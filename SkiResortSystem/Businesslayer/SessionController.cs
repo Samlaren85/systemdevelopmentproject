@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entitylayer;
+using DataLayer;
 
 namespace Businesslayer
 {
     public sealed class SessionController
     {
         private static SessionController _instance;
-        public static User? LoggedIn { get; private set; }
+        public static User LoggedIn { get; private set; }
         private SessionController(User user)
         {
             LoggedIn = user;

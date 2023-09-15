@@ -44,5 +44,15 @@
     <Compile Include="SessionController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{1ddad761-2b3e-49a8-b9f3-5afb9ab0ea4e}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entitylayer\Entitylayer.csproj">
+      <Project>{3b2a3f03-a895-408a-bb30-5a9f24715db4}</Project>
+      <Name>Entitylayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

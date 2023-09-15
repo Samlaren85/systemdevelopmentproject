@@ -1,6 +1,7 @@
 ﻿using SkiResortSystem.Services;
 using SkiResortSystem.ViewModels;
 using System.Windows;
+using SkiResortSystem.Views;
 
 namespace SkiResortSystem
 {

@@ -17,9 +17,9 @@ namespace SkiResortSystem.Views
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class LoginWindow : Window
     {
-        public Window1()
+        public LoginWindow()
         {
             InitializeComponent();
         }

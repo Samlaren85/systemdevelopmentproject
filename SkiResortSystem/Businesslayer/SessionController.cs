@@ -40,7 +40,7 @@ namespace Businesslayer
             if (_instance == null)
             {
                 UnitOfWork unitOfWork = new UnitOfWork();
-                User credentials = unitOfWork.UserRepository.FirstOrDefault(u => u.UserId == ID);
+                User credentials = unitOfWork.UserRepository.FirstOrDefault(u => u.UserID == ID);
                 if (credentials != null && credentials.Password.Equals(password))
                 {
                     LoggedIn = credentials;

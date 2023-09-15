@@ -109,6 +109,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Businesslayer\Businesslayer.csproj">
+      <Project>{4E4F0C52-8AFB-4C19-943A-9DA2BD3E320D}</Project>
+      <Name>Businesslayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entitylayer\Entitylayer.csproj">
+      <Project>{3b2a3f03-a895-408a-bb30-5a9f24715db4}</Project>
+      <Name>Entitylayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.33214.272
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiResortSystem", "SkiResortSystem\SkiResortSystem.csproj", "{91FC5B8B-6D91-4285-857C-DFFC23E5BA24}"
 	ProjectSection(ProjectDependencies) = postProject
+		{3B2A3F03-A895-408A-BB30-5A9F24715DB4} = {3B2A3F03-A895-408A-BB30-5A9F24715DB4}
 		{4E4F0C52-8AFB-4C19-943A-9DA2BD3E320D} = {4E4F0C52-8AFB-4C19-943A-9DA2BD3E320D}
 	EndProjectSection
 EndProject

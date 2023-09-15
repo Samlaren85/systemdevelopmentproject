@@ -17,7 +17,6 @@ namespace Businesslayer
             LoggedIn = user;
         }
        
-        // Kommer vi inte kunna använda denna logik när referenstyper inte är nullable i denna frameworkversion? /Jonathan
         public static SessionController Instance(User user)
         {
             if (_instance == null)
@@ -40,7 +39,7 @@ namespace Businesslayer
             if (_instance == null)
             {
                 UnitOfWork unitOfWork = new UnitOfWork();
-                User credentials = unitOfWork.UserRepository.FirstOrDefault(u => u.UserId == ID);
+                User credentials = unitOfWork.UserRepository.FirstOrDefault(u => u.UserID == ID);
                 if (credentials != null && credentials.Password.Equals(password))
                 {
                     LoggedIn = credentials;

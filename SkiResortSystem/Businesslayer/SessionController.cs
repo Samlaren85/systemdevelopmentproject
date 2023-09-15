@@ -9,7 +9,7 @@ namespace Businesslayer
     public sealed class SessionController
     {
         private static SessionController _instance;
-        public static User? LoggedIn { get; private set; }
+        public static User LoggedIn { get; private set; }
         private SessionController(User user)
         {
             LoggedIn = user;

@@ -20,7 +20,7 @@ namespace Entitylayer
 
             set
             {
-                if (value < 1 || value > 6) //Värdet till höger (det höga) kommer behöva justeras utefter hur många användartyper vi önskar använda i systemet /Jonathan
+                if (value < 1 || value > 8) //Värdet till höger (det höga) kommer behöva justeras utefter hur många användartyper vi önskar använda i systemet /Jonathan
                 {
                     throw new ArgumentOutOfRangeException((nameof(UserType)));
                 }

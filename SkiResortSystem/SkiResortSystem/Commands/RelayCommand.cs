@@ -4,12 +4,12 @@ namespace SkiResortSystem.Commands
 {
     public class RelayCommand : CommandBase
     {
-        private readonly Action _execute = null!;
-        private readonly Func<bool> _canExecute = null!;
+        private readonly Action _execute = null;
+        private readonly Func<bool> _canExecute = null;
 
         public RelayCommand() { }
 
-        public RelayCommand(Action execute) : this(execute, null!) { }
+        public RelayCommand(Action execute) : this(execute, null) { }
 
         public RelayCommand(Action execute, Func<bool> canExecute)
         {
@@ -24,10 +24,10 @@ namespace SkiResortSystem.Commands
 
     public class RelayCommand<T> : RelayCommand
     {
-        private readonly Action<T> _execute = null!;
-        private readonly Func<T, bool> _canExecute = null!;
+        private readonly Action<T> _execute;
+        private readonly Func<T, bool> _canExecute;
 
-        public RelayCommand(Action<T> execute) : this(execute, null!) { }
+        public RelayCommand(Action<T> execute) : this(execute, null) { }
 
         public RelayCommand(Action<T> execute, Func<T, bool> canExecute)
         {

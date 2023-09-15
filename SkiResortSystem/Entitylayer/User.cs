@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entitylayer
 {
+    /// <summary>
+    /// Following usertypes is avaliable: 1=System administrator 2=Reception worker 3=Skishop worker 4=Chief of reception 5=Chief of skishop 6=Chief of economy 7=Chief of marketing 8=CEO
+    /// </summary>
     public class User
     {
         public string UserID { get; set; }

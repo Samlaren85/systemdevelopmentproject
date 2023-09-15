@@ -14,7 +14,7 @@ namespace Entitylayer
         public string UserID { get; set; }
         public string Password { get; set; }
         public int _userTypeValue;
-        public int userType
+        public int UserType
         {
             get { return _userTypeValue; }
 
@@ -22,7 +22,7 @@ namespace Entitylayer
             {
                 if (value < 1 || value > 6) //Värdet till höger (det höga) kommer behöva justeras utefter hur många användartyper vi önskar använda i systemet /Jonathan
                 {
-                    throw new ArgumentOutOfRangeException((nameof(userType)));
+                    throw new ArgumentOutOfRangeException((nameof(UserType)));
                 }
 
                 _userTypeValue = value;
@@ -38,7 +38,7 @@ namespace Entitylayer
             _userCount++;
             UserID = "U" + _userCount.ToString("000000"); //Sista strängen här kan justeras utifrån hur vi bestämmer utformingen av lösenorden.
             Password = password;
-            userType = usertype;
+            UserType = usertype;
         }
     }
 }

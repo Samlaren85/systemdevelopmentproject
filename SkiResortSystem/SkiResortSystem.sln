@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.33214.272
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiResortSystem", "SkiResortSystem\SkiResortSystem.csproj", "{91FC5B8B-6D91-4285-857C-DFFC23E5BA24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Businesslayer", "Businesslayer\Businesslayer.csproj", "{4E4F0C52-8AFB-4C19-943A-9DA2BD3E320D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entitylayer", "Entitylayer\Entitylayer.csproj", "{3B2A3F03-A895-408A-BB30-5A9F24715DB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{91FC5B8B-6D91-4285-857C-DFFC23E5BA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91FC5B8B-6D91-4285-857C-DFFC23E5BA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91FC5B8B-6D91-4285-857C-DFFC23E5BA24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E4F0C52-8AFB-4C19-943A-9DA2BD3E320D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E4F0C52-8AFB-4C19-943A-9DA2BD3E320D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E4F0C52-8AFB-4C19-943A-9DA2BD3E320D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E4F0C52-8AFB-4C19-943A-9DA2BD3E320D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B2A3F03-A895-408A-BB30-5A9F24715DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B2A3F03-A895-408A-BB30-5A9F24715DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B2A3F03-A895-408A-BB30-5A9F24715DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B2A3F03-A895-408A-BB30-5A9F24715DB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

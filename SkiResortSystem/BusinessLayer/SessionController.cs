@@ -5,8 +5,8 @@ namespace BusinessLayer
 {
     public sealed class SessionController
     {
-        private static SessionController _instance;
-        public static User LoggedIn { get; private set; }
+        private static SessionController _instance = null!;
+        public static User? LoggedIn { get; private set; }
         private SessionController(User user)
         {
             LoggedIn = user;
@@ -52,7 +52,7 @@ namespace BusinessLayer
         }
         public static void Terminate()
         {
-            _instance = null;
+            _instance = null!;
             LoggedIn = null;
         }
     }

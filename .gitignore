@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/SkiResortSystem/.vs
+/SkiResortSystem/BusinessLayer/bin/Debug/net7.0
+/SkiResortSystem/BusinessLayer/obj/Debug/net7.0
+/SkiResortSystem/BusinessLayer/obj/Release/net7.0
+/SkiResortSystem/BusinessLayer/obj/project.nuget.cache
+/SkiResortSystem/BusinessLayer/obj/project.assets.json
+/SkiResortSystem/BusinessLayer/obj/BusinessLayer.csproj.nuget.g.targets
+/SkiResortSystem/BusinessLayer/obj/BusinessLayer.csproj.nuget.g.props
+/SkiResortSystem/BusinessLayer/obj/BusinessLayer.csproj.nuget.dgspec.json
+/SkiResortSystem/DataLayer/obj
+/SkiResortSystem/DataLayer/bin/Debug/net7.0
+/SkiResortSystem/EntityLayer/obj
+/SkiResortSystem/EntityLayer/bin/Debug/net7.0
+/SkiResortSystem/SkiResortSystem/obj
+/SkiResortSystem/SkiResortSystem/bin/Debug/net7.0-windows

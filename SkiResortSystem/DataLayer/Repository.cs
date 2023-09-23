@@ -93,7 +93,7 @@ namespace DataLayer
         /// <summary>
         ///  Is this repository empty?
         /// </summary>
-        /// <returns>true is it is empty, false otherwise.</returns>
+        /// <returns>true if it is empty, false otherwise.</returns>
         public bool IsEmpty()
         {
             return Table.Count() == 0;

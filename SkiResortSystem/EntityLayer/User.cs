@@ -23,7 +23,10 @@
             }
         }
         private static int _userCount;
-        public User() //Konstruktor för användare
+        /// <summary>
+        /// Konstruktor för användare. Varningar om nullable referenser i VS kan ignoreras tillsvidare.
+        /// </summary>
+        public User()
         {
 
         }

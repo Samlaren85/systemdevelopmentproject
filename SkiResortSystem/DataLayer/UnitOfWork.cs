@@ -5,7 +5,7 @@ namespace DataLayer
     public class UnitOfWork
     {
         protected AppDbContext appDbContext { get; }
-        public Repository<User> UserRepository { get; private set; } //nu finns du med
+        public Repository<User> UserRepository { get; private set; }
 
         public UnitOfWork()
         {

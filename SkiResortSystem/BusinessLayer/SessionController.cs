@@ -37,7 +37,6 @@ namespace BusinessLayer
                 User credentials = unitOfWork.UserRepository.FirstOrDefault(u => u.UserID == ID);
                 if (credentials != null && credentials.Password.Equals(password))
                 {
-                    LoggedIn = credentials;
                     _instance = new SessionController(credentials);
                     return _instance;
                 }

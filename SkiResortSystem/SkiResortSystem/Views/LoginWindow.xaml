@@ -7,7 +7,7 @@
         xmlns:comp="clr-namespace:SkiResortSystem.Components"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="300" FontFamily="Candara" FontSize="13" >
+        Title="LoginWindow" Height="450" Width="300" FontFamily="Candara" FontSize="13" x:Name="View">
 
     <Window.DataContext>
         <vm:LoginViewModel/>
@@ -33,7 +33,7 @@
         <Border CornerRadius="5" Grid.Column="1" Background="White" Grid.Row="1" Height="20" Margin="0,110,0,0">
             <comp:BindablePasswordBox Password="{Binding Password, Mode=TwoWay}"/>
         </Border>
-        <Button Grid.Column="1" Grid.Row="2" Content="Logga in " Height="30" Width="80" Margin="0,70,0,0" Foreground="Black" BorderBrush="White" Command="{Binding LogInCommand}" >
+        <Button Grid.Column="1" Grid.Row="2" Content="Logga in " Height="30" Width="80" Margin="0,70,0,0" Foreground="Black" BorderBrush="White" Command="{Binding LogInCommand}" CommandParameter="{Binding ElementName=View}" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFEEEEEE" Offset="0.162"/>

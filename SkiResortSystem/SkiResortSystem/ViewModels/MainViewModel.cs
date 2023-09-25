@@ -30,14 +30,17 @@ namespace SkiResortSystem.ViewModels
             set { mainVisibility = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Döljer Main View och öppnar upp löserordsrutan!
+        /// </summary>
         public MainViewModel()
         {
-            MainVisibility = Visibility.Hidden;
             LogIn();
         }
 
         public void LogIn()
         {
+            MainVisibility = Visibility.Hidden;
             LoginViewModel logIn = new LoginViewModel();
             windowService.ShowDialog(logIn);
             if (SessionController.LoggedIn != null)
@@ -48,11 +51,19 @@ namespace SkiResortSystem.ViewModels
             else ExitCommand.Execute(null);
         }
 
-        private ICommand exitCommand = null;
+        private ICommand logOut = null!;
+        public ICommand LogOut =>
+            logOut ??= logOut = new RelayCommand(() =>
+                {
+                    SessionController.Terminate();
+                    LogIn();
+                });
+
+        private ICommand exitCommand = null!;
         public ICommand ExitCommand =>
             exitCommand ??= exitCommand = new RelayCommand<ICloseable>((closeable) =>
-                    {
-                        Application.Current.Shutdown();
-                    });
+                {
+                    Application.Current.Shutdown();
+                });
     }
 }

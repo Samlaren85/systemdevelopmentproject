@@ -38,9 +38,10 @@ namespace DataLayer
         /// Updatein entity with new attributes
         /// </summary>
         /// <param name="entity"></param>
-        public void Update(T entity)
+        public bool Update(T entity)
         {
-            Table.Update(entity);
+            EntityEntry ee = Table.Update(entity);
+            return ee.State.Equals(EntityState.Modified);
         }
 
         /// <summary>

@@ -8,6 +8,10 @@ namespace BusinessLayer
 {
     public class AccommodationController
     {
+        public AccommodationController() 
+        {
+            
+        }
 
     }
 }

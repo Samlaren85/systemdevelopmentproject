@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Visibility="{Binding MainVisibility}" FontFamily="Candara" FontSize="13">
+        Title="MainWindow" Height="450" Width="800" FontFamily="Candara" FontSize="13">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>

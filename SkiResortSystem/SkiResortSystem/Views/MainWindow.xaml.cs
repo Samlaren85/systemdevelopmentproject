@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SkiResortSystem.ViewModels;
+using System.Windows;
 
 namespace SkiResortSystem.Views
 {
@@ -10,6 +11,7 @@ namespace SkiResortSystem.Views
         public MainWindow()
         {
             InitializeComponent();
+           
         }
     }
 }

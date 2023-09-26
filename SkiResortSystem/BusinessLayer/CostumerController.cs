@@ -38,7 +38,7 @@ namespace BusinessLayer
         }
         public Kund FindCostumer(string costumerIdentifier)
         {
-            return unitOfWork.KundRepository.Find(c => c.KundId == costumerIdentifier, PrivatKund, FöretagsKund);
+            return unitOfWork.KundRepository.Find(c => (c.KundId == costumerIdentifier || c.Namn().Contains(costumerIdentifier)), PrivatKund, FöretagsKund);
         }
         public bool ChangeCostumer(Kund costumer)
         {

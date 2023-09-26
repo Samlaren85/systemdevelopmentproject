@@ -6,22 +6,22 @@ namespace BusinessLayer
     public sealed class SessionController
     {
         private static SessionController? _instance = null!;
-        public static User? LoggedIn { get; private set; }
-        private SessionController(User user)
+        public static Användare? LoggedIn { get; private set; }
+        private SessionController(Användare användare)
         {
-            LoggedIn = user;
+            LoggedIn = användare;
         }
 
         /// <summary>
         /// Används för att skapa en session med en annan användare
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="användare"></param>
         /// <returns></returns>
-        public static SessionController Instance(User user)
+        public static SessionController Instance(Användare användare)
         {
             if (_instance == null)
             {
-                _instance = new SessionController(user);
+                _instance = new SessionController(användare);
             }
             return _instance;
         }
@@ -51,7 +51,7 @@ namespace BusinessLayer
             if (_instance == null)
             {
                 UnitOfWork unitOfWork = new UnitOfWork();
-                User credentials = unitOfWork.UserRepository.FirstOrDefault(u => u.UserID == ID);
+                Användare credentials = unitOfWork.AnvändarRepository.FirstOrDefault(a => a.UserID == ID);
                 if (credentials != null && credentials.Password.Equals(password))
                 {
                     _instance = new SessionController(credentials);

@@ -4,9 +4,30 @@ using Microsoft.EntityFrameworkCore;
 namespace DataLayer
 {
     public class AppDbContext : DbContext
-
     {
-        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Kund> Kunder { get; set; } = null!;
+        public DbSet<Aktivitet> Aktiviteter { get; set; } = null!;
+        public DbSet<Användare> Användare { get; set; } = null!;
+        public DbSet<Behörighet> Behörigheter { get; set; } = null!;
+        public DbSet<Bokning> Bokningar { get; set; } = null!;
+        public DbSet<Campingplats> Campingplatser { get; set; } = null!;
+        public DbSet<Facilitet> Faciliteter { get; set; } = null!;
+        public DbSet<Faktura> Fakturor { get; set; } = null!;
+        public DbSet<Företagskund> Företagskunder { get; set; } = null!;
+        public DbSet<Grupplektion> Grupplektioner { get; set; } = null!;
+        public DbSet<Konferanssal> konferanssalar { get; set; } = null!;
+
+        public DbSet<Lägenhet> Lägenheter { get; set; } = null!;
+        public DbSet<Paket> Paket { get; set; } = null!;
+        public DbSet<Privatkund> Privatkunder { get; set; } = null!;
+        public DbSet<Privatlektion> Privatlektioner { get; set; } = null!;
+        public DbSet<Roll> Roller { get; set; } = null!;
+        public DbSet<Skidskola> Skidskolor { get; set; } = null!;
+        public DbSet<Utrustning> Utrustningar { get; set; } = null!;
+        public DbSet<Utrustningsstorlek> Utrustningsstorlekar { get; set; } = null!;
+
+
+
 
         public AppDbContext()
         {
@@ -24,10 +45,15 @@ namespace DataLayer
 
         private void Seed()
         {
-            if (!Users.Any()) 
+            if (!Roller.Any())
             {
-                Users.Add(new User("Admin", 1));
-                Users.Add(new User("Password", 2));
+                Roller.Add(new Roll("R001", "Admin", new List<Behörighet>()));
+                Roller.Add(new Roll("R002", "Receptionist", new List<Behörighet>()));
+            }
+            if (!Användare.Any()) 
+            {
+                Användare.Add(new Användare("Admin",1, Roller.FirstOrDefault(r => r.RollID == "R001")));
+                Användare.Add(new Användare("Password", 2, Roller.FirstOrDefault(r => r.RollID == "R002")));
                 SaveChanges();
             }
         }

@@ -7,11 +7,105 @@
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" FontFamily="Candara" FontSize="13">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
-    <DockPanel>
-        <Button DockPanel.Dock="Bottom" Height="25" Width="100" Content="Logga ut" Command="{Binding LogOut}"/>
-        <Label Content="Hej!"/>
-    </DockPanel>
+
+
+
+    <TabControl Background="#FFA6C3E4" Height="auto" Width="auto" >
+        <TabControl.Resources>
+            <Style TargetType="TabItem">
+                <Setter Property="Background" Value="#FF5E8CE2" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Height" Value="50" />
+                <Setter Property="Width" Value="auto" />
+            </Style>
+            
+        </TabControl.Resources>
+
+
+        <TabItem Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top">
+            <TabItem.Header >
+                <Image Height="50" Width="100" Source="./images/Logo.png"/>
+            </TabItem.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="./images/Logo.png" Grid.ColumnSpan="3"></Image>
+            </Grid>
+            
+            
+            
+        </TabItem>
+
+
+
+        <TabItem Header="Boende" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top" Foreground="White">
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FF5E8CE2" />
+                </Style>
+            </TabItem.Style>
+
+        </TabItem>
+
+
+
+        <TabItem Header="Aktivitet" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top" Foreground="White"  >
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FF5E8CE2" />
+                </Style>
+            </TabItem.Style>
+
+        </TabItem>
+
+        <TabItem Header="Kund" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top" Foreground="White"  >
+
+            
+        </TabItem>
+
+
+
+        <TabItem Header="Ekonomi" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100"  Foreground="White"  >
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FF5E8CE2" />
+                </Style>
+            </TabItem.Style>
+
+        </TabItem>
+
+        <TabItem Header="Styrning" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top" Foreground="White"  >
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FF5E8CE2" />
+                </Style>
+            </TabItem.Style>
+
+        </TabItem>
+
+        <TabItem Header="Admin" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top" Foreground="White"  >
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FF5E8CE2" />
+                </Style>
+            </TabItem.Style>
+
+        </TabItem>
+
+        
+
+
+
+
+
+
+    </TabControl>
+
+
+
+
 </Window>

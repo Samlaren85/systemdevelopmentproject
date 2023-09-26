@@ -17,5 +17,9 @@ namespace EntityLayer
             Förnamn = förnamn;
             Efternamn = efternamn;
         }
+        public string Namn()
+        {
+            return Förnamn + Efternamn;
+        }
     }
 }

@@ -35,7 +35,7 @@
         public Användare(string password, int usertype, Roll rollID)
         {
             _userCount++;
-            UserID = "U" + _userCount.ToString("000000"); //Sista strängen här kan justeras utifrån hur vi bestämmer utformingen av lösenorden.
+            UserID = "A" + _userCount.ToString("000000"); //Sista strängen här kan justeras utifrån hur vi bestämmer utformingen av lösenorden.
             Password = password;
             UserType = usertype;
             RollID = rollID;

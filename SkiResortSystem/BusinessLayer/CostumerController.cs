@@ -16,29 +16,29 @@ namespace BusinessLayer
         {
             unitOfWork = new UnitOfWork();
         }
-        public Kund AddPrivateCostumer(string firstname, string lastname, string streetAdress, int postalCode, string city, string phoneNumber)
+        public Kund AddPrivateCostumer(string personalNumber, string firstname, string lastname, string streetAdress, int postalCode, string city, string phoneNumber)
         {
 
-            Privatkund privateCostumer = new Privatkund() { Förnamn = firstname, Efternamn = lastname };
+            Privatkund privateCostumer = new Privatkund(personalNumber, firstname, lastname);
             unitOfWork.PrivatkundRepository.Add(privateCostumer);
-            Kund costumer = new Kund() { Privatkund = privateCostumer, Gatuadress = streetAdress, Postnummer = postalCode, Ort = city, Telefonnummer = phoneNumber, Rabatt = 0, Kreditgräns = 12000 };
+            Kund costumer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, null, privateCostumer);
             unitOfWork.KundRepository.Add(costumer);
             unitOfWork.Save();
             return costumer;
         }
 
-        public Kund AddCompanyCostumer(string organisationName,string contact, string streetAdress, int postalCode, string city, string phoneNumber)
+        public Kund AddCompanyCostumer(string organistaionNumber, string organisationName,string contact, string streetAdress, int postalCode, string city, string phoneNumber)
         {
-            Företagskund companyCostumer = new Företagskund() { Företagsnamn = organisationName, Kontaktperson = contact };
+            Företagskund companyCostumer = new Företagskund(organistaionNumber,organisationName,contact);
             unitOfWork.FöretagskundRepository.Add(companyCostumer);
-            Kund costumer = new Kund() { företagskund = companyCostumer, Gatuadress = streetAdress, Postnummer = postalCode, Ort = city, Telefonnummer = phoneNumber, Rabatt = 0, Kreditgräns = 12000 };
+            Kund costumer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, companyCostumer, null);
             unitOfWork.KundRepository.Add(costumer);
             unitOfWork.Save();
             return costumer;
         }
         public Kund FindCostumer(string costumerIdentifier)
         {
-            return unitOfWork.KundRepository.FirstOrDefault(c => (c.KundId == costumerIdentifier || c.Namn().Contains(costumerIdentifier)), PrivatKund, FöretagsKund);
+            return unitOfWork.KundRepository.FirstOrDefault(c => (c.KundID == costumerIdentifier || c.Privatkund.Namn().Contains(costumerIdentifier) || c.Företagskund.Företagsnamn.Contains(costumerIdentifier)), x => x.Privatkund, x => x.Företagskund);
         }
         public bool ChangeCostumer(Kund costumer)
         {

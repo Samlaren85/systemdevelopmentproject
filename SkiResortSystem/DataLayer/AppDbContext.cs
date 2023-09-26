@@ -45,10 +45,10 @@ namespace DataLayer
 
         private void Seed()
         {
-            if (!Users.Any()) 
+            if (!Användare.Any()) 
             {
-                Users.Add(new User("Admin", 1));
-                Users.Add(new User("Password", 2));
+                Användare.Add(new Användare() { Password = "Admin", UserType = 1});
+                Användare.Add(new Användare() { Password = "Password", UserType = 2});
                 SaveChanges();
             }
         }

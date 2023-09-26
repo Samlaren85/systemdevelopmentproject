@@ -16,7 +16,11 @@ namespace EntityLayer
         public List<Utrustning> UtrustningID { get; set; }
         public List<Aktivitet> AktivitetID{ get; set; }
 
-        public Bokning(string bokningsID, float utnyttjadKredit, Användare användareID, Kund kundID, List<Facilitet> facilitetID, ist<Utrustning> utrustningID, List<Aktivitet> aktivitetID)
+        public Bokning()
+        {
+
+        }
+        public Bokning(string bokningsID, float utnyttjadKredit, Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID)
         {
             BokningsID = bokningsID;
             UtnyttjadKredit = utnyttjadKredit;

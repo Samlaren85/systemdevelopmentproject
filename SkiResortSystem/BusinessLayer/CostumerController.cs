@@ -1,4 +1,5 @@
 ﻿using DataLayer;
+using EntityLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +16,22 @@ namespace BusinessLayer
         {
             unitOfWork = new UnitOfWork();
         }
-        public Kund AddPrivateCostumer(string firstname, string lastname, string streetAdress, string postalCode, string city, string phoneNumber)
+        public Kund AddPrivateCostumer(string firstname, string lastname, string streetAdress, int postalCode, string city, string phoneNumber)
         {
 
-            PrivatKund privateCostumer = new PrivatKund() { firstname, lastname };
-            unitOfWork.PrivatKund.Add(privateCostumer);
-            Kund costumer = new Kund() { privatkund = privateCostumer, gatuadress = streetAdress, postnummer = postalCode, stad = city, telefonnummer = phoneNumber };
+            Privatkund privateCostumer = new Privatkund() { Förnamn = firstname, Efternamn = lastname };
+            unitOfWork.PrivatkundRepository.Add(privateCostumer);
+            Kund costumer = new Kund() { Privatkund = privateCostumer, Gatuadress = streetAdress, Postnummer = postalCode, Ort = city, Telefonnummer = phoneNumber, Rabatt = 0, Kreditgräns = 12000 };
             unitOfWork.KundRepository.Add(costumer);
             unitOfWork.Save();
             return costumer;
         }
 
-        public Kund AddCompanyCostumer(string organisationName,string contact, string streetAdress, string postalCode, string city, string phoneNumber)
+        public Kund AddCompanyCostumer(string organisationName,string contact, string streetAdress, int postalCode, string city, string phoneNumber)
         {
-            FöretagsKund companyCostumer = new FöretagsKund() { organisationName, contact };
-            unitOfWork.FöretagsKund.Add(companyCostumer);
-            Kund costumer = new Kund() { företagskund = companyCostumer, gatuadress = streetAdress, postnummer = postalCode, stad = city, telefonnummer = phoneNumber };
+            Företagskund companyCostumer = new Företagskund() { Företagsnamn = organisationName, Kontaktperson = contact };
+            unitOfWork.FöretagskundRepository.Add(companyCostumer);
+            Kund costumer = new Kund() { företagskund = companyCostumer, Gatuadress = streetAdress, Postnummer = postalCode, Ort = city, Telefonnummer = phoneNumber, Rabatt = 0, Kreditgräns = 12000 };
             unitOfWork.KundRepository.Add(costumer);
             unitOfWork.Save();
             return costumer;

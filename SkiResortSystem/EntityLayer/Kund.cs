@@ -23,11 +23,6 @@ namespace EntityLayer
         {
             
         }
-
-        public Kund()
-        {
-
-        }
         public Kund(float rabatt, float kreditgräns, string gatuadress, int postnummer, string ort, string telefonnummer, Företagskund? företagskund, Privatkund? privatkund)
         {
             _kundAntal++;

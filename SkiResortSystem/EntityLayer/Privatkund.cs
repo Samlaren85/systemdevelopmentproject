@@ -8,5 +8,14 @@ namespace EntityLayer
 {
     public class Privatkund
     {
+        public string PersonnummerID { get; set; }
+        public string Förnamn { get; set; }
+        public string Efternamn { get; set; }
+        public Privatkund(string personnummerID, string förnamn, string efternamn)
+        {
+            PersonnummerID = personnummerID;
+            Förnamn = förnamn;
+            Efternamn = efternamn;
+        }
     }
 }

@@ -11,5 +11,11 @@ namespace EntityLayer
         public string RollID { get; set; }
         public string Rolltyp { get; set; }
         public List<Behörighet> BehörighetID { get; set; }
+        public Roll(string rollID, string rolltyp, List<Behörighet> behörighetID)
+        { 
+            RollID = rollID;
+            Rolltyp = rolltyp;
+            BehörighetID = behörighetID;
+        }
     }
 }

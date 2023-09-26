@@ -4,7 +4,7 @@ using SkiResortSystem.Models;
 using SkiResortSystem.Services;
 using System;
 using System.Windows;
-using System.Windows.Input;
+using System.Windows.Input; 
 
 namespace SkiResortSystem.ViewModels
 {

@@ -15,6 +15,20 @@ namespace EntityLayer
         public int Postnummer { get; set; }
         public string Ort { get; set; }
         public string Telefonnummer { get; set; }
+        public Företagskund? Företagskund { get; set; }
+        public Privatkund? Privatkund { get; set; }
 
+        public Kund(string kundID, float rabatt, float kreditgräns, string gatuadress, int postnummer, string ort, string telefonnummer, Företagskund? företagskund, Privatkund? privatkund)
+        {
+            KundID = kundID;
+            Rabatt = rabatt;
+            Kreditgräns = kreditgräns;
+            Gatuadress = gatuadress;
+            Postnummer = postnummer;
+            Ort = ort;
+            Telefonnummer = telefonnummer;
+            Företagskund = företagskund;
+            Privatkund = privatkund;
+        }
     }
 }

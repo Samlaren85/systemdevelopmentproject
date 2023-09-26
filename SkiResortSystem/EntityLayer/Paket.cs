@@ -8,5 +8,14 @@ namespace EntityLayer
 {
     public class Paket
     {
+        public string PaketID { get; set; }
+        public string Paketbenämning { get; set; }
+        public float Pris { get; set; }
+        public Paket(string paketID, string paketbenämning, float pris)
+        {
+            PaketID = paketID;
+            Paketbenämning = paketbenämning;
+            Pris = pris;
+        }
     }
 }

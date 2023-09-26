@@ -6,12 +6,32 @@
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" FontFamily="Candara" FontSize="13">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
-    <DockPanel>
-        <Button DockPanel.Dock="Bottom" Height="25" Width="100" Content="Logga ut" Command="{Binding LogOut}"/>
-        <Label Content="Hej!"/>
-    </DockPanel>
+        Title="MainWindow" Height="450" Width="800" Background="#FF5e8ce2" FontFamily="Candara" FontSize="13" BorderBrush="#FF5E8CE2">
+
+    <TabControl Background="#FFA6C3E4" >
+        <TabItem Background="#FF5E8CE2" >
+            <TabItem.Header >
+                <Image Height="100" Width="100" Source="./images/Logo.png"/>
+            </TabItem.Header>
+        </TabItem>
+        <TabItem Header="kund" BorderBrush="#FF5E8CE2">
+            <Button DockPanel.Dock="Bottom" Height="25" Width="100" Margin="650,300,10,10" Content="Logga ut"/>
+
+        </TabItem>
+
+        <TabItem Header="boende/konferens" Height="106" Margin="-2,-2,-2,0" VerticalAlignment="Top" BorderBrush="#FF5E8CE2"></TabItem>
+
+        <Button DockPanel.Dock="Bottom" Height="25" Width="100" Margin="650,300,10,10" Content="Logga ut"/>
+
+
+
+
+
+
+
+
+
+    </TabControl>
+
+
 </Window>

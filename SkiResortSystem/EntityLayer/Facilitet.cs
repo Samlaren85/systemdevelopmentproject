@@ -15,6 +15,10 @@ namespace EntityLayer
         public Konferanssal? KonferansID { get; set; }
         public Lägenhet? LägenhetsID { get; set; }
         public Campingplats? CampingID { get; set; }
+        public Facilitet()
+        {
+            
+        }
         public Facilitet(string facilitetID, float facilitetspris, Konferanssal konferansID, Lägenhet lägenhetsID, Campingplats campingID)
         {
             FacilitetID = facilitetID;

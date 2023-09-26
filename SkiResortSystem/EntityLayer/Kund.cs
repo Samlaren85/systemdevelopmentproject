@@ -18,6 +18,10 @@ namespace EntityLayer
         public string Telefonnummer { get; set; }
         public Företagskund? Företagskund { get; set; }
         public Privatkund? Privatkund { get; set; }
+        public Kund()
+        {
+            
+        }
 
         public Kund(string kundID, float rabatt, float kreditgräns, string gatuadress, int postnummer, string ort, string telefonnummer, Företagskund? företagskund, Privatkund? privatkund)
         {

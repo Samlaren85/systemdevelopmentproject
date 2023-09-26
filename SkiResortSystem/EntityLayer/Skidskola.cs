@@ -15,6 +15,10 @@ namespace EntityLayer
         public string Lärare { get; set; }
         public List<Privatlektion>? Privatlektion { get; set; }
         public List<Grupplektion>? Grupplektion { get; set; }
+        public Skidskola()
+        {
+            
+        }
         public Skidskola(string skidskolaID, int antaldeltagare, string lärare, List<Privatlektion>? privatlektion, List<Grupplektion>? grupplektion)
         {
            SkidskolaID = skidskolaID;

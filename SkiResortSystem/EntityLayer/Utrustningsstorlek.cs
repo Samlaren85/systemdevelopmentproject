@@ -10,6 +10,10 @@ namespace EntityLayer
     {
         public string StorleksID { get; set; }
         public string Storlek { get; set; }
+        public Utrustningsstorlek()
+        {
+            
+        }
         public Utrustningsstorlek(string storleksid, string storlek)
         {
             StorleksID = storleksid;

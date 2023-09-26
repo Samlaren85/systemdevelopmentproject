@@ -12,6 +12,10 @@ namespace EntityLayer
         public string Svårighetsgrad { get; set; }
         public float Lektionspris { get; set; }
         public int MaxAntalDeltagare { get; set; }
+        public Grupplektion()
+        {
+            
+        }
         public Grupplektion(string grupplektionID, string svårighetsgrad, float lektionspris, int maxantaldeltagare)
         {
             GrupplektionID = grupplektionID;

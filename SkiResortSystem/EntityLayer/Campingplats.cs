@@ -11,6 +11,10 @@ namespace EntityLayer
         public string CampingID { get; set; }
         public string CampingBenämning { get; set; }
         public string CampingStorlek { get; set; }
+        public Campingplats()
+        {
+            
+        }
         public Campingplats(string campingID, string campingBenämning, string campingStorlek)
         {
             CampingID = campingID;

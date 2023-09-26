@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace EntityLayer
 {
     public class Privatkund
     {
+        [Key]
         public string PersonnummerID { get; set; }
         public string Förnamn { get; set; }
         public string Efternamn { get; set; }

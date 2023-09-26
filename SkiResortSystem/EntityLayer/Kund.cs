@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -10,6 +11,7 @@ namespace EntityLayer
     public class Kund
     {
         private static int _kundAntal = 0;
+        [Key]
         public string KundID { get; set; }
         public float Rabatt { get; set; }
         public float Kreditgräns { get; set; }

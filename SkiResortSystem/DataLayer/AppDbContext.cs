@@ -45,10 +45,15 @@ namespace DataLayer
 
         private void Seed()
         {
+            if (!Roller.Any())
+            {
+                Roller.Add(new Roll("R001", "Admin", new List<Behörighet>()));
+                Roller.Add(new Roll("R002", "Receptionist", new List<Behörighet>()));
+            }
             if (!Användare.Any()) 
             {
-                Användare.Add(new Användare() { Password = "Admin", UserType = 1});
-                Användare.Add(new Användare() { Password = "Password", UserType = 2});
+                Användare.Add(new Användare("Admin",1, Roller.FirstOrDefault(r => r.RollID == "R001")));
+                Användare.Add(new Användare("Password", 2, Roller.FirstOrDefault(r => r.RollID == "R002")));
                 SaveChanges();
             }
         }

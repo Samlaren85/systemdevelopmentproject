@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace EntityLayer
 {
     public class Aktivitet
     {
+        [Key]
         public string AktivitetsID { get; set; }
         public Skidskola Skidskola { get; set; }
         public bool Vintersäsong { get; set; }

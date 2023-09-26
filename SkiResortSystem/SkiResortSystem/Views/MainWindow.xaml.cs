@@ -13,5 +13,10 @@ namespace SkiResortSystem.Views
             InitializeComponent();
            
         }
+
+        private void TabControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

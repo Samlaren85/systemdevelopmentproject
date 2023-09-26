@@ -6,25 +6,97 @@
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="#FF5e8ce2" FontFamily="Candara" FontSize="13" BorderBrush="#FF5E8CE2">
+        Title="MainWindow" Height="450" Width="800" FontFamily="Candara" FontSize="13">
 
-    <TabControl Background="#FFA6C3E4" >
-        <TabItem Background="#FF5E8CE2" >
+
+
+    <TabControl Background="#FFA6C3E4" Height="auto" Width="auto" >
+        <TabControl.Resources>
+            <Style TargetType="TabItem">
+                <Setter Property="Background" Value="#FF5E8CE2" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Height" Value="50" />
+                <Setter Property="Width" Value="auto" />
+            </Style>
+            
+        </TabControl.Resources>
+
+
+        <TabItem Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top">
             <TabItem.Header >
-                <Image Height="100" Width="100" Source="./images/Logo.png"/>
+                <Image Height="50" Width="100" Source="./images/Logo.png"/>
             </TabItem.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="./images/Logo.png" Grid.ColumnSpan="3"></Image>
+            </Grid>
+            
+            
+            
         </TabItem>
-        <TabItem Header="kund" BorderBrush="#FF5E8CE2">
-            <Button DockPanel.Dock="Bottom" Height="25" Width="100" Margin="650,300,10,10" Content="Logga ut"/>
+
+
+
+        <TabItem Header="Boende" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top" Foreground="White">
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FF5E8CE2" />
+                </Style>
+            </TabItem.Style>
 
         </TabItem>
 
-        <TabItem Header="boende/konferens" Height="106" Margin="-2,-2,-2,0" VerticalAlignment="Top" BorderBrush="#FF5E8CE2"></TabItem>
-
-        <Button DockPanel.Dock="Bottom" Height="25" Width="100" Margin="650,300,10,10" Content="Logga ut"/>
 
 
+        <TabItem Header="Aktivitet" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top" Foreground="White"  >
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FF5E8CE2" />
+                </Style>
+            </TabItem.Style>
 
+        </TabItem>
+
+        <TabItem Header="Kund" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top" Foreground="White"  >
+
+            
+        </TabItem>
+
+
+
+        <TabItem Header="Ekonomi" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100"  Foreground="White"  >
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FF5E8CE2" />
+                </Style>
+            </TabItem.Style>
+
+        </TabItem>
+
+        <TabItem Header="Styrning" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top" Foreground="White"  >
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FF5E8CE2" />
+                </Style>
+            </TabItem.Style>
+
+        </TabItem>
+
+        <TabItem Header="Admin" BorderBrush="#FF5E8CE2" Margin="0,0,2,0" Height="50" Width="100" VerticalAlignment="Top" Foreground="White"  >
+            <TabItem.Style>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FF5E8CE2" />
+                </Style>
+            </TabItem.Style>
+
+        </TabItem>
+
+        
 
 
 
@@ -32,6 +104,8 @@
 
 
     </TabControl>
+
+
 
 
 </Window>

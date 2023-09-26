@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,10 @@ namespace EntityLayer
             Telefonnummer = telefonnummer;
             Företagskund = företagskund;
             Privatkund = privatkund;
+        }
+        public string Adress(string adress)
+        {
+            return Gatuadress + Postnummer + Ort;
         }
     }
 }

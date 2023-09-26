@@ -1,10 +1,13 @@
-﻿namespace EntityLayer
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EntityLayer
 {
     /// <summary>
     /// Following usertypes is avaliable: 1=System administrator 2=Reception worker 3=Skishop worker 4=Chief of reception 5=Chief of skishop 6=Chief of economy 7=Chief of marketing 8=CEO
     /// </summary>
     public class Användare
     {
+        [Key]
         public string UserID { get; set; }
         public string Password { get; set; }
 
@@ -35,7 +38,7 @@
         public Användare(string password, int usertype, Roll rollID)
         {
             _userCount++;
-            UserID = "U" + _userCount.ToString("000000"); //Sista strängen här kan justeras utifrån hur vi bestämmer utformingen av lösenorden.
+            UserID = "A" + _userCount.ToString("000000"); //Sista strängen här kan justeras utifrån hur vi bestämmer utformingen av lösenorden.
             Password = password;
             UserType = usertype;
             RollID = rollID;

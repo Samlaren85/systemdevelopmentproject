@@ -5,13 +5,48 @@ namespace DataLayer
     public class UnitOfWork
     {
         protected AppDbContext appDbContext { get; }
-        public Repository<User> UserRepository { get; private set; }
+        public Repository<Kund> KundRepository { get; private set; }
+        public Repository<Aktivitet> AktivitetRepository { get; private set; }
+        public Repository<Användare> AnvändarRepository { get; private set; }
+        public Repository<Behörighet> BehörighetsRepository { get; private set; }
+        public Repository<Bokning> BokningsRepository { get; private set; }
+        public Repository<Campingplats> CampingplatsRepository { get; private set; }
+        public Repository<Facilitet> FacilitetRepository { get; private set; }
+        public Repository<Faktura> FakturaRepository { get; private set; }
+        public Repository<Företagskund> FöretagskundRepository { get; private set; }
+        public Repository<Grupplektion> GrupplektionRepository { get; private set; }
+        public Repository<Konferanssal> KonferanssalRepository { get; private set; }
+        public Repository<Lägenhet> LägenhetRepository { get; private set; }
+        public Repository<Paket> PaketRepository { get; private set; }
+        public Repository<Privatkund> PrivatkundRepository { get; private set; }
+        public Repository<Privatlektion> PrivatlektionRepository { get; private set; }
+        public Repository<Roll> RollRepository { get; private set; }
+        public Repository<Skidskola> SkidskolaRepository { get; private set; }
+        public Repository<Utrustning> UtrustningRepository { get; private set; }
+        public Repository<Utrustningsstorlek> UtrustningsstorlekRepository { get; private set; }
 
         public UnitOfWork()
         {
             appDbContext = new AppDbContext();
-
-            UserRepository = new Repository<User>(appDbContext);
+            KundRepository = new Repository<Kund>(appDbContext);
+            AktivitetRepository = new Repository<Aktivitet>(appDbContext);
+            AnvändarRepository = new Repository<Användare>(appDbContext);
+            BehörighetsRepository = new Repository<Behörighet>(appDbContext);
+            BokningsRepository = new Repository<Bokning>(appDbContext);
+            CampingplatsRepository = new Repository<Campingplats>(appDbContext);
+            FacilitetRepository = new Repository<Facilitet>(appDbContext);
+            FakturaRepository = new Repository<Faktura>(appDbContext);
+            FöretagskundRepository = new Repository<Företagskund>(appDbContext);
+            GrupplektionRepository = new Repository<Grupplektion>(appDbContext);
+            KonferanssalRepository = new Repository<Konferanssal>(appDbContext);
+            LägenhetRepository = new Repository<Lägenhet>(appDbContext);
+            PaketRepository = new Repository<Paket>(appDbContext);
+            PrivatkundRepository = new Repository<Privatkund>(appDbContext);
+            PrivatlektionRepository = new Repository<Privatlektion>(appDbContext);
+            RollRepository = new Repository<Roll>(appDbContext);
+            SkidskolaRepository = new Repository<Skidskola>(appDbContext);
+            UtrustningRepository = new Repository<Utrustning>(appDbContext);
+            UtrustningsstorlekRepository = new Repository<Utrustningsstorlek>(appDbContext);
 
         }
         public void Save()

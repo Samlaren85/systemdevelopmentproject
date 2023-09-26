@@ -14,6 +14,10 @@ namespace EntityLayer
         public int Antal { get; set; }
         public List<Paket> Paket { get; set; }
         public Utrustningsstorlek Storlek { get; set; }
+        public Utrustning()
+        {
+            
+        }
         public Utrustning(string utrustningsID, string utrustningsBenämning, float pris, int antal, List<Paket> paket, Utrustningsstorlek storlek)
         {
             UtrustningsID = utrustningsID;

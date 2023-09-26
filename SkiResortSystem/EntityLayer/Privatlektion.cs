@@ -11,6 +11,10 @@ namespace EntityLayer
         public string PrivatlektionID { get; set; }
         public string MaxAntalDeltagare { get; set; }
         public float Timpris { get; set; }
+        public Privatlektion()
+        {
+            
+        }
         public Privatlektion(string privatlektionID, string maxantaldeltagare, float timpris)
         {
             PrivatlektionID = privatlektionID;

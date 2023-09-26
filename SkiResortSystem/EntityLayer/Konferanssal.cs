@@ -10,6 +10,10 @@ namespace EntityLayer
     {
         public string KonferansID { get; set; }
         public string KonferansBenämning { get; set; }
+        public Konferanssal()
+        {
+            
+        }
         public Konferanssal(string konferansID, string konferansBenämning)
         {
             KonferansID = konferansID;

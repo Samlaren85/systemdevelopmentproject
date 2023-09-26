@@ -10,6 +10,10 @@ namespace EntityLayer
     {
         public string BehörighetID { get; set; }
         public string Behörighetstyp { get; set; }
+        public Behörighet()
+        {
+            
+        }
         public Behörighet(string behörighetID, string behörighetstyp)
         {
             BehörighetID = behörighetID;

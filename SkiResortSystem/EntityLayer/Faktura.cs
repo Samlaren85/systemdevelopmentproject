@@ -14,6 +14,10 @@ namespace EntityLayer
         public DateTime Fakturadatum { get; set; }
         public float Totalpris { get; set; }
         public float Moms { get; set; }
+        public Faktura()
+        {
+            
+        }
         public Faktura(string fakturaID, DateTime fakturadatum, float totalpris, float moms)
         {
             FakturaID = fakturaID;

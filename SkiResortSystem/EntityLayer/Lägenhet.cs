@@ -12,6 +12,10 @@ namespace EntityLayer
         public string LägenhetBenämning { get; set; }
         public string Bäddar { get; set; }
         public string Lägenhetstorlek { get; set; }
+        public Lägenhet()
+        {
+            
+        }
         public Lägenhet(string lägenhetID, string lägenhetbenämning, string bäddar, string lägenhetstorlek)
         {
             LägenhetID = lägenhetID;

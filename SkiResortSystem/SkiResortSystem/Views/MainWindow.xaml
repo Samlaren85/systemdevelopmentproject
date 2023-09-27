@@ -58,6 +58,40 @@
 
 
         <TabItem Header="BOENDE &amp; KONFERENS"   >
+            <TabControl Width="1000" HorizontalAlignment="Left" TabStripPlacement="Left" Background="#FFA6C3E4">
+
+                <TabItem Margin="0,0,0,2" Header="BOKA BOENDE/KONFERENS" Width="auto" >
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+
+                        <TextBlock Text="Sök kund" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,50,0,20"/>
+                        <TextBox Background="White" Grid.Column="0"  Margin="50,85,60,20" Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                        <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,105,59,0" />
+
+                    </Grid>
+                </TabItem>
+
+
+                <TabItem Header="HANTERA BOKNINGSR"  Width="auto" >
+
+                </TabItem>
+
+                <TabItem Header="VISA BELÄGGNING"  Width="auto">
+
+                </TabItem>
+
+            </TabControl>
 
 
         </TabItem>

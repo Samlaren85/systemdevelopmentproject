@@ -16,7 +16,7 @@ namespace EntityLayer
         public float Rabatt { get; set; }
         public float Kreditgräns { get; set; }
         public string Gatuadress { get; set; }
-        public int Postnummer { get; set; }
+        public string Postnummer { get; set; }
         public string Ort { get; set; }
         public string Telefonnummer { get; set; }
         public Företagskund? Företagskund { get; set; }
@@ -25,7 +25,7 @@ namespace EntityLayer
         {
             
         }
-        public Kund(float rabatt, float kreditgräns, string gatuadress, int postnummer, string ort, string telefonnummer, Företagskund? företagskund, Privatkund? privatkund)
+        public Kund(float rabatt, float kreditgräns, string gatuadress, string postnummer, string ort, string telefonnummer, Företagskund? företagskund, Privatkund? privatkund)
         {
             _kundAntal++;
             KundID = "K" + _kundAntal.ToString("000000");

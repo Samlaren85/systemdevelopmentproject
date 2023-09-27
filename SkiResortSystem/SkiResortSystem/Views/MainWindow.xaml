@@ -6,20 +6,21 @@
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1003" FontFamily="Candara" FontSize="13" >
-
+        Title="MainWindow" Height="700" Width="1500" FontFamily="Candara" FontSize="13" Background="#FF5e8ec2" >
+<!--
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
-
-    <TabControl Background="#FFA6C3E4" Height="auto" Width="1004" SelectionChanged="TabControl_SelectionChanged_1" >
+-->
+    <TabControl Background="#FFA6C3E4" Height="auto" Width="auto" Padding="0,0,0,0" BorderBrush="White" BorderThickness="2" SelectionChanged="TabControl_SelectionChanged_1" >
         <TabControl.Resources>
             <Style TargetType="TabItem">
                 <Setter Property="Background" Value="#FF5e8ec2" />
                 <Setter Property="Foreground" Value="White" />
+                <Setter Property="BorderBrush" Value="White"/>
                 <Setter Property="Height" Value="50" />
                 <Setter Property="Width" Value="150" />
-                <Setter Property="Margin" Value="0,0,2,3" />
+                <Setter Property="BorderThickness" Value="2" />
             </Style>
             <Style TargetType="TextBlock">
 
@@ -35,7 +36,7 @@
         </TabControl.Resources>
 
 
-        <TabItem  Height="50" Width="100" >
+        <TabItem  Height="50" Margin="0,0,6,0">
             <TabItem.Header >
                 <Image Height="50" Width="100" Source="./images/Logo.png"/>
             </TabItem.Header>
@@ -73,15 +74,15 @@
 
 
 
-            <TabControl Width="1000" HorizontalAlignment="Left" TabStripPlacement="Left" Background="#FFA6C3E4">
+            <TabControl Padding="-2,0,0,0" Margin="0,0,0,0" Width="1000" HorizontalAlignment="Left" TabStripPlacement="Left" Background="#FFA6C3E4">
 
-                <TabItem Margin="0,0,0,2" Header="LÄGG TILL PRIVATKUND" Width="auto" >
+                <TabItem Header="LÄGG TILL PRIVATKUND" >
 
                     <TextBlock Text="dsakkdsk"></TextBlock>
                 </TabItem>
 
 
-                <TabItem Header="LÄGG TILL FÖRETAGSKUND"  Width="auto" >
+                <TabItem Header="LÄGG TILL FÖRETAGSKUND"  >
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -172,7 +173,7 @@
 
                 </TabItem>
 
-                <TabItem Header="HANTERA KUND"  Width="auto">
+                <TabItem Header="HANTERA KUND">
 
                 </TabItem>
 

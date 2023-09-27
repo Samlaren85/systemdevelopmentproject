@@ -98,10 +98,10 @@ namespace BusinessLayer
         public List<Kund> SearchCustomers(string searchTerm)
         {
             return unitOfWork.KundRepository
-                .Where(c =>
+                .Find(c =>
                     c.KundID.Contains(searchTerm) ||
                     c.Privatkund.Namn().Contains(searchTerm) ||
-                    c.Företagskund.Företagsnamn.Contains(searchTerm))
+                    c.Företagskund.Företagsnamn.Contains(searchTerm), x => x.Privatkund, x => x.Företagskund)
                 .ToList();
         }
         public List<Kund> GetSearchResults(string searchTerm)

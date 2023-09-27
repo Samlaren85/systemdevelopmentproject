@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Grupplektion
     {
+        private static int _antalGrupplektioner = 0;
         [Key]
         public string GrupplektionID { get; set; }
         public string Svårighetsgrad { get; set; }
@@ -18,9 +19,10 @@ namespace EntityLayer
         {
             
         }
-        public Grupplektion(string grupplektionID, string svårighetsgrad, float lektionspris, int maxantaldeltagare)
+        public Grupplektion(string svårighetsgrad, float lektionspris, int maxantaldeltagare)
         {
-            GrupplektionID = grupplektionID;
+            _antalGrupplektioner++;
+            GrupplektionID = "GRUPP" + _antalGrupplektioner.ToString("000000");
             Svårighetsgrad = svårighetsgrad;
             Lektionspris = lektionspris;
             MaxAntalDeltagare = maxantaldeltagare;

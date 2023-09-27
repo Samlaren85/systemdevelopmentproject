@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Konferenssal
     {
+        private static int _antalKonferenssalar = 0;
         [Key]
         public string KonferensID { get; set; }
         public string KonferensBenämning { get; set; }
@@ -16,9 +17,10 @@ namespace EntityLayer
         {
             
         }
-        public Konferenssal(string konferensID, string konferensBenämning)
+        public Konferenssal(string konferensBenämning)
         {
-            KonferensID = konferensID;
+            _antalKonferenssalar++;
+            KonferensID = "KONF" + _antalKonferenssalar.ToString("000");
             KonferensBenämning = konferensBenämning;
         }
     }

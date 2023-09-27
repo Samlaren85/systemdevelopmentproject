@@ -9,9 +9,12 @@ namespace EntityLayer
 {
     public class Bokning
     {
+        private static int _antalBokningar = 0;
         [Key]
         public string BokningsID { get; set; }
         public float UtnyttjadKredit { get; set; }
+        public DateTime Ankomsttid { get; set; }
+        public DateTime Avresetid { get; set; }
         public Användare AnvändareID { get; set; }
         public Kund KundID { get; set; }
         public List<Facilitet> FacilitetID { get; set; }
@@ -22,10 +25,11 @@ namespace EntityLayer
         {
 
         }
-        public Bokning(string bokningsID, float utnyttjadKredit, Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID)
+        public Bokning(Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID)
         {
-            BokningsID = bokningsID;
-            UtnyttjadKredit = utnyttjadKredit;
+            _antalBokningar++;
+            BokningsID = "B" + _antalBokningar.ToString("000000");
+            UtnyttjadKredit = 0;
             AnvändareID = användareID;
             KundID = kundID;
             FacilitetID = facilitetID;

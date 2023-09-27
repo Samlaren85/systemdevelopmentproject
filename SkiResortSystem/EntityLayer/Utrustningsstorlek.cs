@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Utrustningsstorlek
     {
+        private static int _antalUtrustningsstorlekar = 0;
         [Key]
         public string StorleksID { get; set; }
         public string Storlek { get; set; }
@@ -16,9 +17,10 @@ namespace EntityLayer
         {
             
         }
-        public Utrustningsstorlek(string storleksid, string storlek)
+        public Utrustningsstorlek(string storlek)
         {
-            StorleksID = storleksid;
+            _antalUtrustningsstorlekar++;
+            StorleksID = "STL" + _antalUtrustningsstorlekar.ToString("000");
             Storlek = storlek;
         }
     }

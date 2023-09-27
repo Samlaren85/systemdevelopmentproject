@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Lägenhet
     {
+        private static int _antalLägenheter = 0;
         [Key]
         public string LägenhetID { get; set; }
         public string LägenhetBenämning { get; set; }
@@ -18,9 +19,10 @@ namespace EntityLayer
         {
             
         }
-        public Lägenhet(string lägenhetID, string lägenhetbenämning, string bäddar, string lägenhetstorlek)
+        public Lägenhet(string lägenhetbenämning, string bäddar, string lägenhetstorlek)
         {
-            LägenhetID = lägenhetID;
+            _antalLägenheter++;
+            LägenhetID = "LGH" + _antalLägenheter.ToString("0000");
             LägenhetBenämning = lägenhetbenämning;
             Bäddar = bäddar;
             Lägenhetstorlek = lägenhetstorlek;

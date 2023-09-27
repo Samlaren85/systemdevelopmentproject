@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Utrustning
     {
+        private static int _antalUtrustning = 0;
         [Key]
         public string UtrustningsID { get; set; }
         public string UtrustningsBenämning { get; set; }
@@ -20,9 +21,10 @@ namespace EntityLayer
         {
             
         }
-        public Utrustning(string utrustningsID, string utrustningsBenämning, float pris, int antal, List<Paket> paket, Utrustningsstorlek storlek)
+        public Utrustning(string utrustningsBenämning, float pris, int antal, List<Paket> paket, Utrustningsstorlek storlek)
         {
-            UtrustningsID = utrustningsID;
+            _antalUtrustning++;
+            UtrustningsID = "UTR" + _antalUtrustning.ToString("000000000");
             UtrustningsBenämning = utrustningsBenämning;
             Pris = pris;
             Antal = antal;

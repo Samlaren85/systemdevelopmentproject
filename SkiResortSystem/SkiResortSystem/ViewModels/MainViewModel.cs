@@ -13,8 +13,8 @@ using SkiResortSystem.Services;
 namespace SkiResortSystem.ViewModels
 {
     public class MainViewModel : ObservableObject
-    { 
-        WindowService windowService = new WindowService()
+    {
+        WindowService windowService = new WindowService();
 
         private string loggedInUser = "#NA";
         public string LoggedInUser
@@ -51,14 +51,61 @@ namespace SkiResortSystem.ViewModels
             else ExitCommand.Execute(null);
         }
 
+        private string personnummerID;
+        public string PersonnummerID
+        {
+            get { return personnummerID; }
+            set { personnummerID = value; OnPropertyChanged(); }
+        }
+
+        private string förnamn;
+        public string Förnamn
+        {
+            get { return förnamn; }
+            set { förnamn = value; OnPropertyChanged(); }
+        }
+
+        private string efternamn;
+        public string Efternamn
+        {
+            get { return efternamn; }
+            set { efternamn = value; OnPropertyChanged(); }
+        }
+
+        private string gatuadress;
+        public string Gatuadress
+        {
+            get { return gatuadress; }
+            set { gatuadress = value; OnPropertyChanged(); }
+        }
+
+        private int postnummer;
+        public int Postnummer
+        {
+            get { return postnummer; }
+            set { postnummer = value; OnPropertyChanged(); }
+        }
+
+        private string ort;
+        public string Ort
+        {
+            get { return ort; }
+            set { ort = value; OnPropertyChanged(); }
+        }
+
+        private string telefonnummer;
+        public string Telefonnummer
+        {
+            get { return telefonnummer; }
+            set { telefonnummer = value; OnPropertyChanged(); }
+        }
 
         private ICommand skapaPrivatkund = null!;
-        public ICommand SkapaPrivatkund => skapaPrivatkund ??= new RelayCommand((personnummerID, förnamn, efternamn, gatuadress, postnummer, ort, telefonnummer) =>
-        {
-            CustomerController cc = new CustomerController;
-            cc.AddPrivateCustomer(personnummerID, förnamn, efternamn, gatuadress, postnummer, ort, telefonnummer);
 
-            
+        public ICommand SkapaPrivatkund => skapaPrivatkund ??= new RelayCommand(() =>
+        {
+            CustomerController cc = new CustomerController();
+            cc.AddPrivateCustomer(PersonnummerID, Förnamn, Efternamn, Gatuadress, Postnummer, Ort, Telefonnummer);
         }); 
 
 

@@ -148,8 +148,22 @@ namespace BusinessLayer
             
             return söktaFaciliteter.Except(inaktuellaBokningar).ToList(); //Vad händer om första sökkriteriet blir null?!? ta bort efter testkörning
         }
+        public List<Facilitet> FindLedigaFaciliteter(string sökTerm, int antalPersoner)
+        {
+            List<Facilitet> faciliteter = FindLedigaFaciliteter(sökTerm);
+            List<Facilitet> inaktuellaFaciliteter = new List<Facilitet>();
 
+            foreach (Facilitet facilitet in faciliteter)
+            {
+                if (facilitet.LägenhetsID.Bäddar => antalPersoner)
+                {
+                    inaktuellaFaciliteter.Add(facilitet);
+                }
+            }
+            return faciliteter.Except(inaktuellaFaciliteter).ToList();
+        }
  #endregion
+        
         /// <summary>
         /// Konstruktor för boendemodulen
         /// </summary>

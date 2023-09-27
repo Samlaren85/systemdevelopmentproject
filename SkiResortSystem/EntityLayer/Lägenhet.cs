@@ -13,7 +13,7 @@ namespace EntityLayer
         [Key]
         public string LägenhetID { get; set; }
         public string LägenhetBenämning { get; set; }
-        public string Bäddar { get; set; }
+        public int Bäddar { get; set; }
         public string Lägenhetstorlek { get; set; }
         public Lägenhet()
         {

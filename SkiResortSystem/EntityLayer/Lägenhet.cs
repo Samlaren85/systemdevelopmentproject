@@ -19,7 +19,7 @@ namespace EntityLayer
         {
             
         }
-        public Lägenhet(string lägenhetbenämning, string bäddar, string lägenhetstorlek)
+        public Lägenhet(string lägenhetbenämning, int bäddar, string lägenhetstorlek)
         {
             _antalLägenheter++;
             LägenhetID = "LGH" + _antalLägenheter.ToString("0000");

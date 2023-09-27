@@ -50,7 +50,7 @@ namespace BusinessLayer
         /// <param name="bäddar"></param>
         /// <param name="lägenhetsstorlek"></param>
         /// <returns></returns>
-        public Facilitet AddLägenhet(float facilitetspris, string lägenhetsbenämning, string bäddar, string lägenhetsstorlek)
+        public Facilitet AddLägenhet(float facilitetspris, string lägenhetsbenämning, int bäddar, string lägenhetsstorlek)
         {
             Lägenhet lägenhet = new Lägenhet() {LägenhetBenämning = lägenhetsbenämning, Bäddar = bäddar, Lägenhetstorlek = lägenhetsstorlek };
             unitOfWork.LägenhetRepository.Add(lägenhet);
@@ -70,13 +70,6 @@ namespace BusinessLayer
 
 
         #endregion
-
-
-
-
-
-
-
 
  #region Metoder för sök
             /// <summary>

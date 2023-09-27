@@ -15,7 +15,7 @@ namespace DataLayer
         public DbSet<Faktura> Fakturor { get; set; } = null!;
         public DbSet<Företagskund> Företagskunder { get; set; } = null!;
         public DbSet<Grupplektion> Grupplektioner { get; set; } = null!;
-        public DbSet<Konferanssal> konferanssalar { get; set; } = null!;
+        public DbSet<Konferenssal> konferanssalar { get; set; } = null!;
 
         public DbSet<Lägenhet> Lägenheter { get; set; } = null!;
         public DbSet<Paket> Paket { get; set; } = null!;

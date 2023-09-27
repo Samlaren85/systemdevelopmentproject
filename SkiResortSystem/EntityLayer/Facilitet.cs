@@ -9,23 +9,25 @@ namespace EntityLayer
 {
     public class Facilitet
     {
+        private static int _antalFaciliteter;
         [Key]
         public string FacilitetID { get; set; }
         
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT
         public float Facilitetspris { get; set; }
-        public Konferanssal? KonferansID { get; set; }
+        public Konferenssal? KonferensID { get; set; }
         public Lägenhet? LägenhetsID { get; set; }
         public Campingplats? CampingID { get; set; }
         public Facilitet()
         {
             
         }
-        public Facilitet(string facilitetID, float facilitetspris, Konferanssal konferansID, Lägenhet lägenhetsID, Campingplats campingID)
+        public Facilitet(float facilitetspris, Konferenssal konferansID, Lägenhet lägenhetsID, Campingplats campingID)
         {
-            FacilitetID = facilitetID;
+            _antalFaciliteter++;
+            FacilitetID = "F" + _antalFaciliteter.ToString("000000");
             Facilitetspris = facilitetspris;
-            KonferansID = konferansID;
+            KonferensID = konferansID;
             LägenhetsID = lägenhetsID;
             CampingID = campingID;
         }

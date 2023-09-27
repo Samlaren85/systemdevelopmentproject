@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Privatlektion
     {
+        private static int _antalPrivatlektioner = 0;
         [Key]
         public string PrivatlektionID { get; set; }
         public string MaxAntalDeltagare { get; set; }
@@ -17,9 +18,10 @@ namespace EntityLayer
         {
             
         }
-        public Privatlektion(string privatlektionID, string maxantaldeltagare, float timpris)
+        public Privatlektion(string maxantaldeltagare, float timpris)
         {
-            PrivatlektionID = privatlektionID;
+            _antalPrivatlektioner++;
+            PrivatlektionID = "PRIV" + _antalPrivatlektioner.ToString("0000");
             MaxAntalDeltagare = maxantaldeltagare;
             Timpris = timpris;
         }

@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Aktivitet
     {
+        private static int _antalAktiviteter = 0;
         [Key]
         public string AktivitetsID { get; set; }
         public Skidskola Skidskola { get; set; }
@@ -17,9 +18,10 @@ namespace EntityLayer
         {
             
         }
-        public Aktivitet(string aktivitetsID, Skidskola skidskola, bool vintersäsong)
+        public Aktivitet(Skidskola skidskola, bool vintersäsong)
         {
-            AktivitetsID = aktivitetsID;
+            _antalAktiviteter++;
+            AktivitetsID = "AKT" + _antalAktiviteter.ToString("000");
             Skidskola = skidskola;
             Vintersäsong = vintersäsong;
         }

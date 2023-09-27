@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class CostumerController
+    public class CustomerController
     {
         public UnitOfWork unitOfWork;
 
-        public CostumerController()
+        public CustomerController()
         {
             unitOfWork = new UnitOfWork();
         }
@@ -27,15 +27,15 @@ namespace BusinessLayer
         /// <param name="city"></param>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
-        public Kund AddPrivateCostumer(string personalNumber, string firstname, string lastname, string streetAdress, int postalCode, string city, string phoneNumber)
+        public Kund AddPrivateCustomer(string personalNumber, string firstname, string lastname, string streetAdress, int postalCode, string city, string phoneNumber)
         {
 
-            Privatkund privateCostumer = new Privatkund(personalNumber, firstname, lastname);
-            unitOfWork.PrivatkundRepository.Add(privateCostumer);
-            Kund costumer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, null, privateCostumer);
-            unitOfWork.KundRepository.Add(costumer);
+            Privatkund privateCustomer = new Privatkund(personalNumber, firstname, lastname);
+            unitOfWork.PrivatkundRepository.Add(privateCustomer);
+            Kund customer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, null, privateCustomer);
+            unitOfWork.KundRepository.Add(customer);
             unitOfWork.Save();
-            return costumer;
+            return customer;
         }
 
         /// <summary>
@@ -49,46 +49,46 @@ namespace BusinessLayer
         /// <param name="city"></param>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
-        public Kund AddCompanyCostumer(string organistaionNumber, string organisationName,string contact, string streetAdress, int postalCode, string city, string phoneNumber)
+        public Kund AddCompanyCustomer(string organistaionNumber, string organisationName,string contact, string streetAdress, int postalCode, string city, string phoneNumber)
         {
-            Företagskund companyCostumer = new Företagskund(organistaionNumber,organisationName,contact);
-            unitOfWork.FöretagskundRepository.Add(companyCostumer);
-            Kund costumer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, companyCostumer, null);
-            unitOfWork.KundRepository.Add(costumer);
+            Företagskund companyCustomer = new Företagskund(organistaionNumber,organisationName,contact);
+            unitOfWork.FöretagskundRepository.Add(companyCustomer);
+            Kund customer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, companyCustomer, null);
+            unitOfWork.KundRepository.Add(customer);
             unitOfWork.Save();
-            return costumer;
+            return customer;
         }
         /// <summary>
         /// Söker specifik kund i databasen
         /// </summary>
-        /// <param name="costumerIdentifier"></param>
+        /// <param name="customerIdentifier"></param>
         /// <returns></returns>
-        public Kund FindCostumer(string costumerIdentifier)
+        public Kund FindCustomer(string customerIdentifier)
         {
-            return unitOfWork.KundRepository.FirstOrDefault(c => (c.KundID == costumerIdentifier 
-                                                            || c.Privatkund.Namn().Contains(costumerIdentifier) 
-                                                            || c.Företagskund.Företagsnamn.Contains(costumerIdentifier)),
+            return unitOfWork.KundRepository.FirstOrDefault(c => (c.KundID == customerIdentifier 
+                                                            || c.Privatkund.Namn().Contains(customerIdentifier) 
+                                                            || c.Företagskund.Företagsnamn.Contains(customerIdentifier)),
                                                             x => x.Privatkund, x => x.Företagskund);
         }
         /// <summary>
         /// Ändrar en vald kund i databasen om den hittas
         /// </summary>
-        /// <param name="costumer"></param>
+        /// <param name="customer"></param>
         /// <returns></returns>
-        public bool ChangeCostumer(Kund costumer)
+        public bool ChangeCustomer(Kund customer)
         {
-            bool done = unitOfWork.KundRepository.Update(costumer);
+            bool done = unitOfWork.KundRepository.Update(customer);
             if (done) unitOfWork.Save();
             return done;
         }
         /// <summary>
         /// Tar bort en kund ur databasen
         /// </summary>
-        /// <param name="costumer"></param>
+        /// <param name="customer"></param>
         /// <returns></returns>
-        public bool RemoveCostumer(Kund costumer)
+        public bool RemoveCustomer(Kund customer)
         {
-            bool done = unitOfWork.KundRepository.Remove(costumer);
+            bool done = unitOfWork.KundRepository.Remove(customer);
             if (done) unitOfWork.Save();
             return done;
         }

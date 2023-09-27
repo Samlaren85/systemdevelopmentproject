@@ -15,7 +15,7 @@ namespace DataLayer
         public Repository<Faktura> FakturaRepository { get; private set; }
         public Repository<Företagskund> FöretagskundRepository { get; private set; }
         public Repository<Grupplektion> GrupplektionRepository { get; private set; }
-        public Repository<Konferanssal> KonferanssalRepository { get; private set; }
+        public Repository<Konferenssal> KonferenssalRepository { get; private set; }
         public Repository<Lägenhet> LägenhetRepository { get; private set; }
         public Repository<Paket> PaketRepository { get; private set; }
         public Repository<Privatkund> PrivatkundRepository { get; private set; }
@@ -38,7 +38,7 @@ namespace DataLayer
             FakturaRepository = new Repository<Faktura>(appDbContext);
             FöretagskundRepository = new Repository<Företagskund>(appDbContext);
             GrupplektionRepository = new Repository<Grupplektion>(appDbContext);
-            KonferanssalRepository = new Repository<Konferanssal>(appDbContext);
+            KonferenssalRepository = new Repository<Konferenssal>(appDbContext);
             LägenhetRepository = new Repository<Lägenhet>(appDbContext);
             PaketRepository = new Repository<Paket>(appDbContext);
             PrivatkundRepository = new Repository<Privatkund>(appDbContext);

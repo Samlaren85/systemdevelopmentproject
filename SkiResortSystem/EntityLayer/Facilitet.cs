@@ -14,14 +14,14 @@ namespace EntityLayer
         
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT
         public float Facilitetspris { get; set; }
-        public Konferanssal? KonferansID { get; set; }
+        public Konferenssal? KonferansID { get; set; }
         public Lägenhet? LägenhetsID { get; set; }
         public Campingplats? CampingID { get; set; }
         public Facilitet()
         {
             
         }
-        public Facilitet(string facilitetID, float facilitetspris, Konferanssal konferansID, Lägenhet lägenhetsID, Campingplats campingID)
+        public Facilitet(string facilitetID, float facilitetspris, Konferenssal konferansID, Lägenhet lägenhetsID, Campingplats campingID)
         {
             FacilitetID = facilitetID;
             Facilitetspris = facilitetspris;

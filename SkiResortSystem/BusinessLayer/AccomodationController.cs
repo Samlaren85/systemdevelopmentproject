@@ -16,16 +16,16 @@ namespace BusinessLayer
     public class AccommodationController
     {
         public UnitOfWork unitOfWork;
-        public int FacilitetPris { get; set; }
 
         /// <summary>
-        /// AddKonferens´sal-metoden används för att lägga till en ny bokningsbar konferenssal i systemet. 
+        /// AddKonferenssal-metoden används för att lägga till en ny bokningsbar konferenssal i systemet. 
         /// </summary>
-        public Facilitet AddKonferenssal(string konferensBenämning, double facilitetspris)
+        public Facilitet AddKonferenssal(string konferensBenämning, float facilitetspris)
         {
             Konferenssal konferenssal = new Konferenssal() { konferensBenämning };
             konferenssal.konferensBenämning = unitOfWork.KonferensRepository.Add(konferenssal);
-            Facilitet facilitet = new Facilitet() { facilitetspris, konferenssal };
+            Facilitet facilitet = new Facilitet() { facilitetspris, konferenssal};
+            unitOfWork.Save();
             return facilitet;
         }
 
@@ -38,6 +38,7 @@ namespace BusinessLayer
             unitOfWork.CampingRepository.Add(campingplats);
             Facilitet facilitet = new Facilitet() { facilitetspris, campingplats };
             unitOfWork.FacilitetRepository.Add(facilitet);
+            unitOfWork.Save();
             return facilitet;
         }
         
@@ -55,6 +56,7 @@ namespace BusinessLayer
             unitOfWork.LägenhetRepository.Add(lägenhet);
             Facilitet facilitet = new Facilitet() { facilitetspris, lägenhet };
             unitOfWork.FacilitetRepository.Add(facilitet);
+            unitOfWork.Save();
             return facilitet;
         }
  #region Boknings metoder
@@ -96,12 +98,11 @@ namespace BusinessLayer
             /// </summary>
             /// <param name="sökTerm"></param>
             /// <returns></returns>
-            public Bokning SökBoende(string sökTerm) // input string == Namn, yyyy-mm-dd, BokningID ??? Detta format vi tänkt oss enl. UC?
+            public Bokning FindBoende(string sökTerm) // input string == Namn, yyyy-mm-dd, BokningID ??? Detta format vi tänkt oss enl. UC?
         {
-            Bokning sökresultat = new Bokning();
-            sökresultat = unitOfWork.BokningRepository.FirstOrDefault(sr => sr.Bokning.BokningID == sökTerm, sr => Bokning.Ankomstdatum == sökTerm, sr => Bokning.Kund.Namn == sökTerm);
-
-            return sökresultat;
+            return unitOfWork.BokningsRepository.FirstOrDefault(b => (b.BokningsID == sökTerm  
+                                                               || b.KundID.Privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)
+                                                               || b.Bokning.Ankomstdatum.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)));
         }
 
         /// <summary>
@@ -110,17 +111,17 @@ namespace BusinessLayer
         /// Metoden hanterar utsökning av namn oberoende av om kunden är privat-/företagskund
         /// </summary>
         /// <returns></returns>
-        public List<Bokning> SökBoenden(Bokning bokning, string sökTerm) // input string == Namn, yyyy-mm-dd, BokningID ??? Detta format vi tänkt oss enl. UC?
+        public List<Bokning> FindBoenden(Bokning bokning, string sökTerm) // input string == Namn, yyyy-mm-dd, BokningID ??? Detta format vi tänkt oss enl. UC?
         {
-            return bokning.Where(bokning =>
-            bokning.Kund != null && (
-            bokning.Kund.Namn.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)) ||
+            return bokningsLista.Where(b =>
+            b.Kund != null && (
+            b.Kund.Namn.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)) ||
             // Nedan är hur jag gissar att jag kan söka ut namnet på kunden oberende av vilken typ utav kund det är.
-            (bokning.Kund is Privatkund privatkund && privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)) ||
-            (bokning.Kund is Företagskund företagskund && företagskund.Företagsnamn.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)) ||
+            (b.Kund is Privatkund privatkund && privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)) ||
+            (b.Kund is Företagskund företagskund && företagskund.Företagsnamn.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)) ||
 
-            bokning.Faktura.Datum.ToString("yyyy-MM-dd").Contains(sökTerm, StringComparison.OrdinalIgnoreCase) ||
-            bokning.BokningID.ToString().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)
+            b.Faktura.Datum.ToString("yyyy-MM-dd").Contains(sökTerm, StringComparison.OrdinalIgnoreCase) ||
+            b.BokningID.ToString().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)
             ).ToList();
         }
 
@@ -129,7 +130,7 @@ namespace BusinessLayer
         /// </summary>
         /// <param name="facilitetsval"></param>
         /// <returns></returns>
-        public static List<Facilitet> SökLedigaFaciliteter(Facilitet facilitetsval)
+        public static List<Facilitet> FindLedigaFaciliteter(Facilitet facilitetsval)
         {
                     return facilitetsval.Where(facilitetsval =>
                             facilitetsval.konferensID != null && (facilitetsval.Facilitetbokning.Bokning.BokningID != null) ||
@@ -143,7 +144,7 @@ namespace BusinessLayer
         /// </summary>
         /// <param name="antalPersoner"></param>
         /// <returns></returns>
-        public static List<Facilitet> SökLedigaLägenheter(Lägenhet lägenhet, int antalPersoner) //Endast påbörjad! behöver hjälp
+        public static List<Facilitet> FindLedigaLägenheter(Lägenhet lägenhet, int antalPersoner) //Endast påbörjad! behöver hjälp
         {
             if (antalPersoner <= 4)
             {

@@ -59,46 +59,32 @@ namespace BusinessLayer
             unitOfWork.Save();
             return facilitet;
         }
- #region Boknings metoder
-        public Bokning BokaBoende(Kund nyKund, Användare aktivAnvändare, Ankomstdatum ankDatum, Facilitet boende, double utnyttjadKredit) //Ska returtyp vara Facilitetsbokning?
+        #region Boknings metoder
+        public void CreateBokning(Användare användarID, Kund kundID, List<Facilitet> facilitetsID, List<Utrustning> utrustningID, List<Aktivitet> AktivitetID)
         {
-            
-            Bokning NyBoendeBokning = new Bokning()
-            {
-                nyKund,
-                aktivAnvändare,
-                ankDatum,
-                utnyttjadKredit,
-                boende, //Ska kunna bli lägenhet/camping
-            };
-            
-            unitOfWork.BokningRepository.Add(NyBoendeBokning);
-            return NyBoendeBokning;
+            Bokning bokning = new Bokning(användarID, kundID, facilitetsID, utrustningID, AktivitetID);
+            unitOfWork.BokningsRepository.Add(bokning);
+            unitOfWork.Save();
         }
 
-        public Bokning BokaKonferens(Kund nyKund, Användare aktivAnvändare, Ankomstdatum ankDatum, Facilitet konferenssal, double utnyttjadKredit) //Ska returtyp vara Facilitetsbokning?
-        {
-            Bokning NyKonferensBokning = new Bokning()
-            {
-                nyKund,
-                aktivAnvändare,
-                ankDatum,
-                utnyttjadKredit,
-                konferenssal, //Ska styras för att alltid motsvara en konferenssal
-            };
 
-            unitOfWork.BokningRepository.Add(NyKonferensBokning);
-            return NyKonferensBokning;
-        }
- #endregion
 
- #region Metoder för sök
-            /// <summary>
-            /// Metoden kan användas för att söka fram ett enskilt boende
-            /// </summary>
-            /// <param name="sökTerm"></param>
-            /// <returns></returns>
-            public Bokning FindBoende(string sökTerm) // input string == Namn, yyyy-mm-dd, BokningID ??? Detta format vi tänkt oss enl. UC?
+        #endregion
+
+
+
+
+
+
+
+
+        #region Metoder för sök
+        /// <summary>
+        /// Metoden kan användas för att söka fram ett enskilt boende
+        /// </summary>
+        /// <param name="sökTerm"></param>
+        /// <returns></returns>
+        public Bokning FindBoende(string sökTerm) // input string == Namn, yyyy-mm-dd, BokningID ??? Detta format vi tänkt oss enl. UC?
         {
             return unitOfWork.BokningsRepository.FirstOrDefault(b => (b.BokningsID == sökTerm  
                                                                || b.KundID.Privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)

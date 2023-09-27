@@ -13,13 +13,13 @@ namespace EntityLayer
         [Key]
         public string LägenhetID { get; set; }
         public string LägenhetBenämning { get; set; }
-        public string Bäddar { get; set; }
+        public int Bäddar { get; set; }
         public string Lägenhetstorlek { get; set; }
         public Lägenhet()
         {
             
         }
-        public Lägenhet(string lägenhetbenämning, string bäddar, string lägenhetstorlek)
+        public Lägenhet(string lägenhetbenämning, int bäddar, string lägenhetstorlek)
         {
             _antalLägenheter++;
             LägenhetID = "LGH" + _antalLägenheter.ToString("0000");

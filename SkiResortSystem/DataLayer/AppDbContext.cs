@@ -47,8 +47,8 @@ namespace DataLayer
         {
             if (!Roller.Any())
             {
-                Roller.Add(new Roll("R001", "Admin", new List<Behörighet>()));
-                Roller.Add(new Roll("R002", "Receptionist", new List<Behörighet>()));
+                Roller.Add(new Roll("Admin", new List<Behörighet>()));
+                Roller.Add(new Roll("Receptionist", new List<Behörighet>()));
             }
             if (!Användare.Any()) 
             {

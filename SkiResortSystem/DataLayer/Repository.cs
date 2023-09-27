@@ -97,7 +97,7 @@ namespace DataLayer
         /// <returns>true if it is empty, false otherwise.</returns>
         public bool IsEmpty()
         {
-            return Table.Count() == 0;
+            return !Table.Any();
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace SkiResortSystem.ViewModels
 {
     public class MainViewModel : ObservableObject
     { 
-        WindowService windowService = new WindowService();
+        WindowService windowService = new WindowService()
 
         private string loggedInUser = "#NA";
         public string LoggedInUser
@@ -50,7 +50,36 @@ namespace SkiResortSystem.ViewModels
             }
             else ExitCommand.Execute(null);
         }
-        
+
+
+        private ICommand skapaPrivatkund = null!;
+        public ICommand SkapaPrivatkund => skapaPrivatkund ??= new RelayCommand((personnummerID, förnamn, efternamn, gatuadress, postnummer, ort, telefonnummer) =>
+        {
+            CustomerController cc = new CustomerController;
+            cc.AddPrivateCustomer(personnummerID, förnamn, efternamn, gatuadress, postnummer, ort, telefonnummer);
+
+            
+        }); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       private ICommand logOut = null!;
         
         public ICommand LogOut =>

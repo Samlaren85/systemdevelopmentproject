@@ -22,7 +22,7 @@ namespace EntityLayer
         {
             
         }
-        public Facilitet(float facilitetspris, Konferenssal konferansID, Lägenhet lägenhetsID, Campingplats campingID)
+        public Facilitet(float facilitetspris, Konferenssal? konferansID, Lägenhet? lägenhetsID, Campingplats? campingID)
         {
             _antalFaciliteter++;
             FacilitetID = "F" + _antalFaciliteter.ToString("000000");

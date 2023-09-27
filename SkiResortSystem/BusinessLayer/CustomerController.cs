@@ -49,9 +49,9 @@ namespace BusinessLayer
         /// <param name="city"></param>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
-        public Kund AddCompanyCustomer(string organistaionNumber, string organisationName,string contact, string streetAdress, int postalCode, string city, string phoneNumber)
+        public Kund AddCompanyCustomer(string organistaionNumber, string organisationName,string contact, string visitAdress, string streetAdress, int postalCode, string city, string phoneNumber)
         {
-            Företagskund companyCustomer = new Företagskund(organistaionNumber,organisationName,contact);
+            Företagskund companyCustomer = new Företagskund(organistaionNumber,organisationName,contact, visitAdress);
             unitOfWork.FöretagskundRepository.Add(companyCustomer);
             Kund customer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, companyCustomer, null);
             unitOfWork.KundRepository.Add(customer);

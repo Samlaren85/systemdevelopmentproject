@@ -155,7 +155,7 @@ namespace BusinessLayer
 
             foreach (Facilitet facilitet in faciliteter)
             {
-                if (facilitet.LägenhetsID.Bäddar => antalPersoner)
+                if (facilitet.LägenhetsID.Bäddar >= antalPersoner)
                 {
                     inaktuellaFaciliteter.Add(facilitet);
                 }

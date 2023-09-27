@@ -23,7 +23,7 @@ namespace BusinessLayer
         public Facilitet AddKonferenssal(string konferensBenämning, float facilitetspris)
         {
             Konferenssal konferenssal = new Konferenssal() { KonferensBenämning = konferensBenämning };
-            unitOfWork.KonferensRepository.Add(konferenssal);
+            unitOfWork.KonferenssalRepository.Add(konferenssal);
             Facilitet facilitet = new Facilitet() { Facilitetspris = facilitetspris, KonferensID = konferenssal};
             unitOfWork.Save();
             return facilitet;

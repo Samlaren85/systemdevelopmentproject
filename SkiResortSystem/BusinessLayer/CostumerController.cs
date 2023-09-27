@@ -16,6 +16,17 @@ namespace BusinessLayer
         {
             unitOfWork = new UnitOfWork();
         }
+        /// <summary>
+        /// Lägger till en privatkund i databasen
+        /// </summary>
+        /// <param name="personalNumber"></param>
+        /// <param name="firstname"></param>
+        /// <param name="lastname"></param>
+        /// <param name="streetAdress"></param>
+        /// <param name="postalCode"></param>
+        /// <param name="city"></param>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
         public Kund AddPrivateCostumer(string personalNumber, string firstname, string lastname, string streetAdress, int postalCode, string city, string phoneNumber)
         {
 
@@ -27,6 +38,17 @@ namespace BusinessLayer
             return costumer;
         }
 
+        /// <summary>
+        /// Lägger till en företagskund i databasen
+        /// </summary>
+        /// <param name="organistaionNumber"></param>
+        /// <param name="organisationName"></param>
+        /// <param name="contact"></param>
+        /// <param name="streetAdress"></param>
+        /// <param name="postalCode"></param>
+        /// <param name="city"></param>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
         public Kund AddCompanyCostumer(string organistaionNumber, string organisationName,string contact, string streetAdress, int postalCode, string city, string phoneNumber)
         {
             Företagskund companyCostumer = new Företagskund(organistaionNumber,organisationName,contact);
@@ -36,6 +58,11 @@ namespace BusinessLayer
             unitOfWork.Save();
             return costumer;
         }
+        /// <summary>
+        /// Söker specifik kund i databasen
+        /// </summary>
+        /// <param name="costumerIdentifier"></param>
+        /// <returns></returns>
         public Kund FindCostumer(string costumerIdentifier)
         {
             return unitOfWork.KundRepository.FirstOrDefault(c => (c.KundID == costumerIdentifier 
@@ -43,12 +70,22 @@ namespace BusinessLayer
                                                             || c.Företagskund.Företagsnamn.Contains(costumerIdentifier)),
                                                             x => x.Privatkund, x => x.Företagskund);
         }
+        /// <summary>
+        /// Ändrar en vald kund i databasen om den hittas
+        /// </summary>
+        /// <param name="costumer"></param>
+        /// <returns></returns>
         public bool ChangeCostumer(Kund costumer)
         {
             bool done = unitOfWork.KundRepository.Update(costumer);
             if (done) unitOfWork.Save();
             return done;
         }
+        /// <summary>
+        /// Tar bort en kund ur databasen
+        /// </summary>
+        /// <param name="costumer"></param>
+        /// <returns></returns>
         public bool RemoveCostumer(Kund costumer)
         {
             bool done = unitOfWork.KundRepository.Remove(costumer);

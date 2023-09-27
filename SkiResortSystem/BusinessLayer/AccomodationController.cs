@@ -22,9 +22,9 @@ namespace BusinessLayer
         /// </summary>
         public Facilitet AddKonferenssal(string konferensBenämning, float facilitetspris)
         {
-            Konferenssal konferenssal = new Konferenssal() { konferensBenämning };
-            konferenssal.konferensBenämning = unitOfWork.KonferensRepository.Add(konferenssal);
-            Facilitet facilitet = new Facilitet() { facilitetspris, konferenssal};
+            Konferenssal konferenssal = new Konferenssal() { KonferensBenämning = konferensBenämning };
+            unitOfWork.KonferensRepository.Add(konferenssal);
+            Facilitet facilitet = new Facilitet() { Facilitetspris = facilitetspris, KonferensID = konferenssal};
             unitOfWork.Save();
             return facilitet;
         }
@@ -32,11 +32,11 @@ namespace BusinessLayer
         /// <summary>
         /// AddCampingPlats-metoden används för att lägga till en ny bokningsbar campingplats i systemet. 
         /// </summary>
-        public Facilitet AddCampingPlats(string campingBenämning, double campingStorlek, double facilitetspris)
+        public Facilitet AddCampingPlats(string campingBenämning, string campingStorlek, float facilitetspris)
         {
-            CampingPlats campingplats = new campingPlats() { campingBenämning, campingStorlek };
-            unitOfWork.CampingRepository.Add(campingplats);
-            Facilitet facilitet = new Facilitet() { facilitetspris, campingplats };
+            Campingplats campingplats = new Campingplats() { CampingBenämning = campingBenämning, CampingStorlek = campingStorlek };
+            unitOfWork.CampingplatsRepository.Add(campingplats);
+            Facilitet facilitet = new Facilitet() { Facilitetspris = facilitetspris, CampingID = campingplats };
             unitOfWork.FacilitetRepository.Add(facilitet);
             unitOfWork.Save();
             return facilitet;
@@ -50,11 +50,11 @@ namespace BusinessLayer
         /// <param name="bäddar"></param>
         /// <param name="lägenhetsstorlek"></param>
         /// <returns></returns>
-        public Facilitet AddLägenhet(double facilitetspris, string lägenhetsbenämning, int bäddar, double lägenhetsstorlek)
+        public Facilitet AddLägenhet(float facilitetspris, string lägenhetsbenämning, string bäddar, string lägenhetsstorlek)
         {
-            Lägenhet lägenhet = new Lägenhet() { lägenhetsbenämning, bäddar, lägenhetsstorlek };
+            Lägenhet lägenhet = new Lägenhet() {LägenhetBenämning = lägenhetsbenämning, Bäddar = bäddar, Lägenhetstorlek = lägenhetsstorlek };
             unitOfWork.LägenhetRepository.Add(lägenhet);
-            Facilitet facilitet = new Facilitet() { facilitetspris, lägenhet };
+            Facilitet facilitet = new Facilitet() {Facilitetspris = facilitetspris, LägenhetsID = lägenhet };
             unitOfWork.FacilitetRepository.Add(facilitet);
             unitOfWork.Save();
             return facilitet;
@@ -130,13 +130,30 @@ namespace BusinessLayer
         /// </summary>
         /// <param name="facilitetsval"></param>
         /// <returns></returns>
-        public static List<Facilitet> FindLedigaFaciliteter(Facilitet facilitetsval)
+        public List<Facilitet> FindLedigaFaciliteter(string sökTerm)
         {
-                    return facilitetsval.Where(facilitetsval =>
-                            facilitetsval.konferensID != null && (facilitetsval.Facilitetbokning.Bokning.BokningID != null) ||
-                            facilitetsval.lägenhetsID != null && (facilitetsval.Facilitetbokning.Bokning.BokningID != null) ||
-                            facilitetsval.campingID != null && (facilitetsval.Facilitetbokning.Bokning.BokningID != null)
-                            ).ToList();
+            IList<Facilitet> allaFaciliteter = unitOfWork.FacilitetRepository.Find(f => true);
+            IList<Bokning> allabokningar = unitOfWork.FacilitetRepository.Find(b => b.Ankomsttid >= DateTime.Now);
+
+            IList<Facilitet> inaktuellaFaciliteter = new List<Facilitet>();
+            foreach (Facilitet f in allaFaciliteter)
+            {
+                    if (f.KonferensID == null && sökTerm.Equals("Konferenssal")) inaktuellaFaciliteter.Add(f);
+                    if (f.CampingID == null && sökTerm.Equals("Campingplats")) inaktuellaFaciliteter.Add(f);
+                    if (f.LägenhetsID == null && sökTerm.Equals("Lägenhet")) inaktuellaFaciliteter.Add(f);
+            }
+
+            IList<Facilitet> inaktuellaBokningar = new List<Facilitet>();
+            foreach (Bokning b in allabokningar) 
+            {
+                foreach (Facilitet f in b.FacilitetID)
+                {
+                    inaktuellaBokningar.Add(f);
+                }
+            }
+            List<Facilitet> söktaFaciliteter = allaFaciliteter.Except(inaktuellaFaciliteter).ToList();
+            
+            return söktaFaciliteter.Except(inaktuellaBokningar).ToList(); //Vad händer om första sökkriteriet blir null?!?
         }
 
         /// <summary>

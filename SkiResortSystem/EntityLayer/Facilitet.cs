@@ -14,7 +14,7 @@ namespace EntityLayer
         
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT
         public float Facilitetspris { get; set; }
-        public Konferenssal? KonferansID { get; set; }
+        public Konferenssal? KonferensID { get; set; }
         public Lägenhet? LägenhetsID { get; set; }
         public Campingplats? CampingID { get; set; }
         public Facilitet()
@@ -25,7 +25,7 @@ namespace EntityLayer
         {
             FacilitetID = facilitetID;
             Facilitetspris = facilitetspris;
-            KonferansID = konferansID;
+            KonferensID = konferansID;
             LägenhetsID = lägenhetsID;
             CampingID = campingID;
         }

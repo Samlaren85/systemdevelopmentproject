@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Skidskola
     {
+        private static int _antalSkidskolor = 0;
         [Key]
         public string SkidskolaID { get; set; }
         
@@ -21,9 +22,10 @@ namespace EntityLayer
         {
             
         }
-        public Skidskola(string skidskolaID, int antaldeltagare, string lärare, List<Privatlektion>? privatlektion, List<Grupplektion>? grupplektion)
+        public Skidskola(int antaldeltagare, string lärare, List<Privatlektion>? privatlektion, List<Grupplektion>? grupplektion)
         {
-           SkidskolaID = skidskolaID;
+           _antalSkidskolor++;
+           SkidskolaID = "SKID" + _antalSkidskolor.ToString("00000");
            AntalDeltagare = antaldeltagare;
            Lärare = lärare;
            Privatlektion = privatlektion;

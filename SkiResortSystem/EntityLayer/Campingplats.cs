@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Campingplats
     {
+        private static int _antalCampingplatser = 0;
         [Key]
         public string CampingID { get; set; }
         public string CampingBenämning { get; set; }
@@ -17,9 +18,10 @@ namespace EntityLayer
         {
             
         }
-        public Campingplats(string campingID, string campingBenämning, string campingStorlek)
+        public Campingplats(string campingBenämning, string campingStorlek)
         {
-            CampingID = campingID;
+            _antalCampingplatser++;
+            CampingID = "CAMP" + _antalCampingplatser.ToString("0000");
             CampingBenämning = campingBenämning;
             CampingStorlek = campingStorlek;
         }

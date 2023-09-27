@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Facilitet
     {
+        private static int _antalFaciliteter;
         [Key]
         public string FacilitetID { get; set; }
         
@@ -21,9 +22,10 @@ namespace EntityLayer
         {
             
         }
-        public Facilitet(string facilitetID, float facilitetspris, Konferenssal konferansID, Lägenhet lägenhetsID, Campingplats campingID)
+        public Facilitet(float facilitetspris, Konferenssal konferansID, Lägenhet lägenhetsID, Campingplats campingID)
         {
-            FacilitetID = facilitetID;
+            _antalFaciliteter++;
+            FacilitetID = "F" + _antalFaciliteter.ToString("000000");
             Facilitetspris = facilitetspris;
             KonferensID = konferansID;
             LägenhetsID = lägenhetsID;

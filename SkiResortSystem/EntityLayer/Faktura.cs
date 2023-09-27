@@ -9,6 +9,7 @@ namespace EntityLayer
 {
     public class Faktura
     {
+        private static int _antalFakturor = 0;
         [Key]
         public string FakturaID { get; set; }
 
@@ -20,9 +21,10 @@ namespace EntityLayer
         {
             
         }
-        public Faktura(string fakturaID, DateTime fakturadatum, float totalpris, float moms)
+        public Faktura(DateTime fakturadatum, float totalpris, float moms)
         {
-            FakturaID = fakturaID;
+            _antalFakturor++;
+            FakturaID = "FAKT" + _antalFakturor.ToString("000000");
             Fakturadatum = fakturadatum; 
             Totalpris = totalpris; 
             Moms = moms;

@@ -102,7 +102,7 @@ namespace BusinessLayer
         {
             return unitOfWork.BokningsRepository.FirstOrDefault(b => (b.BokningsID == sökTerm  
                                                                || b.KundID.Privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)
-                                                               || b.Bokning.Ankomstdatum.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)));
+                                                               || b.Ankomstdatum.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)));
         }
 
         /// <summary>
@@ -111,18 +111,24 @@ namespace BusinessLayer
         /// Metoden hanterar utsökning av namn oberoende av om kunden är privat-/företagskund
         /// </summary>
         /// <returns></returns>
-        public List<Bokning> FindBoenden(Bokning bokning, string sökTerm) // input string == Namn, yyyy-mm-dd, BokningID ??? Detta format vi tänkt oss enl. UC?
+        public IList<Bokning> FindBoenden(string sökTerm, DateTime ankomst, DateTime avresa, string facilitetsTyp) // input string == Namn, yyyy-mm-dd, BokningID ??? Detta format vi tänkt oss enl. UC?
         {
-            return bokningsLista.Where(b =>
-            b.Kund != null && (
-            b.Kund.Namn.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)) ||
-            // Nedan är hur jag gissar att jag kan söka ut namnet på kunden oberende av vilken typ utav kund det är.
-            (b.Kund is Privatkund privatkund && privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)) ||
-            (b.Kund is Företagskund företagskund && företagskund.Företagsnamn.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)) ||
-
-            b.Faktura.Datum.ToString("yyyy-MM-dd").Contains(sökTerm, StringComparison.OrdinalIgnoreCase) ||
-            b.BokningID.ToString().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)
-            ).ToList();
+            IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => ((b.BokningsID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase) || (b.KundID != null &&
+                                                            (b.KundID.Privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase) ||
+                                                            b.KundID.Företagskund.Företagsnamn.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)))) &&
+                                                            (b.Ankomsttid.ToShortDateString == ankomst.ToShortDateString || b.Avresetid.ToShortDateString == avresa.ToShortDateString)
+                                                            ), x => x.KundID, x => x.FacilitetID);
+            List<Bokning> inaktuellBokningar = new List<Bokning>();
+            foreach (Bokning bokning in bokningar)
+            {
+                foreach(Facilitet facilitet in bokning.FacilitetID)
+                {
+                    if (facilitet.KonferansID == null && facilitetsTyp.Equals("Konferenssal")) inaktuellBokningar.Add(bokning);
+                    if (facilitet.CampingID == null && facilitetsTyp.Equals("Campingplats")) inaktuellBokningar.Add(bokning);
+                    if (facilitet.LägenhetsID == null && facilitetsTyp.Equals("Lägenhet")) inaktuellBokningar.Add(bokning);
+                }
+            }
+            return bokningar.Except(inaktuellBokningar).ToList(); //Vad händer om första sökkriteriet blir null?!?
         }
 
         /// <summary>

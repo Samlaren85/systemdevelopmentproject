@@ -15,7 +15,7 @@ namespace EntityLayer
         
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT
         public float Facilitetspris { get; set; }
-        public Konferenssal? KonferansID { get; set; }
+        public Konferenssal? KonferensID { get; set; }
         public Lägenhet? LägenhetsID { get; set; }
         public Campingplats? CampingID { get; set; }
         public Facilitet()
@@ -27,7 +27,7 @@ namespace EntityLayer
             _antalFaciliteter++;
             FacilitetID = "F" + _antalFaciliteter.ToString("000000");
             Facilitetspris = facilitetspris;
-            KonferansID = konferansID;
+            KonferensID = konferansID;
             LägenhetsID = lägenhetsID;
             CampingID = campingID;
         }

@@ -61,20 +61,7 @@ namespace BusinessLayer
             unitOfWork.Save();
             return facilitet;
         }
-        #endregion
-
-        #region Boknings metoder
-        public void CreateBokning(Användare användarID, Kund kundID, List<Facilitet> facilitetsID, List<Utrustning> utrustningID, List<Aktivitet> AktivitetID)
-        {
-            Bokning bokning = new Bokning(användarID, kundID, facilitetsID, utrustningID, AktivitetID);
-            unitOfWork.BokningsRepository.Add(bokning);
-            unitOfWork.Save();
-        }
-
-
-
-        #endregion
-
+     
  #region Metoder för sök
             /// <summary>
             /// Metoden kan användas för att söka fram ett specifikt boende och presentera detaljer för användaren.

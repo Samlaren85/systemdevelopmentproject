@@ -217,11 +217,31 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged(); 
             }
         }
+        
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set
+            {
+                errorMessage = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void SearchCustomers()
         {
             CustomerController cc = new CustomerController();
-            SearchResults = cc.GetSearchResults(SearchText);
+            try
+            {
+                SearchResults = cc.GetSearchResults(SearchText);
+                ErrorMessage = string.Empty; 
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = "Ingen kund hittades";
+                SearchResults = new List<Kund>(); 
+            }
         }
 
 

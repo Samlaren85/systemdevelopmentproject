@@ -8,9 +8,11 @@
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1920" FontFamily="Candara" FontSize="13" Background="#FF5e8ec2" >
+    
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
+    
 
     <TabControl Background="#FFA6C3E4" Height="1000" Width="auto" BorderBrush="White" BorderThickness="2" Padding="-5,0,0,0" >
         <TabControl.Resources>
@@ -55,53 +57,9 @@
 
 
         <TabItem Header="BOENDE &amp; KONFERENS"   >
-            <TabControl HorizontalAlignment="Left" TabStripPlacement="Left" Background="#FFA6C3E4">
 
-                <TabItem Margin="0,0,0,2" Header="BOKA BOENDE/KONFERENS" Width="auto" >
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-
-                        <TextBlock Text="Sök kund" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,52,0,135"/>
-                        <TextBox Background="White" Grid.Column="0"  Margin="50,77,55,110" Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-                        <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,112,55,74" BorderBrush="White" Background="White" />
-                        <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="51,96,0,91" />
-
-
-                    </Grid>
-                </TabItem>
-
-
-                <TabItem Header="HANTERA BOKNINGSR"  Width="auto" Height="50" Margin="-2,0,0,0" VerticalAlignment="Bottom" >
-
-                </TabItem>
-
-                <TabItem Header="VISA BELÄGGNING"  Width="auto">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"> </RowDefinition>
-                            <RowDefinition Height="*"> </RowDefinition>
-                            <RowDefinition Height="*"> </RowDefinition>
-                        </Grid.RowDefinitions>
-                    </Grid>
-                </TabItem>
-
-            </TabControl>
+            <comp:BoendeModulen/>
+            
 
 
         </TabItem>

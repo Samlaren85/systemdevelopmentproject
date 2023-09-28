@@ -8,7 +8,75 @@
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <TabControl HorizontalAlignment="Left" TabStripPlacement="Left" Background="#FFA6C3E4">
+        <TabControl.Resources>
+            <Style TargetType="TabItem">
+                <Setter Property="Background" Value="#FF5e8ec2" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="BorderBrush" Value="White"/>
+                <Setter Property="Height" Value="50" />
+                <Setter Property="Width" Value="190" />
+                <Setter Property="Margin" Value="-6,0,0,0"></Setter>
+
+
+            </Style>
+            <Style TargetType="TextBlock">
+
+                <Setter Property="Height" Value="20"/>
+                <Setter Property="Width" Value="400" ></Setter>
+
+            </Style>
+            <Style TargetType="TextBox">
+
+                <Setter Property="Height" Value="20"/>
+                <Setter Property="FontSize" Value="16"/>
+
+            </Style>
+
+        </TabControl.Resources>
+        <TabItem Margin="0,0,0,2" Header="BOKA BOENDE/KONFERENS" Width="auto" >
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+
+                <TextBlock Text="Sök kund" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,52,0,135"/>
+                <TextBox Background="White" Grid.Column="0"  Margin="50,129,231,164" Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,169,231,125" BorderBrush="White" Background="White" />
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="51,96,0,91" />
+
+
+            </Grid>
+        </TabItem>
+
+
+        <TabItem Header="HANTERA BOKNINGAR"  Width="auto" Height="50" Margin="-2,0,0,0" VerticalAlignment="Bottom" >
+
+        </TabItem>
+
+        <TabItem Header="VISA BELÄGGNING"  Width="auto">
+            <Grid>
+                <DataGrid Name="BeläggningsData" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="DATUM"></DataGridTextColumn>
+                        <DataGridTextColumn Header="LGH1"></DataGridTextColumn>
+                        <DataGridTextColumn Header="LGH2"></DataGridTextColumn>
+                        <DataGridTextColumn Header="CAMPING"></DataGridTextColumn>
+                        <DataGridTextColumn Header="KONF1"></DataGridTextColumn>
+                        <DataGridTextColumn Header="KONF2"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+
+    </TabControl>
 </UserControl>

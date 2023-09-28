@@ -239,7 +239,7 @@ namespace SkiResortSystem.ViewModels
             }
             catch (Exception ex)
             {
-                ErrorMessage = "Ingen kund hittades";
+                ErrorMessage = "Ingen kund hittades" + ex.Message;
                 SearchResults = new List<Kund>(); 
             }
         }

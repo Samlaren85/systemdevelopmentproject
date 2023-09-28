@@ -56,6 +56,16 @@ namespace DataLayer
                 Användare.Add(new Användare("Password", 2, Roller.FirstOrDefault(r => r.RollID == "R002")));
                 SaveChanges();
             }
+            if (!Kunder.Any())
+            {
+                Privatkund pkund = new Privatkund("990106", "Börje", "Lundin");
+                Kund Börje = new Kund(1, 1, "Ekliden", "5190", "sandared", "112-1121121", null, pkund);
+                Kunder.Add(Börje);
+                Företagskund fkund = new Företagskund("1111111", "Ara AB", "borki", "Hidden Leaf village");
+                Kund Ara = new Kund(1, 1, "Göreborgsvägen", "51189", "borås", "911-911911", fkund, null);
+                Kunder.Add(Ara);
+                SaveChanges();
+            }
         }
 
     }

@@ -7,11 +7,11 @@
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1920" FontFamily="Candara" FontSize="13" Background="#FF5e8ec2" >
-    <!--
+    
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
-    -->
+    
 
     <TabControl Background="#FFA6C3E4" Height="1000" Width="auto" BorderBrush="White" BorderThickness="2" Padding="-5,0,0,0" >
         <TabControl.Resources>
@@ -29,7 +29,6 @@
 
                 <Setter Property="Height" Value="20"/>
                 <Setter Property="Width" Value="400" ></Setter> 
-                <Setter Property="Font"
 
             </Style>
             <Style TargetType="TextBox">
@@ -75,8 +74,8 @@
 
 
                         <TextBlock Text="Sök kund" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,52,0,135"/>
-                        <TextBox Background="White" Grid.Column="0"  Margin="50,77,55,110" Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-                        <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,112,55,74" BorderBrush="White" Background="White" />
+                        <TextBox Background="White" Grid.Column="0"  Margin="50,129,231,164" Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                        <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,169,231,125" BorderBrush="White" Background="White" />
                         <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="51,96,0,91" />
 
 

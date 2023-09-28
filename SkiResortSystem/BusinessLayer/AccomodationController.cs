@@ -61,14 +61,14 @@ namespace BusinessLayer
             unitOfWork.Save();
             return facilitet;
         }
-     
- #region Metoder för sök
-            /// <summary>
-            /// Metoden kan användas för att söka fram ett specifikt boende och presentera detaljer för användaren.
-            /// </summary>
-            /// <param name="sökTerm"></param>
-            /// <returns></returns>
-            public Bokning FindBoende(string sökTerm)
+        #endregion
+        #region Metoder för sök
+        /// <summary>
+        /// Metoden kan användas för att söka fram ett specifikt boende och presentera detaljer för användaren.
+        /// </summary>
+        /// <param name="sökTerm"></param>
+        /// <returns></returns>
+        public Bokning FindBoende(string sökTerm)
         {
             return unitOfWork.BokningsRepository.FirstOrDefault(b => (b.BokningsID == sökTerm  
                                                                || b.KundID.Privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)

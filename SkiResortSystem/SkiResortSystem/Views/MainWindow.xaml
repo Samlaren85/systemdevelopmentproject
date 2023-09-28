@@ -81,12 +81,24 @@
                 </TabItem>
 
 
-                <TabItem Header="HANTERA BOKNINGSR"  Width="auto" >
-
+                <TabItem Header="HANTERA BOKNINGAR"  Width="auto" >
+                    
+                    
                 </TabItem>
 
                 <TabItem Header="VISA BELÄGGNING"  Width="auto">
-
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"> </RowDefinition>
+                            <RowDefinition Height="*"> </RowDefinition>
+                            <RowDefinition Height="*"> </RowDefinition>
+                        </Grid.RowDefinitions>
+                    </Grid>
                 </TabItem>
 
             </TabControl>

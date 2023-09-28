@@ -16,7 +16,9 @@ namespace BusinessLayer
     public class AccommodationController
     {
         public UnitOfWork unitOfWork;
+        #region Metoder för att lägga till logiobjekt
 
+        
         /// <summary>
         /// AddKonferenssal-metoden används för att lägga till en ny bokningsbar konferenssal i systemet. 
         /// </summary>
@@ -62,7 +64,7 @@ namespace BusinessLayer
      
  #region Metoder för sök
             /// <summary>
-            /// Metoden kan användas för att söka fram ett enskilt boende
+            /// Metoden kan användas för att söka fram ett specifikt boende och presentera detaljer för användaren.
             /// </summary>
             /// <param name="sökTerm"></param>
             /// <returns></returns>
@@ -143,6 +145,15 @@ namespace BusinessLayer
                 }
             }
             return faciliteter.Except(inaktuellaFaciliteter).ToList();
+        }
+
+        public List<T> KontrolleraBeläggning<T>(string sökTerm) //Starta här nästa stittning!
+        {
+            List<T>myList = new List<T>();
+            FindBoende(sökTerm); // Här ska vi få till i vyn 6-Beläggning så att Lägenheter samt konferenssalar splittas till 4 olika kolummner (2st/typ)
+            /*FindUtrustning(sökTerm);*/ //Här ska varje enskild typ visas på separat rad (vertikalt) KOMMER ATT SKAPAS I Utrustnings BL09/BL20 sprint2-ish
+            /*FindAktiviteter(sökTerm);*/ //Här ska varje aktivitet splittas på enskild rad. Likt Utrustning KOMMER ATT SKAPAS I BL07/BL08 sprint2-ish
+            return myList;
         }
  #endregion
         

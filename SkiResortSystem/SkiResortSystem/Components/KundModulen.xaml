@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
              xmlns:local="clr-namespace:SkiResortSystem.Components"
-             mc:Ignorable="d" 
+             xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+             mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1200">
     <TabControl Padding="-2,0,0,0" Margin="0,0,0,0" HorizontalAlignment="Left" TabStripPlacement="Left" Background="#FFA6C3E4">
         <TabControl.Resources>

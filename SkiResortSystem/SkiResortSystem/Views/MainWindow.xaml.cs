@@ -28,5 +28,15 @@ namespace SkiResortSystem.Views
         {
 
         }
+
+        private void TextBox_TextChanged_1(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_2(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
     }
 }

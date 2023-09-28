@@ -7,11 +7,11 @@
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1500" FontFamily="Candara" FontSize="13" Background="#FF5e8ec2" >
-<!--
+    <!--
     <Window.DataContext>
         <vm:MainViewModel/>
-    </Window.DataContext>
--->
+    </Window.DataContext>   
+    -->
     <TabControl Background="#FFA6C3E4" Height="auto" Width="auto" Padding="0,0,0,0" BorderBrush="White" BorderThickness="2" SelectionChanged="TabControl_SelectionChanged_1" >
         <TabControl.Resources>
             <Style TargetType="TabItem">
@@ -75,9 +75,11 @@
                         </Grid.RowDefinitions>
 
 
-                        <TextBlock Text="Sök kund" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,50,0,20"/>
-                        <TextBox Background="White" Grid.Column="0"  Margin="50,85,60,20" Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-                        <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,105,59,0" />
+                        <TextBlock Text="Sök kund" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,52,0,135"/>
+                        <TextBox Background="White" Grid.Column="0"  Margin="50,77,55,110" Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                        <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,112,55,74" BorderBrush="White" Background="White" />
+                        <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="51,96,0,91" />
+
 
                     </Grid>
                 </TabItem>

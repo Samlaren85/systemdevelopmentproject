@@ -7,10 +7,22 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Components\AktivitetsModulen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Components\BindablePasswordBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Components\BoendeModulen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Components\EkonomiModulen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Components\KundModulen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Components\StyrningsModulen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\LoginWindow.xaml.cs">
@@ -18,10 +30,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Components\AktivitetsModulen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Components\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Components\BoendeModulen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Components\EkonomiModulen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Components\KundModulen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Components\StyrningsModulen.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\LoginWindow.xaml">

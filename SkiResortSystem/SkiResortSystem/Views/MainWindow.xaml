@@ -6,23 +6,31 @@
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1003" FontFamily="Candara" FontSize="13">
+        Title="MainWindow" Height="700" Width="1920" FontFamily="Candara" FontSize="13" Background="#FF5e8ec2" >
+    <!--
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    -->
 
-
-
-    <TabControl Background="#FFA6C3E4" Height="auto" Width="1004" SelectionChanged="TabControl_SelectionChanged_1" >
+    <TabControl Background="#FFA6C3E4" Height="1000" Width="auto" BorderBrush="White" BorderThickness="2" Padding="-2,0,0,0" >
         <TabControl.Resources>
             <Style TargetType="TabItem">
                 <Setter Property="Background" Value="#FF5e8ec2" />
                 <Setter Property="Foreground" Value="White" />
+                <Setter Property="BorderBrush" Value="White"/>
                 <Setter Property="Height" Value="50" />
                 <Setter Property="Width" Value="150" />
-                <Setter Property="Margin" Value="0,0,2,3" />
+                <Setter Property="Margin" Value="-6,0,0,0"></Setter>
+
+
             </Style>
             <Style TargetType="TextBlock">
-                
+
                 <Setter Property="Height" Value="20"/>
-                
+                <Setter Property="Width" Value="400" ></Setter>
+
+
             </Style>
             <Style TargetType="TextBox">
 
@@ -33,20 +41,13 @@
         </TabControl.Resources>
 
 
-        <TabItem  Height="50" Width="100" >
+        <TabItem>
             <TabItem.Header >
                 <Image Height="50" Width="100" Source="./images/Logo.png"/>
             </TabItem.Header>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="333*"/>
-                    <ColumnDefinition Width="124*"/>
-                    <ColumnDefinition Width="209*"/>
-                    <ColumnDefinition Width="333*"/>
-                </Grid.ColumnDefinitions>
 
-                <Image Source="./images/Logo.png" Grid.ColumnSpan="4"></Image>
-            </Grid>
+            <Image Source="./images/Logo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="500" Margin="0,0,0,200" ></Image>
+
 
 
 
@@ -55,6 +56,40 @@
 
 
         <TabItem Header="BOENDE &amp; KONFERENS"   >
+            <TabControl HorizontalAlignment="Left" TabStripPlacement="Left" Background="#FFA6C3E4">
+
+                <TabItem Margin="0,0,0,2" Header="BOKA BOENDE/KONFERENS" Width="auto" >
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+
+                        <TextBlock Text="Sök kund" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,50,0,20"/>
+                        <TextBox Background="White" Grid.Column="0"  Margin="50,85,60,20" Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                        <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,105,59,0" />
+
+                    </Grid>
+                </TabItem>
+
+
+                <TabItem Header="HANTERA BOKNINGSR"  Width="auto" >
+
+                </TabItem>
+
+                <TabItem Header="VISA BELÄGGNING"  Width="auto">
+
+                </TabItem>
+
+            </TabControl>
 
 
         </TabItem>
@@ -71,72 +106,114 @@
 
 
 
-            <TabControl Width="1000" HorizontalAlignment="Left" TabStripPlacement="Left" Background="#FFA6C3E4">
+            <TabControl Width="auto"  TabStripPlacement="Left" HorizontalAlignment="Left" Background="#FFA6C3E4" Height="1000">
 
-                <TabItem Margin="0,0,0,2" Header="LÄGG TILL PRIVATKUND" Width="auto" >
+                <TabItem Header="LÄGG TILL PRIVATKUND" FontSize="10" >
 
                     <TextBlock Text="dsakkdsk"></TextBlock>
                 </TabItem>
 
 
-                <TabItem Header="LÄGG TILL FÖRETAGSKUND"  Width="auto" >
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Text="LÄGG TILL NY FÖRETAGSKUND" Foreground="Black" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Margin="50,0,0,50"/>
-
-                        <TextBlock Text="Organisationsnummer" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,50,0,20"/>
-                        <Border CornerRadius="5" Background="White" Grid.Column="0"  Margin="50,85,60,20" Width="170">
-                            <TextBox/>
-                        </Border>
-
-                        <TextBlock Text="Företagsnamn" Foreground="Black" Grid.Column="1" FontSize="15" Margin="0,50,0,20"/>
-                        <Border CornerRadius="5" Background="White" Grid.Column="1"  Height="20" Margin="0,85,100,20" Width="300">
-                            <TextBox/>
-                        </Border>
+                <TabItem Header="LÄGG TILL FÖRETAGSKUND" FontSize="10"  >
 
 
-                        <TextBlock Text="BESÖKSADRESS" Foreground="Black" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Margin="50,0,30,100" TextDecorations="Underline"/>
+                    <Grid Height="auto" Width="1760">
 
 
-                        <TextBlock Text="FAKTURAADRESS" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" FontSize="15" Margin="50,0,30,100" TextDecorations="Underline"/>
+
+                        <TextBlock Text="LÄGG TILL NY FÖRETAGSKUND" Foreground="Black" Grid.Column="0" Grid.Row="0" FontSize="20" Margin="86,32,1274,942"/>
+
+                        <TextBlock Text="Organisationsnummer" Foreground="Black" Grid.Column="0" FontSize="15" Margin="86,92,1274,882"/>
 
 
-                        <TextBlock Text="Gatuadress" Foreground="Black" Grid.Column="0" Grid.Row="1" FontSize="15" Margin="50,30,20,70"/>
-                        <Border CornerRadius="5" Background="White" Grid.Column="0" Grid.Row="1" Height="20" Margin="50,20,56,21" Width="170">
-                            <TextBox/>
-                        </Border>
-
-                        <TextBlock Text="Gatuadress" Foreground="Black" Grid.Column="1" Grid.Row="1" FontSize="15" Margin="50,30,20,20"/>
-                        <Border CornerRadius="5" Background="White" Grid.Column="1" Grid.Row="1" Height="20" Margin="50,20,300,20" Width="270" Grid.ColumnSpan="2">
-                            <TextBox/>
-                        </Border>
 
 
-                        <TextBlock Text="Postnummer" Foreground="Black" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" FontSize="15" Margin="50,90,20,20"/>
-                        <Border CornerRadius="5" Background="White" Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" Height="20" Margin="50,10,56,21" Width="170">
-                            <TextBox/>
-                        </Border>
+                        <TextBlock Text="Företagsnamn" Foreground="Black" FontSize="15" Margin="357,92,1003,882"/>
 
-                        
 
-                       
-                        
-                        
+
+
+
+                        <TextBlock Text="BESÖKSADRESS" Foreground="Black" Grid.Column="0" FontSize="15" Margin="86,163,1274,811" TextDecorations="Underline"/>
+
+
+                        <TextBlock Text="FAKTURAADRESS" Foreground="Black" FontSize="15" Margin="480,163,880,811" TextDecorations="Underline"/>
+
+
+                        <TextBlock Text="Gatuadress" Foreground="Black" FontSize="15" Margin="86,195,1274,779"/>
+
+
+
+
+                        <TextBlock Text="Gatuadress" Foreground="Black" FontSize="15" Margin="480,195,880,779"/>
+
+
+
+
+                        <TextBlock Text="Postnummer" Foreground="Black"  FontSize="15" Margin="86,269,1274,705" />
+
+
+
+                        <TextBlock Text="Postort" Foreground="Black"  FontSize="15" Margin="266,269,1094,705"  />
+
+
+
+
+                        <TextBlock Text="Postort" Foreground="Black" FontSize="15"  Margin="652,269,708,705"/>
+
+
+
+                        <TextBlock Text="Postnummer" Foreground="Black" FontSize="15" Margin="480,269,880,705" />
+
+
+
+
+
+                        <TextBlock Text="Kontaktperson" Foreground="Black" FontSize="15" Margin="86,357,1274,617"/>
+
+
+
+
+                        <TextBlock Text="E-post" Foreground="Black" FontSize="15" Margin="372,357,988,617"/>
+
+
+
+
+                        <TextBlock Text="Telefonnummer" Foreground="Black" FontSize="15" Margin="86,429,1274,545"/>
+
+                        <TextBlock Text="Rabatt" Foreground="Black" FontSize="15" Margin="86,506,1274,468"/>
+
+                        <TextBlock Text="Kreditgräns" Foreground="Black" FontSize="15" Margin="372,506,988,468"/>
+
+                        <TextBox Margin="372,382,1058,592"/>
+                        <TextBox Margin="86,382,1457,592"/>
+                        <TextBox Margin="652,294,891,680"/>
+                        <TextBox Margin="480,294,1167,680"/>
+                        <TextBox Margin="266,294,1321,680"/>
+                        <TextBox Margin="86,294,1561,680"/>
+                        <TextBox Margin="480,220,1003,754"/>
+                        <TextBox Margin="86,220,1417,754"/>
+                        <TextBox Margin="357,117,1137,857"/>
+                        <TextBox Margin="86,117,1470,857"/>
+                        <TextBox Margin="86,454,1470,520"/>
+                        <TextBox Margin="82,530,1546,444"/>
+                        <TextBox Margin="372,531,1257,443"/>
+
+
+                        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="White" Margin="750,508,880,436" ></Button>
+
+
+
+
+
+
+
+
                     </Grid>
 
                 </TabItem>
 
-                <TabItem Header="HANTERA KUND"  Width="auto">
+                <TabItem Header="HANTERA KUND" FontSize="10">
 
                 </TabItem>
 

@@ -27,7 +27,7 @@ namespace BusinessLayer
         /// <param name="city"></param>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
-        public Kund AddPrivateCustomer(string personalNumber, string firstname, string lastname, string streetAdress, int postalCode, string city, string phoneNumber)
+        public Kund AddPrivateCustomer(string personalNumber, string firstname, string lastname, string streetAdress, string postalCode, string city, string phoneNumber)
         {
 
             Privatkund privateCustomer = new Privatkund(personalNumber, firstname, lastname);
@@ -49,9 +49,9 @@ namespace BusinessLayer
         /// <param name="city"></param>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
-        public Kund AddCompanyCustomer(string organistaionNumber, string organisationName,string contact, string streetAdress, int postalCode, string city, string phoneNumber)
+        public Kund AddCompanyCustomer(string organistaionNumber, string organisationName,string contact, string visitadress, string streetAdress, string postalCode, string city, string phoneNumber)
         {
-            Företagskund companyCustomer = new Företagskund(organistaionNumber,organisationName,contact);
+            Företagskund companyCustomer = new Företagskund(organistaionNumber,organisationName,contact, visitadress);
             unitOfWork.FöretagskundRepository.Add(companyCustomer);
             Kund customer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, companyCustomer, null);
             unitOfWork.KundRepository.Add(customer);
@@ -92,5 +92,23 @@ namespace BusinessLayer
             if (done) unitOfWork.Save();
             return done;
         }
+
+
+        //TEST IFALL SÖKNING AV KUND FUNGERAR 
+        public List<Kund> SearchCustomers(string searchTerm)
+        {
+            return unitOfWork.KundRepository
+                .Find(c =>
+                    c.KundID.Contains(searchTerm) ||
+                    c.Privatkund.Namn().Contains(searchTerm) ||
+                    c.Företagskund.Företagsnamn.Contains(searchTerm), x => x.Privatkund, x => x.Företagskund)
+                .ToList();
+        }
+        public List<Kund> GetSearchResults(string searchTerm)
+        {
+            return SearchCustomers(searchTerm);
+        }
+
+
     }
 }

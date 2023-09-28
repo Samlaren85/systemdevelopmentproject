@@ -29,7 +29,7 @@
 
                 <Setter Property="Height" Value="20"/>
                 <Setter Property="Width" Value="400" ></Setter> 
-                <Setter Property="Font"
+                
 
             </Style>
             <Style TargetType="TextBox">
@@ -84,22 +84,22 @@
                 </TabItem>
 
 
-                <TabItem Header="HANTERA BOKNINGSR"  Width="auto" Height="50" Margin="-2,0,0,0" VerticalAlignment="Bottom" >
+                <TabItem Header="HANTERA BOKNINGAR"  Width="auto" Height="50" Margin="-2,0,0,0" VerticalAlignment="Bottom" >
 
                 </TabItem>
 
                 <TabItem Header="VISA BELÄGGNING"  Width="auto">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"> </RowDefinition>
-                            <RowDefinition Height="*"> </RowDefinition>
-                            <RowDefinition Height="*"> </RowDefinition>
-                        </Grid.RowDefinitions>
+                        <DataGrid Name="BeläggningsData" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="DATUM"></DataGridTextColumn>
+                                <DataGridTextColumn Header="LGH1"></DataGridTextColumn>
+                                <DataGridTextColumn Header="LGH2"></DataGridTextColumn>
+                                <DataGridTextColumn Header="CAMPING"></DataGridTextColumn>
+                                <DataGridTextColumn Header="KONF1"></DataGridTextColumn>
+                                <DataGridTextColumn Header="KONF2"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Grid>
                 </TabItem>
 

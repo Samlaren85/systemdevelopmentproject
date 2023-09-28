@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
              xmlns:local="clr-namespace:SkiResortSystem.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+             d:DesignHeight="900" d:DesignWidth="1200">
     <TabControl Padding="-2,0,0,0" Margin="0,0,0,0" HorizontalAlignment="Left" TabStripPlacement="Left" Background="#FFA6C3E4">
         <TabControl.Resources>
             <Style TargetType="TabItem">
@@ -51,7 +53,7 @@
 
                 <TextBlock Text="Organisationsnummer" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,50,2,77"/>
                 <Border CornerRadius="5" Background="White" Grid.Column="0" Height="20" Margin="50,20,60,0" Width="170">
-                    <TextBox/>
+                    <TextBox Text="{Binding OrganisationsnummerID, UpdateSourceTrigger=PropertyChanged}"/>
                 </Border>
 
                 <TextBlock Text="Företagsnamn" Foreground="Black" FontSize="15" Margin="0,50,0,70" Grid.ColumnSpan="2" Grid.Column="1"/>

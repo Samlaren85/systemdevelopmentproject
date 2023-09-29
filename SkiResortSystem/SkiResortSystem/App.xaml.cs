@@ -21,6 +21,8 @@ namespace SkiResortSystem
             Startup += (s, e) => //ta bort denna sen
             {
                 WindowService.RegisterWindow<LoginViewModel, LoginWindow>();
+                WindowService.RegisterWindow<KundöversiktFöretagViewModel,KundöversiktFöretag> ();
+                WindowService.RegisterWindow<KundöversiktPrivatViewModel, KundöversiktPrivat>();
             };
         }
     }

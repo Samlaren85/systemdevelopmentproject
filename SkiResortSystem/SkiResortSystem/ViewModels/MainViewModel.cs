@@ -12,6 +12,7 @@ using EntityLayer;
 using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using SkiResortSystem.Services;
+using SkiResortSystem.Views;
 
 namespace SkiResortSystem.ViewModels
 {
@@ -317,10 +318,23 @@ namespace SkiResortSystem.ViewModels
         });
 
 
+        private ICommand customerPriveteOverview = null!;
+        public ICommand CustomerPrivateOverview =>
+            customerPriveteOverview ??= customerPriveteOverview = new RelayCommand(() =>
+            {
+                KundöversiktPrivat kundöversikt = new KundöversiktPrivat();
+                windowService.ShowDialog(kundöversikt);
+            }
+            );
 
-
-
-
+        private ICommand customerCompanyOverview = null!;
+        public ICommand CustomerCompanyOverview =>
+            customerCompanyOverview ??= customerCompanyOverview = new RelayCommand(() =>
+            {
+                KundöversiktFöretag kundöversikt = new KundöversiktFöretag();
+                windowService.ShowDialog(kundöversikt);
+            }
+            );
 
         /// <summary>
         /// Logga ut och stänga ner nedan 

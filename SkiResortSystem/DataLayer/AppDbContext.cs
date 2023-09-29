@@ -29,11 +29,16 @@ namespace DataLayer
         public DbSet<Utrustningsstorlek> Utrustningsstorlekar { get; set; } = null!;
 
 
-        bool test = true;
+        private static bool _test = true;
+        private static bool _reset = false;
 
         public AppDbContext()
         {
-            if (test) base.Database.EnsureDeleted();
+            if (_test && !_reset)
+            {
+                _reset = true;
+                base.Database.EnsureDeleted();
+            }
             base.Database.EnsureCreated();
             Seed();
         }
@@ -41,7 +46,7 @@ namespace DataLayer
         {
             if (!optionBuilder.IsConfigured)
             {
-                if (test) optionBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SkiResortSystem;Trusted_Connection=True;");
+                if (_test) optionBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SkiResortSystem;Trusted_Connection=True;");
                 else optionBuilder.UseSqlServer("Server=sqlutb2.hb.se,56077;Database=suht2301;User Id=suht2301;Password=bax999;Encrypt=False;");
                 /*string connectionString = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())

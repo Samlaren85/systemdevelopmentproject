@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Components\AdminModulen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Components\AktivitetsModulen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -30,6 +33,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Components\AdminModulen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Components\AktivitetsModulen.xaml">
       <SubType>Designer</SubType>
     </Page>

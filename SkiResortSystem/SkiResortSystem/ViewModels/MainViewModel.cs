@@ -234,15 +234,24 @@ namespace SkiResortSystem.ViewModels
             CustomerController cc = new CustomerController();
             try
             {
+                ErrorMessage = string.Empty;
+                
                 SearchResults = cc.GetSearchResults(SearchText);
-                ErrorMessage = string.Empty; 
+                if(searchResults .Count < 1)
+                {
+                    ErrorMessage = "Ingen kund hittades";
+
+                }
+
             }
             catch (Exception ex)
             {
-                ErrorMessage = "Ingen kund hittades" + ex.Message;
+                ErrorMessage = "Ingen kund hittades, " + ex.Message;
                 SearchResults = new List<Kund>(); 
             }
         }
+
+            
 
 
 

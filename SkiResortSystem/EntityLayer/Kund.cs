@@ -42,5 +42,18 @@ namespace EntityLayer
         {
             return Gatuadress + Postnummer + Ort;
         }
+        public override string ToString()
+        {
+            string kundtext;
+            if(Privatkund != null)
+            {
+                kundtext = Privatkund.Namn() + " (Privatkund)";
+            }
+            else
+            {
+                kundtext = Företagskund.Företagsnamn + " (Företagskund)";
+            }
+            return kundtext.ToString();
+        }
     }
 }

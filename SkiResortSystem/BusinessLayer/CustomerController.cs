@@ -97,12 +97,15 @@ namespace BusinessLayer
         //TEST IFALL SÖKNING AV KUND FUNGERAR 
         public List<Kund> SearchCustomers(string searchTerm)
         {
-           return unitOfWork.KundRepository
+
+            List<Kund> x = unitOfWork.KundRepository
                 .Find(c =>
                     c.KundID.Contains(searchTerm) ||
-                    c.Privatkund.Namn().Contains(searchTerm) ||
-                    c.Företagskund.Företagsnamn.Contains(searchTerm), x => x.Privatkund, x => x.Företagskund)
+                    (c.Privatkund!= null && c.Privatkund.Namn().Contains(searchTerm)) ||
+                    (c.Företagskund != null && c.Företagskund.Företagsnamn.Contains(searchTerm)), x => x.Privatkund, x => x.Företagskund)
                 .ToList();
+
+            return x;
         }
         public List<Kund> GetSearchResults(string searchTerm)
         {

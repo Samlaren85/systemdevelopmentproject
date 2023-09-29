@@ -52,7 +52,7 @@
                 <TextBlock Text="Sök kund" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,52,0,135"/>
                 <TextBox Background="White" Grid.Column="0"  Margin="50,129,231,164" Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,169,231,125" BorderBrush="White" Background="White" />
-                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="51,96,0,91" />
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="51,129,-241,12" RenderTransformOrigin="0.013,0.393" Grid.ColumnSpan="3" />
 
 
             </Grid>

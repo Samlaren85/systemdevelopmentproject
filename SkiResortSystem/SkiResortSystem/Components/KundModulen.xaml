@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              mc:Ignorable="d" Height="1026" Width="2127">
-    <TabControl Width="auto"  TabStripPlacement="Left" HorizontalAlignment="Left" Background="#FFA6C3E4" Height="1000">
+    <TabControl Width="auto"  TabStripPlacement="Left" HorizontalAlignment="Left"  Background="#FFA6C3E4" Height="1000">
         <TabControl.Resources>
             <Style TargetType="TabItem">
                 <Setter Property="Background" Value="#FF5e8ec2" />
@@ -21,10 +21,10 @@
             </Style>
             <Style TargetType="TextBlock">
 
-                <Setter Property="Height" Value="20"/>
+                <Setter Property="Height" Value="30"/>
                 <Setter Property="Width" Value="400" ></Setter>
                 <Setter Property="Foreground" Value="Black"/>
-                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="FontSize" Value="20"/>
             </Style>
             <Style TargetType="TextBox">
 
@@ -43,12 +43,12 @@
                 <TextBlock Text="Personnummer" Margin="86,92,1274,882"/>
 
 
-                <TextBlock Text="Namn" Margin="86,169,1274,805"/>
+                <TextBlock Text="Namn" Margin="86,156,1274,808"/>
 
 
 
 
-                <TextBlock Text="Efternamn" Margin="418,169,942,805"/>
+                <TextBlock Text="Efternamn" Margin="422,162,938,802"/>
 
 
 
@@ -57,12 +57,12 @@
 
 
 
-                <TextBlock Text="Kreditgräns" Margin="735,149,625,825"  />
+                <TextBlock Text="Kreditgräns" Margin="735,154,625,810"  />
 
 
 
 
-                <TextBlock Text="Rabatt" Margin="735,92,625,882"/>
+                <TextBlock Text="Rabatt" Margin="735,82,625,882"/>
 
 
 
@@ -86,10 +86,19 @@
 
 
                 <TextBox Margin="86,347,1543,627"/>
-                <TextBox Margin="86,506,1457,468"/>
+                <TextBox Margin="80,513,1457,461" RenderTransformOrigin="0.5,0.5">
+                    <TextBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBox.RenderTransform>
+                </TextBox>
                 <TextBox Background="#FFC5BEBE" Margin="735,117,852,857"/>
                 <TextBox Margin="286,347,1296,627"/>
-                <TextBox Background="#FFC5BEBE" Margin="735,169,852,805"/>
+                <TextBox Background="#FFC5BEBE" Margin="735,195,852,779"/>
                 <TextBox Margin="86,279,1379,695"/>
                 <TextBox Margin="418,195,1065,779"/>
                 <TextBox Margin="86,195,1417,779"/>
@@ -117,42 +126,42 @@
 
 
 
-                <TextBlock Text="Företagsnamn" Margin="357,92,1003,882"/>
+                <TextBlock Text="Företagsnamn" Margin="400,92,960,872"/>
 
 
 
 
 
-                <TextBlock Text="BESÖKSADRESS" Margin="86,163,1274,811" TextDecorations="Underline"/>
+                <TextBlock Text="BESÖKSADRESS" Margin="86,183,1274,791" TextDecorations="Underline"/>
 
 
-                <TextBlock Text="FAKTURAADRESS" Margin="480,163,880,811" TextDecorations="Underline"/>
+                <TextBlock Text="FAKTURAADRESS" Margin="655,183,705,781" TextDecorations="Underline"/>
 
 
-                <TextBlock Text="Gatuadress" Margin="86,195,1274,779"/>
-
-
-
-
-                <TextBlock Text="Gatuadress" Margin="480,195,880,779"/>
+                <TextBlock Text="Gatuadress" Margin="86,214,1274,760"/>
 
 
 
 
-                <TextBlock Text="Postnummer" Margin="86,269,1274,705" />
-
-
-
-                <TextBlock Text="Postort" Margin="266,269,1094,705"  />
+                <TextBlock Text="Gatuadress" Margin="655,219,705,745"/>
 
 
 
 
-                <TextBlock Text="Postort" Margin="652,269,708,705"/>
+                <TextBlock Text="Postnummer" Margin="82,284,1278,680" />
 
 
 
-                <TextBlock Text="Postnummer" Margin="480,269,880,705" />
+                <TextBlock Text="Postort" Margin="247,282,1113,682"  />
+
+
+
+
+                <TextBlock Text="Postort" Margin="855,284,505,680"/>
+
+
+
+                <TextBlock Text="Postnummer" Margin="655,284,705,680" />
 
 
 
@@ -163,33 +172,33 @@
 
 
 
-                <TextBlock Text="E-post" Margin="372,357,988,617"/>
+                <TextBlock Text="E-post" Margin="455,357,905,607"/>
 
 
 
 
-                <TextBlock Text="Telefonnummer" Margin="86,429,1274,545"/>
+                <TextBlock Text="Telefonnummer" Margin="86,429,1274,535"/>
 
                 <TextBlock Text="Rabatt"  Margin="86,506,1274,468"/>
 
-                <TextBlock Text="Kreditgräns"  Margin="372,506,988,468"/>
+                <TextBlock Text="Kreditgräns"  Margin="310,495,1050,469"/>
 
-                <TextBox Margin="372,382,1058,592"/>
-                <TextBox Margin="86,380,1457,585"/>
-                <TextBox Margin="652,294,891,680"/>
-                <TextBox Margin="480,294,1167,680"/>
-                <TextBox Margin="266,294,1321,680"/>
-                <TextBox Margin="86,294,1561,680"/>
-                <TextBox Margin="480,220,1003,754"/>
-                <TextBox Margin="86,220,1417,754"/>
-                <TextBox Margin="357,117,1137,857"/>
-                <TextBox Margin="86,117,1443,847"/>
-                <TextBox Margin="86,454,1470,520"/>
+                <TextBox Margin="655,254,775,720"/>
+                <TextBox Margin="86,380,1388,570"/>
+                <TextBox Margin="855,324,688,650"/>
+                <TextBox Margin="655,319,993,655"/>
+                <TextBox Margin="455,392,1132,582"/>
+                <TextBox Margin="84,314,1562,660"/>
+                <TextBox Margin="86,244,1406,730"/>
+                <TextBox Margin="247,314,1257,660"/>
+                <TextBox Margin="400,134,1094,840"/>
+                <TextBox Margin="82,124,1447,830"/>
+                <TextBox Margin="86,464,1470,510"/>
                 <TextBox Margin="82,530,1546,444"/>
-                <TextBox Margin="372,531,1257,443"/>
+                <TextBox Margin="310,530,1320,444"/>
 
 
-                <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="White" Margin="750,508,880,436" ></Button>
+                <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="White" Margin="942,500,688,444" RenderTransformOrigin="-0.654,-1.268" ></Button>
 
 
 
@@ -203,11 +212,13 @@
         </TabItem>
 
         <TabItem Header="HANTERA KUND" Width="192">
-            <Grid Width="1760">
-                <TextBlock Text="SÖK KUND" Margin="67,80,1455,892"></TextBlock>
-                <TextBox Margin="67,109,1061,848"></TextBox>
+            <DataGrid Background="#FFA6C3E4" Width="800" Height="400" Margin="50,190,500,400" BorderBrush="Black" BorderThickness="2">
+                <TextBlock Text="SÖK KUND" Margin="67,58,1293,884"></TextBlock>
+                <TextBox Margin="67,116,1061,838"></TextBox>
+                
+                
 
-            </Grid>
+            </DataGrid>
         </TabItem>
 
     </TabControl>

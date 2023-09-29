@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Components\AdminModulen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Components\AktivitetsModulen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,11 +28,20 @@
     <Compile Update="Components\StyrningsModulen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\KundöversiktPrivat.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\KundöversiktFöretag.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Components\AdminModulen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Components\AktivitetsModulen.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -46,6 +58,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Components\StyrningsModulen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\KundöversiktPrivat.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\KundöversiktFöretag.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\LoginWindow.xaml">

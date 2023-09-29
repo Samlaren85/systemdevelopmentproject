@@ -1,0 +1,89 @@
+﻿<Window x:Class="SkiResortSystem.Views.Kundöversikt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SkiResortSystem.Views"
+        mc:Ignorable="d"
+        Title="Kundöversikt" Height="auto" Width="1920" FontFamily="Candara" >
+
+    <Window.Resources>
+        
+        <Style TargetType="TextBlock">
+
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="400" ></Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="TextBox">
+
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="16"/>
+
+
+        </Style>
+
+    </Window.Resources>
+    <Grid  Background="#FFA6C3E4" Height="1000">
+
+        <TextBlock Text="LÄGG TILL NY PRIVATKUND" FontSize="20" Margin="86,32,1274,942"/>
+        <TextBlock Text="Personnummer" Margin="166,77,1354,893"/>
+
+
+        <TextBlock Text="Förnamn" Margin="86,156,1274,808"/>
+
+
+
+
+        <TextBlock Text="Efternamn" Margin="525,163,995,807"/>
+
+
+
+
+        <TextBlock Text="Gatuadress" Margin="86,249,1274,725" />
+
+
+
+        <TextBlock Text="Kreditgräns" Margin="902,159,618,811"  />
+
+
+
+
+        <TextBlock Text="Rabatt" Margin="902,77,618,893"/>
+
+
+
+        <TextBlock Text="Postort" Margin="525,315,995,655" />
+
+
+
+
+
+        <TextBlock Text="Telefonnummer" Margin="86,477,1274,497"/>
+
+
+
+
+        <TextBlock Text="Postnummer" Margin="166,315,1354,655"/>
+
+
+
+
+        <TextBlock Text="E-post" Margin="86,395,1274,579"/>
+
+
+        <TextBox Margin="166,360,1463,620"/>
+        <TextBox Margin="166,512,1560,468"/>
+        <TextBox Background="#FFC5BEBE" Margin="904,120,896,860"/>
+        <TextBox Margin="525,360,1218,620"/>
+        <TextBox Background="#FFC5BEBE" Margin="904,198,896,782"/>
+        <TextBox Margin="166,284,1299,696"/>
+        <TextBox Margin="525,198,1131,782"/>
+        <TextBox Margin="166,198,1526,780"/>
+        <TextBox Margin="160,120,1384,850"/>
+        <TextBox Margin="166,430,1390,550"/>
+
+        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Margin="902,559,888,391" Foreground="White" ></Button>
+    </Grid>
+</Window>

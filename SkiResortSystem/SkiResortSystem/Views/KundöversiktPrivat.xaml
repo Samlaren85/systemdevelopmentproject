@@ -1,11 +1,11 @@
-﻿<Window x:Class="SkiResortSystem.Views.Kundöversikt"
+﻿<Window x:Class="SkiResortSystem.Views.KundöversiktPrivat"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="Kundöversikt" Height="auto" Width="1920" FontFamily="Candara" >
+        Title="KundöversiktPrivat" Height="1000" Width="1920" FontFamily="Candara" >
 
     <Window.Resources>
         
@@ -50,7 +50,7 @@
 
 
 
-        <TextBlock Text="Rabatt" Margin="902,77,618,893"/>
+        <TextBlock Text="Rabatt" Margin="904,77,616,893"/>
 
 
 

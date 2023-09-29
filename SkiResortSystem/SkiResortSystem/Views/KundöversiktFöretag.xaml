@@ -3,10 +3,127 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:comp="clr-namespace:SkiResortSystem.Components"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="KundöversiktFöretag" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="auto" Width="1920" FontFamily="Candara" FontSize="13" Background="#FF5e8ec2" >
+
+
+    <Window.Resources>
+
+        <Style TargetType="TextBlock">
+
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="400" ></Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="TextBox">
+
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="16"/>
+
+
+        </Style>
+
+    </Window.Resources>
+
+
+
+
+
+    <Grid  Background="#FFA6C3E4" Height="1000">
+
+
+        <TextBlock Text="LÄGG TILL NY FÖRETAGSKUND" FontSize="20" Margin="154,32,1366,938"/>
+
+            <TextBlock Text="Organisationsnummer" Margin="154,99,1366,871"/>
+
+
+
+
+            <TextBlock Text="Företagsnamn" Margin="480,99,1040,871"/>
+
+
+
+
+
+            <TextBlock Text="BESÖKSADRESS" Margin="154,179,1366,791" TextDecorations="Underline"/>
+
+
+            <TextBlock Text="FAKTURAADRESS" Margin="655,183,705,781" TextDecorations="Underline"/>
+
+
+            <TextBlock Text="Gatuadress" Margin="154,214,1366,756"/>
+
+
+
+
+            <TextBlock Text="Gatuadress" Margin="655,219,705,745"/>
+
+
+
+
+            <TextBlock Text="Postnummer" Margin="154,286,1366,684" />
+
+
+
+            <TextBlock Text="Postort" Margin="391,287,1129,683"  />
+
+
+
+
+            <TextBlock Text="Postort" Margin="855,284,505,680"/>
+
+
+
+            <TextBlock Text="Postnummer" Margin="735,285,785,685" />
+
+
+
+
+
+            <TextBlock Text="Kontaktperson" Margin="154,356,1366,614"/>
+
+
+
+
+            <TextBlock Text="E-post" Margin="627,360,893,610"/>
+
+
+
+
+            <TextBlock Text="Telefonnummer" Margin="154,450,1366,520"/>
+
+            <TextBlock Text="Rabatt"  Margin="154,530,1366,440"/>
+
+            <TextBlock Text="Kreditgräns"  Margin="500,530,1020,440"/>
+
+            <TextBox Margin="735,250,850,720"/>
+            <TextBox Margin="154,395,1320,575"/>
+            <TextBox Margin="935,322,770,648"/>
+            <TextBox Margin="735,322,1040,648"/>
+            <TextBox Margin="627,395,960,575"/>
+            <TextBox Margin="154,321,1620,649"/>
+            <TextBox Margin="154,244,1338,726"/>
+            <TextBox Margin="391,321,1329,649"/>
+            <TextBox Margin="480,134,1093,836"/>
+            <TextBox Margin="154,134,1525,836"/>
+            <TextBox Margin="154,485,1402,485"/>
+            <TextBox Margin="154,566,1474,404"/>
+            <TextBox Margin="501,566,1129,404"/>
+
+
+            <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Margin="1042,556,748,394" Foreground="White" ></Button>
+
+
+
+
+
+
+
+
     </Grid>
+
+    
 </Window>

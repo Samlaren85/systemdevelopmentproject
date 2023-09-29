@@ -25,11 +25,13 @@ namespace EntityLayer
         {
 
         }
-        public Bokning(Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID)
+        public Bokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID)
         {
             _antalBokningar++;
             BokningsID = "B" + _antalBokningar.ToString("000000");
             UtnyttjadKredit = 0;
+            Ankomsttid = ankomsttid;
+            Avresetid = avresetid;
             AnvändareID = användareID;
             KundID = kundID;
             FacilitetID = facilitetID;

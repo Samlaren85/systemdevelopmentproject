@@ -212,11 +212,13 @@
         </TabItem>
 
         <TabItem Header="HANTERA KUND" Width="192">
-            <Grid Width="1760">
+            <DataGrid Background="#FFA6C3E4" Width="800" Height="400" Margin="50,190,500,400" BorderBrush="Black" BorderThickness="2">
                 <TextBlock Text="SÖK KUND" Margin="67,58,1293,884"></TextBlock>
                 <TextBox Margin="67,116,1061,838"></TextBox>
+                
+                
 
-            </Grid>
+            </DataGrid>
         </TabItem>
 
     </TabControl>

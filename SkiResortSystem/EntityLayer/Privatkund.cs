@@ -25,7 +25,7 @@ namespace EntityLayer
         }
         public string Namn()
         {
-            return Förnamn + Efternamn;
+            return Förnamn + " " + Efternamn;
         }
     }
 }

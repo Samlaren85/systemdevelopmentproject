@@ -41,17 +41,19 @@
         </TabControl.Resources>
         <TabItem Margin="0,0,0,2" Header="BOKA BOENDE/KONFERENS" Width="auto">
 
-            <Grid>
-                
+            <Canvas Height="auto" Width="1760">
 
 
-                <TextBlock Text="Sök kund" Foreground="Black" FontSize="15" Margin="0,19,0,0"/>
-                <TextBox Background="White" Margin="0,48,237,376" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="36,44,237,376" BorderBrush="White" Background="White" SelectionChanged="ComboBox_SelectionChanged" />
-                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="51,129,241,12" RenderTransformOrigin="0.013,0.393" />
+
+                <TextBlock Text="Sök kund" Foreground="Black" FontSize="15" Canvas.Left="39" Canvas.Top="81"/>
+                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="39" Canvas.Top="109" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" SelectionChanged="ComboBox_SelectionChanged" Canvas.Left="39" Canvas.Top="129" Width="229" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" />
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="39" Canvas.Top="149" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
 
-            </Grid>
+
+            </Canvas>
+
         </TabItem>
 
 

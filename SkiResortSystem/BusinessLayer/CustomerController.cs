@@ -27,12 +27,12 @@ namespace BusinessLayer
         /// <param name="city"></param>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
-        public Kund AddPrivateCustomer(string personalNumber, string firstname, string lastname, string streetAdress, string postalCode, string city, string phoneNumber)
+        public Kund AddPrivateCustomer(string personalNumber, string firstname, string lastname, string streetAdress, string postalCode, string city, string phoneNumber, string epost)
         {
 
             Privatkund privateCustomer = new Privatkund(personalNumber, firstname, lastname);
             unitOfWork.PrivatkundRepository.Add(privateCustomer);
-            Kund customer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, null, privateCustomer);
+            Kund customer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, epost, null, privateCustomer);
             unitOfWork.KundRepository.Add(customer);
             unitOfWork.Save();
             return customer;
@@ -49,11 +49,11 @@ namespace BusinessLayer
         /// <param name="city"></param>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
-        public Kund AddCompanyCustomer(string organistaionNumber, string organisationName,string contact, string visitadress, string streetAdress, string postalCode, string city, string phoneNumber)
+        public Kund AddCompanyCustomer(string organistaionNumber, string organisationName,string contact, string visitadress, string streetAdress, string postalCode, string city, string phoneNumber, string epost)
         {
             Företagskund companyCustomer = new Företagskund(organistaionNumber,organisationName,contact, visitadress);
             unitOfWork.FöretagskundRepository.Add(companyCustomer);
-            Kund customer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, companyCustomer, null);
+            Kund customer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, epost, companyCustomer, null);
             unitOfWork.KundRepository.Add(customer);
             unitOfWork.Save();
             return customer;

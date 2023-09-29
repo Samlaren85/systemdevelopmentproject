@@ -16,8 +16,21 @@
                 <Setter Property="Height" Value="50" />
                 <Setter Property="Width" Value="190" />
                 <Setter Property="Margin" Value="-6,0,0,0"></Setter>
-
-
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Foreground" Value="#FF5e8ec2" />
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="False">
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="FontWeight" Value="Normal"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="BorderBrush" Value="White" />
+                <Setter Property="Background" Value="White"/>
             </Style>
             <Style TargetType="TextBlock">
 
@@ -30,195 +43,35 @@
 
                 <Setter Property="Height" Value="20"/>
                 <Setter Property="FontSize" Value="16"/>
-                
+
 
             </Style>
 
         </TabControl.Resources>
 
-        <TabItem Header="LÄGG TILL PRIVATKUND" Width="192" >
-            <Grid Height="auto" Width="1760">
-                
-                <TextBlock Text="LÄGG TILL NY PRIVATKUND" FontSize="20" Margin="86,32,1274,942"/>
-                <TextBlock Text="Personnummer" Margin="86,92,1274,882"/>
-
-
-                <TextBlock Text="Namn" Margin="86,156,1274,808"/>
-
-
-
-
-                <TextBlock Text="Efternamn" Margin="422,162,938,802"/>
-
-
-
-
-                <TextBlock Text="Gatuadress" Margin="86,249,1274,725" />
-
-
-
-                <TextBlock Text="Kreditgräns" Margin="735,154,625,810"  />
-
-
-
-
-                <TextBlock Text="Rabatt" Margin="735,82,625,882"/>
-
-
-
-                <TextBlock Text="Postort" Margin="286,319,1074,655" />
-
-
-
-
-
-                <TextBlock Text="Telefonnummer" Margin="86,477,1274,497"/>
-
-
-
-
-                <TextBlock Text="Postnummer" Margin="86,319,1274,655"/>
-
-
-
-
-                <TextBlock Text="E-post" Margin="86,395,1274,579"/>
-
-
-                <TextBox Margin="86,347,1543,627"/>
-                <TextBox Margin="80,513,1457,461" RenderTransformOrigin="0.5,0.5">
-                    <TextBox.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBox.RenderTransform>
-                </TextBox>
-                <TextBox Background="#FFC5BEBE" Margin="735,117,852,857"/>
-                <TextBox Margin="286,347,1296,627"/>
-                <TextBox Background="#FFC5BEBE" Margin="735,195,852,779"/>
-                <TextBox Margin="86,279,1379,695"/>
-                <TextBox Margin="418,195,1065,779"/>
-                <TextBox Margin="86,195,1417,779"/>
-                <TextBox Margin="86,117,1457,830" TextChanged="TextBox_TextChanged"/>
-                <TextBox Margin="86,429,1470,545"/>
-
-                <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="White" Margin="750,508,880,436" ></Button>
-
-            </Grid>
-
-        </TabItem>
-
-
-        <TabItem Header="LÄGG TILL FÖRETAGSKUND" Width="192" Height="50" Margin="-1,0,1,0" VerticalAlignment="Bottom" >
-
-
-            <Grid Height="auto" Width="1760">
-
-
-
-                <TextBlock Text="LÄGG TILL NY FÖRETAGSKUND" FontSize="20" Margin="86,32,1274,942"/>
-
-                <TextBlock Text="Organisationsnummer" Margin="86,92,1274,882"/>
-
-
-
-
-                <TextBlock Text="Företagsnamn" Margin="400,92,960,872"/>
-
-
-
-
-
-                <TextBlock Text="BESÖKSADRESS" Margin="86,183,1274,791" TextDecorations="Underline"/>
-
-
-                <TextBlock Text="FAKTURAADRESS" Margin="655,183,705,781" TextDecorations="Underline"/>
-
-
-                <TextBlock Text="Gatuadress" Margin="86,214,1274,760"/>
-
-
-
-
-                <TextBlock Text="Gatuadress" Margin="655,219,705,745"/>
-
-
-
-
-                <TextBlock Text="Postnummer" Margin="82,284,1278,680" />
-
-
-
-                <TextBlock Text="Postort" Margin="247,282,1113,682"  />
-
-
-
-
-                <TextBlock Text="Postort" Margin="855,284,505,680"/>
-
-
-
-                <TextBlock Text="Postnummer" Margin="655,284,705,680" />
-
-
-
-
-
-                <TextBlock Text="Kontaktperson" Margin="86,357,1274,617"/>
-
-
-
-
-                <TextBlock Text="E-post" Margin="455,357,905,607"/>
-
-
-
-
-                <TextBlock Text="Telefonnummer" Margin="86,429,1274,535"/>
-
-                <TextBlock Text="Rabatt"  Margin="86,506,1274,468"/>
-
-                <TextBlock Text="Kreditgräns"  Margin="310,495,1050,469"/>
-
-                <TextBox Margin="655,254,775,720"/>
-                <TextBox Margin="86,380,1388,570"/>
-                <TextBox Margin="855,324,688,650"/>
-                <TextBox Margin="655,319,993,655"/>
-                <TextBox Margin="455,392,1132,582"/>
-                <TextBox Margin="84,314,1562,660"/>
-                <TextBox Margin="86,244,1406,730"/>
-                <TextBox Margin="247,314,1257,660"/>
-                <TextBox Margin="400,134,1094,840"/>
-                <TextBox Margin="82,124,1447,830"/>
-                <TextBox Margin="86,464,1470,510"/>
-                <TextBox Margin="82,530,1546,444"/>
-                <TextBox Margin="310,530,1320,444"/>
-
-
-                <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="White" Margin="942,500,688,444" RenderTransformOrigin="-0.654,-1.268" ></Button>
-
-
-
-
-
-
-
-
-            </Grid>
-
-        </TabItem>
-
-        <TabItem Header="HANTERA KUND" Width="192">
-            <DataGrid Background="#FFA6C3E4" Width="800" Height="400" Margin="50,190,500,400" BorderBrush="Black" BorderThickness="2">
+        <TabItem Header="HANTERA KUND" Width="192" FontWeight="Normal" >
+            <Grid>
                 <TextBlock Text="SÖK KUND" Margin="67,58,1293,884"></TextBlock>
-                <TextBox Margin="67,116,1061,838"></TextBox>
-                
-                
+                <TextBox Height="50" Margin="67,128,1240,816" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
 
-            </DataGrid>
+                </TextBox>
+                <DataGrid Background="#FFA6C3E4" Width="800" Height="400" Margin="67,223,893,371" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding SearchResults, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Person-/Org.nummer" Width="*" Binding="{Binding KundID}"/>
+                        <DataGridTextColumn Header="Namn" Width="*" Binding="{Binding}"/>
+                        <DataGridTextColumn Header="Telefonnummer" Width="*" Binding="{Binding Telefonnummer}"/>
+                        <DataGridTextColumn Header="E-post" Width="*" Binding="{Binding Epost}"/>
+                    </DataGrid.Columns>
+
+
+
+                </DataGrid>
+                <Button Content="Lägg till företagskund" Height="50" Width="220" HorizontalAlignment="Left" Margin="647,36,0,0" VerticalAlignment="Top"/>
+                <Button Content="Lägg till privatkund" Height="50" Width="220" HorizontalAlignment="Left" Margin="647,128,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Grunka!">
+            
         </TabItem>
 
     </TabControl>

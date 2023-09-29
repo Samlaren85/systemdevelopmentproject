@@ -13,7 +13,6 @@ namespace EntityLayer
         [Key]
         public string FakturaID { get; set; }
 
-        // VILKEN TYP AV DATUM MAN SKA HA??
         public DateTime Fakturadatum { get; set; }
         public float Totalpris { get; set; }
         public float Moms { get; set; }

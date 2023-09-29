@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1080" d:DesignWidth="1920">
     <TabControl HorizontalAlignment="Left" TabStripPlacement="Left" Background="#FFA6C3E4">
         <TabControl.Resources>
             <Style TargetType="TabItem">
@@ -34,27 +34,14 @@
             </Style>
 
         </TabControl.Resources>
-        <TabItem Margin="0,0,0,2" Header="BOKA BOENDE/KONFERENS" Width="auto" >
+        <TabItem Margin="0,0,0,2" Header="BOKA BOENDE/KONFERENS" Width="auto">
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
+            <Grid Width="1920">
 
-
-                <TextBlock Text="Sök kund" Foreground="Black" Grid.Column="0" FontSize="15" Margin="50,52,0,135"/>
-                <TextBox Background="White" Grid.Column="0"  Margin="50,129,231,164" Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,169,231,125" BorderBrush="White" Background="White" />
-                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="51,129,-241,12" RenderTransformOrigin="0.013,0.393" Grid.ColumnSpan="3" />
-
-
+                <TextBlock Text="Sök kund" Foreground="Black" FontSize="15" Margin="50,132,1470,922"/>
+                <TextBox Background="White"  Width="170" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="50,164,1700,890" />
+                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" Margin="50,164,1679,890" BorderBrush="White" Background="White" />
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Margin="50,164,1470,890" RenderTransformOrigin="0.013,0.393" />
             </Grid>
         </TabItem>
 

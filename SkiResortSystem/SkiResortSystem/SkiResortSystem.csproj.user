@@ -25,6 +25,9 @@
     <Compile Update="Components\StyrningsModulen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Kundöversikt.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -46,6 +49,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Components\StyrningsModulen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Kundöversikt.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\LoginWindow.xaml">

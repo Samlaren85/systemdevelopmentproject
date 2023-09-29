@@ -41,7 +41,6 @@
 
         </TabControl.Resources>
 
-
         <TabItem>
             <TabItem.Header >
                 <Image Height="50" Width="100" Source="./images/Logo.png"/>
@@ -49,25 +48,17 @@
 
             <Image Source="./images/Logo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="500" Margin="0,0,0,200" ></Image>
 
-
-
-
         </TabItem>
-
-
 
         <TabItem Header="BOENDE &amp; KONFERENS"   >
 
             <comp:BoendeModulen/>
-            
-
 
         </TabItem>
 
-
-
         <TabItem Header="AKTIVITET &amp; UTRUSTNING"    >
 
+            <comp:AktivitetsModulen/>
 
         </TabItem>
 
@@ -75,37 +66,25 @@
 
             <comp:KundModulen/>
 
-
-            
-
-
-
         </TabItem>
-
-
 
         <TabItem Header="EKONOMI"  >
 
+            <comp:EkonomiModulen/>
 
         </TabItem>
 
         <TabItem Header="STYRNING">
 
+            <comp:StyrningsModulen/>
 
         </TabItem>
 
         <TabItem Header="ADMIN">
 
+            <comp:AdminModulen/>
 
         </TabItem>
-
-
-
-
-
-
-
-
 
     </TabControl>
 

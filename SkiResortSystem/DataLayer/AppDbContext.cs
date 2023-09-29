@@ -1,5 +1,7 @@
 ﻿using EntityLayer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace DataLayer
 {
@@ -27,10 +29,11 @@ namespace DataLayer
         public DbSet<Utrustningsstorlek> Utrustningsstorlekar { get; set; } = null!;
 
 
-
+        bool test = true;
 
         public AppDbContext()
         {
+            if (test) base.Database.EnsureDeleted();
             base.Database.EnsureCreated();
             Seed();
         }
@@ -38,7 +41,15 @@ namespace DataLayer
         {
             if (!optionBuilder.IsConfigured)
             {
-                optionBuilder.UseSqlServer("Server=sqlutb2.hb.se,56077;Database=suht2301;User Id=suht2301;Password=bax999;Encrypt=False");
+                if (test) optionBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SkiResortSystem;Trusted_Connection=True;");
+                else optionBuilder.UseSqlServer("Server=sqlutb2.hb.se,56077;Database=suht2301;User Id=suht2301;Password=bax999;Encrypt=False;");
+                /*string connectionString = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", true, true)
+                    .Build()
+                    .GetConnectionString("Test");
+
+                optionBuilder.UseSqlServer(connectionString);*/
                 base.OnConfiguring(optionBuilder);
             }
         }
@@ -52,8 +63,8 @@ namespace DataLayer
             }
             if (!Användare.Any()) 
             {
-                Användare.Add(new Användare("Admin",1, Roller.FirstOrDefault(r => r.RollID == "R001")));
-                Användare.Add(new Användare("Password", 2, Roller.FirstOrDefault(r => r.RollID == "R002")));
+                Användare.Add(new Användare("@dm1n1strator",1, Roller.FirstOrDefault(r => r.RollID == "R001")));
+                Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID == "R002")));
                 SaveChanges();
             }
             if (!Kunder.Any())

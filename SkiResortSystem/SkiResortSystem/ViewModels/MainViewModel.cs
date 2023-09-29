@@ -251,19 +251,63 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-            
+        //prop som ska till bokning
 
+        private Användare användarID;
+        public Användare AnvändarID
+        {
+            get { return användarID; }
+            set { användarID = value; OnPropertyChanged(); }
+        }
 
+        private Kund kundID;
+        public Kund KundID
+        {
+            get { return kundID; }
+            set { kundID = value; OnPropertyChanged(); }
+        }
 
+        private List<Facilitet> facilitetsID;
+        public List<Facilitet> FacilitetsID
+        {
+            get { return facilitetsID; }
+            set { facilitetsID = value; OnPropertyChanged(); }
+        }
 
+        private List<Utrustning> utrustningID;
+        public List<Utrustning> UtrustningID
+        {
+            get { return utrustningID; }
+            set { utrustningID = value; OnPropertyChanged(); }
+        }
 
+        private List<Aktivitet> aktivitetID;
+        public List<Aktivitet> AktivitetID
+        {
+            get { return aktivitetID; }
+            set { aktivitetID = value; OnPropertyChanged(); }
+        }
 
+        private DateTime ankomsttid;
+        public DateTime Ankomsttid
+        {
+            get { return ankomsttid; }
+            set { ankomsttid = value; OnPropertyChanged(); }
+        }
+        private DateTime avresetid;
+        public DateTime Avresetid
+        {
+            get { return  avresetid; }
+            set { avresetid = value; OnPropertyChanged(); }
+        }
 
+        private ICommand createBooking = null!;
 
-
-
-
-
+        public ICommand CreateBooking => createBooking ??= createBooking = new RelayCommand(() =>
+        {
+            BookingController bc = new BookingController();
+            bc.CreateBokning(ankomsttid, avresetid, AnvändarID, KundID, FacilitetsID, UtrustningID, AktivitetID);
+        });
 
 
 

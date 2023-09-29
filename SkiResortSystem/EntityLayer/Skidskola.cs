@@ -13,7 +13,6 @@ namespace EntityLayer
         [Key]
         public string SkidskolaID { get; set; }
         
-        //SKA VARA BERÄKNAT
         public int AntalDeltagare { get; set; }
         public string Lärare { get; set; }
         public List<Privatlektion>? Privatlektion { get; set; }

@@ -12,20 +12,30 @@ namespace EntityLayer
     {
         private static int _kundAntal = 0;
         [Key]
-        public string KundID { get; set; }
+        private string kundID;
+        public string KundID 
+        { 
+            get
+            {
+                if (Privatkund != null) return Privatkund.PersonnummerID;
+                else return Företagskund.OrganisationsnummerID;
+            }
+            set { kundID = value; }
+        }
         public float Rabatt { get; set; }
         public float Kreditgräns { get; set; }
         public string Gatuadress { get; set; }
         public string Postnummer { get; set; }
         public string Ort { get; set; }
         public string Telefonnummer { get; set; }
+        public string Epost { get; set; }
         public Företagskund? Företagskund { get; set; }
         public Privatkund? Privatkund { get; set; }
         public Kund()
         {
             
         }
-        public Kund(float rabatt, float kreditgräns, string gatuadress, string postnummer, string ort, string telefonnummer, Företagskund? företagskund, Privatkund? privatkund)
+        public Kund(float rabatt, float kreditgräns, string gatuadress, string postnummer, string ort, string telefonnummer, string epost, Företagskund? företagskund, Privatkund? privatkund)
         {
             _kundAntal++;
             KundID = "K" + _kundAntal.ToString("000000");
@@ -35,6 +45,7 @@ namespace EntityLayer
             Postnummer = postnummer;
             Ort = ort;
             Telefonnummer = telefonnummer;
+            Epost = epost;
             Företagskund = företagskund;
             Privatkund = privatkund;
         }
@@ -54,6 +65,20 @@ namespace EntityLayer
                 kundtext = Företagskund.Företagsnamn + " (Företagskund)";
             }
             return kundtext.ToString();
+        }
+
+        public string Number()
+        {
+            string kundnummer;
+            if (Privatkund != null)
+            {
+                kundnummer = Privatkund.PersonnummerID;
+            }
+            else
+            {
+                kundnummer = Företagskund.OrganisationsnummerID;
+            }
+            return kundnummer.ToString();
         }
     }
 }

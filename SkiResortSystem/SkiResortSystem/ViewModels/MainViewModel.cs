@@ -104,13 +104,20 @@ namespace SkiResortSystem.ViewModels
             get { return telefonnummerPrivat; }
             set { telefonnummerPrivat = value; OnPropertyChanged(); }
         }
+		
+		private string epost;
+		public string Epost
+		{
+			get { return epost; }
+			set { epost = value; OnPropertyChanged(); }
+		}
 
         private ICommand createPrivateCustomer = null!;
 
         public ICommand CreatePrivateCustomer => createPrivateCustomer ??= new RelayCommand(() =>
         {
             CustomerController cc = new CustomerController();
-            cc.AddPrivateCustomer(PersonnummerID, Förnamn, Efternamn, GatuadressPrivat, PostnummerPrivat, OrtPrivat, TelefonnummerPrivat);
+            cc.AddPrivateCustomer(PersonnummerID, Förnamn, Efternamn, GatuadressPrivat, PostnummerPrivat, OrtPrivat, TelefonnummerPrivat, epost);
         });
 
         //Properties för att binda till mainwindow skapa företagskunderkunder 
@@ -176,7 +183,7 @@ namespace SkiResortSystem.ViewModels
         public ICommand CreateBusinessCustomer => createBusinessCustomer ??= createBusinessCustomer = new RelayCommand(() =>
         {
             CustomerController cc = new CustomerController();
-            cc.AddCompanyCustomer(OrganisationsnummerID, Företagsnamn, Kontaktperson, Besöksaddress, GatuadressFöretag, PostnummerFöretag, OrtFöretag, TelefonnummerFöretag);
+            cc.AddCompanyCustomer(OrganisationsnummerID, Företagsnamn, Kontaktperson, Besöksaddress, GatuadressFöretag, PostnummerFöretag, OrtFöretag, TelefonnummerFöretag, epost);
         });
 
 

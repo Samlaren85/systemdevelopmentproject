@@ -28,10 +28,7 @@
     <Compile Update="Components\StyrningsModulen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\KundöversiktPrivat.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\KundöversiktFöretag.xaml.cs">
+    <Compile Update="Views\CustomerOverviewPrivate.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\LoginWindow.xaml.cs">
@@ -60,10 +57,7 @@
     <Page Update="Components\StyrningsModulen.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\KundöversiktPrivat.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\KundöversiktFöretag.xaml">
+    <Page Update="Views\CustomerOverviewPrivate.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\LoginWindow.xaml">

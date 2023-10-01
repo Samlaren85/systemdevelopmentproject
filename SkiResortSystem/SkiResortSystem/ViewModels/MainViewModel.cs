@@ -322,7 +322,7 @@ namespace SkiResortSystem.ViewModels
         public ICommand CustomerPrivateOverview =>
             customerPriveteOverview ??= customerPriveteOverview = new RelayCommand(() =>
             {
-                KundöversiktPrivat kundöversikt = new KundöversiktPrivat();
+                CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel();
                 windowService.ShowDialog(kundöversikt);
             }
             );
@@ -331,7 +331,7 @@ namespace SkiResortSystem.ViewModels
         public ICommand CustomerCompanyOverview =>
             customerCompanyOverview ??= customerCompanyOverview = new RelayCommand(() =>
             {
-                KundöversiktFöretag kundöversikt = new KundöversiktFöretag();
+                CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel();
                 windowService.ShowDialog(kundöversikt);
             }
             );

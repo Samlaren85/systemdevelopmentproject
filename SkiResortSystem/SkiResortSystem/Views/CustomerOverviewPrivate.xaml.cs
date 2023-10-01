@@ -18,9 +18,9 @@ namespace SkiResortSystem.Views
     /// <summary>
     /// Interaction logic for Kundöversikt.xaml
     /// </summary>
-    public partial class KundöversiktPrivat : Window, ICloseable
+    public partial class CustomerOverviewPrivate : Window, ICloseable
     {
-        public KundöversiktPrivat()
+        public CustomerOverviewPrivate()
         {
             InitializeComponent();
         }

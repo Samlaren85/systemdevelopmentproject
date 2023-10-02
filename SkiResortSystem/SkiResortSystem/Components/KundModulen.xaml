@@ -16,6 +16,7 @@
                 <Setter Property="Height" Value="50" />
                 <Setter Property="Width" Value="192" />
                 <Setter Property="Margin" Value="-6,0,0,0"></Setter>
+                <!--
                 <Style.Triggers>
                     <Trigger Property="IsSelected" Value="True">
                         <Setter Property="Foreground" Value="#FF5e8ec2" />
@@ -26,6 +27,7 @@
                         <Setter Property="FontWeight" Value="Normal"/>
                     </Trigger>
                 </Style.Triggers>
+                -->
             </Style>
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="20"/>
@@ -56,7 +58,14 @@
                 <TextBox Height="50" Margin="67,128,1240,816" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
 
                 </TextBox>
-                <DataGrid Background="#FFA6C3E4" Width="800" Height="400" Margin="67,223,893,371" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding SearchResults, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False">
+                <DataGrid Background="#FFA6C3E4" Width="800" Height="400" Margin="67,223,893,371" BorderBrush="Black" BorderThickness="2"
+                          ItemsSource="{Binding SearchResults}" SelectedItem="{Binding Path=SelectCustomer}" 
+                          IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.InputBindings>
+                        <MouseBinding
+                        MouseAction="LeftDoubleClick"
+                        Command="{Binding DoubleClickCustomerCommand}"/>
+                    </DataGrid.InputBindings>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Person-/Org.nummer" Width="*" Binding="{Binding KundID}"/>
                         <DataGridTextColumn Header="Namn" Width="*" Binding="{Binding}"/>

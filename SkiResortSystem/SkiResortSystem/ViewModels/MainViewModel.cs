@@ -151,6 +151,19 @@ namespace SkiResortSystem.ViewModels
             set { besöksaddress = value; OnPropertyChanged(); }
         }
 
+        private string besökspostnummer;
+        public string Besökspostnummer
+        {
+            get { return besökspostnummer; }
+            set { besökspostnummer = value; OnPropertyChanged(); }
+        }
+        private string besöksort;
+        public string Besöksort
+        {
+            get { return besöksort; }
+            set { besöksort = value; OnPropertyChanged(); }
+        }
+
         private string gatuadressFöretag;
         public string GatuadressFöretag
         {
@@ -179,12 +192,39 @@ namespace SkiResortSystem.ViewModels
             set { telefonnummerFöretag = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Används för att markera kund i kundlistan, vid dubbelklick öppnas en kundöversikt
+        /// </summary>
+        private Kund selectCustomer;
+        public Kund SelectCustomer
+        {
+            get { return selectCustomer; }
+            set
+            {
+                selectCustomer = value;
+            }
+        }
+        private ICommand doubleClickCustomerCommand = null!;
+        public ICommand DoubleClickCustomerCommand =>
+            doubleClickCustomerCommand ??= doubleClickCustomerCommand = new RelayCommand(() =>
+            {
+                if (selectCustomer.Privatkund != null)
+                {
+                    CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel(SelectCustomer);
+                    windowService.ShowDialog(kundöversikt);
+                }
+                else
+                {
+                    CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel(SelectCustomer);
+                    windowService.ShowDialog(kundöversikt);
+                }
+            });
         private ICommand createBusinessCustomer = null!;
 
         public ICommand CreateBusinessCustomer => createBusinessCustomer ??= createBusinessCustomer = new RelayCommand(() =>
         {
             CustomerController cc = new CustomerController();
-            cc.AddCompanyCustomer(OrganisationsnummerID, Företagsnamn, Kontaktperson, Besöksaddress, GatuadressFöretag, PostnummerFöretag, OrtFöretag, TelefonnummerFöretag, epost);
+            cc.AddCompanyCustomer(OrganisationsnummerID, Företagsnamn, Kontaktperson, Besöksaddress, Besökspostnummer, Besöksort, GatuadressFöretag, PostnummerFöretag, OrtFöretag, TelefonnummerFöretag, epost);
         });
 
 

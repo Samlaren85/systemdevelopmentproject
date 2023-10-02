@@ -47,10 +47,26 @@
 
 
 
-                <TextBlock Text="Sök kund" Foreground="Black" FontSize="15" Canvas.Left="39" Canvas.Top="81"/>
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="39" Canvas.Top="109" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" SelectionChanged="ComboBox_SelectionChanged" Canvas.Left="39" Canvas.Top="129" Width="229" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" />
-                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="39" Canvas.Top="149" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="Sök kund" Foreground="Black" FontSize="15" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" SelectionChanged="ComboBox_SelectionChanged" Canvas.Left="80" Canvas.Top="124" Width="229" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" />
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="144" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+                <RadioButton Content="Lägenhet" Canvas.Left="80" Canvas.Top="169" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <RadioButton Content="Camping" Canvas.Left="161" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <RadioButton Content="Konferens" Canvas.Left="237" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                <DatePicker Canvas.Left="449" Canvas.Top="104" Height="22" Width="148" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <DatePicker Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148"/>
+
+
+
+                <DataGrid Background="#FFA6C3E4" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding SearchResults, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Typ" Width="*" Binding="{Binding }"/>
+                        <DataGridTextColumn Header="Pris" Width="*" Binding="{Binding}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
 
 
 

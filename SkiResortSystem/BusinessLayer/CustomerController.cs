@@ -37,6 +37,14 @@ namespace BusinessLayer
             unitOfWork.Save();
             return customer;
         }
+        public Kund AddPrivateCustomer(Kund newCustomer)
+        {
+
+            unitOfWork.PrivatkundRepository.Add(newCustomer.Privatkund);
+            unitOfWork.KundRepository.Add(newCustomer);
+            unitOfWork.Save();
+            return newCustomer;
+        }
 
         /// <summary>
         /// Lägger till en företagskund i databasen
@@ -49,14 +57,22 @@ namespace BusinessLayer
         /// <param name="city"></param>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
-        public Kund AddCompanyCustomer(string organistaionNumber, string organisationName,string contact, string visitadress, string streetAdress, string postalCode, string city, string phoneNumber, string epost)
+        public Kund AddCompanyCustomer(string organistaionNumber, string organisationName,string contact, string visitAdress, string visitPostalCode, string visitCity, string streetAdress, string postalCode, string city, string phoneNumber, string epost)
         {
-            Företagskund companyCustomer = new Företagskund(organistaionNumber,organisationName,contact, visitadress);
+            Företagskund companyCustomer = new Företagskund(organistaionNumber,organisationName,contact, visitAdress, visitPostalCode, visitCity);
             unitOfWork.FöretagskundRepository.Add(companyCustomer);
             Kund customer = new Kund(0, 12000, streetAdress, postalCode, city, phoneNumber, epost, companyCustomer, null);
             unitOfWork.KundRepository.Add(customer);
             unitOfWork.Save();
             return customer;
+        }
+        public Kund AddCompanyCustomer(Kund newCustomer)
+        {
+
+            unitOfWork.FöretagskundRepository.Add(newCustomer.Företagskund);
+            unitOfWork.KundRepository.Add(newCustomer);
+            unitOfWork.Save();
+            return newCustomer;
         }
         /// <summary>
         /// Söker specifik kund i databasen

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         mc:Ignorable="d"
-        Title="KundöversiktPrivat" Height="Auto" Width="1920" FontFamily="Candara" x:Name="View">
+        Title="KundöversiktPrivat" Height="Auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">
     <Window.DataContext>
         <vm:CustomerOverviewPrivateViewModel/>
     </Window.DataContext>
@@ -23,7 +23,14 @@
 
             <Setter Property="Height" Value="30"/>
             <Setter Property="FontSize" Value="16"/>
-
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly" Value="True">
+                    <Setter Property="Background" Value="#FFC5BEBE"/>
+                </Trigger>
+                <Trigger Property="IsReadOnly" Value="False">
+                    <Setter Property="Background" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
 
         </Style>
 
@@ -74,10 +81,10 @@
 
 
         <TextBlock Text="E-post" Canvas.Left="86" Canvas.Top="400" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        
-        
 
-        <TextBox Text="{Binding Personnummer}" Canvas.Left="86" Canvas.Top="110" Width="238" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+
+        <TextBox Text="{Binding Personnummer}" Canvas.Left="86" Canvas.Top="110" Width="238" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="{Binding KundIDReadOnly}"/>
         <TextBox Text="{Binding Förnamn}" Canvas.Left="86" Canvas.Top="190" Width="263"/>
         <TextBox Text="{Binding Efternamn}" Canvas.Left="425" Canvas.Top="191" Width="286" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBox Text="{Binding Gatuadress}" Canvas.Left="86" Canvas.Top="270" Width="374" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -85,9 +92,9 @@
         <TextBox  Text="{Binding Postort}" Canvas.Left="425" Canvas.Top="350" Width="143"/>
         <TextBox Text="{Binding Epost}" Canvas.Left="86" Canvas.Top="430" Width="430"/>
         <TextBox Text="{Binding Telefonnummer}" Canvas.Left="86" Canvas.Top="510" Width="263"/>
-        <TextBox Background="#FFC5BEBE" Text="{Binding Rabatt}" Canvas.Left="904" Canvas.Top="120" Width="129" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        
-        <TextBox Background="#FFC5BEBE" Text="{Binding Kreditgräns}" Canvas.Left="904" Canvas.Top="198" Width="128"/>
+        <TextBox  Text="{Binding Rabatt}" Canvas.Left="904" Canvas.Top="120" Width="129" HorizontalAlignment="Left" VerticalAlignment="Center" IsReadOnly="{Binding RabattReadOnly}"/>
+
+        <TextBox Text="{Binding Kreditgräns}" Canvas.Left="904" Canvas.Top="198" Width="128" IsReadOnly="{Binding KreditReadOnly}"/>
         
         
 

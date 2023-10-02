@@ -7,7 +7,7 @@
         xmlns:comp="clr-namespace:SkiResortSystem.Components"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="auto" Width="1920" FontFamily="Candara" FontSize="13" Background="#FF5e8ec2" >
+        Title="MainWindow" Height="auto" Width="1920" FontFamily="Candara" FontSize="13" Background="#FF5e8ec2" WindowState="Maximized">
     
     <Window.DataContext>
         <vm:MainViewModel/>

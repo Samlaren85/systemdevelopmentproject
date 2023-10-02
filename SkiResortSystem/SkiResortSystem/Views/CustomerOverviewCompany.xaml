@@ -6,7 +6,7 @@
         xmlns:comp="clr-namespace:SkiResortSystem.Components"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="auto" Width="1920" FontFamily="Candara" FontSize="13" Background="#FF5e8ec2" >
+        Title="MainWindow" Height="auto" Width="1920" FontFamily="Candara">
 
 
     <Window.Resources>
@@ -35,7 +35,7 @@
     <Grid  Background="#FFA6C3E4" Height="1000">
 
 
-        <TextBlock Text="LÄGG TILL NY FÖRETAGSKUND" FontSize="20" Margin="154,32,1366,938"/>
+        <TextBlock Text="LÄGG TILL NY FÖRETAGSKUND" Margin="154,32,1366,938"/>
 
             <TextBlock Text="Organisationsnummer" Margin="154,99,1366,871"/>
 

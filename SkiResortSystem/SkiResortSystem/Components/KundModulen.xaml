@@ -30,7 +30,7 @@
                 -->
             </Style>
             <Style TargetType="Button">
-                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontSize" Value="19"/>
                 <Setter Property="BorderBrush" Value="White" />
                 <Setter Property="Background" Value="#FF5e8ec2"/>
                 <Setter Property="Foreground" Value="White"/>
@@ -39,7 +39,7 @@
 
                 
                 <Setter Property="Foreground" Value="Black"/>
-                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontSize" Value="18"/>
             </Style>
             <Style TargetType="TextBox">
 
@@ -53,11 +53,11 @@
 
         <TabItem Header="HANTERA KUND" Width="192" FontWeight="Normal" >
             <Grid>
-                <TextBlock Text="SÖK KUND" Margin="67,58,1293,884"></TextBlock>
-                <TextBox Height="50" Margin="67,128,1240,816" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock Text="SÖK KUND" Margin="94,71,1433,919"></TextBlock>
+                <TextBox Height="NaN" Margin="94,106,1321,890" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
 
                 </TextBox>
-                <DataGrid Background="#FFA6C3E4" Width="800" Height="400" Margin="67,223,893,371" BorderBrush="Black" BorderThickness="2"
+                <DataGrid Background="#FFA6C3E4" Margin="94,170,754,392" BorderBrush="Black" BorderThickness="2"
                           ItemsSource="{Binding SearchResults}" SelectedItem="{Binding Path=SelectCustomer}" 
                           IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
                     <DataGrid.InputBindings>
@@ -75,12 +75,12 @@
 
 
                 </DataGrid>
-                <Button Content="Lägg till företagskund" Height="50" Width="220" HorizontalAlignment="Left" Margin="647,36,0,0" VerticalAlignment="Top" Command="{Binding CustomerCompanyOverview}"/>
-                <Button Content="Lägg till privatkund" Height="50" Width="220" HorizontalAlignment="Left" Margin="647,128,0,0" VerticalAlignment="Top" Command="{Binding CustomerPrivateOverview}"/>
+                <Button Content="LÄGG TILL FÖRETAGSKUND" Height="50" Width="240" HorizontalAlignment="Left"  Margin="935,86,0,0" VerticalAlignment="Top" Command="{Binding CustomerCompanyOverview}" Click="Button_Click"/>
+                <Button Content="LÄGG TILL PRIVATKUND" Height="50" Width="240" HorizontalAlignment="Left" Margin="680,86,0,0" VerticalAlignment="Top" Command="{Binding CustomerPrivateOverview}" RenderTransformOrigin="-0.071,0.828"/>
             </Grid>
         </TabItem>
         <TabItem Header="Grunka!">
-            
+
         </TabItem>
 
     </TabControl>

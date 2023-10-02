@@ -29,11 +29,15 @@
 
             </Style>
 
-            <Style TargetType="Button">
-                <Setter Property="FontSize" Value="20"/>
-                <Setter Property="BorderBrush" Value="White" />
-                <Setter Property="Background" Value="#FF5e8ec2"/>
-                <Setter Property="Foreground" Value="White"/>
+      
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+
+            <Style TargetType="RadioButton">
+
+                <Setter Property="FontSize" Value="18"/>
             </Style>
 
         </TabControl.Resources>
@@ -99,8 +103,11 @@
         </TabItem>
 
         <TabItem Header="VISA BELÄGGNING" Background="#FF5e8ec2">
-            <Grid>
-                <DataGrid Name="BeläggningsData" AutoGenerateColumns="False" Background="Transparent" BorderThickness="3" Margin="30,120,400,220" Foreground="Black" BorderBrush="Black" GridLinesVisibility="Vertical">
+
+            <Canvas Height="auto" Width="1760">
+
+
+                <DataGrid Name="BeläggningsData" Width="856" Height="410" AutoGenerateColumns="False" Background="Transparent" BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="DATUM"></DataGridTextColumn>
                         <DataGridTextColumn Header="LGH1"></DataGridTextColumn>
@@ -110,13 +117,16 @@
                         <DataGridTextColumn Header="KONF2"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <TextBlock Text="Fråndatum" Margin="23,0,900,860"/>
-                <TextBox Margin="30,0,1200,780"  />
 
-                <TextBlock Text="Tilldatum" Margin="180,0,1040,860"/>
-                <TextBox Margin="180,0,1040,780"  />
 
-            </Grid>
+                <TextBlock Text="Datum:" Foreground="Black" Canvas.Left="80" Canvas.Top="58" />
+                <TextBox Canvas.Top="60" Canvas.Left="150" Width="70" />
+                <TextBlock Text="Tillgängligt per datum" Foreground="Black" Canvas.Left="80" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <RadioButton Content="Boende/Konfrerens" Canvas.Left="524" Canvas.Top="110" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <RadioButton Content="Utrustning" Canvas.Left="722" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <RadioButton Content="Aktivitet" Canvas.Left="845" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            </Canvas>
 
         </TabItem>
 

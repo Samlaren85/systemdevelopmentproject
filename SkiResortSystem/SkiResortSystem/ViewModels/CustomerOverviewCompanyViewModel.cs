@@ -16,11 +16,29 @@ namespace SkiResortSystem.ViewModels
     public class CustomerOverviewCompanyViewModel: ObservableObject
     {
         private CustomerController customerController;
+        private bool kundIDReadOnly = true;
+        public bool KundIDReadOnly
+        {
+            get { return kundIDReadOnly; }
+            set { kundIDReadOnly = value; OnPropertyChanged(); }
+        }
+        private bool kreditReadOnly = false;
+        public bool KreditReadOnly
+        {
+            get { return kreditReadOnly; }
+            set { kreditReadOnly = value; OnPropertyChanged(); }
+        }
+        private bool rabattReadOnly = false;
+        public bool RabattReadOnly
+        {
+            get { return rabattReadOnly; }
+            set { rabattReadOnly = value; OnPropertyChanged(); }
+        }
         private Kund kund;
         public Kund Kund
         {
             get { return kund; }
-            set { kund = value; OnPropertyChanged(); }
+            set { kund = value; KundIDReadOnly = true; OnPropertyChanged(); }
         }
         private string företagsnamn;
         public string Företagsnamn
@@ -158,6 +176,7 @@ namespace SkiResortSystem.ViewModels
         public CustomerOverviewCompanyViewModel()
         {
             customerController = new CustomerController();
+            KundIDReadOnly = false;
         }
         public CustomerOverviewCompanyViewModel(Kund laddadKund)
         {

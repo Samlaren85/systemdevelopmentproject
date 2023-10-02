@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
+        xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         mc:Ignorable="d"
-        Title="KundöversiktPrivat" Height="1000" Width="1920" FontFamily="Candara" >
-
+        Title="KundöversiktPrivat" Height="1000" Width="1920" FontFamily="Candara" x:Name="View">
+    <Window.DataContext>
+        <vm:CustomerOverviewPrivateViewModel/>
+    </Window.DataContext>
     <Window.Resources>
-        
+
         <Style TargetType="TextBlock">
 
             <Setter Property="Height" Value="30"/>
@@ -25,65 +28,65 @@
         </Style>
 
     </Window.Resources>
-    <Grid  Background="#FFA6C3E4" Height="1000">
+    <Canvas  Background="#FFA6C3E4" Height="1000" >
 
-        <TextBlock Text="LÄGG TILL NY PRIVATKUND" FontSize="20" Margin="86,32,1274,942"/>
-        <TextBlock Text="Personnummer" Margin="166,77,1354,893"/>
-
-
-        <TextBlock Text="Förnamn" Margin="86,156,1274,808"/>
+        <TextBlock Text="LÄGG TILL NY PRIVATKUND" FontSize="20" Canvas.Left="86" Canvas.Top="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Text="Personnummer" Canvas.Left="94" Canvas.Top="77" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 
-
-
-        <TextBlock Text="Efternamn" Margin="525,163,995,807"/>
+        <TextBlock Text="Förnamn" Canvas.Left="86" Canvas.Top="156" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 
 
 
-        <TextBlock Text="Gatuadress" Margin="86,249,1274,725" />
-
-
-
-        <TextBlock Text="Kreditgräns" Margin="902,159,618,811"  />
+        <TextBlock Text="Efternamn" Canvas.Left="525" Canvas.Top="163" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 
 
 
-        <TextBlock Text="Rabatt" Margin="904,77,616,893"/>
+        <TextBlock Text="Gatuadress" Canvas.Left="86" Canvas.Top="249" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
 
 
-        <TextBlock Text="Postort" Margin="525,315,995,655" />
-
-
-
-
-
-        <TextBlock Text="Telefonnummer" Margin="86,477,1274,497"/>
+        <TextBlock Text="Kreditgräns" Canvas.Left="902" Canvas.Top="159" HorizontalAlignment="Left" VerticalAlignment="Center"  />
 
 
 
 
-        <TextBlock Text="Postnummer" Margin="166,315,1354,655"/>
+        <TextBlock Text="Rabatt" Canvas.Left="904" Canvas.Top="77" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+
+
+        <TextBlock Text="Postort" Canvas.Left="525" Canvas.Top="315" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
 
 
 
-        <TextBlock Text="E-post" Margin="86,395,1274,579"/>
+
+        <TextBlock Text="Telefonnummer" Canvas.Left="86" Canvas.Top="477" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 
-        <TextBox Margin="166,360,1463,620"/>
-        <TextBox Margin="166,512,1560,468"/>
-        <TextBox Background="#FFC5BEBE" Margin="904,120,896,860"/>
-        <TextBox Margin="525,360,1218,620"/>
-        <TextBox Background="#FFC5BEBE" Margin="904,198,896,782"/>
-        <TextBox Margin="166,284,1299,696"/>
-        <TextBox Margin="525,198,1131,782"/>
-        <TextBox Margin="166,198,1526,780"/>
-        <TextBox Margin="160,120,1384,850"/>
-        <TextBox Margin="166,430,1390,550"/>
 
-        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Margin="902,559,888,391" Foreground="White" ></Button>
-    </Grid>
+
+        <TextBlock Text="Postnummer" Canvas.Left="166" Canvas.Top="315" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+
+
+
+        <TextBlock Text="E-post" Canvas.Left="86" Canvas.Top="395" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+
+        <TextBox  Text="{Binding Postnummer}" Canvas.Left="166" Canvas.Top="360" Width="184" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text="{Binding Telefonnummer}" Canvas.Left="166" Canvas.Top="512" Width="263"/>
+        <TextBox Background="#FFC5BEBE" Text="{Binding Rabatt}" Canvas.Left="904" Canvas.Top="120" Width="129" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox  Text="{Binding Postort}" Canvas.Left="525" Canvas.Top="360" Width="143"/>
+        <TextBox Background="#FFC5BEBE" Text="{Binding Kreditgräns}" Canvas.Left="904" Canvas.Top="198" Width="128"/>
+        <TextBox Text="{Binding Gatuadress}" Canvas.Left="166" Canvas.Top="284" Width="502"/>
+        <TextBox Text="{Binding Efternamn}" Canvas.Left="525" Canvas.Top="198" Width="286" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text="{Binding Förnamn}" Canvas.Left="166" Canvas.Top="198" Width="263"/>
+        <TextBox Text="{Binding Personnummer}" Canvas.Left="88" Canvas.Top="120" Width="238" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text="{Binding Epost}" Canvas.Left="166" Canvas.Top="430" Width="430"/>
+
+        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="902" Canvas.Top="559" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+    </Canvas>
 </Window>

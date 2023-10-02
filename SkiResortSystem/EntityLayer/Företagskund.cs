@@ -14,16 +14,20 @@ namespace EntityLayer
         public string Företagsnamn { get; set; }
         public string Kontaktperson { get; set; }
         public string Besöksadress { get; set; }
+        public string Besökspostnummer { get; set; }
+        public string Besöksort { get; set; }
         public Företagskund()
         {
             
         }
-        public Företagskund(string organisationsnummerID, string företagsnamn, string kontaktperson, string besöksadress)
+        public Företagskund(string organisationsnummerID, string företagsnamn, string kontaktperson, string besöksadress, string besökspostnummer, string besöksort)
         {
             OrganisationsnummerID = organisationsnummerID;
             Företagsnamn = företagsnamn;
             Kontaktperson = kontaktperson;
             Besöksadress = besöksadress;
+            Besökspostnummer = besökspostnummer;
+            Besöksort = besöksort;
         }
     }
 }

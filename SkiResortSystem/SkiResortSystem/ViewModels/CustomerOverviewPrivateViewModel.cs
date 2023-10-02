@@ -151,7 +151,7 @@ namespace SkiResortSystem.ViewModels
                     try
                     {
                         Kund = customerController.AddPrivateCustomer(Personnummer, förnamn, efternamn, Gatuadress, Postnummer, Postort, Telefonnummer, Epost);
-                        MessageBoxResult respons = MessageBox.Show($"Kund {Kund} är sparad i systemet!\nVill du gå tillbaks till kundmodulen", "Sparad kund", MessageBoxButton.YesNo);
+                        MessageBoxResult respons = MessageBox.Show($"Kund {Kund} är sparad i systemet!\nVill du gå tillbaka till kundmodulen?", "Sparad kund", MessageBoxButton.YesNo);
                         if (respons == MessageBoxResult.Yes) CloseCommand.Execute(view);
                     }
                     catch (Exception ex)
@@ -161,8 +161,15 @@ namespace SkiResortSystem.ViewModels
                 }
                 else
                 {
-                    customerController.ChangeCustomer(Kund);
-                    MessageBoxResult respons = MessageBox.Show($"Kund {Kund} är uppdaterad i systemet!", "Uppdaterad kund");
+                    try
+                    {
+                        customerController.ChangeCustomer(Kund);
+                        MessageBoxResult respons = MessageBox.Show($"Kund {Kund} är uppdaterad i systemet!", "Uppdaterad kund");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             });
         private ICommand closeCommand = null;

@@ -79,9 +79,5 @@
                 <Button Content="LÄGG TILL PRIVATKUND" Height="50" Width="240" HorizontalAlignment="Left" Margin="680,86,0,0" VerticalAlignment="Top" Command="{Binding CustomerPrivateOverview}" RenderTransformOrigin="-0.071,0.828"/>
             </Grid>
         </TabItem>
-        <TabItem Header="Grunka!">
-
-        </TabItem>
-
     </TabControl>
 </UserControl>

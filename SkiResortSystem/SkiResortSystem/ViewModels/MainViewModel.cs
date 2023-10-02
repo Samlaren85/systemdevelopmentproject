@@ -349,6 +349,90 @@ namespace SkiResortSystem.ViewModels
             set { avresetid = value; OnPropertyChanged(); }
         }
 
+        private bool lägenhetradiobutton;
+        public bool Lägenhetradiobutton
+        {
+            get { return lägenhetradiobutton; }
+            set { lägenhetradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private bool campingradiobutton;
+        public bool Campingradiobutton
+        {
+            get { return campingradiobutton; }
+            set { campingradiobutton = value; OnPropertyChanged(); }
+        }
+        private bool konferensradiobutton;
+        public bool Konferensradiobutton
+        {
+            get { return konferensradiobutton; }
+            set { konferensradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private string antalPersonerTillBoende;
+        public string AntalPersonerTillBoende
+        {
+            get { return antalPersonerTillBoende; }
+            set { antalPersonerTillBoende = value; OnPropertyChanged(); }
+        }
+
+        private List<Facilitet> facilitetsSökning;
+        public List<Facilitet> FacilitetsSökning
+        {
+            get { return facilitetsSökning; }
+            set { facilitetsSökning = value; OnPropertyChanged(); }
+        }
+
+        private ICommand sökLedigaFaciliteter = null!;
+
+        public ICommand SökLedigaFaciliteter => sökLedigaFaciliteter ??= sökLedigaFaciliteter = new RelayCommand(() =>
+        {
+            AccommodationController ac = new AccommodationController();
+           
+            if (Lägenhetradiobutton)
+            {
+                try
+                {
+                    int x = Int32.Parse(antalPersonerTillBoende);
+                    FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                   
+
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
+                }
+                
+
+            }
+            //if (Campingradiobutton)
+            //{
+            //    try
+            //    {
+            //        int x = Int32.Parse(antalPersonerTillBoende);
+            //        ac.FindLedigaCamping(x);
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
+            //    }
+
+            //}
+            //if (Konferensradiobutton)
+            //{
+            //    try
+            //    {
+            //        int x = Int32.Parse(antalPersonerTillBoende);
+            //        ac.FindLedigaKonferens(x);
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
+            //    }
+            //}
+        });
+
+
         private ICommand createBooking = null!;
 
         public ICommand CreateBooking => createBooking ??= createBooking = new RelayCommand(() =>

@@ -31,5 +31,13 @@ namespace EntityLayer
             LägenhetsID = lägenhetsID;
             CampingID = campingID;
         }
+
+
+    //    public override string ToString()
+    //    {
+    //        /
+    //        string facilitet = 
+    //        return "".ToString();
+    //    }
     }
 }

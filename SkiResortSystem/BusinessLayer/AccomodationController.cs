@@ -155,8 +155,37 @@ namespace BusinessLayer
             /*FindAktiviteter(sökTerm);*/ //Här ska varje aktivitet splittas på enskild rad. Likt Utrustning KOMMER ATT SKAPAS I BL07/BL08 sprint2-ish
             return myList;
         }
- #endregion
-        
+
+        public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)
+        {
+            IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid < avrese && b.Avresetid > ankomst, X => X.FacilitetID);
+            IList<Facilitet> Faciliteter = unitOfWork.FacilitetRepository.Find(b => b.FacilitetID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase));
+            List<Facilitet> inaktuellFaciliteter = new List<Facilitet>();
+            foreach (Bokning b in bokningar)
+            {
+                foreach (Facilitet facilitet in b.FacilitetID)
+                {
+                    inaktuellFaciliteter.Add(facilitet);
+                }
+            }
+            return Faciliteter.Except(inaktuellFaciliteter).ToList();
+        }
+
+        public List<Facilitet> FindLedigaLägenheter(int antalpersoner, DateTime ankomst, DateTime avrese)
+        {      
+                return FindLedigaFaciliteterFörBokning("Lägenhet", antalpersoner,  ankomst,  avrese);          
+        }
+        public List<Facilitet> FindLedigaCamping(int antalpersoner, DateTime ankomst, DateTime avrese)
+        {
+            return FindLedigaFaciliteterFörBokning("Camping", antalpersoner,  ankomst,  avrese);
+        }
+        public List<Facilitet> FindLedigaKonferens(int antalpersoner, DateTime ankomst, DateTime avrese)
+        {
+            return FindLedigaFaciliteterFörBokning("Konferens", antalpersoner,  ankomst,  avrese);
+        }
+
+        #endregion
+
         /// <summary>
         /// Konstruktor för boendemodulen
         /// </summary>

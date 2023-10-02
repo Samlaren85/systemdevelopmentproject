@@ -8,7 +8,7 @@
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara" FontSize="13">
-    
+
     <TabControl TabStripPlacement="Left" Background="#FFA6C3E4">
         <TabControl.Resources>
             <Style TargetType="TabItem">
@@ -39,7 +39,7 @@
                 <Setter Property="Background" Value="#FF5e8ec2"/>
                 <Setter Property="Foreground" Value="White"/>
             </Style>
-            
+
         </TabControl.Resources>
         <TabItem Margin="0,0,0,2" Header="BOKA BOENDE/KONFERENS">
 
@@ -80,8 +80,9 @@
         </TabItem>
 
         <TabItem Header="VISA BELÄGGNING" Background="#FF5e8ec2">
-            <Grid>
-                <DataGrid Name="BeläggningsData" AutoGenerateColumns="False" Background="Transparent" BorderThickness="3" Margin="30,120,400,220" Foreground="Black" BorderBrush="Black" GridLinesVisibility="Vertical">
+
+            <Canvas Height="auto" Width="1760">
+                <DataGrid Name="BeläggningsData" Width="908" Height="430" AutoGenerateColumns="False" Background="Transparent" BorderThickness="3" Margin="30,120,400,220" Foreground="Black" BorderBrush="Black" GridLinesVisibility="Vertical">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="DATUM"></DataGridTextColumn>
                         <DataGridTextColumn Header="LGH1"></DataGridTextColumn>
@@ -91,14 +92,14 @@
                         <DataGridTextColumn Header="KONF2"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <TextBlock Text="Fråndatum" Margin="23,0,900,860"/>
-                <TextBox Margin="30,0,1200,780"  />
+                
 
-                <TextBlock Text="Tilldatum" Margin="180,0,1040,860"/>
-                <TextBox Margin="180,0,1040,780"  />
+                <RadioButton Content="Boende/Konfrerens" Canvas.Left="600" Canvas.Top="93" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <RadioButton Content="Utrustning" Canvas.Left="760" Canvas.Top="93" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <RadioButton Content="Aktivitet" Canvas.Left="870" Canvas.Top="93" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-            </Grid>
-            
+            </Canvas>
+
         </TabItem>
 
     </TabControl>

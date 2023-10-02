@@ -25,5 +25,9 @@ namespace SkiResortSystem.Components
             InitializeComponent();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

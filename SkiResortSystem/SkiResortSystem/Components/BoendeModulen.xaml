@@ -16,23 +16,19 @@
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="BorderBrush" Value="White"/>
                 <Setter Property="Height" Value="50" />
-                <Setter Property="Width" Value="192" />
+                <Setter Property="Width" Value="190" />
                 <Setter Property="Margin" Value="-6,0,0,0"/>
-            </Style>
-            <Style TargetType="TextBlock">
-
-                <Setter Property="Height" Value="20"/>
-                <Setter Property="Width" Value="400"/>
-                <Setter Property="FontSize" Value="20"/>
-                <Setter Property="Foreground" Value="Black"/>
 
             </Style>
+
+
             <Style TargetType="TextBox">
 
                 <Setter Property="Height" Value="20"/>
                 <Setter Property="FontSize" Value="16"/>
 
             </Style>
+
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="BorderBrush" Value="White" />
@@ -56,10 +52,12 @@
                 <RadioButton Content="Camping" Canvas.Left="161" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <RadioButton Content="Konferens" Canvas.Left="237" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-                <DatePicker Canvas.Left="449" Canvas.Top="104" Height="22" Width="148" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <DatePicker Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148"/>
 
 
+                <TextBlock Text="Ankomstdatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}"/>
+                <TextBlock Text="Avresedatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="76"/>
+                <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" />
 
                 <DataGrid Background="#FFA6C3E4" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding SearchResults, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <DataGrid.Columns>
@@ -67,10 +65,12 @@
                         <DataGridTextColumn Header="Pris" Width="*" Binding="{Binding}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-
-
-
             </Canvas>
+
+
+
+
+
 
         </TabItem>
 

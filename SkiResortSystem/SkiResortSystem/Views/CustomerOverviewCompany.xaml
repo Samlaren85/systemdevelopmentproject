@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="auto" Width="1920" FontFamily="Candara" FontSize="13" Background="#FF5e8ec2" >
+        Title="MainWindow" Height="auto" Width="1920" FontFamily="Candara" >
     <Window.DataContext>
         <vm:CustomerOverviewCompanyViewModel/>
     </Window.DataContext>
@@ -38,7 +38,7 @@
     <Canvas  Background="#FFA6C3E4" Height="1000">
 
 
-        <TextBlock Text="LÄGG TILL NY FÖRETAGSKUND" FontSize="20" Margin="154,32,1366,938"/>
+        <TextBlock Text="LÄGG TILL NY FÖRETAGSKUND" Margin="154,32,1366,938"/>
 
         <TextBlock Text="Organisationsnummer" Margin="154,99,1366,871"/>
 

@@ -352,7 +352,7 @@ namespace SkiResortSystem.ViewModels
         {
             get { return  avresetid; }
             set {
-                if (avresetid < ankomsttid) avresetid = Ankomsttid;
+                if (value < ankomsttid) avresetid = Ankomsttid;
                 else avresetid = value;
                 OnPropertyChanged(); }
         }

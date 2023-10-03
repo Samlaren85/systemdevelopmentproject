@@ -17,6 +17,12 @@ namespace SkiResortSystem.ViewModels
     public class CustomerOverviewPrivateViewModel : ObservableObject
     {
         private CustomerController customerController;
+        private string rubrik;
+        public string Rubrik
+        {
+            get { return rubrik; }
+            set { rubrik = value; OnPropertyChanged(); }
+        }
         private bool kundIDReadOnly = true;
         public bool KundIDReadOnly
         {
@@ -52,11 +58,13 @@ namespace SkiResortSystem.ViewModels
                 {
                     KundIDReadOnly = true;
                     RemoveEnabled = true;
+                    Rubrik = "PRIVATKUND";
                 }
                 else
                 { 
                     KundIDReadOnly = false;
-                    RemoveEnabled = false; 
+                    RemoveEnabled = false;
+                    Rubrik = "LÄGG TILL NY PRIVATKUND";
                 }
                 OnPropertyChanged(); 
             }
@@ -165,6 +173,7 @@ namespace SkiResortSystem.ViewModels
         {
             customerController = new CustomerController();
             KundIDReadOnly = false;
+            Rubrik = "LÄGG TILL NY PRIVATKUND";
         }
         public CustomerOverviewPrivateViewModel(Kund laddadKund)
         {

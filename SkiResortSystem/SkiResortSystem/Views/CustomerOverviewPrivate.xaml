@@ -37,7 +37,7 @@
     </Window.Resources>
     <Canvas  Background="#FFA6C3E4" Height="1000" >
 
-        <TextBlock Text="LÄGG TILL NY PRIVATKUND" FontSize="20" Canvas.Left="86" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Text="{Binding Rubrik}" FontSize="20" Canvas.Left="86" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBlock Text="Personnummer" Canvas.Left="86" Canvas.Top="80" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 

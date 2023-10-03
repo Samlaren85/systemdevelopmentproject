@@ -45,7 +45,7 @@
     <Canvas  Background="#FFA6C3E4" Height="1000">
 
 
-        <TextBlock Text="LÄGG TILL NY FÖRETAGSKUND" Margin="154,32,1366,938"/>
+        <TextBlock Text="{Binding Rubrik}" Margin="154,32,1366,938"/>
 
         <TextBlock Text="Organisationsnummer" Margin="154,99,1366,871"/>
 
@@ -124,8 +124,8 @@
         <TextBox Text="{Binding Kreditgräns}" Canvas.Left="501" Canvas.Top="566" Width="179" IsReadOnly="{Binding KreditReadOnly}"/>
 
 
-        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="902" Canvas.Top="483" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="902" Canvas.Top="547" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}"/>
+        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="790" Canvas.Top="485" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="790" Canvas.Top="546" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}"/>
 
 
 

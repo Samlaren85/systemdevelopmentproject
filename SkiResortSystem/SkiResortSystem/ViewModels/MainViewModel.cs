@@ -13,6 +13,7 @@ using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using SkiResortSystem.Services;
 using SkiResortSystem.Views;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SkiResortSystem.ViewModels
 {
@@ -262,6 +263,7 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 selectedCustomer = value;
+                if (selectedCustomer != null) SearchText = selectedCustomer.ToString().Split(" (")[0];
                 OnPropertyChanged(); 
             }
         }
@@ -273,6 +275,16 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 errorMessage = value;
+                OnPropertyChanged();
+            }
+        }
+        private string errorMessage2;
+        public string ErrorMessage2
+        {
+            get { return errorMessage2; }
+            set
+            {
+                errorMessage2 = value;
                 OnPropertyChanged();
             }
         }
@@ -336,17 +348,24 @@ namespace SkiResortSystem.ViewModels
             set { aktivitetID = value; OnPropertyChanged(); }
         }
 
-        private DateTime ankomsttid;
+        private DateTime ankomsttid = DateTime.Today;
         public DateTime Ankomsttid
         {
             get { return ankomsttid; }
-            set { ankomsttid = value; OnPropertyChanged(); }
+            set { 
+                ankomsttid = value;
+                if (ankomsttid > avresetid) Avresetid = ankomsttid;
+                OnPropertyChanged(); 
+            }
         }
-        private DateTime avresetid;
+        private DateTime avresetid = DateTime.Today;
         public DateTime Avresetid
         {
             get { return  avresetid; }
-            set { avresetid = value; OnPropertyChanged(); }
+            set {
+                if (value < ankomsttid) avresetid = Ankomsttid;
+                else avresetid = value;
+                OnPropertyChanged(); }
         }
 
         private bool lägenhetradiobutton;
@@ -373,7 +392,7 @@ namespace SkiResortSystem.ViewModels
         public string AntalPersonerTillBoende
         {
             get { return antalPersonerTillBoende; }
-            set { antalPersonerTillBoende = value; OnPropertyChanged(); }
+            set { antalPersonerTillBoende = value; ErrorMessage2 = string.Empty; OnPropertyChanged(); }
         }
 
         private List<Facilitet> facilitetsSökning;
@@ -391,45 +410,51 @@ namespace SkiResortSystem.ViewModels
            
             if (Lägenhetradiobutton)
             {
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
+                {
+                    FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                }
+                else
+                {
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+
+                }
+            
+               
+                
+
+            }
+            if (Campingradiobutton)
+            {
                 try
                 {
                     int x = Int32.Parse(antalPersonerTillBoende);
-                    FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
-                   
+                    FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
+
 
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
                 }
-                
 
             }
-            //if (Campingradiobutton)
-            //{
-            //    try
-            //    {
-            //        int x = Int32.Parse(antalPersonerTillBoende);
-            //        ac.FindLedigaCamping(x);
-            //    }
-            //    catch (FormatException)
-            //    {
-            //        Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
-            //    }
+            if (Konferensradiobutton)
+            {
+                try
+                {
+                    int x = Int32.Parse(antalPersonerTillBoende);
+                    FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
 
-            //}
-            //if (Konferensradiobutton)
-            //{
-            //    try
-            //    {
-            //        int x = Int32.Parse(antalPersonerTillBoende);
-            //        ac.FindLedigaKonferens(x);
-            //    }
-            //    catch (FormatException)
-            //    {
-            //        Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
-            //    }
-            //}
+
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
+                }
+            }
         });
 
 

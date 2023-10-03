@@ -88,19 +88,20 @@
         <TextBox Text="{Binding Förnamn}" Canvas.Left="86" Canvas.Top="190" Width="263"/>
         <TextBox Text="{Binding Efternamn}" Canvas.Left="425" Canvas.Top="191" Width="286" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBox Text="{Binding Gatuadress}" Canvas.Left="86" Canvas.Top="270" Width="374" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox  Text="{Binding Postnummer}" Canvas.Left="86" Canvas.Top="350" Width="184" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox  Text="{Binding Postort}" Canvas.Left="425" Canvas.Top="350" Width="143"/>
+        <TextBox Text="{Binding Postnummer}" Canvas.Left="86" Canvas.Top="350" Width="184" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text="{Binding Postort}" Canvas.Left="425" Canvas.Top="350" Width="143"/>
         <TextBox Text="{Binding Epost}" Canvas.Left="86" Canvas.Top="430" Width="430"/>
         <TextBox Text="{Binding Telefonnummer}" Canvas.Left="86" Canvas.Top="510" Width="263"/>
+
         <TextBox  Text="{Binding Rabatt}" Canvas.Left="904" Canvas.Top="120" Width="129" HorizontalAlignment="Left" VerticalAlignment="Center" IsReadOnly="{Binding RabattReadOnly}"/>
-
         <TextBox Text="{Binding Kreditgräns}" Canvas.Left="904" Canvas.Top="198" Width="128" IsReadOnly="{Binding KreditReadOnly}"/>
-        
-        
 
-        
-      
 
-        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="902" Canvas.Top="559" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+
+
+
+        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="903" Canvas.Top="430" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="903" Canvas.Top="490" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}"/>
     </Canvas>
 </Window>

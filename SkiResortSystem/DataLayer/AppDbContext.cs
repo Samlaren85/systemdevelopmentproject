@@ -68,7 +68,7 @@ namespace DataLayer
             }
             if (!Användare.Any()) 
             {
-                Användare.Add(new Användare("1",1, Roller.FirstOrDefault(r => r.RollID == "R001")));
+                Användare.Add(new Användare("@dm1n1strator",1, Roller.FirstOrDefault(r => r.RollID == "R001")));
                 Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID == "R002")));
                 SaveChanges();
             }

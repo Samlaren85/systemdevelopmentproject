@@ -16,6 +16,12 @@ namespace SkiResortSystem.ViewModels
     public class CustomerOverviewCompanyViewModel: ObservableObject
     {
         private CustomerController customerController;
+        private string rubrik;
+        public string Rubrik
+        {
+            get { return rubrik; }
+            set { rubrik = value; OnPropertyChanged(); }
+        }
         private bool kundIDReadOnly = true;
         public bool KundIDReadOnly
         {
@@ -34,11 +40,33 @@ namespace SkiResortSystem.ViewModels
             get { return rabattReadOnly; }
             set { rabattReadOnly = value; OnPropertyChanged(); }
         }
+        private bool removeEnabled = false;
+        public bool RemoveEnabled
+        {
+            get { return removeEnabled; }
+            set { removeEnabled = value; OnPropertyChanged(); }
+        }
         private Kund kund;
         public Kund Kund
         {
             get { return kund; }
-            set { kund = value; KundIDReadOnly = true; OnPropertyChanged(); }
+            set
+            {
+                kund = value;
+                if (value != null)
+                {
+                    KundIDReadOnly = true;
+                    RemoveEnabled = true;
+                    Rubrik = "FÖRETAGSKUND";
+                }
+                else
+                {
+                    KundIDReadOnly = false;
+                    RemoveEnabled = false;
+                    Rubrik = "LÄGG TILL NY FÖRETAGSKUND";
+                }
+                OnPropertyChanged();
+            }
         }
         private string företagsnamn;
         public string Företagsnamn
@@ -177,6 +205,7 @@ namespace SkiResortSystem.ViewModels
         {
             customerController = new CustomerController();
             KundIDReadOnly = false;
+            Rubrik = "LÄGG TILL NY FÖRETAGSKUND";
         }
         public CustomerOverviewCompanyViewModel(Kund laddadKund)
         {
@@ -224,6 +253,36 @@ namespace SkiResortSystem.ViewModels
                     {
                         MessageBox.Show(ex.Message);
                     }
+                }
+            });
+        private ICommand removeCustomer = null!;
+        public ICommand RemoveCustomer =>
+            removeCustomer ??= removeCustomer = new RelayCommand<ICloseable>((view) =>
+            {
+                if (Kund != null)
+                {
+                    try
+                    {
+                        string name = Kund.ToString();
+                        bool removed = customerController.RemoveCustomer(Kund);
+                        if (removed)
+                        {
+                            MessageBoxResult respons = MessageBox.Show($"Kund {name} är borttagen ur systemet!", "Borttagen kund");
+                            CloseCommand.Execute(view);
+                        }
+                        else
+                        {
+                            MessageBoxResult respons = MessageBox.Show($"Kunden {name} kunde inte tas bort ur systemet!", "Borttagen kund");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBoxResult respons = MessageBox.Show($"Ingen kund är vald för att ta bort!", "Borttagen kund");
                 }
             });
         private ICommand closeCommand = null!;

@@ -81,7 +81,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Border Background="#FF5e8ec2" Width="195" HorizontalAlignment="Left" Margin="-2,53,0,0" />
+        <Border Background="#FF5e8ec2" Width="195" HorizontalAlignment="Left" Margin="0,53,0,0" />
     </Grid>
 
 </UserControl>

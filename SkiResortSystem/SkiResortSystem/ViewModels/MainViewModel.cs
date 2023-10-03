@@ -262,6 +262,7 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 selectedCustomer = value;
+                if (selectedCustomer != null) SearchText = selectedCustomer.ToString().Split(" (")[0];
                 OnPropertyChanged(); 
             }
         }
@@ -336,17 +337,24 @@ namespace SkiResortSystem.ViewModels
             set { aktivitetID = value; OnPropertyChanged(); }
         }
 
-        private DateTime ankomsttid;
+        private DateTime ankomsttid = DateTime.Today;
         public DateTime Ankomsttid
         {
             get { return ankomsttid; }
-            set { ankomsttid = value; OnPropertyChanged(); }
+            set { 
+                ankomsttid = value;
+                if (ankomsttid > avresetid) Avresetid = ankomsttid;
+                OnPropertyChanged(); 
+            }
         }
-        private DateTime avresetid;
+        private DateTime avresetid = DateTime.Today;
         public DateTime Avresetid
         {
             get { return  avresetid; }
-            set { avresetid = value; OnPropertyChanged(); }
+            set {
+                if (avresetid < ankomsttid) avresetid = Ankomsttid;
+                else avresetid = value;
+                OnPropertyChanged(); }
         }
 
         private bool lägenhetradiobutton;

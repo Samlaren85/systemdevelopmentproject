@@ -116,12 +116,12 @@
 
                 <DataGrid Name="BeläggningsData" Width="856" Height="410" AutoGenerateColumns="False" Background="Transparent" BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="DATUM"></DataGridTextColumn>
-                        <DataGridTextColumn Header="LGH1"></DataGridTextColumn>
-                        <DataGridTextColumn Header="LGH2"></DataGridTextColumn>
-                        <DataGridTextColumn Header="CAMPING"></DataGridTextColumn>
-                        <DataGridTextColumn Header="KONF1"></DataGridTextColumn>
-                        <DataGridTextColumn Header="KONF2"></DataGridTextColumn>
+                        <DataGridTextColumn Header="DATUM" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="LGH1" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="LGH2" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="CAMPING" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="KONF1" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="KONF2" Width="*"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -129,7 +129,7 @@
                 <TextBlock Text="Datum:" Foreground="Black" Canvas.Left="80" Canvas.Top="58" />
                 <TextBox Canvas.Top="60" Canvas.Left="150" Width="70" />
                 <TextBlock Text="Tillgängligt per datum" Foreground="Black" Canvas.Left="80" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                <RadioButton Content="Boende/Konfrerens" Canvas.Left="524" Canvas.Top="110" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <RadioButton Content="Boende/Konferens" Canvas.Left="524" Canvas.Top="110" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <RadioButton Content="Utrustning" Canvas.Left="722" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <RadioButton Content="Aktivitet" Canvas.Left="845" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 

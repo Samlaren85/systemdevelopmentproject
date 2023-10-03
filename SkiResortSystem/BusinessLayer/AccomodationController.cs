@@ -159,7 +159,7 @@ namespace BusinessLayer
         public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)
         {
             IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid < avrese && b.Avresetid > ankomst, X => X.FacilitetID);
-            IList<Facilitet> Faciliteter = unitOfWork.FacilitetRepository.Find(b => b.FacilitetID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase));
+            IList<Facilitet> Faciliteter = unitOfWork.FacilitetRepository.Find(b => b.FacilitetID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase) && antalPersoner <= b.LägenhetsID.Bäddar, x => x.LägenhetsID);
             List<Facilitet> inaktuellFaciliteter = new List<Facilitet>();
             foreach (Bokning b in bokningar)
             {
@@ -173,15 +173,15 @@ namespace BusinessLayer
 
         public List<Facilitet> FindLedigaLägenheter(int antalpersoner, DateTime ankomst, DateTime avrese)
         {      
-                return FindLedigaFaciliteterFörBokning("Lägenhet", antalpersoner,  ankomst,  avrese);          
+                return FindLedigaFaciliteterFörBokning("LGH", antalpersoner,  ankomst,  avrese);          
         }
         public List<Facilitet> FindLedigaCamping(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
-            return FindLedigaFaciliteterFörBokning("Camping", antalpersoner,  ankomst,  avrese);
+            return FindLedigaFaciliteterFörBokning("CAMP", antalpersoner,  ankomst,  avrese);
         }
         public List<Facilitet> FindLedigaKonferens(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
-            return FindLedigaFaciliteterFörBokning("Konferens", antalpersoner,  ankomst,  avrese);
+            return FindLedigaFaciliteterFörBokning("KONF", antalpersoner,  ankomst,  avrese);
         }
 
         #endregion

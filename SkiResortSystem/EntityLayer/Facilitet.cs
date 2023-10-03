@@ -11,7 +11,20 @@ namespace EntityLayer
     {
         private static int _antalFaciliteter;
         [Key]
-        public string FacilitetID { get; set; }
+        private string facilitetID;
+        public string FacilitetID
+        {
+            get
+            {
+                if (LägenhetsID != null) return LägenhetsID.LägenhetID;
+                else if (CampingID != null) return CampingID.CampingID;
+                else return KonferensID.KonferensID;
+            }
+            set
+            { facilitetID = value; }
+        }
+
+           
         
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT
         public float Facilitetspris { get; set; }
@@ -33,11 +46,24 @@ namespace EntityLayer
         }
 
 
-    //    public override string ToString()
-    //    {
-    //        /
-    //        string facilitet = 
-    //        return "".ToString();
-    //    }
+        public override string ToString()
+        {
+            if(LägenhetsID != null)
+            {
+                return  LägenhetsID.LägenhetBenämning + "\n" + LägenhetsID.Lägenhetstorlek + ", " + LägenhetsID.Bäddar;
+            }
+            if (CampingID != null)
+            {
+                return CampingID.CampingBenämning + "\n" + CampingID.CampingStorlek;
+            }
+            if(KonferensID != null)
+            {
+                return KonferensID.KonferensBenämning;
+            }
+            else
+            {
+                return "Databasen saknar information om facilitet.";
+            }
+        }
     }
 }

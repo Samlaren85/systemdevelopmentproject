@@ -29,7 +29,7 @@
 
             </Style>
 
-      
+
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontSize" Value="18"/>
@@ -51,10 +51,11 @@
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" SelectionChanged="ComboBox_SelectionChanged" Canvas.Left="80" Canvas.Top="124" Width="229" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" />
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="144" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBlock Text="{Binding ErrorMessage2}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="614" Canvas.Top="131" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
-                <RadioButton Content="Lägenhet" Canvas.Left="80" Canvas.Top="169" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <RadioButton Content="Camping" Canvas.Left="161" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <RadioButton Content="Konferens" Canvas.Left="237" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <RadioButton Content="Lägenhet" Canvas.Left="80" Canvas.Top="169" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding Lägenhetradiobutton}"/>
+                <RadioButton Content="Camping" Canvas.Left="161" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding Campingradiobutton}"/>
+                <RadioButton Content="Konferens" Canvas.Left="237" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding Konferensradiobutton}"/>
 
 
 
@@ -62,16 +63,17 @@
                 <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding Ankomsttid}"/>
                 <TextBlock Text="Ankomstdatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="76"/>
                 <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding Avresetid}"/>
+                <Button Content="Sök" Canvas.Left="614" Canvas.Top="165" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+                <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" />
+
 
                 <DataGrid Background="#FFA6C3E4" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding FacilitetsSökning, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Typ" Width="*" Binding="{Binding }"/>
-                        <DataGridTextColumn Header="Pris" Width="*" Binding="{Binding}"/>
+                        <DataGridTextColumn Header="Typ" Width="*" Binding="{Binding}"/>
+                        <DataGridTextColumn Header="Pris" Width="*" Binding="{Binding Facilitetspris}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Sök" Canvas.Left="614" Canvas.Top="165" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                 <TextBlock Text="Antal personer" Foreground="Black" Canvas.Left="614" FontSize="15" TextWrapping="Wrap" Canvas.Top="77"/>
-                <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding AntalPersonerTillBoende}"/>
             </Canvas>
             <!--<DataGrid Background="#FFA6C3E4" Width="800" Height="400" Margin="67,223,893,371" BorderBrush="Black" BorderThickness="2"
                     ItemsSource="{Binding SearchResults}" SelectedItem="{Binding Path=SelectCustomer}" 

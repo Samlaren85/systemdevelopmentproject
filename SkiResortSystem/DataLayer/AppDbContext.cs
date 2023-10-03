@@ -82,6 +82,14 @@ namespace DataLayer
                 Kunder.Add(Ara);
                 SaveChanges();
             }
+            if (!Faciliteter.Any())
+            {
+                Lägenhet l = new Lägenhet("Kings Bed", 10, "Typ stor");
+
+                Facilitet Lunden = new Facilitet(100000, null, l, null);
+                Faciliteter.Add(Lunden);
+                SaveChanges();
+            }
         }
 
     }

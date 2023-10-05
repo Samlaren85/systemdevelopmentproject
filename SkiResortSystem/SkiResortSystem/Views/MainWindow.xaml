@@ -61,7 +61,7 @@
                                 </VisualStateManager.VisualStateGroups>
                                 <Border Background="#FF5e8ec2" BorderThickness="0,0,2,0" BorderBrush="White">
 
-                                    <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" />
                                 </Border>
                             </Grid>
                         </ControlTemplate>

@@ -415,6 +415,8 @@ namespace SkiResortSystem.ViewModels
             set { facilitetsSökning = value; OnPropertyChanged(); }
         }
 
+        
+
         private ICommand sökLedigaFaciliteter = null!;
 
         public ICommand SökLedigaFaciliteter => sökLedigaFaciliteter ??= sökLedigaFaciliteter = new RelayCommand(() =>
@@ -478,6 +480,82 @@ namespace SkiResortSystem.ViewModels
             }
         });
 
+        private List<string> visaBeläggning;
+        public List<string> VisaBeläggning
+        {
+            get { return visaBeläggning; }
+            set { visaBeläggning = value; OnPropertyChanged(); }
+        }
+
+        private DateTime beläggningankomsttid = DateTime.Today;
+        public DateTime BeläggningAnkomsttid
+        {
+            get { return beläggningankomsttid; }
+            set
+            {
+                beläggningankomsttid = value;
+                BeläggningDatumperiod = beläggningankomsttid.AddDays(7);
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime beläggningdatumperiod = DateTime.Today;
+        public DateTime BeläggningDatumperiod
+        {
+            get { return beläggningdatumperiod; }
+            set
+            {
+                beläggningdatumperiod= value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool boendekonferensbeläggningradiobutton;
+        public bool BoendeKonferensbeläggningradiobutton
+        {
+            get { return boendekonferensbeläggningradiobutton; }
+            set { boendekonferensbeläggningradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private bool utrustningbeläggningradiobutton;
+        public bool UtrustningBeläggningradiobutton
+        {
+            get { return utrustningbeläggningradiobutton; }
+            set { utrustningbeläggningradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private bool aktivitetbeläggningradiobutton;
+        public bool Aktivitetbeläggningradiobutton
+        {
+            get { return aktivitetbeläggningradiobutton; }
+            set { aktivitetbeläggningradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private ICommand visaBeläggningen = null!;
+        public ICommand VisaBeläggningen => visaBeläggningen ??= visaBeläggningen = new RelayCommand(() =>
+        {
+            AccommodationController ac = new AccommodationController();
+
+            if (BoendeKonferensbeläggningradiobutton)
+            {
+                VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, true, false, false);
+            }
+
+
+            if (UtrustningBeläggningradiobutton)
+            {
+                {
+                    VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, true, false);
+                }
+            }
+
+            if (Aktivitetbeläggningradiobutton)
+            {
+                {
+                    VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, false, true);
+                }
+            }
+        });
 
         private ICommand createBooking = null!;
 

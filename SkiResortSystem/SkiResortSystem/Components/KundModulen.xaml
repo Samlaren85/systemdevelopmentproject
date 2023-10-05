@@ -54,7 +54,7 @@
 
                                     <Border Background="#FF5e8ec2" BorderBrush="White" BorderThickness="0,2,0,2">
 
-                                        <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" />
                                     </Border>
                                 </Grid>
                             </ControlTemplate>
@@ -63,8 +63,26 @@
                 </Style>
 
 
-              
-                <Style TargetType="Button">
+            <Style TargetType="DataGridCell">
+
+                <Setter Property="Background" Value="#FFA6C3E4"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Height" Value="43"/>
+                
+            </Style>
+
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="#FFA6C3E4"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+
+            </Style>
+
+
+
+
+            <Style TargetType="Button">
                     <Setter Property="FontSize" Value="18"/>
                     <Setter Property="BorderBrush" Value="White" />
                     <Setter Property="Background" Value="#FF5e8ec2"/>

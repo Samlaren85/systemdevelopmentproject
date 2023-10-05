@@ -108,15 +108,7 @@ namespace SkiResortSystem.ViewModels
         }
         public BookingOverviewViewModel(Kund ValdKund, Facilitet Valdfacilitet, DateTime Valdavresetid, DateTime Valdankomsttid, int ValdaAntalPersoner)
         {
-            if (ValdKund.Privatkund != null)
-            {
-                Kund = ValdKund;
-
-            }
-            if (ValdKund.Företagskund != null)
-            {
-                Kund = ValdKund;
-            }
+            Kund = ValdKund;
             AntalPersoner = ValdaAntalPersoner;
             Ankomst = Valdankomsttid;
             Avresa = Valdavresetid;

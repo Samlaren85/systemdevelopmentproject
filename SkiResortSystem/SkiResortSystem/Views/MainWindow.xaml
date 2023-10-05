@@ -14,18 +14,17 @@
     </Window.DataContext>
     
 
-    <TabControl Background="#FFA6C3E4" Height="1000" Width="auto" BorderBrush="White" BorderThickness="2" Padding="-5,0,0,0" >
+    <TabControl Background="#FFA6C3E4" Height="1000" Width="auto" BorderBrush="White" BorderThickness="0,2,0,0" Padding="-4,0,0,0" >
         <TabControl.Resources>
-            <Style TargetType="TabItem">
+            <Style TargetType="TabItem" x:Key="TB1">
                 <Setter Property="Background" Value="#FF5e8ec2" />
                 <Setter Property="Foreground" Value="White" />
-                <Setter Property="BorderBrush" Value="White"/>
                 <Setter Property="Height" Value="50" />
-                <Setter Property="Width" Value="190" />
-                <Setter Property="Margin" Value="-6,0,0,0"></Setter>
-                
-                
-                <Setter Property="Template">
+                <Setter Property="Width" Value="192" />
+                <Setter Property="Margin" Value="-6,0,0,0" />
+
+
+                <Setter Property="Template" >
                     <Setter.Value>
                         <ControlTemplate TargetType="TabItem">
 
@@ -58,17 +57,18 @@
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
-                                    </VisualStateGroup>
+                                </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
+                                <Border Background="#FF5e8ec2" BorderThickness="0,0,2,0" BorderBrush="White">
 
-                                <Border Background="#FF5e8ec2">
-
-                                    <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Border>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+               
+
             </Style>
 
 
@@ -82,47 +82,72 @@
             </Style>
 
         </TabControl.Resources>
-
-        <TabItem>
+        
+        <TabItem >
             <TabItem.Header >
-                <Image Height="50" Width="100" Source="./images/Logo.png"/>
+              
+                    <Image Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Source="./images/Logo.png"/>
+               
             </TabItem.Header>
+            
+            <TabItem.Style>
+            <Style TargetType="TabItem" >
+                    <Setter Property="Background" Value="#FF5e8ec2" />
+                    <Setter Property="Height" Value="50" />
+                <Setter Property="Width" Value="192" />
+                
+            </Style>
+            </TabItem.Style>
+
+            <TabItem.Template>
+                <ControlTemplate TargetType="TabItem">
+                    <Grid>
+                        <Border Background="#FF5e8ec2" BorderThickness="0,0,5,0" BorderBrush="White">
+                            <ContentPresenter ContentSource="Header" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </TabItem.Template>
+
+
+
+
 
             <Image Source="./images/Logo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="500" Margin="0,0,0,200" ></Image>
 
         </TabItem>
 
-        <TabItem Header="BOENDE &amp; KONFERENS"   >
+        <TabItem Header="BOENDE &amp; KONFERENS" Style="{StaticResource TB1}" >
 
             <comp:BoendeModulen/>
 
         </TabItem>
 
-        <TabItem Header="AKTIVITET &amp; UTRUSTNING"    >
+        <TabItem Header="AKTIVITET &amp; UTRUSTNING" Style="{StaticResource TB1}"   >
 
             <comp:AktivitetsModulen/>
 
         </TabItem>
 
-        <TabItem Header="KUND" >
+        <TabItem Header="KUND" Style="{StaticResource TB1}">
 
             <comp:KundModulen/>
 
         </TabItem>
 
-        <TabItem Header="EKONOMI"  >
+        <TabItem Header="EKONOMI" Style="{StaticResource TB1}"  >
 
             <comp:EkonomiModulen/>
 
         </TabItem>
 
-        <TabItem Header="STYRNING">
+        <TabItem Header="STYRNING" Style="{StaticResource TB1}">
 
             <comp:StyrningsModulen/>
 
         </TabItem>
 
-        <TabItem Header="ADMIN">
+        <TabItem Header="ADMIN" Style="{StaticResource TB1}">
 
             <comp:AdminModulen/>
 

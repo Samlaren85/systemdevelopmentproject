@@ -198,7 +198,7 @@ namespace BusinessLayer
         }
  #endregion
         
-        public List<string> VisaBeläggningen<T>(DateTime franDatum, DateTime tillDatum, bool boende , bool utrustning, bool aktivitet)
+        public List<string> VisaBeläggningen(DateTime franDatum, DateTime tillDatum, bool boende , bool utrustning, bool aktivitet)
         {
             List<Facilitet> inaktuellaFaciliteter = new List<Facilitet>(); // Används som hjälp för filtrering
             IList<Facilitet> dataColumn2 = new List<Facilitet>();

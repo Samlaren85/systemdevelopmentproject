@@ -219,12 +219,12 @@
 
 
                 <TextBlock Text="Datum:" Foreground="Black" Canvas.Left="80" Canvas.Top="58" />
-                <DatePicker  Canvas.Top="60" Canvas.Left="150" />
+                <DatePicker  Canvas.Top="60" Canvas.Left="150" SelectedDate="{Binding boende}" />
                 
                 <TextBlock Text="Tillgängligt per datum" Foreground="Black" Canvas.Left="80" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                <RadioButton Content="Boende/Konferens" IsChecked="{Binding BoendeKonferensradiobutton}" Canvas.Left="524" Canvas.Top="110" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <RadioButton Content="Utrustning" Canvas.Left="722" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <RadioButton Content="Aktivitet" Canvas.Left="845" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <RadioButton Content="Boende/Konferens" IsChecked="{Binding Aktivitetbeläggningradiobutton}" Canvas.Left="524" Canvas.Top="110" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <RadioButton Content="Utrustning" IsChecked="{Binding UtrustningBeläggningradiobutton}" Canvas.Left="722" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <RadioButton Content="Aktivitet" IsChecked="{Binding Aktivitetbeläggningradiobutton}" Canvas.Left="845" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
             </Canvas>
 

@@ -460,56 +460,72 @@ namespace SkiResortSystem.ViewModels
             set { visaBeläggning = value; OnPropertyChanged(); }
         }
 
+        private DateTime beläggningankomsttid = DateTime.Today;
+        public DateTime BeläggningAnkomsttid
+        {
+            get { return beläggningankomsttid; }
+            set
+            {
+                beläggningankomsttid = value;
+                BeläggningDatumperiod = beläggningankomsttid.AddDays(7);
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime beläggningdatumperiod = DateTime.Today;
+        public DateTime BeläggningDatumperiod
+        {
+            get { return beläggningdatumperiod; }
+            set
+            {
+                beläggningdatumperiod= value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool boendekonferensbeläggningradiobutton;
+        public bool BoendeKonferensbeläggningradiobutton
+        {
+            get { return boendekonferensbeläggningradiobutton; }
+            set { boendekonferensbeläggningradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private bool utrustningbeläggningradiobutton;
+        public bool UtrustningBeläggningradiobutton
+        {
+            get { return utrustningbeläggningradiobutton; }
+            set { utrustningbeläggningradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private bool aktivitetbeläggningradiobutton;
+        public bool Aktivitetbeläggningradiobutton
+        {
+            get { return aktivitetbeläggningradiobutton; }
+            set { aktivitetbeläggningradiobutton = value; OnPropertyChanged(); }
+        }
+
         private ICommand visaBeläggningen = null!;
         public ICommand VisaBeläggningen => visaBeläggningen ??= visaBeläggningen = new RelayCommand(() =>
         {
             AccommodationController ac = new AccommodationController();
 
-            if (BoendeKonferensradiobutton) 
+            if (BoendeKonferensbeläggningradiobutton)
             {
-                VisaBeläggningen = ac.VisaBeläggningen(boendeFranDatum, 7, true, null, null);
+                VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, true, false, false);
             }
-            
-            
-            if (Utrustningradiobutton)
+
+
+            if (UtrustningBeläggningradiobutton)
             {
-                bool success = int.TryParse(antalPersonerTillBoende, out int x);
-                if (success)
                 {
-                    FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
-                }
-                else
-                {
-                    ErrorMessage2 = string.Empty;
-                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                    VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, true, false);
                 }
             }
 
-            if (Aktivitetradiobutton)
+            if (Aktivitetbeläggningradiobutton)
             {
-                bool success = int.TryParse(antalPersonerTillBoende, out int x);
-                if (success)
                 {
-                    FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
-                }
-                else
-                {
-                    ErrorMessage2 = string.Empty;
-                    ErrorMessage2 = "Du behöver lägga till antal kunder";
-                }
-            }
-
-            if (Campingradiobutton)
-            {
-                bool success = int.TryParse(antalPersonerTillBoende, out int x);
-                if (success)
-                {
-                    FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
-                }
-                else
-                {
-                    ErrorMessage2 = string.Empty;
-                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                    VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, false, true);
                 }
             }
         });

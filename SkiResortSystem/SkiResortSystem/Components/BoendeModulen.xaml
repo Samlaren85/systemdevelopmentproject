@@ -18,9 +18,52 @@
                 <Setter Property="Height" Value="50" />
                 <Setter Property="Width" Value="190" />
                 <Setter Property="Margin" Value="-6,0,0,0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TabItem">
+                          
+                            <Grid>
+                            
+                                <VisualStateManager.VisualStateGroups>
 
+                                    <VisualStateGroup x:Name="SelectionStates">
+                                        <VisualState x:Name="Unselected" />
+                                      
+                                        <VisualState x:Name="Selected">
+                                          
+                                            <Storyboard>
+                                               
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock"
+                                                                                   Storyboard.TargetProperty="TextDecorations">
+                                                   
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <TextDecorationCollection>
+                                                                <TextDecoration Location="Underline" PenThicknessUnit="FontRecommended">
+                                                                    <TextDecoration.Pen>
+                                                                  
+                                                                        <Pen Thickness="7" Brush="White" />
+                                                                    </TextDecoration.Pen>
+                                                                </TextDecoration>
+                                                            </TextDecorationCollection>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <Border Background="#FF5e8ec2">
+                                   
+                                    <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
-
+         
 
             <Style TargetType="TextBox">
 
@@ -48,7 +91,7 @@
             </Style>
 
         </TabControl.Resources>
-        <TabItem Margin="0,0,0,2" Header="BOKA BOENDE/KONFERENS">
+        <TabItem Margin="-2,0,0,2" Header="BOKA BOENDE/KONFERENS">
 
             <Canvas Height="auto" Width="1760">
 
@@ -107,11 +150,11 @@
         </TabItem>
 
 
-        <TabItem Header="HANTERA BOKNINGAR" Margin="-2,0,0,0" >
+        <TabItem Header="HANTERA BOKNINGAR" Margin="-2,0,0,2" >
 
         </TabItem>
 
-        <TabItem Header="VISA BELÄGGNING" Background="#FF5e8ec2">
+        <TabItem Header="VISA BELÄGGNING" Margin="-2,0,0,2" Background="#FF5e8ec2">
 
             <Canvas Height="auto" Width="1760">
 

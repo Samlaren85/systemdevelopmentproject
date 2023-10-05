@@ -283,6 +283,37 @@ namespace BusinessLayer
             return columnData; //Hur ska denna faktiskt se ut?
             
         }
+
+        public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)
+        {
+            IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid < avrese && b.Avresetid > ankomst, X => X.FacilitetID);
+            IList<Facilitet> Faciliteter = unitOfWork.FacilitetRepository.Find(b => b.FacilitetID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase) && antalPersoner <= b.LägenhetsID.Bäddar, x => x.LägenhetsID);
+            List<Facilitet> inaktuellFaciliteter = new List<Facilitet>();
+            foreach (Bokning b in bokningar)
+            {
+                foreach (Facilitet facilitet in b.FacilitetID)
+                {
+                    inaktuellFaciliteter.Add(facilitet);
+                }
+            }
+            return Faciliteter.Except(inaktuellFaciliteter).ToList();
+        }
+
+        public List<Facilitet> FindLedigaLägenheter(int antalpersoner, DateTime ankomst, DateTime avrese)
+        {      
+                return FindLedigaFaciliteterFörBokning("LGH", antalpersoner,  ankomst,  avrese);          
+        }
+        public List<Facilitet> FindLedigaCamping(int antalpersoner, DateTime ankomst, DateTime avrese)
+        {
+            return FindLedigaFaciliteterFörBokning("CAMP", antalpersoner,  ankomst,  avrese);
+        }
+        public List<Facilitet> FindLedigaKonferens(int antalpersoner, DateTime ankomst, DateTime avrese)
+        {
+            return FindLedigaFaciliteterFörBokning("KONF", antalpersoner,  ankomst,  avrese);
+        }
+
+        #endregion
+
         /// <summary>
         /// Konstruktor för boendemodulen
         /// </summary>

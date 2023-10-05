@@ -13,6 +13,7 @@ using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using SkiResortSystem.Services;
 using SkiResortSystem.Views;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SkiResortSystem.ViewModels
 {
@@ -151,6 +152,19 @@ namespace SkiResortSystem.ViewModels
             set { besöksaddress = value; OnPropertyChanged(); }
         }
 
+        private string besökspostnummer;
+        public string Besökspostnummer
+        {
+            get { return besökspostnummer; }
+            set { besökspostnummer = value; OnPropertyChanged(); }
+        }
+        private string besöksort;
+        public string Besöksort
+        {
+            get { return besöksort; }
+            set { besöksort = value; OnPropertyChanged(); }
+        }
+
         private string gatuadressFöretag;
         public string GatuadressFöretag
         {
@@ -179,12 +193,39 @@ namespace SkiResortSystem.ViewModels
             set { telefonnummerFöretag = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Används för att markera kund i kundlistan, vid dubbelklick öppnas en kundöversikt
+        /// </summary>
+        private Kund selectCustomer;
+        public Kund SelectCustomer
+        {
+            get { return selectCustomer; }
+            set
+            {
+                selectCustomer = value;
+            }
+        }
+        private ICommand doubleClickCustomerCommand = null!;
+        public ICommand DoubleClickCustomerCommand =>
+            doubleClickCustomerCommand ??= doubleClickCustomerCommand = new RelayCommand(() =>
+            {
+                if (selectCustomer.Privatkund != null)
+                {
+                    CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel(SelectCustomer);
+                    windowService.ShowDialog(kundöversikt);
+                }
+                else
+                {
+                    CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel(SelectCustomer);
+                    windowService.ShowDialog(kundöversikt);
+                }
+            });
         private ICommand createBusinessCustomer = null!;
 
         public ICommand CreateBusinessCustomer => createBusinessCustomer ??= createBusinessCustomer = new RelayCommand(() =>
         {
             CustomerController cc = new CustomerController();
-            cc.AddCompanyCustomer(OrganisationsnummerID, Företagsnamn, Kontaktperson, Besöksaddress, GatuadressFöretag, PostnummerFöretag, OrtFöretag, TelefonnummerFöretag, epost);
+            cc.AddCompanyCustomer(OrganisationsnummerID, Företagsnamn, Kontaktperson, Besöksaddress, Besökspostnummer, Besöksort, GatuadressFöretag, PostnummerFöretag, OrtFöretag, TelefonnummerFöretag, epost);
         });
 
 
@@ -222,6 +263,7 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 selectedCustomer = value;
+                if (selectedCustomer != null) SearchText = selectedCustomer.ToString().Split(" (")[0];
                 OnPropertyChanged(); 
             }
         }
@@ -233,6 +275,16 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 errorMessage = value;
+                OnPropertyChanged();
+            }
+        }
+        private string errorMessage2;
+        public string ErrorMessage2
+        {
+            get { return errorMessage2; }
+            set
+            {
+                errorMessage2 = value;
                 OnPropertyChanged();
             }
         }
@@ -296,18 +348,109 @@ namespace SkiResortSystem.ViewModels
             set { aktivitetID = value; OnPropertyChanged(); }
         }
 
-        private DateTime ankomsttid;
+        private DateTime ankomsttid = DateTime.Today;
         public DateTime Ankomsttid
         {
             get { return ankomsttid; }
-            set { ankomsttid = value; OnPropertyChanged(); }
+            set { 
+                ankomsttid = value;
+                if (ankomsttid > avresetid) Avresetid = ankomsttid;
+                OnPropertyChanged(); 
+            }
         }
-        private DateTime avresetid;
+        private DateTime avresetid = DateTime.Today;
         public DateTime Avresetid
         {
             get { return  avresetid; }
-            set { avresetid = value; OnPropertyChanged(); }
+            set {
+                if (value < ankomsttid) avresetid = Ankomsttid;
+                else avresetid = value;
+                OnPropertyChanged(); }
         }
+
+        private bool lägenhetradiobutton;
+        public bool Lägenhetradiobutton
+        {
+            get { return lägenhetradiobutton; }
+            set { lägenhetradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private bool campingradiobutton;
+        public bool Campingradiobutton
+        {
+            get { return campingradiobutton; }
+            set { campingradiobutton = value; OnPropertyChanged(); }
+        }
+        private bool konferensradiobutton;
+        public bool Konferensradiobutton
+        {
+            get { return konferensradiobutton; }
+            set { konferensradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private string antalPersonerTillBoende;
+        public string AntalPersonerTillBoende
+        {
+            get { return antalPersonerTillBoende; }
+            set { antalPersonerTillBoende = value; ErrorMessage2 = string.Empty; OnPropertyChanged(); }
+        }
+
+        private List<Facilitet> facilitetsSökning;
+        public List<Facilitet> FacilitetsSökning
+        {
+            get { return facilitetsSökning; }
+            set { facilitetsSökning = value; OnPropertyChanged(); }
+        }
+
+        private ICommand sökLedigaFaciliteter = null!;
+
+        public ICommand SökLedigaFaciliteter => sökLedigaFaciliteter ??= sökLedigaFaciliteter = new RelayCommand(() =>
+        {
+            AccommodationController ac = new AccommodationController();
+           
+            if (Lägenhetradiobutton)
+            {
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
+                {
+                    FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                }
+                else
+                {
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                }
+            }
+
+            if (Konferensradiobutton)
+            {
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
+                {
+                    FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
+                }
+                else
+                {
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                }
+            }
+
+            if (Campingradiobutton)
+            {
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
+                {
+                    FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
+                }
+                else
+                {
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                }
+            }
+        });
+
 
         private ICommand createBooking = null!;
 

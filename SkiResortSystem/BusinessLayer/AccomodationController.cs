@@ -198,23 +198,34 @@ namespace BusinessLayer
         }
  #endregion
         
-        public List<string> FetchColumnDataVisaBeläggning<T>(string sökTerm, DateTime franDatum, DateTime tillDatum, string facilitetsTyp, bool lägenhet, bool konferens, bool camping)
+        public List<string> VisaBeläggningen<T>(DateTime franDatum, DateTime tillDatum, bool boende , bool utrustning, bool aktivitet)
         {
             List<Facilitet> inaktuellaFaciliteter = new List<Facilitet>(); // Används som hjälp för filtrering
-            IList<Bokning> aktuellaBokningar = FindBoenden(sökTerm, franDatum, tillDatum, facilitetsTyp);
-            IList<Facilitet> dataColumn2 = FindLedigaFaciliteter(facilitetsTyp, 4); // Data för LGH1
-            IList<Facilitet> dataColumn3 = FindLedigaFaciliteter(facilitetsTyp, 5); // Data för LGH2
+            IList<Facilitet> dataColumn2 = new List<Facilitet>();
+            IList<Facilitet> dataColumn3 = new List<Facilitet>();
             IList<Facilitet> dataColumn4 = new List<Facilitet>();
-            IList<Facilitet> dataColumn5 = FindLedigaFaciliteter(facilitetsTyp); // Data för konf1
-            IList<Facilitet> dataColumn6 = FindLedigaFaciliteter(facilitetsTyp); // Data för konf2
+            IList<Facilitet> dataColumn5 = new List<Facilitet>();
+            IList<Facilitet> dataColumn6 = new List<Facilitet>();
 
-            if (camping == true)
+            if (boende == true)
             {
-                dataColumn4 = FindLedigaFaciliteter(sökTerm); // Data för Camping
+                string facilitetsTyp = "Campingplats";
+                dataColumn4 = FindLedigaFaciliteter(facilitetsTyp); // Data för Camping
             }
 
-            if (konferens == true)
+            if (boende == true)
             {
+                string facilitetsTyp = "Lägenhet";
+                dataColumn3 = FindLedigaFaciliteter(facilitetsTyp, 5);
+                dataColumn2 = FindLedigaFaciliteter(facilitetsTyp, 4);
+            }
+
+            if (boende == true)
+            {
+                string facilitetsTyp = "Konferenssal";
+                dataColumn5 = FindLedigaFaciliteter(facilitetsTyp);
+                dataColumn6 = FindLedigaFaciliteter(facilitetsTyp);
+
                 foreach (Facilitet facilitet in dataColumn5)
                 {
                     if (facilitet.KonferensID.KonferensBenämning.Equals("Liten"))
@@ -236,54 +247,54 @@ namespace BusinessLayer
                 }
             }
             // Koden nedan hämtar datumen och parsar dessa till en gemensam variabel
-            string textFranDatum = null;
+            string textFranDatum = string.Empty;
            
             franDatum = DateTime.Parse(textFranDatum);
 
             string dataColumn1 = $"{textFranDatum}";
 
-            List<string> column1List = new List<string> {dataColumn1}; //Datum
+            List<string> boendeColumnList1 = new List<string> {dataColumn1}; //Datum
 
             TimeSpan dateDifference = tillDatum - franDatum;
             int periodSlutdatum = (int)dateDifference.TotalDays;
           
             for (int i = 0; i < periodSlutdatum; i++)
             {
-                column1List.Add(franDatum.AddDays(i).ToShortDateString());
+                boendeColumnList1.Add(franDatum.AddDays(i).ToShortDateString());
             }
 
-            IList<string> column2List = new List<string>(); //LGH1
-            IList<string> column3List = new List<string>(); // LGH2 
-            IList<string> column4List = new List<string>(); //Camping
-            IList<string> column5List = new List<string>(); //Konf1
-            IList<string> column6List = new List<string>(); //Konf2
+            IList<string> boendeColumnList2 = new List<string>(); //LGH1
+            IList<string> boendeColumnList3 = new List<string>(); // LGH2 
+            IList<string> boendeColumnList4 = new List<string>(); //Camping
+            IList<string> boendeColumnList5 = new List<string>(); //Konf1
+            IList<string> boendeColumnList6 = new List<string>(); //Konf2
 
             // Denna foreach-loop används för att lägga samtliga listor som ska visas i tabellen inom boendemodulen/Visa beläggning i en gemensam lista.
-            foreach (string datum in column1List)
+            foreach (string datum in boendeColumnList1)
             {
 
-                column2List.Add(dataColumn2.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                column3List.Add(dataColumn3.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                column4List.Add(dataColumn4.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                column5List.Add(dataColumn5.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                column6List.Add(dataColumn6.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                boendeColumnList2.Add(dataColumn2.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                boendeColumnList3.Add(dataColumn3.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                boendeColumnList4.Add(dataColumn4.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                boendeColumnList5.Add(dataColumn5.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                boendeColumnList6.Add(dataColumn6.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
             }
 
             // columnData är det gemensamma lista som används för att hämta och presentera data i visa beläggnings fliken(boendemodulen)
             List<string> columnData = new List<string>
             {
-                column1List.Count().ToString(),
-                column2List.Count().ToString(),
-                column3List.Count().ToString(),
-                column4List.Count().ToString(),
-                column5List.Count().ToString(),
-                column6List.Count().ToString()
+                boendeColumnList1.Count().ToString(),
+                boendeColumnList2.Count().ToString(),
+                boendeColumnList3.Count().ToString(),
+                boendeColumnList4.Count().ToString(),
+                boendeColumnList5.Count().ToString(),
+                boendeColumnList6.Count().ToString()
             };
 
             return columnData; //Hur ska denna faktiskt se ut?
             
         }
-
+        #region Metoder för att söka fram lediga boenden.
         public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)
         {
             IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid < avrese && b.Avresetid > ankomst, X => X.FacilitetID);

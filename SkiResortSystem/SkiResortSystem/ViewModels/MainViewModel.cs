@@ -402,6 +402,8 @@ namespace SkiResortSystem.ViewModels
             set { facilitetsSökning = value; OnPropertyChanged(); }
         }
 
+        
+
         private ICommand sökLedigaFaciliteter = null!;
 
         public ICommand SökLedigaFaciliteter => sökLedigaFaciliteter ??= sökLedigaFaciliteter = new RelayCommand(() =>
@@ -451,6 +453,66 @@ namespace SkiResortSystem.ViewModels
             }
         });
 
+        private List<string> visaBeläggning;
+        public List<string> VisaBeläggning
+        {
+            get { return visaBeläggning; }
+            set { visaBeläggning = value; OnPropertyChanged(); }
+        }
+
+        private ICommand visaBeläggningen = null!;
+        public ICommand VisaBeläggningen => visaBeläggningen ??= visaBeläggningen = new RelayCommand(() =>
+        {
+            AccommodationController ac = new AccommodationController();
+
+            if (BoendeKonferensradiobutton) 
+            {
+                VisaBeläggningen = ac.VisaBeläggningen(boendeFranDatum, 7, true, null, null);
+            }
+            
+            
+            if (Utrustningradiobutton)
+            {
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
+                {
+                    FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                }
+                else
+                {
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                }
+            }
+
+            if (Aktivitetradiobutton)
+            {
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
+                {
+                    FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
+                }
+                else
+                {
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                }
+            }
+
+            if (Campingradiobutton)
+            {
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
+                {
+                    FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
+                }
+                else
+                {
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                }
+            }
+        });
 
         private ICommand createBooking = null!;
 

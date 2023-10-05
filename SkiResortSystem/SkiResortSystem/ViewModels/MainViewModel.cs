@@ -419,40 +419,34 @@ namespace SkiResortSystem.ViewModels
                 {
                     ErrorMessage2 = string.Empty;
                     ErrorMessage2 = "Du behöver lägga till antal kunder";
-
                 }
-            
-               
-                
-
             }
-            if (Campingradiobutton)
-            {
-                try
-                {
-                    int x = Int32.Parse(antalPersonerTillBoende);
-                    FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
 
-
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
-                }
-
-            }
             if (Konferensradiobutton)
             {
-                try
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
                 {
-                    int x = Int32.Parse(antalPersonerTillBoende);
                     FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
-
-
                 }
-                catch (FormatException)
+                else
                 {
-                    Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                }
+            }
+
+            if (Campingradiobutton)
+            {
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
+                {
+                    FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
+                }
+                else
+                {
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
                 }
             }
         });

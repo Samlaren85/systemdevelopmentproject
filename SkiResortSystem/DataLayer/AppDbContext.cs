@@ -84,10 +84,25 @@ namespace DataLayer
             }
             if (!Faciliteter.Any())
             {
-                Lägenhet l = new Lägenhet("Kings Bed", 10, "Typ stor");
+                for (int i = 0; i < 85; i++)
+                {
+                    Facilitet facilitet;
+                    Lägenhet lägenhet;
+                    if (i < 50)
+                    {
+                        // Lägenhet 1 with 4 beds and size 50
+                        lägenhet = new Lägenhet("Lägenhet 1", 4, "50m\u00b2");
+                        facilitet = new Facilitet(8000, null, lägenhet, null);
+                    }
+                    else
+                    {
+                        // Lägenhet 2 with 6 beds and size 70
+                        lägenhet = new Lägenhet("Lägenhet 2", 6, "70m\u00b2");
+                        facilitet = new Facilitet(10000, null, lägenhet, null);
+                    }
+                    Faciliteter.Add(facilitet);
+                }
 
-                Facilitet Lunden = new Facilitet(100000, null, l, null);
-                Faciliteter.Add(Lunden);
                 SaveChanges();
             }
         }

@@ -485,6 +485,98 @@ namespace SkiResortSystem.ViewModels
             }
             );
 
+        #region AktivitetsModulen
+
+        private string searchBooking;
+        public string SearchBooking
+        {
+            get { return searchBooking; }
+            set
+            {
+                searchBooking = value;
+                SearchBookings(); 
+                OnPropertyChanged();
+            }
+        }
+
+        private Bokning selectedBooking;
+        public Bokning SelectedBooking
+        {
+            get { return selectedBooking; }
+            set
+            {
+                if (value != null)
+                {
+                    selectedBooking = value;
+                    SearchBooking = SelectedBooking.ToString().Split(" (")[0];
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private IList<Bokning> bookingResults;
+        public IList<Bokning> BookingResults
+        {
+            get { return bookingResults; }
+            set
+            {
+                bookingResults = value; 
+                OnPropertyChanged();
+            }
+        }
+        private string noBookingResult;
+        public string NoBookingResult
+        {
+            get { return noBookingResult; }
+            set
+            {
+                noBookingResult = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void SearchBookings()
+        {
+            BookingController bc = new BookingController();
+            try
+            {
+                ErrorMessage = string.Empty;
+
+                BookingResults = bc.FindMasterBooking(SearchBooking);
+                if (searchResults.Count < 1)
+                {
+                    NoBookingResult = "Ingen bokning hittades";
+                }
+                else
+                {
+                    SearchActivities();
+                }
+            }
+            catch (Exception ex)
+            {
+                NoBookingResult = "Ingen bokning hittades, " + ex.Message;
+                SearchResults = new List<Kund>();
+            }
+        }
+
+        public void SearchActivities()
+        {
+            //Inte implementerat än!
+        }
+
+        private IList<Aktivitet> aktivitetsSökning;
+        public IList<Aktivitet> AktivitetsSökning
+        {
+            get { return aktivitetsSökning; }
+            set
+            {
+                aktivitetsSökning= value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// Logga ut och stänga ner nedan 
         /// </summary>

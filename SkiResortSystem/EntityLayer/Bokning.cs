@@ -38,5 +38,13 @@ namespace EntityLayer
             UtrustningID = utrustningID;
             AktivitetID = aktivitetID;
         }
+
+        public override string ToString()
+        {
+            string customerName = string.Empty;
+            if (KundID.Företagskund != null) customerName = KundID.Företagskund.Företagsnamn;
+            else if (KundID.Privatkund != null) customerName = KundID.Privatkund.Namn();
+            return $"{BokningsID} ({customerName})";
+        }
     }
 }

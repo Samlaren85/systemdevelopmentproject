@@ -1,5 +1,4 @@
-﻿using SkiResortSystem.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +15,11 @@ using System.Windows.Shapes;
 namespace SkiResortSystem.Views
 {
     /// <summary>
-    /// Interaction logic for KundöversiktFöretag.xaml
+    /// Interaction logic for EquipmentOverview.xaml
     /// </summary>
-    public partial class CustomerOverviewCompany : Window, ICloseable
+    public partial class EquipmentOverview : Window
     {
-        public CustomerOverviewCompany()
+        public EquipmentOverview()
         {
             InitializeComponent();
         }

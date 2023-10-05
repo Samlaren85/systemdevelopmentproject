@@ -23,6 +23,8 @@ namespace SkiResortSystem
                 WindowService.RegisterWindow<LoginViewModel, LoginWindow>();
                 WindowService.RegisterWindow<CustomerOverviewCompanyViewModel, CustomerOverviewCompany> ();
                 WindowService.RegisterWindow<CustomerOverviewPrivateViewModel, CustomerOverviewPrivate>();
+                WindowService.RegisterWindow<BookingOverviewViewModel, BookingOverview>();
+
             };
         }
     }

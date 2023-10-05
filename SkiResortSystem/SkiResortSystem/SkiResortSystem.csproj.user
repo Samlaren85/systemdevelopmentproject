@@ -28,6 +28,9 @@
     <Compile Update="Components\StyrningsModulen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\BookingOverview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CustomerOverviewPrivate.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -55,6 +58,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Components\StyrningsModulen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\BookingOverview.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CustomerOverviewPrivate.xaml">

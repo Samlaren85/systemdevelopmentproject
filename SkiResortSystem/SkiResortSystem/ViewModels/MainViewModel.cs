@@ -205,6 +205,8 @@ namespace SkiResortSystem.ViewModels
                 selectCustomer = value;
             }
         }
+
+
         private ICommand doubleClickCustomerCommand = null!;
         public ICommand DoubleClickCustomerCommand =>
             doubleClickCustomerCommand ??= doubleClickCustomerCommand = new RelayCommand(() =>
@@ -214,12 +216,15 @@ namespace SkiResortSystem.ViewModels
                     CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel(SelectCustomer);
                     windowService.ShowDialog(kundöversikt);
                 }
-                else
+                else if (selectCustomer.Företagskund != null)
                 {
                     CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel(SelectCustomer);
                     windowService.ShowDialog(kundöversikt);
                 }
             });
+
+       
+
         private ICommand createBusinessCustomer = null!;
 
         public ICommand CreateBusinessCustomer => createBusinessCustomer ??= createBusinessCustomer = new RelayCommand(() =>
@@ -232,6 +237,9 @@ namespace SkiResortSystem.ViewModels
         /// <summary>
         /// Nedan för att söka efter kund ifrån boende 
         /// </summary>
+        ///
+
+        
 
         private string searchText;
         public string SearchText
@@ -262,8 +270,13 @@ namespace SkiResortSystem.ViewModels
             get { return selectedCustomer; }
             set
             {
-                selectedCustomer = value;
-                if (selectedCustomer != null) SearchText = selectedCustomer.ToString().Split(" (")[0];
+
+                if (value != null)
+                {
+                    selectedCustomer = value;
+
+                    SearchText = selectedCustomer.ToString().Split(" (")[0];
+                }
                 OnPropertyChanged(); 
             }
         }
@@ -414,6 +427,12 @@ namespace SkiResortSystem.ViewModels
                 if (success)
                 {
                     FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                    foreach (Facilitet f in FacilitetsSökning)
+                    {
+                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                    }
+
+
                 }
                 else
                 {
@@ -428,6 +447,10 @@ namespace SkiResortSystem.ViewModels
                 if (success)
                 {
                     FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
+                    foreach (Facilitet f in FacilitetsSökning)
+                    {
+                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                    }
                 }
                 else
                 {
@@ -442,6 +465,10 @@ namespace SkiResortSystem.ViewModels
                 if (success)
                 {
                     FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
+                    foreach(Facilitet f in FacilitetsSökning)
+                    {
+                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                    }
                 }
                 else
                 {
@@ -478,6 +505,30 @@ namespace SkiResortSystem.ViewModels
                 windowService.ShowDialog(kundöversikt);
             }
             );
+
+
+        private Facilitet selectedFacility;
+        public Facilitet SelectedFacility
+        {
+            get { return selectedFacility; }
+            set
+            {
+                selectedFacility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ICommand doubleClickBookingCommand = null!;
+        public ICommand DoubleClickBookingCommand =>
+            doubleClickBookingCommand ??= doubleClickBookingCommand = new RelayCommand(() =>
+            {
+                if (SelectedCustomer != null)
+                {
+                    int.TryParse(antalPersonerTillBoende, out int antalpersoner);
+                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner);
+                    windowService.ShowDialog(bokningsöversikt);
+                }
+            });
 
         /// <summary>
         /// Logga ut och stänga ner nedan 

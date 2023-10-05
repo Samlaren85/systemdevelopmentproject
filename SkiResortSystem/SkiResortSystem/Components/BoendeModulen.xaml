@@ -55,13 +55,30 @@
 
                                 <Border Background="#FF5e8ec2" BorderThickness="2,0,0,2" BorderBrush="White">
 
-                                    <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
                                 </Border>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <Style TargetType="DataGridCell">
+
+                <Setter Property="Background" Value="#FFA6C3E4"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Height" Value="43"/>
+
+            </Style>
+
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="#FFA6C3E4"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+
+            </Style>
+
 
 
             <Style TargetType="TextBox">
@@ -89,6 +106,7 @@
                 <Setter Property="Foreground" Value="White"/>
             </Style>
 
+
         </TabControl.Resources>
         <TabItem  Header="BOKA BOENDE/KONFERENS">
 
@@ -96,7 +114,7 @@
 
 
 
-                <TextBlock Text="Sök kund" Foreground="Black" FontSize="15" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBlock Text="Sök kund" Foreground="Black" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" SelectionChanged="ComboBox_SelectionChanged" Canvas.Left="80" Canvas.Top="105" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -108,21 +126,21 @@
 
 
 
-                <TextBlock Text="Avresedatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock Text="Avresedatum"  Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding Avresetid}"/>
-                <TextBlock Text="Ankomstdatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="76"/>
+                <TextBlock Text="Ankomstdatum" Canvas.Left="449" Canvas.Top="76"/>
                 <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding Ankomsttid}"/>
                 <Button Content="Sök" Canvas.Left="614" Canvas.Top="165" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Click="Button_Click_1"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" />
 
 
-                <DataGrid Background="#FFA6C3E4" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding FacilitetsSökning, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <DataGrid Background="#FFA6C3E4" Width="908" Height="430" BorderBrush="Black"  BorderThickness="2" ItemsSource="{Binding FacilitetsSökning, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Typ" Width="*" Binding="{Binding}"/>
                         <DataGridTextColumn Header="Pris" Width="*" Binding="{Binding Facilitetspris}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <TextBlock Text="Antal personer" Foreground="Black" Canvas.Left="614" FontSize="15" TextWrapping="Wrap" Canvas.Top="77"/>
+                <TextBlock Text="Antal personer" Canvas.Left="614" Canvas.Top="77"/>
             </Canvas>
             <!--<DataGrid Background="#FFA6C3E4" Width="800" Height="400" Margin="67,223,893,371" BorderBrush="Black" BorderThickness="2"
                     ItemsSource="{Binding SearchResults}" SelectedItem="{Binding Path=SelectCustomer}" 
@@ -151,9 +169,39 @@
 
         <TabItem Header="HANTERA BOKNINGAR"  >
 
+            <Canvas Height="auto" Width="1760">
+
+
+                <DataGrid  Width="856" Height="410" AutoGenerateColumns="False" Background="Transparent" BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Namn" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Ankomstdatum" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Avresedatum" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="bokningsnummer" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="AntalPersoner" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Typ " Width="*"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+                    
+                
+                <TextBox Canvas.Top="85" Canvas.Left="80" Width="293" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                
+                <TextBlock Text="Förnamn/Efternamn/Bokningsnummer" Foreground="Black" Canvas.Left="80" Canvas.Top="55" />
+                <TextBlock Text="SÖK BOKNING/KONFERENS" Foreground="Black" Canvas.Left="80" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                
+          
+                <DatePicker Canvas.Top="85" Canvas.Left="530" />
+                <DatePicker Canvas.Top="85" Canvas.Left="750" />
+                <TextBlock Text="Ankomstdatum" Canvas.Top="55" Canvas.Left="530"/>
+                <TextBlock Text="Avresedatum" Canvas.Top="55" Canvas.Left="750"  />
+
+            </Canvas>
+
+
         </TabItem>
 
-        <TabItem Header="VISA BELÄGGNING" Background="#FF5e8ec2">
+        <TabItem Header="VISA BELÄGGNING">
 
             <Canvas Height="auto" Width="1760">
 
@@ -171,7 +219,8 @@
 
 
                 <TextBlock Text="Datum:" Foreground="Black" Canvas.Left="80" Canvas.Top="58" />
-                <TextBox Canvas.Top="60" Canvas.Left="150" Width="70" />
+                <DatePicker  Canvas.Top="60" Canvas.Left="150" />
+                
                 <TextBlock Text="Tillgängligt per datum" Foreground="Black" Canvas.Left="80" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <RadioButton Content="Boende/Konferens" IsChecked="{Binding BoendeKonferensradiobutton}" Canvas.Left="524" Canvas.Top="110" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <RadioButton Content="Utrustning" Canvas.Left="722" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -179,6 +228,11 @@
 
             </Canvas>
 
+        </TabItem>
+
+        <TabItem Header="Prislista">
+            
+            
         </TabItem>
 
     </TabControl>

@@ -12,7 +12,7 @@ namespace EntityLayer
         private static int _antalFaciliteter;
         [Key]
         public string FacilitetID { get; set; }
-        
+        public Bokning BokningsRef { get; set; }
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT
         public float Facilitetspris { get; set; }
         public Konferenssal? KonferensID { get; set; }

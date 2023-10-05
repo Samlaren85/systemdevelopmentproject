@@ -16,7 +16,6 @@
                     <Setter Property="BorderBrush" Value="White"/>
                     <Setter Property="Height" Value="50" />
                     <Setter Property="Width" Value="192" />
-                    <Setter Property="Margin" Value="-6,0,0,0"></Setter>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="TabItem">
@@ -53,9 +52,9 @@
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
 
-                                    <Border Background="#FF5e8ec2">
+                                    <Border Background="#FF5e8ec2" BorderBrush="White" BorderThickness="0,2,0,2">
 
-                                        <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" />
                                     </Border>
                                 </Grid>
                             </ControlTemplate>
@@ -64,8 +63,26 @@
                 </Style>
 
 
-              
-                <Style TargetType="Button">
+            <Style TargetType="DataGridCell">
+
+                <Setter Property="Background" Value="#FFA6C3E4"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Height" Value="43"/>
+                
+            </Style>
+
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="#FFA6C3E4"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+
+            </Style>
+
+
+
+
+            <Style TargetType="Button">
                     <Setter Property="FontSize" Value="18"/>
                     <Setter Property="BorderBrush" Value="White" />
                     <Setter Property="Background" Value="#FF5e8ec2"/>
@@ -86,8 +103,8 @@
                 </Style>
 
             </TabControl.Resources>
-
-            <TabItem Header="HANTERA KUND" Width="192" Margin="-2,0,0,2" >
+            
+            <TabItem Header="HANTERA KUND"  >
                 <Grid>
                     <TextBlock Text="SÖK KUND" Margin="94,71,1433,919"></TextBlock>
                     <TextBox Height="NaN" Margin="94,106,1321,890" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">

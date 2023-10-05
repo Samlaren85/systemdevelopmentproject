@@ -205,6 +205,8 @@ namespace SkiResortSystem.ViewModels
                 selectCustomer = value;
             }
         }
+
+
         private ICommand doubleClickCustomerCommand = null!;
         public ICommand DoubleClickCustomerCommand =>
             doubleClickCustomerCommand ??= doubleClickCustomerCommand = new RelayCommand(() =>
@@ -214,12 +216,15 @@ namespace SkiResortSystem.ViewModels
                     CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel(SelectCustomer);
                     windowService.ShowDialog(kundöversikt);
                 }
-                else
+                else if (selectCustomer.Företagskund != null)
                 {
                     CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel(SelectCustomer);
                     windowService.ShowDialog(kundöversikt);
                 }
             });
+
+       
+
         private ICommand createBusinessCustomer = null!;
 
         public ICommand CreateBusinessCustomer => createBusinessCustomer ??= createBusinessCustomer = new RelayCommand(() =>
@@ -232,6 +237,9 @@ namespace SkiResortSystem.ViewModels
         /// <summary>
         /// Nedan för att söka efter kund ifrån boende 
         /// </summary>
+        ///
+
+        
 
         private string searchText;
         public string SearchText
@@ -262,8 +270,13 @@ namespace SkiResortSystem.ViewModels
             get { return selectedCustomer; }
             set
             {
-                selectedCustomer = value;
-                if (selectedCustomer != null) SearchText = selectedCustomer.ToString().Split(" (")[0];
+
+                if (value != null)
+                {
+                    selectedCustomer = value;
+
+                    SearchText = selectedCustomer.ToString().Split(" (")[0];
+                }
                 OnPropertyChanged(); 
             }
         }
@@ -402,6 +415,8 @@ namespace SkiResortSystem.ViewModels
             set { facilitetsSökning = value; OnPropertyChanged(); }
         }
 
+        
+
         private ICommand sökLedigaFaciliteter = null!;
 
         public ICommand SökLedigaFaciliteter => sökLedigaFaciliteter ??= sökLedigaFaciliteter = new RelayCommand(() =>
@@ -414,49 +429,133 @@ namespace SkiResortSystem.ViewModels
                 if (success)
                 {
                     FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                    foreach (Facilitet f in FacilitetsSökning)
+                    {
+                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                    }
+
+
                 }
                 else
                 {
                     ErrorMessage2 = string.Empty;
                     ErrorMessage2 = "Du behöver lägga till antal kunder";
-
                 }
-            
-               
-                
-
             }
-            if (Campingradiobutton)
-            {
-                try
-                {
-                    int x = Int32.Parse(antalPersonerTillBoende);
-                    FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
 
-
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
-                }
-
-            }
             if (Konferensradiobutton)
             {
-                try
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
                 {
-                    int x = Int32.Parse(antalPersonerTillBoende);
                     FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
-
-
+                    foreach (Facilitet f in FacilitetsSökning)
+                    {
+                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                    }
                 }
-                catch (FormatException)
+                else
                 {
-                    Console.WriteLine($"Unable to parse '{antalPersonerTillBoende}'");
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                }
+            }
+
+            if (Campingradiobutton)
+            {
+                bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                if (success)
+                {
+                    FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
+                    foreach(Facilitet f in FacilitetsSökning)
+                    {
+                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                    }
+                }
+                else
+                {
+                    ErrorMessage2 = string.Empty;
+                    ErrorMessage2 = "Du behöver lägga till antal kunder";
                 }
             }
         });
 
+        private List<string> visaBeläggning;
+        public List<string> VisaBeläggning
+        {
+            get { return visaBeläggning; }
+            set { visaBeläggning = value; OnPropertyChanged(); }
+        }
+
+        private DateTime beläggningankomsttid = DateTime.Today;
+        public DateTime BeläggningAnkomsttid
+        {
+            get { return beläggningankomsttid; }
+            set
+            {
+                beläggningankomsttid = value;
+                BeläggningDatumperiod = beläggningankomsttid.AddDays(7);
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime beläggningdatumperiod = DateTime.Today;
+        public DateTime BeläggningDatumperiod
+        {
+            get { return beläggningdatumperiod; }
+            set
+            {
+                beläggningdatumperiod= value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool boendekonferensbeläggningradiobutton;
+        public bool BoendeKonferensbeläggningradiobutton
+        {
+            get { return boendekonferensbeläggningradiobutton; }
+            set { boendekonferensbeläggningradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private bool utrustningbeläggningradiobutton;
+        public bool UtrustningBeläggningradiobutton
+        {
+            get { return utrustningbeläggningradiobutton; }
+            set { utrustningbeläggningradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private bool aktivitetbeläggningradiobutton;
+        public bool Aktivitetbeläggningradiobutton
+        {
+            get { return aktivitetbeläggningradiobutton; }
+            set { aktivitetbeläggningradiobutton = value; OnPropertyChanged(); }
+        }
+
+        private ICommand visaBeläggningen = null!;
+        public ICommand VisaBeläggningen => visaBeläggningen ??= visaBeläggningen = new RelayCommand(() =>
+        {
+            AccommodationController ac = new AccommodationController();
+
+            if (BoendeKonferensbeläggningradiobutton)
+            {
+                VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, true, false, false);
+            }
+
+
+            if (UtrustningBeläggningradiobutton)
+            {
+                {
+                    VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, true, false);
+                }
+            }
+
+            if (Aktivitetbeläggningradiobutton)
+            {
+                {
+                    VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, false, true);
+                }
+            }
+        });
 
         private ICommand createBooking = null!;
 
@@ -484,6 +583,30 @@ namespace SkiResortSystem.ViewModels
                 windowService.ShowDialog(kundöversikt);
             }
             );
+
+
+        private Facilitet selectedFacility;
+        public Facilitet SelectedFacility
+        {
+            get { return selectedFacility; }
+            set
+            {
+                selectedFacility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ICommand doubleClickBookingCommand = null!;
+        public ICommand DoubleClickBookingCommand =>
+            doubleClickBookingCommand ??= doubleClickBookingCommand = new RelayCommand(() =>
+            {
+                if (SelectedCustomer != null)
+                {
+                    int.TryParse(antalPersonerTillBoende, out int antalpersoner);
+                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner);
+                    windowService.ShowDialog(bokningsöversikt);
+                }
+            });
 
         #region AktivitetsModulen
 

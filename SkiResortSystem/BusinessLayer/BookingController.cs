@@ -24,7 +24,14 @@ namespace BusinessLayer
             Bokning bokning = new Bokning(ankomsttid, avresetid, användarID, kundID, facilitetsID, utrustningID, AktivitetID);
             unitOfWork.BokningsRepository.Add(bokning);
             unitOfWork.Save();
+            return bokning;
         }
+        public void SparaBokning(Bokning bokning)
+        {
+            unitOfWork.BokningsRepository.Add(bokning);
+            unitOfWork.Save();
+        }
+      
 
         public IList<Bokning> FindMasterBooking(string searchString)
         {

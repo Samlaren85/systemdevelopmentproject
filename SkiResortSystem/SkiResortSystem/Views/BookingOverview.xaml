@@ -67,9 +67,9 @@
         <TextBox Text="{Binding Kund}" Canvas.Left="154" Canvas.Top="204" Width="243" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox Text="{Binding UtnyttjadKredit}"  Width="130"  Background="White" Canvas.Left="724" Canvas.Top="134" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox Text="{Binding AntalNätter}" Canvas.Left="467" Canvas.Top="296" Width="54" HorizontalAlignment="Left" VerticalAlignment="Center" IsReadOnly="{Binding KundIDReadOnly}" Background="White"/>
-        <TextBox Text="{Binding Facilitetstyp}" Canvas.Left="154" Canvas.Top="395" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
+        <TextBox Text="{Binding Facilitetstyp}" Canvas.Left="154" Canvas.Top="395" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
         <TextBox Text="{Binding AntalPersoner}" HorizontalAlignment="Left" Canvas.Left="321" Canvas.Top="395" VerticalAlignment="Top" Width="130"/>
-        <TextBox Text="{Binding PrisPerNatt}" Canvas.Left="154" Canvas.Top="485" Width="130" IsReadOnly="{Binding RabattReadOnly}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding PrisPerNatt}" Canvas.Left="154" Canvas.Top="485" Width="150" IsReadOnly="{Binding RabattReadOnly}" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBox Text="{Binding Totalpris}" Canvas.Left="321" Canvas.Top="485" Width="130" IsReadOnly="{Binding KreditReadOnly}" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White"/>
 
 

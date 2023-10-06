@@ -53,7 +53,7 @@
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
 
-                                <Border Background="#FF5e8ec2" BorderThickness="2,0,0,2" BorderBrush="White">
+                                <Border Background="#FF5e8ec2" BorderThickness="0,0,0,2" BorderBrush="White">
 
                                     <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
                                 </Border>
@@ -63,21 +63,24 @@
                 </Setter>
             </Style>
 
+
             <Style TargetType="DataGridCell">
 
-                <Setter Property="Background" Value="#FFA6C3E4"/>
+                <Setter Property="Background" Value="White"/>
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Height" Value="43"/>
 
             </Style>
 
             <Style TargetType="DataGridColumnHeader">
-                <Setter Property="Background" Value="#FFA6C3E4"/>
+                <Setter Property="Background" Value="#FF5e8ec2"/>
                 <Setter Property="FontSize" Value="18"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
 
             </Style>
+
 
 
 
@@ -114,7 +117,7 @@
 
 
 
-                <TextBlock Text="Sök kund" Foreground="Black" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" SelectionChanged="ComboBox_SelectionChanged" Canvas.Left="80" Canvas.Top="105" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -126,7 +129,7 @@
 
 
 
-                <TextBlock Text="Avresedatum"  Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock Text="Avresedatum"  Canvas.Left="449" Canvas.Top="144"/>
                 <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding Avresetid}"/>
                 <TextBlock Text="Ankomstdatum" Canvas.Left="449" Canvas.Top="76"/>
                 <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding Ankomsttid}"/>
@@ -134,7 +137,7 @@
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" />
 
 
-                <DataGrid Background="#FFA6C3E4" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
+                <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
                           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedItem="{Binding Path=SelectedFacility}">
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommand}"/>
@@ -176,12 +179,12 @@
             <Canvas Height="auto" Width="1760">
 
 
-                <DataGrid  Width="856" Height="410" AutoGenerateColumns="False" Background="Transparent" BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <DataGrid  Width="856" Height="410" Background="White" AutoGenerateColumns="False"  BorderThickness="2" Canvas.Left="80" Canvas.Top="149" ItemsSource="{Binding }" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Namn" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Namn" Width="*" ></DataGridTextColumn>
                         <DataGridTextColumn Header="Ankomstdatum" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Avresedatum" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="bokningsnummer" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Bokningsnummer" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="AntalPersoner" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Typ " Width="*"></DataGridTextColumn>
                     </DataGrid.Columns>
@@ -210,7 +213,7 @@
             <Canvas Height="auto" Width="1760">
 
 
-                <DataGrid Name="BeläggningsData" Width="856" Height="410" AutoGenerateColumns="False" ItemsSource ="{Binding VisaBeläggning, Mode=TwoWay}"  Background="Transparent" BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <DataGrid Name="BeläggningsData" Width="856" Height="410" Background="White" AutoGenerateColumns="False" ItemsSource ="{Binding VisaBeläggning, Mode=TwoWay}"   BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="DATUM" Width="*" Binding="{Binding }"></DataGridTextColumn>
                         <DataGridTextColumn Header="LGH1" Width="*"></DataGridTextColumn>

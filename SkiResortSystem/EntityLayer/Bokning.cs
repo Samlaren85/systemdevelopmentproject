@@ -18,9 +18,15 @@ namespace EntityLayer
         public DateTime Avresetid { get; set; }
         public Användare AnvändareID { get; set; }
         public Kund KundID { get; set; }
+
+        [ForeignKey("FacilitetsID")]
         public List<Facilitet> FacilitetID { get; set; }
-        public List<Utrustning>? UtrustningID { get; set; }
-        public List<Aktivitet>? AktivitetID{ get; set; }
+       
+        [ForeignKey("UtrustningsID")]
+        public List<Utrustning> UtrustningID { get; set; }
+
+        [ForeignKey("AktivitetsID")]
+        public List<Aktivitet> AktivitetID{ get; set; }
 
         public Bokning()
         {

@@ -270,6 +270,8 @@ namespace SkiResortSystem.ViewModels
             get { return selectedCustomer; }
             set
             {
+                if (selectedCustomer == value) return; // Lägg till den här raden för att undvika oändlig loop
+
 
                 if (value != null)
                 {
@@ -431,7 +433,7 @@ namespace SkiResortSystem.ViewModels
                     FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
                     foreach (Facilitet f in FacilitetsSökning)
                     {
-                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
                     }
 
 
@@ -451,7 +453,7 @@ namespace SkiResortSystem.ViewModels
                     FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
                     foreach (Facilitet f in FacilitetsSökning)
                     {
-                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
                     }
                 }
                 else
@@ -469,7 +471,7 @@ namespace SkiResortSystem.ViewModels
                     FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
                     foreach(Facilitet f in FacilitetsSökning)
                     {
-                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
                     }
                 }
                 else
@@ -506,6 +508,17 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 beläggningdatumperiod= value;
+                OnPropertyChanged();
+            }
+        }
+
+        private float facilitetspris;
+        public float Facilitetspris
+        {
+            get { return facilitetspris; }
+            set
+            {
+                facilitetspris = value;
                 OnPropertyChanged();
             }
         }
@@ -603,7 +616,7 @@ namespace SkiResortSystem.ViewModels
                 if (SelectedCustomer != null)
                 {
                     int.TryParse(antalPersonerTillBoende, out int antalpersoner);
-                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner);
+                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner, Facilitetspris);
                     windowService.ShowDialog(bokningsöversikt);
                 }
             });

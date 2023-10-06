@@ -31,9 +31,9 @@ namespace BusinessLayer
         /// <summary>
         /// AddKonferenssal-metoden används för att lägga till en ny bokningsbar konferenssal i systemet. 
         /// </summary>
-        public Facilitet AddKonferenssal(string konferensBenämning, float facilitetspris)
+        public Facilitet AddKonferenssal(string konferensBenämning, float facilitetspris, int antalPersoner)
         {
-            Konferenssal konferenssal = new Konferenssal(konferensBenämning);
+            Konferenssal konferenssal = new Konferenssal(konferensBenämning, antalPersoner);
             unitOfWork.KonferenssalRepository.Add(konferenssal);
             Facilitet facilitet = new Facilitet(facilitetspris, konferenssal, null, null);
             unitOfWork.Save();

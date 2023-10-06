@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SkiResortSystem.Views
 {
     /// <summary>
-    /// Interaction logic for KundöversiktFöretag.xaml
+    /// Interaction logic for BookingOverview.xaml
     /// </summary>
-    public partial class CustomerOverviewCompany : Window, ICloseable
+    public partial class BookingOverview : Window, ICloseable
     {
-        public CustomerOverviewCompany()
+        public BookingOverview()
         {
             InitializeComponent();
         }

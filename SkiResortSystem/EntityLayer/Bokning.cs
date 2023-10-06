@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +18,14 @@ namespace EntityLayer
         public DateTime Avresetid { get; set; }
         public Användare AnvändareID { get; set; }
         public Kund KundID { get; set; }
+
+        [ForeignKey("FacilitetsID")]
         public List<Facilitet> FacilitetID { get; set; }
+       
+        [ForeignKey("UtrustningsID")]
         public List<Utrustning> UtrustningID { get; set; }
+
+        [ForeignKey("AktivitetsID")]
         public List<Aktivitet> AktivitetID{ get; set; }
 
         public Bokning()
@@ -37,6 +44,14 @@ namespace EntityLayer
             FacilitetID = facilitetID;
             UtrustningID = utrustningID;
             AktivitetID = aktivitetID;
+        }
+
+        public override string ToString()
+        {
+            string customerName = string.Empty;
+            if (KundID.Företagskund != null) customerName = KundID.Företagskund.Företagsnamn;
+            else if (KundID.Privatkund != null) customerName = KundID.Privatkund.Namn();
+            return $"{BokningsID} ({customerName})";
         }
     }
 }

@@ -78,6 +78,7 @@
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
 
             </Style>
 
@@ -118,7 +119,7 @@
 
 
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" SelectionChanged="ComboBox_SelectionChanged" Canvas.Left="80" Canvas.Top="105" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" SelectionChanged="ComboBox_SelectionChanged" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding ErrorMessage2}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="614" Canvas.Top="131" HorizontalAlignment="Left" VerticalAlignment="Top" />
@@ -174,7 +175,7 @@
         </TabItem>
 
 
-        <TabItem Header="HANTERA BOKNINGAR"  >
+        <TabItem Header="HANTERA BOKNINGAR">
 
             <Canvas Height="auto" Width="1760">
 
@@ -237,7 +238,7 @@
 
         </TabItem>
 
-        <TabItem Header="Prislista">
+        <TabItem Header="PRISLISTA">
             
             
         </TabItem>

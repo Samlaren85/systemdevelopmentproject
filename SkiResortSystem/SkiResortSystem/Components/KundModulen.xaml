@@ -68,7 +68,8 @@
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Height" Value="43"/>
-                
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
             </Style>
 
             <Style TargetType="DataGridColumnHeader">
@@ -77,6 +78,7 @@
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
 
             </Style>
 
@@ -125,7 +127,7 @@
                             <DataGridTextColumn Header="Telefonnummer" Width="*" Binding="{Binding Telefonnummer}"/>
                             <DataGridTextColumn Header="E-post" Width="*" Binding="{Binding Epost}"/>
                         </DataGrid.Columns>
-
+                        
 
 
                     </DataGrid>

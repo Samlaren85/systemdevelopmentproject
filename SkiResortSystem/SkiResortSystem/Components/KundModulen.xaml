@@ -52,7 +52,7 @@
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
 
-                                    <Border Background="#FF5e8ec2" BorderBrush="White" BorderThickness="0,2,0,2">
+                                    <Border Background="#FF5e8ec2" BorderBrush="White" BorderThickness="0,0,0,2">
 
                                         <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" />
                                     </Border>

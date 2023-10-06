@@ -10,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SkiResortSystem.Components
+namespace SkiResortSystem.Views
 {
     /// <summary>
-    /// Interaction logic for EkonomiModulen.xaml
+    /// Interaction logic for BillOverview.xaml
     /// </summary>
-    public partial class EkonomiModulen : UserControl
+    public partial class BillOverview : Window
     {
-        public EkonomiModulen()
+        public BillOverview()
         {
             InitializeComponent();
         }
-
-
     }
 }

@@ -1,0 +1,45 @@
+﻿<Window x:Class="SkiResortSystem.Views.BillOverview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SkiResortSystem.Views"
+        mc:Ignorable="d"
+        Title="Företagskund" Height="auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">
+
+        <Window.Resources>
+        <Style TargetType="TextBlock">
+
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="400" ></Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="TextBox">
+
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Style.Triggers>
+                <Trigger Property="IsReadOnly" Value="True">
+                    <Setter Property="Background" Value="#FFC5BEBE"/>
+                </Trigger>
+                <Trigger Property="IsReadOnly" Value="False">
+                    <Setter Property="Background" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+
+
+
+    </Window.Resources>
+
+    <Canvas Background="#FFA6C3E4" Height="1000" >
+        
+        
+        
+        
+        
+       </Canvas>
+    
+</Window>

@@ -14,6 +14,7 @@ namespace EntityLayer
         [Key]
         public string BokningsID { get; set; }
         public float UtnyttjadKredit { get; set; }
+        public bool Återbetalningsskydd { get; set; }
         public DateTime Ankomsttid { get; set; }
         public DateTime Avresetid { get; set; }
         public Användare AnvändareID { get; set; }
@@ -32,7 +33,7 @@ namespace EntityLayer
         {
 
         }
-        public Bokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID)
+        public Bokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID, bool återbetalningsskydd = false)
         {
             _antalBokningar++;
             BokningsID = "B" + _antalBokningar.ToString("000000");
@@ -44,6 +45,8 @@ namespace EntityLayer
             FacilitetID = facilitetID;
             UtrustningID = utrustningID;
             AktivitetID = aktivitetID;
+            Återbetalningsskydd = återbetalningsskydd;
+
         }
 
         public override string ToString()

@@ -122,7 +122,7 @@
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding ErrorMessage2}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="614" Canvas.Top="131" HorizontalAlignment="Left" VerticalAlignment="Top" />
-
+        
                 <RadioButton Content="Lägenhet" Canvas.Left="80" Canvas.Top="169" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding Lägenhetradiobutton}"/>
                 <RadioButton Content="Camping" Canvas.Left="190" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding Campingradiobutton}"/>
                 <RadioButton Content="Konferens" Canvas.Left="300" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding Konferensradiobutton}"/>

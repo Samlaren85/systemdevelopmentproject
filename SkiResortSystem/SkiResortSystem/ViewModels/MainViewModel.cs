@@ -427,22 +427,32 @@ namespace SkiResortSystem.ViewModels
            
             if (Lägenhetradiobutton)
             {
-                bool success = int.TryParse(antalPersonerTillBoende, out int x);
-                if (success)
+                if (SelectedCustomer == null)
                 {
-                    FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
-                    foreach (Facilitet f in FacilitetsSökning)
-                    {
-                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
-                    }
-
+                    ErrorMessage = "Du behöver välja kund!";
+                   
 
                 }
                 else
                 {
-                    ErrorMessage2 = string.Empty;
-                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                    bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                    if (success)
+                    {
+                        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                        foreach (Facilitet f in FacilitetsSökning)
+                        {
+                            Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                        }
+
+
+                    }
+                    else
+                    {
+                        ErrorMessage2 = string.Empty;
+                        ErrorMessage2 = "Du behöver lägga till antal kunder";
+                    }
                 }
+           
             }
 
             if (Konferensradiobutton)

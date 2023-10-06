@@ -24,5 +24,7 @@ namespace SkiResortSystem.Views
         {
             InitializeComponent();
         }
+
+        
     }
 }

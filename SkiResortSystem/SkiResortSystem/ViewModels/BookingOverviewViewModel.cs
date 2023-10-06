@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using EntityLayer;
+using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using SkiResortSystem.Services;
 using System;
@@ -8,18 +9,31 @@ using System.Linq;
 using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace SkiResortSystem.ViewModels
 {
     class BookingOverviewViewModel : ObservableObject
     {
+        private string kundPresentation;
+        public string KundPresentation
+        {
+            get { return kundPresentation; }
+            set { kundPresentation = value; OnPropertyChanged(); }
+        }
+
+
 
 
         private Kund kund;
         public Kund Kund
         {
             get { return kund; }
-            set { kund = value; OnPropertyChanged(); }
+            set { 
+                kund = value;
+                kundPresentation = kund.ToString().Split(" (")[0];
+                OnPropertyChanged(); }
         }
 
        
@@ -51,6 +65,23 @@ namespace SkiResortSystem.ViewModels
             get { return bokningsnummer; }
             set { bokningsnummer = value; OnPropertyChanged(); }
         }
+
+        private Bokning bokning;
+        public Bokning Bokning
+        {
+            get { return bokning; }
+            set { bokning = value; OnPropertyChanged(); }
+        }
+
+        private bool avbetalningsskydd;
+        public bool Avbetalningsskydd
+        {
+            get { return avbetalningsskydd; }
+            set { avbetalningsskydd = value; OnPropertyChanged(); }
+        }
+
+
+
 
         private int antalPersoner;
         public int AntalPersoner
@@ -84,6 +115,8 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+
+
         private DateTime avresa;
         public DateTime Avresa
         {
@@ -103,6 +136,25 @@ namespace SkiResortSystem.ViewModels
             return b;
         }
 
+        private ICommand saveCustomer = null!;
+
+        public ICommand SaveCustomer => saveCustomer ??= saveCustomer = new RelayCommand<ICloseable>((view) =>
+        {
+            BookingController bc = new BookingController();
+            Bokning.Återbetalningsskydd = Avbetalningsskydd;
+            bc.SparaBokning(Bokning);
+            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
+            CloseCommand.Execute(view);
+
+        });
+
+        private ICommand closeCommand = null!;
+
+        public ICommand CloseCommand => closeCommand ??= closeCommand = new RelayCommand<ICloseable>((view) =>
+        {
+            view.Close();
+
+        });
 
         public BookingOverviewViewModel()
         {
@@ -130,7 +182,7 @@ namespace SkiResortSystem.ViewModels
 
             if (Valdfacilitet.LägenhetsID != null)
             {
-                Facilitetstyp = "Lägenhet, " + Valdfacilitet.LägenhetsID.LägenhetBenämning;
+                Facilitetstyp = "Lägenhet, " + Valdfacilitet.LägenhetsID.Lägenhetstorlek;
             }
             if (Valdfacilitet.CampingID != null)
             {
@@ -144,8 +196,8 @@ namespace SkiResortSystem.ViewModels
             {
                 Valdfacilitet
             };
-            Bokning b = SkapaBokning(Ankomst, Avresa, SessionController.LoggedIn, ValdKund, BokadFacilitet, null, null);
-            Bokningsnummer = b.BokningsID;
+            Bokning = SkapaBokning(Ankomst, Avresa, SessionController.LoggedIn, ValdKund, BokadFacilitet, null, null);
+            Bokningsnummer = Bokning.BokningsID;
 
         }
     }

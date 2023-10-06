@@ -9,6 +9,7 @@ using System.Windows.Input;
 using BusinessLayer;
 using DataLayer;
 using EntityLayer;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using SkiResortSystem.Services;
@@ -427,22 +428,32 @@ namespace SkiResortSystem.ViewModels
            
             if (Lägenhetradiobutton)
             {
-                bool success = int.TryParse(antalPersonerTillBoende, out int x);
-                if (success)
+                if (SelectedCustomer == null)
                 {
-                    FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
-                    foreach (Facilitet f in FacilitetsSökning)
-                    {
-                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
-                    }
-
+                    ErrorMessage = "Du behöver välja kund!";
+                   
 
                 }
                 else
                 {
-                    ErrorMessage2 = string.Empty;
-                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                    bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                    if (success)
+                    {
+                        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                        foreach (Facilitet f in FacilitetsSökning)
+                        {
+                            Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                        }
+
+
+                    }
+                    else
+                    {
+                        ErrorMessage2 = string.Empty;
+                        ErrorMessage2 = "Du behöver lägga till antal kunder";
+                    }
                 }
+           
             }
 
             if (Konferensradiobutton)
@@ -482,8 +493,8 @@ namespace SkiResortSystem.ViewModels
             }
         });
 
-        private List<string> visaBeläggning;
-        public List<string> VisaBeläggning
+        private IList<List<string>> visaBeläggning;
+        public IList<List<string>> VisaBeläggning
         {
             get { return visaBeläggning; }
             set { visaBeläggning = value; OnPropertyChanged(); }
@@ -527,7 +538,7 @@ namespace SkiResortSystem.ViewModels
         public bool BoendeKonferensbeläggningradiobutton
         {
             get { return boendekonferensbeläggningradiobutton; }
-            set { boendekonferensbeläggningradiobutton = value; OnPropertyChanged(); }
+            set { boendekonferensbeläggningradiobutton = value; VisaBeläggningen.Execute(true); OnPropertyChanged(); }
         }
 
         private bool utrustningbeläggningradiobutton;

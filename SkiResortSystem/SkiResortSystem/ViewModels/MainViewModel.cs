@@ -9,6 +9,7 @@ using System.Windows.Input;
 using BusinessLayer;
 using DataLayer;
 using EntityLayer;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using SkiResortSystem.Services;
@@ -492,8 +493,8 @@ namespace SkiResortSystem.ViewModels
             }
         });
 
-        private List<string> visaBeläggning;
-        public List<string> VisaBeläggning
+        private IList<List<string>> visaBeläggning;
+        public IList<List<string>> VisaBeläggning
         {
             get { return visaBeläggning; }
             set { visaBeläggning = value; OnPropertyChanged(); }
@@ -537,7 +538,7 @@ namespace SkiResortSystem.ViewModels
         public bool BoendeKonferensbeläggningradiobutton
         {
             get { return boendekonferensbeläggningradiobutton; }
-            set { boendekonferensbeläggningradiobutton = value; OnPropertyChanged(); }
+            set { boendekonferensbeläggningradiobutton = value; VisaBeläggningen.Execute(true); OnPropertyChanged(); }
         }
 
         private bool utrustningbeläggningradiobutton;

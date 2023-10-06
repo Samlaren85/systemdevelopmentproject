@@ -31,9 +31,9 @@ namespace BusinessLayer
         /// <summary>
         /// AddKonferenssal-metoden används för att lägga till en ny bokningsbar konferenssal i systemet. 
         /// </summary>
-        public Facilitet AddKonferenssal(string konferensBenämning, float facilitetspris)
+        public Facilitet AddKonferenssal(string konferensBenämning, float facilitetspris, int antalPersoner)
         {
-            Konferenssal konferenssal = new Konferenssal(konferensBenämning);
+            Konferenssal konferenssal = new Konferenssal(konferensBenämning, antalPersoner);
             unitOfWork.KonferenssalRepository.Add(konferenssal);
             Facilitet facilitet = new Facilitet(facilitetspris, konferenssal, null, null);
             unitOfWork.Save();
@@ -198,7 +198,7 @@ namespace BusinessLayer
         }
  #endregion
         
-        public List<string> VisaBeläggningen(DateTime franDatum, DateTime tillDatum, bool boende , bool utrustning, bool aktivitet)
+        public IList<List<string>> VisaBeläggningen(DateTime franDatum, DateTime tillDatum, bool boende , bool utrustning, bool aktivitet)
         {
             List<Facilitet> inaktuellaFaciliteter = new List<Facilitet>(); // Används som hjälp för filtrering
             IList<Facilitet> dataColumn2 = new List<Facilitet>();
@@ -247,49 +247,50 @@ namespace BusinessLayer
                 }
             }
             // Koden nedan hämtar datumen och parsar dessa till en gemensam variabel
-            string textFranDatum = string.Empty;
-           
-            franDatum = DateTime.Parse(textFranDatum);
+            //string textFranDatum = string.Empty;
 
-            string dataColumn1 = $"{textFranDatum}";
+            //textFranDatum = franDatum.ToShortDateString();
 
-            List<string> boendeColumnList1 = new List<string> {dataColumn1}; //Datum
+            //string dataColumn1;
 
+            List<string> DatumColumnList1 = new List<string>(); //Datum
+            // Någonting här blir tokigt, värdet blir alltid 7 (den period vi vill "lägga till")
             TimeSpan dateDifference = tillDatum - franDatum;
             int periodSlutdatum = (int)dateDifference.TotalDays;
           
             for (int i = 0; i < periodSlutdatum; i++)
             {
-                boendeColumnList1.Add(franDatum.AddDays(i).ToShortDateString());
+                DatumColumnList1.Add(franDatum.AddDays(i).ToShortDateString());
             }
 
-            IList<string> boendeColumnList2 = new List<string>(); //LGH1
-            IList<string> boendeColumnList3 = new List<string>(); // LGH2 
-            IList<string> boendeColumnList4 = new List<string>(); //Camping
-            IList<string> boendeColumnList5 = new List<string>(); //Konf1
-            IList<string> boendeColumnList6 = new List<string>(); //Konf2
+            List<string> LGH1ColumnList2 = new List<string>(); //LGH1
+            List<string> LGH2ColumnList3 = new List<string>(); // LGH2 
+            List<string> CampingColumnList4 = new List<string>(); //Camping
+            List<string> Konf1ColumnList5 = new List<string>(); //Konf1
+            List<string> Konf2ColumnList6 = new List<string>(); //Konf2
 
             // Denna foreach-loop används för att lägga samtliga listor som ska visas i tabellen inom boendemodulen/Visa beläggning i en gemensam lista.
-            foreach (string datum in boendeColumnList1)
+            foreach (string datum in DatumColumnList1)
             {
 
-                boendeColumnList2.Add(dataColumn2.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                boendeColumnList3.Add(dataColumn3.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                boendeColumnList4.Add(dataColumn4.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                boendeColumnList5.Add(dataColumn5.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                boendeColumnList6.Add(dataColumn6.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                LGH1ColumnList2.Add(dataColumn2.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                LGH2ColumnList3.Add(dataColumn3.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                CampingColumnList4.Add(dataColumn4.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                Konf1ColumnList5.Add(dataColumn5.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                Konf2ColumnList6.Add(dataColumn6.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
             }
 
             // columnData är det gemensamma lista som används för att hämta och presentera data i visa beläggnings fliken(boendemodulen)
-            List<string> columnData = new List<string>
+            IList<List<string>> columnData = new List<List<string>>
             {
-                boendeColumnList1.Count().ToString(),
-                boendeColumnList2.Count().ToString(),
-                boendeColumnList3.Count().ToString(),
-                boendeColumnList4.Count().ToString(),
-                boendeColumnList5.Count().ToString(),
-                boendeColumnList6.Count().ToString()
+                DatumColumnList1,
+                LGH1ColumnList2,
+                LGH2ColumnList3,
+                CampingColumnList4,
+                Konf1ColumnList5,
+                Konf2ColumnList6
             };
+            
 
             return columnData; //Hur ska denna faktiskt se ut?
             

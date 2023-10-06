@@ -17,7 +17,6 @@ namespace DataLayer
         public Repository<Grupplektion> GrupplektionRepository { get; private set; }
         public Repository<Konferenssal> KonferenssalRepository { get; private set; }
         public Repository<Lägenhet> LägenhetRepository { get; private set; }
-        public Repository<Paket> PaketRepository { get; private set; }
         public Repository<Privatkund> PrivatkundRepository { get; private set; }
         public Repository<Privatlektion> PrivatlektionRepository { get; private set; }
         public Repository<Roll> RollRepository { get; private set; }
@@ -27,7 +26,7 @@ namespace DataLayer
 
         public UnitOfWork()
         {
-            appDbContext =  AppDbContext.Instantiate();
+            appDbContext = AppDbContext.Instantiate();
             KundRepository = new Repository<Kund>(appDbContext);
             AktivitetRepository = new Repository<Aktivitet>(appDbContext);
             AnvändarRepository = new Repository<Användare>(appDbContext);
@@ -40,7 +39,6 @@ namespace DataLayer
             GrupplektionRepository = new Repository<Grupplektion>(appDbContext);
             KonferenssalRepository = new Repository<Konferenssal>(appDbContext);
             LägenhetRepository = new Repository<Lägenhet>(appDbContext);
-            PaketRepository = new Repository<Paket>(appDbContext);
             PrivatkundRepository = new Repository<Privatkund>(appDbContext);
             PrivatlektionRepository = new Repository<Privatlektion>(appDbContext);
             RollRepository = new Repository<Roll>(appDbContext);

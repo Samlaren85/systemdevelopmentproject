@@ -140,7 +140,8 @@ namespace DataLayer
                 }
                 SaveChanges();
             }
-            if (!Utrustningar.Any())
+            /* FUNGERAR INTE ATT SEEDA UTRUSTNING ÄNNU!!!!
+             * if (!Utrustningar.Any())
             {
                 for (int i = 0; i < 176; i++)
                 {
@@ -269,7 +270,7 @@ namespace DataLayer
                     else Utrustningar.Add(new Utrustning("S" + (i + 1).ToString("00"), "Skoter yamaha viking", 1000, "2 pers"));
                 }
                 SaveChanges();
-            }
+            }*/
         }
 
     }

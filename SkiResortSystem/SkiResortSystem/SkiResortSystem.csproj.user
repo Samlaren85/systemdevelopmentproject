@@ -31,7 +31,13 @@
     <Compile Update="Views\BookingOverview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ActivityOverview.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CustomerOverviewPrivate.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EquipmentOverview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\LoginWindow.xaml.cs">
@@ -63,7 +69,13 @@
     <Page Update="Views\BookingOverview.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\ActivityOverview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\CustomerOverviewPrivate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EquipmentOverview.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\LoginWindow.xaml">

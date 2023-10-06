@@ -32,7 +32,9 @@ namespace DataLayer
         private static bool _test = true;
         private static bool _reset = false;
 
-        public AppDbContext()
+        private static AppDbContext _instance = null!;
+
+        private AppDbContext()
         {
             if (_test && !_reset)
             {
@@ -41,6 +43,12 @@ namespace DataLayer
             }
             base.Database.EnsureCreated();
             Seed();
+        }
+
+        public static AppDbContext Instantiate()
+        {
+            if (_instance == null) _instance = new AppDbContext();
+            return _instance;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {

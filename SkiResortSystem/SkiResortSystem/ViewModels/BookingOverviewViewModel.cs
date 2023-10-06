@@ -22,11 +22,13 @@ namespace SkiResortSystem.ViewModels
             set { kund = value; OnPropertyChanged(); }
         }
 
+       
+
         private int antalNätter;
         public int AntalNätter
         {
             get { return antalNätter; }
-            set { antalNätter = Avresa.Day-Ankomst.Day; OnPropertyChanged(); }
+            set { antalNätter = value; OnPropertyChanged(); }
         }
 
         private float utnyttjadKredit;
@@ -106,21 +108,25 @@ namespace SkiResortSystem.ViewModels
         {
 
         }
-        public BookingOverviewViewModel(Kund ValdKund, Facilitet Valdfacilitet, DateTime Valdavresetid, DateTime Valdankomsttid, int ValdaAntalPersoner)
-        {
-            if (ValdKund.Privatkund != null)
-            {
-                Kund = ValdKund;
-
-            }
-            if (ValdKund.Företagskund != null)
-            {
-                Kund = ValdKund;
-            }
+        public BookingOverviewViewModel(Kund ValdKund, Facilitet Valdfacilitet, DateTime Valdavresetid, DateTime Valdankomsttid, int ValdaAntalPersoner,float Facilitetspris)
+        { 
+            Kund = ValdKund;
             AntalPersoner = ValdaAntalPersoner;
             Ankomst = Valdankomsttid;
             Avresa = Valdavresetid;
-          
+            TimeSpan tidsspann = Avresa - Ankomst;
+            AntalNätter = tidsspann.Days;
+            Totalpris = Facilitetspris;
+            if(AntalNätter == 0)
+            {
+                PrisPerNatt = 0;
+            }
+            else
+            {
+                PrisPerNatt = Totalpris / AntalNätter;
+                PrisPerNatt = (float)Math.Round(PrisPerNatt, 2);
+            }
+
 
             if (Valdfacilitet.LägenhetsID != null)
             {

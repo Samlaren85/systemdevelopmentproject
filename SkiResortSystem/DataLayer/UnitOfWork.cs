@@ -27,7 +27,7 @@ namespace DataLayer
 
         public UnitOfWork()
         {
-            appDbContext = new AppDbContext();
+            appDbContext =  AppDbContext.Instantiate();
             KundRepository = new Repository<Kund>(appDbContext);
             AktivitetRepository = new Repository<Aktivitet>(appDbContext);
             AnvändarRepository = new Repository<Användare>(appDbContext);

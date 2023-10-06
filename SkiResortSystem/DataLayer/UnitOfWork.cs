@@ -22,8 +22,7 @@ namespace DataLayer
         public Repository<Roll> RollRepository { get; private set; }
         public Repository<Skidskola> SkidskolaRepository { get; private set; }
         public Repository<Utrustning> UtrustningRepository { get; private set; }
-        public Repository<Utrustningsstorlek> UtrustningsstorlekRepository { get; private set; }
-
+       
         public UnitOfWork()
         {
             appDbContext = AppDbContext.Instantiate();
@@ -44,8 +43,7 @@ namespace DataLayer
             RollRepository = new Repository<Roll>(appDbContext);
             SkidskolaRepository = new Repository<Skidskola>(appDbContext);
             UtrustningRepository = new Repository<Utrustning>(appDbContext);
-            UtrustningsstorlekRepository = new Repository<Utrustningsstorlek>(appDbContext);
-
+           
         }
         public void Save()
         {

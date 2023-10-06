@@ -9,6 +9,7 @@ using System.Windows.Input;
 using BusinessLayer;
 using DataLayer;
 using EntityLayer;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using SkiResortSystem.Services;
@@ -270,6 +271,8 @@ namespace SkiResortSystem.ViewModels
             get { return selectedCustomer; }
             set
             {
+                if (selectedCustomer == value) return; // Lägg till den här raden för att undvika oändlig loop
+
 
                 if (value != null)
                 {
@@ -425,22 +428,32 @@ namespace SkiResortSystem.ViewModels
            
             if (Lägenhetradiobutton)
             {
-                bool success = int.TryParse(antalPersonerTillBoende, out int x);
-                if (success)
+                if (SelectedCustomer == null)
                 {
-                    FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
-                    foreach (Facilitet f in FacilitetsSökning)
-                    {
-                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
-                    }
-
+                    ErrorMessage = "Du behöver välja kund!";
+                   
 
                 }
                 else
                 {
-                    ErrorMessage2 = string.Empty;
-                    ErrorMessage2 = "Du behöver lägga till antal kunder";
+                    bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                    if (success)
+                    {
+                        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                        foreach (Facilitet f in FacilitetsSökning)
+                        {
+                            Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                        }
+
+
+                    }
+                    else
+                    {
+                        ErrorMessage2 = string.Empty;
+                        ErrorMessage2 = "Du behöver lägga till antal kunder";
+                    }
                 }
+           
             }
 
             if (Konferensradiobutton)
@@ -451,7 +464,7 @@ namespace SkiResortSystem.ViewModels
                     FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
                     foreach (Facilitet f in FacilitetsSökning)
                     {
-                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
                     }
                 }
                 else
@@ -469,7 +482,7 @@ namespace SkiResortSystem.ViewModels
                     FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
                     foreach(Facilitet f in FacilitetsSökning)
                     {
-                        f.Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
+                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
                     }
                 }
                 else
@@ -480,8 +493,8 @@ namespace SkiResortSystem.ViewModels
             }
         });
 
-        private List<string> visaBeläggning;
-        public List<string> VisaBeläggning
+        private IList<List<string>> visaBeläggning;
+        public IList<List<string>> VisaBeläggning
         {
             get { return visaBeläggning; }
             set { visaBeläggning = value; OnPropertyChanged(); }
@@ -510,11 +523,22 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+        private float facilitetspris;
+        public float Facilitetspris
+        {
+            get { return facilitetspris; }
+            set
+            {
+                facilitetspris = value;
+                OnPropertyChanged();
+            }
+        }
+
         private bool boendekonferensbeläggningradiobutton;
         public bool BoendeKonferensbeläggningradiobutton
         {
             get { return boendekonferensbeläggningradiobutton; }
-            set { boendekonferensbeläggningradiobutton = value; OnPropertyChanged(); }
+            set { boendekonferensbeläggningradiobutton = value; VisaBeläggningen.Execute(true); OnPropertyChanged(); }
         }
 
         private bool utrustningbeläggningradiobutton;
@@ -603,7 +627,7 @@ namespace SkiResortSystem.ViewModels
                 if (SelectedCustomer != null)
                 {
                     int.TryParse(antalPersonerTillBoende, out int antalpersoner);
-                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner);
+                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner, Facilitetspris);
                     windowService.ShowDialog(bokningsöversikt);
                 }
             });

@@ -14,19 +14,26 @@ namespace EntityLayer
         [Key]
         public string BokningsID { get; set; }
         public float UtnyttjadKredit { get; set; }
+        public bool Återbetalningsskydd { get; set; }
         public DateTime Ankomsttid { get; set; }
         public DateTime Avresetid { get; set; }
         public Användare AnvändareID { get; set; }
         public Kund KundID { get; set; }
+
+        [ForeignKey("FacilitetsID")]
         public List<Facilitet> FacilitetID { get; set; }
-        public List<Utrustning>? UtrustningID { get; set; }
-        public List<Aktivitet>? AktivitetID{ get; set; }
+       
+        [ForeignKey("UtrustningsID")]
+        public List<Utrustning> UtrustningID { get; set; }
+
+        [ForeignKey("AktivitetsID")]
+        public List<Aktivitet> AktivitetID{ get; set; }
 
         public Bokning()
         {
 
         }
-        public Bokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID)
+        public Bokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID, bool återbetalningsskydd = false)
         {
             _antalBokningar++;
             BokningsID = "B" + _antalBokningar.ToString("000000");
@@ -38,6 +45,8 @@ namespace EntityLayer
             FacilitetID = facilitetID;
             UtrustningID = utrustningID;
             AktivitetID = aktivitetID;
+            Återbetalningsskydd = återbetalningsskydd;
+
         }
 
         public override string ToString()

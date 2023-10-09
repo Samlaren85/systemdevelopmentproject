@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara" FontSize="13">
+             d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara">
 
     <TabControl TabStripPlacement="Left" Background="#FFA6C3E4">
         <TabControl.Resources>
@@ -17,6 +17,7 @@
                 <Setter Property="BorderBrush" Value="White"/>
                 <Setter Property="Height" Value="50" />
                 <Setter Property="Width" Value="192" />
+                <Setter Property="FontSize" Value="13"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="TabItem">
@@ -66,10 +67,15 @@
 
             <Style TargetType="DataGridCell">
 
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#FF5E8EC2"/>
+                    </Trigger>
+
+                </Style.Triggers>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Height" Value="43"/>
-
             </Style>
 
             <Style TargetType="DataGridColumnHeader">
@@ -123,7 +129,7 @@
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding ErrorMessage2}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="614" Canvas.Top="131" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        
+
                 <RadioButton Content="Lägenhet" Canvas.Left="80" Canvas.Top="169" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding Lägenhetradiobutton}"/>
                 <RadioButton Content="Camping" Canvas.Left="190" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding Campingradiobutton}"/>
                 <RadioButton Content="Konferens" Canvas.Left="300" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding Konferensradiobutton}"/>
@@ -180,7 +186,7 @@
             <Canvas Height="auto" Width="1760">
 
 
-                <DataGrid  Width="856" Height="410" Background="White" AutoGenerateColumns="False"  BorderThickness="2" Canvas.Left="80" Canvas.Top="149" ItemsSource="{Binding }" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <DataGrid  Width="956" Height="410" Background="White" AutoGenerateColumns="False"  BorderThickness="2" Canvas.Left="80" Canvas.Top="149" ItemsSource="{Binding }" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Namn" Width="*" ></DataGridTextColumn>
                         <DataGridTextColumn Header="Ankomstdatum" Width="*"></DataGridTextColumn>
@@ -190,15 +196,15 @@
                         <DataGridTextColumn Header="Typ " Width="*"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                
-                    
-                
+
+
+
                 <TextBox Canvas.Top="85" Canvas.Left="80" Width="293" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                
+
                 <TextBlock Text="Förnamn/Efternamn/Bokningsnummer" Foreground="Black" Canvas.Left="80" Canvas.Top="55" />
                 <TextBlock Text="SÖK BOKNING/KONFERENS" Foreground="Black" Canvas.Left="80" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                
-          
+
+
                 <DatePicker Canvas.Top="85" Canvas.Left="530" />
                 <DatePicker Canvas.Top="85" Canvas.Left="750" />
                 <TextBlock Text="Ankomstdatum" Canvas.Top="55" Canvas.Left="530"/>
@@ -223,16 +229,16 @@
                         <DataGridTextColumn Header="KONF1" Width="*" ></DataGridTextColumn>
                         <DataGridTextColumn Header="KONF2" Width="*" ></DataGridTextColumn>
                     </DataGrid.Columns>
-                        <DataGrid.RowDetailsTemplate>
-                            <DataTemplate>
-                                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding}"></DataGridTextColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                        
-                            </DataTemplate>
-                        </DataGrid.RowDetailsTemplate>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
                     <!--<DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <DataGrid ItemsSource="{Binding VisaBeläggning}" AutoGenerateColumns="False">
@@ -249,10 +255,10 @@
                     </DataGrid.RowDetailsTemplate>-->
 
                 </DataGrid>
-                 
+
                 <TextBlock Text="Datum:" Foreground="Black" Canvas.Left="80" Canvas.Top="58" />
                 <DatePicker  Canvas.Top="60" Canvas.Left="150" SelectedDate="{Binding BeläggningAnkomsttid}" />
-                
+
                 <TextBlock Text="Tillgängligt per datum" Foreground="Black" Canvas.Left="80" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <RadioButton Content="Boende/Konferens" IsChecked="{Binding BoendeKonferensbeläggningradiobutton}" Canvas.Left="524" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <RadioButton Content="Utrustning" IsChecked="{Binding UtrustningBeläggningradiobutton}" Canvas.Left="722" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -263,8 +269,8 @@
         </TabItem>
 
         <TabItem Header="PRISLISTA">
-            
-            
+
+
         </TabItem>
 
     </TabControl>

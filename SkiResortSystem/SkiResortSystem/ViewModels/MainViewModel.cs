@@ -449,12 +449,7 @@ namespace SkiResortSystem.ViewModels
                     bool success = int.TryParse(antalPersonerTillBoende, out int x);
                     if (success)
                     {
-                        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
-                        foreach (Facilitet f in FacilitetsSökning)
-                        {
-                            Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
-                        }
-
+                        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);                  
 
                     }
                     else
@@ -472,10 +467,7 @@ namespace SkiResortSystem.ViewModels
                 if (success)
                 {
                     FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
-                    foreach (Facilitet f in FacilitetsSökning)
-                    {
-                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
-                    }
+                 
                 }
                 else
                 {
@@ -490,10 +482,7 @@ namespace SkiResortSystem.ViewModels
                 if (success)
                 {
                     FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
-                    foreach(Facilitet f in FacilitetsSökning)
-                    {
-                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
-                    }
+                  
                 }
                 else
                 {
@@ -583,13 +572,13 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private float facilitetspris;
-        public float Facilitetspris
+        private float facilitetspriset;
+        public float Facilitetspriset
         {
-            get { return facilitetspris; }
+            get { return facilitetspriset; }
             set
             {
-                facilitetspris = value;
+                facilitetspriset = value;
                 OnPropertyChanged();
             }
         }
@@ -677,7 +666,7 @@ namespace SkiResortSystem.ViewModels
             get { return selectedFacility; }
             set
             {
-                selectedFacility = value;
+                selectedFacility = value; Facilitetspriset = value.Facilitetspris * ((100 - SelectedCustomer.Rabatt)/100);
                 OnPropertyChanged();
             }
         }
@@ -689,7 +678,7 @@ namespace SkiResortSystem.ViewModels
                 if (SelectedCustomer != null)
                 {
                     int.TryParse(antalPersonerTillBoende, out int antalpersoner);
-                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner, Facilitetspris);
+                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner, Facilitetspriset);
                     windowService.ShowDialog(bokningsöversikt);
                 }
             });
@@ -703,9 +692,8 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 searchBooking = value;
-                SearchBookings(); 
-                OnPropertyChanged();
-            }
+                SearchBookings();
+                OnPropertyChanged(SearchBooking);            }
         }
 
         private Bokning selectedBooking;
@@ -746,24 +734,37 @@ namespace SkiResortSystem.ViewModels
 
         public void SearchBookings()
         {
+            if(bookingResults != null)
+            {
+                BookingResults.Clear();
+            }
+
+            NoBookingResult = string.Empty;
+
             BookingController bc = new BookingController();
             try
-            {
-                NoBookingResult = string.Empty;
-
-                BookingResults = bc.FindMasterBooking(SearchBooking);
-                if (searchResults.Count < 1)
+            { 
+                if(!(Ankomsttid == DateTime.Today && Avresetid == DateTime.Today))
+                {
+                    BookingResults = bc.FindMasterBooking(SearchBooking, Ankomsttid, Avresetid);
+                }
+                else
+                {
+                    BookingResults = bc.FindMasterBooking(SearchBooking);
+                }
+                if (BookingResults.Count < 1)
                 {
                     NoBookingResult = "Ingen bokning hittades";
+                    BookingResults.Clear();
                 }
-               
             }
             catch (Exception ex)
             {
                 NoBookingResult = "Ingen bokning hittades, " + ex.Message;
-                SearchResults = new List<Kund>();
+                BookingResults.Clear();
             }
         }
+        
 
         public void SearchActivities()
         {

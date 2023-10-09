@@ -230,34 +230,9 @@ namespace BusinessLayer
                 dataColumn5 = FindLedigaFaciliteter(facilitetsTyp, 50);
                 dataColumn6 = FindLedigaFaciliteter(facilitetsTyp, 20);
 
-                /*foreach (Facilitet facilitet in dataColumn5)
-                {
-                    if (facilitet.KonferensID.KonferensBenämning.Equals("Liten"))
-                    {
-                        inaktuellaFaciliteter.Add(facilitet);
-                    }
-                    dataColumn5.Except(inaktuellaFaciliteter).ToList();
-                    inaktuellaFaciliteter.Clear();
-                }
-
-                foreach (Facilitet facilitet in dataColumn6)
-                {
-                    if (facilitet.KonferensID.KonferensBenämning == "Stor")
-                    {
-                        inaktuellaFaciliteter.Add(facilitet);
-                    }
-                    dataColumn6.Except(inaktuellaFaciliteter).ToList();
-                    inaktuellaFaciliteter.Clear();
-                }*/
             }
-            // Koden nedan hämtar datumen och parsar dessa till en gemensam variabel
-            //string textFranDatum = string.Empty;
-
-            //textFranDatum = franDatum.ToShortDateString();
-
-            //string dataColumn1;
-
-            List<string> DatumColumnList1 = new List<string>(); //Datum
+            
+            List<string> DatumColumnList1 = new List<string>();
             
             TimeSpan dateDifference = tillDatum - franDatum;
             int periodSlutdatum = (int)dateDifference.TotalDays;

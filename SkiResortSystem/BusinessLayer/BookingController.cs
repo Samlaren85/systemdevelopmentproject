@@ -22,8 +22,6 @@ namespace BusinessLayer
         public Bokning CreateBokning(DateTime ankomsttid, DateTime avresetid, Användare användarID, Kund kundID, List<Facilitet> facilitetsID, List<Utrustning> utrustningID, List<Aktivitet> AktivitetID)
         {
             Bokning bokning = new Bokning(ankomsttid, avresetid, användarID, kundID, facilitetsID, utrustningID, AktivitetID);
-            unitOfWork.BokningsRepository.Add(bokning);
-            unitOfWork.Save();
             return bokning;
         }
         public void SparaBokning(Bokning bokning)
@@ -35,7 +33,7 @@ namespace BusinessLayer
 
         public IList<Bokning> FindMasterBooking(string searchString)
         {
-            return unitOfWork.BokningsRepository.Find(b => b.BokningsID.Contains(searchString) || b.KundID.Privatkund.Namn().Contains(searchString) || b.KundID.Företagskund.Företagsnamn.Contains(searchString), x => x.KundID, x => x.KundID.Företagskund, x => x.KundID.Företagskund);
+            return unitOfWork.BokningsRepository.Find(b => b.BokningsID.Contains(searchString, StringComparison.OrdinalIgnoreCase) || b.KundID.Privatkund.Namn().Contains(searchString, StringComparison.OrdinalIgnoreCase) || b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase), x => x.KundID, x => x.KundID.Företagskund, x => x.KundID.Företagskund);
         }
 
     }

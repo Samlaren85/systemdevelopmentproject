@@ -15,7 +15,7 @@
         <Style TargetType="TextBlock">
 
             <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="400" ></Setter>
+            <Setter Property="Width" Value="Auto" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
@@ -38,7 +38,7 @@
 
     <Canvas  Background="#FFA6C3E4" Height="1000" >
 
-        <TextBlock Text="{Binding Rubrik}" FontSize="20" Canvas.Left="128" Canvas.Top="42" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding Rubrik}" FontSize="20" Canvas.Left="128" Canvas.Top="42" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBlock Text="Personnummer" Canvas.Left="128" Canvas.Top="125" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
 
@@ -103,6 +103,7 @@
 
 
         <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="945" Canvas.Top="475" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="945" Canvas.Top="535" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}"/>
+        <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="785" Canvas.Top="535" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}"/>
+        <Button Content="STÄNG" Height="50" Width="130"  Canvas.Left="945" Canvas.Top="535" Foreground="White" BorderBrush="White" FontSize="20" Background="#FF5e8ec2"  />
     </Canvas>
 </Window>

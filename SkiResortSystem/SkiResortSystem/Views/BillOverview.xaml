@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="Företagskund" Height="auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">
+        Title="BillOverview" Height="auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">
 
-        <Window.Resources>
+    <Window.Resources>
         <Style TargetType="TextBlock">
 
             <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="400" ></Setter>
+            <Setter Property="Width" Value="Auto" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
@@ -30,16 +30,112 @@
 
         </Style>
 
+        <Style TargetType="DataGridCell">
+
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Height" Value="43"/>
+
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#FF5e8ec2"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
 
 
     </Window.Resources>
+    <Canvas  Background="#FFA6C3E4" Height="1000" >
 
-    <Canvas Background="#FFA6C3E4" Height="1000" >
-        
-        
-        
-        
-        
-       </Canvas>
-    
+        <TextBlock Text="Faktura" FontSize="20" FontWeight="Bold" Canvas.Left="128" Canvas.Top="30" />
+
+
+        <TextBlock Text="Personnummer" Canvas.Left="128" Canvas.Top="125" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+
+        <TextBlock Text="Förnamn" Canvas.Left="128" Canvas.Top="205" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+
+
+
+        <TextBlock Text="Efternamn" Canvas.Left="467" Canvas.Top="205" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+
+
+
+        <TextBlock Text="Gatuadress" Canvas.Left="128" Canvas.Top="285" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextBlock Text="Postort" Canvas.Left="467" Canvas.Top="365" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+
+
+
+
+        <TextBlock Text="Pris" Canvas.Left="128" Canvas.Top="525" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+
+
+
+        <TextBlock Text="Postnummer" Canvas.Left="128" Canvas.Top="365" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+
+
+
+        <TextBlock Text="Förfallodatum" Canvas.Left="128" Canvas.Top="445" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+
+
+        <TextBox Canvas.Left="128" Canvas.Top="155" Width="238" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="128" Canvas.Top="235" Width="263" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="467" Canvas.Top="236" Width="286" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="128" Canvas.Top="315" Width="374" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="128" Canvas.Top="395" Width="184" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="467" Canvas.Top="395" Width="143" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="128" Canvas.Top="475" Width="130" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="128" Canvas.Top="555" Width="130" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+
+
+
+
+
+
+
+        <Button Content="STÄNG" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="ARKIVERA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="SKRIV UT" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="990" Canvas.Top="555" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <TextBlock Text="FAKTURAÖVERSIKT" Canvas.Left="1020" Canvas.Top="79" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+        <DataGrid Background="White" Width="308" Height="330"  BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
+          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="950" Canvas.Top="130">
+
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Artikel" Width="3*"/>
+                <DataGridTextColumn Header="Pris" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
+    </Canvas>
+
+
 </Window>

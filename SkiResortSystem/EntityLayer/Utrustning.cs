@@ -13,12 +13,12 @@ namespace EntityLayer
         public string UtrustningsID { get; set; }
         public string UtrustningsBenämning { get; set; }
         public float Pris { get; set; }
-        public Utrustningsstorlek Storlek { get; set; }
+        public string Storlek { get; set; }
         public Utrustning()
         {
             
         }
-        public Utrustning(string utrustningsID, string utrustningsBenämning, float pris, Utrustningsstorlek storlek)
+        public Utrustning(string utrustningsID, string utrustningsBenämning, float pris, string storlek)
         {
             UtrustningsID = utrustningsID;
             UtrustningsBenämning = utrustningsBenämning;

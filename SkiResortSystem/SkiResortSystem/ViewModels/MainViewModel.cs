@@ -304,6 +304,16 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string errorMessage3;
+        public string ErrorMessage3
+        {
+            get { return errorMessage3; }
+            set
+            {
+                errorMessage3 = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void SearchCustomers()
         {
@@ -491,6 +501,10 @@ namespace SkiResortSystem.ViewModels
                     ErrorMessage2 = "Du behöver lägga till antal kunder";
                 }
             }
+            if(Campingradiobutton == false && Konferensradiobutton == false && Lägenhetradiobutton == false) 
+            {
+                ErrorMessage3 = "Du behöver välja facilitetstyp";
+            }
         });
 
 
@@ -504,7 +518,7 @@ namespace SkiResortSystem.ViewModels
                     visaBeläggning = value;
                     // Överför listan för att skapa rader i tabellen av de inre listorna.
                     ÖverfördVisaBeläggning = Överförd(visaBeläggning);
-                    OnPropertyChanged(nameof(visaBeläggning));
+                    OnPropertyChanged(nameof(VisaBeläggning));
                     OnPropertyChanged(nameof(ÖverfördVisaBeläggning));
                 }
                 visaBeläggning = value; OnPropertyChanged(); }
@@ -591,14 +605,14 @@ namespace SkiResortSystem.ViewModels
         public bool UtrustningBeläggningradiobutton
         {
             get { return utrustningbeläggningradiobutton; }
-            set { utrustningbeläggningradiobutton = value; OnPropertyChanged(); }
+            set { utrustningbeläggningradiobutton = value; VisaBeläggningen.Execute(true); OnPropertyChanged(); }
         }
 
         private bool aktivitetbeläggningradiobutton;
         public bool Aktivitetbeläggningradiobutton
         {
             get { return aktivitetbeläggningradiobutton; }
-            set { aktivitetbeläggningradiobutton = value; OnPropertyChanged(); }
+            set { aktivitetbeläggningradiobutton = value; VisaBeläggningen.Execute(true); OnPropertyChanged(); }
         }
 
         
@@ -614,14 +628,14 @@ namespace SkiResortSystem.ViewModels
             }
 
 
-            if (UtrustningBeläggningradiobutton)
+            else if (UtrustningBeläggningradiobutton)
             {
                 {
                     VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, true, false);
                 }
             }
 
-            if (Aktivitetbeläggningradiobutton)
+            else if (Aktivitetbeläggningradiobutton)
             {
                 {
                     VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, false, true);
@@ -735,17 +749,14 @@ namespace SkiResortSystem.ViewModels
             BookingController bc = new BookingController();
             try
             {
-                ErrorMessage = string.Empty;
+                NoBookingResult = string.Empty;
 
                 BookingResults = bc.FindMasterBooking(SearchBooking);
                 if (searchResults.Count < 1)
                 {
                     NoBookingResult = "Ingen bokning hittades";
                 }
-                else
-                {
-                    SearchActivities();
-                }
+               
             }
             catch (Exception ex)
             {

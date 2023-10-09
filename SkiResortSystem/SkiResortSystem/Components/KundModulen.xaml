@@ -16,7 +16,8 @@
                     <Setter Property="BorderBrush" Value="White"/>
                     <Setter Property="Height" Value="50" />
                     <Setter Property="Width" Value="192" />
-                    <Setter Property="Template">
+                    <Setter Property="FontSize" Value="13"/>
+                <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="TabItem">
 
@@ -65,10 +66,15 @@
 
             <Style TargetType="DataGridCell">
 
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#FF5E8EC2"/>
+                    </Trigger>
+
+                </Style.Triggers>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Height" Value="43"/>
-                
             </Style>
 
             <Style TargetType="DataGridColumnHeader">
@@ -77,6 +83,7 @@
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
 
             </Style>
 
@@ -125,7 +132,7 @@
                             <DataGridTextColumn Header="Telefonnummer" Width="*" Binding="{Binding Telefonnummer}"/>
                             <DataGridTextColumn Header="E-post" Width="*" Binding="{Binding Epost}"/>
                         </DataGrid.Columns>
-
+                        
 
 
                     </DataGrid>

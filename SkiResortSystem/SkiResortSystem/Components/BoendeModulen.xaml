@@ -131,7 +131,6 @@
                 <TextBlock Text="{Binding ErrorMessage2}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="614" Canvas.Top="131" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding ErrorMessage3}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="195" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-
                 <RadioButton Content="Lägenhet" Canvas.Left="80" Canvas.Top="169" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding Lägenhetradiobutton}"/>
                 <RadioButton Content="Camping" Canvas.Left="190" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding Campingradiobutton}"/>
                 <RadioButton Content="Konferens" Canvas.Left="300" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding Konferensradiobutton}"/>
@@ -209,8 +208,8 @@
                 <TextBlock Text="SÖK BOKNING/KONFERENS" Foreground="Black" Canvas.Left="80" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
 
-                <DatePicker Canvas.Top="85" Canvas.Left="530" />
-                <DatePicker Canvas.Top="85" Canvas.Left="685" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <DatePicker Canvas.Top="85" Canvas.Left="530" SelectedDate="{Binding Ankomsttid}"/>
+                <DatePicker Canvas.Top="85" Canvas.Left="685" SelectedDate="{Binding Avresetid}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="Ankomstdatum" Canvas.Top="55" Canvas.Left="530"/>
                 <TextBlock Text="Avresedatum" Canvas.Top="55" Canvas.Left="685" HorizontalAlignment="Left" VerticalAlignment="Center"  />
 

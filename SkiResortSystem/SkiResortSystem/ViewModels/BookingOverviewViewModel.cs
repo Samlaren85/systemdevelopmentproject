@@ -148,6 +148,17 @@ namespace SkiResortSystem.ViewModels
 
         });
 
+        private ICommand stängTabort = null!;
+
+        public ICommand StängTabort => stängTabort ??= stängTabort = new RelayCommand<ICloseable>((view) =>
+        {
+            BookingController bc = new BookingController();
+            bc.RemoveBokning(Bokning);
+            CloseCommand.Execute(view);
+
+        });
+
+
         private ICommand closeCommand = null!;
 
         public ICommand CloseCommand => closeCommand ??= closeCommand = new RelayCommand<ICloseable>((view) =>
@@ -169,7 +180,7 @@ namespace SkiResortSystem.ViewModels
             Avresa = Valdavresetid;
             TimeSpan tidsspann = Avresa - Ankomst;
             AntalNätter = tidsspann.Days;
-            Totalpris = Facilitetspris;
+            Totalpris = (float)Math.Round(Facilitetspris, 2);
             if(AntalNätter == 0)
             {
                 PrisPerNatt = 0;

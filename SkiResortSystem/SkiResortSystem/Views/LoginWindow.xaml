@@ -13,6 +13,7 @@
         <vm:LoginViewModel/>
     </Window.DataContext>
 
+
     <Grid Background="#FFA6C3E4">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

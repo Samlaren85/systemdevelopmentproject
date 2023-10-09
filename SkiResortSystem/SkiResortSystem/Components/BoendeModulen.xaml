@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara" FontSize="13">
+             d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara">
 
     <TabControl TabStripPlacement="Left" Background="#FFA6C3E4">
         <TabControl.Resources>
@@ -17,6 +17,7 @@
                 <Setter Property="BorderBrush" Value="White"/>
                 <Setter Property="Height" Value="50" />
                 <Setter Property="Width" Value="192" />
+                <Setter Property="FontSize" Value="13"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="TabItem">
@@ -66,10 +67,15 @@
 
             <Style TargetType="DataGridCell">
 
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#FF5E8EC2"/>
+                    </Trigger>
+
+                </Style.Triggers>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Height" Value="43"/>
-
             </Style>
 
             <Style TargetType="DataGridColumnHeader">

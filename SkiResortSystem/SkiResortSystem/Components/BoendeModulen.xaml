@@ -223,25 +223,28 @@
             <Canvas Height="auto" Width="1760">
 
 
-                <DataGrid Name="BeläggningsData" Width="856" Height="410" Background="White" AutoGenerateColumns="False" ItemsSource ="{Binding VisaBeläggning, Mode=TwoWay}"   BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <DataGrid Name="BeläggningsData" Width="856" Height="410" Background="White" AutoGenerateColumns="False" ItemsSource ="{Binding ÖverfördVisaBeläggning, Mode=TwoWay}"   BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="DATUM" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="LGH1" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="LGH2" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="CAMPING" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="KONF1" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="KONF2" Width="*" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="DATUM" Width="*" Binding="{Binding [0] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="LGH1" Width="*" Binding="{Binding [1] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="LGH2" Width="*" Binding="{Binding [2] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="CAMPING" Width="*" Binding="{Binding [3] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="KONF1" Width="*" Binding="{Binding [4] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="KONF2" Width="*" Binding="{Binding [5] }" ></DataGridTextColumn>
                     </DataGrid.Columns>
-                    <DataGrid.RowDetailsTemplate>
-                        <DataTemplate>
-                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding}"></DataGridTextColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-
-                        </DataTemplate>
-                    </DataGrid.RowDetailsTemplate>
+                    
+                    
+                    
+                        <!--<DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding}"></DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                        
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>-->
                     <!--<DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <DataGrid ItemsSource="{Binding VisaBeläggning}" AutoGenerateColumns="False">

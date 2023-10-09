@@ -27,7 +27,7 @@ namespace EntityLayer
            
         
         
-        public Bokning BokningsRef { get; set; }
+        public Bokning? BokningsRef { get; set; }
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT
         public float Facilitetspris { get; set; }
         public Konferenssal? KonferensID { get; set; }

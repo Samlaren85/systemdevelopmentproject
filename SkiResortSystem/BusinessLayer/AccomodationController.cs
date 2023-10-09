@@ -148,7 +148,11 @@ namespace BusinessLayer
 
             foreach (Facilitet facilitet in faciliteter)
             {
-                if (facilitet.LägenhetsID.Bäddar >= antalPersoner)
+                if (facilitet.LägenhetsID != null &&facilitet.LägenhetsID.Bäddar < antalPersoner)
+                {
+                    inaktuellaFaciliteter.Add(facilitet);
+                }
+                if (facilitet.KonferensID != null &&facilitet.KonferensID.AntalPersoner < antalPersoner)
                 {
                     inaktuellaFaciliteter.Add(facilitet);
                 }
@@ -216,17 +220,17 @@ namespace BusinessLayer
             if (boende == true)
             {
                 string facilitetsTyp = "Lägenhet";
-                dataColumn3 = FindLedigaFaciliteter(facilitetsTyp, 5);
+                dataColumn3 = FindLedigaFaciliteter(facilitetsTyp, 6);
                 dataColumn2 = FindLedigaFaciliteter(facilitetsTyp, 4);
             }
 
             if (boende == true)
             {
                 string facilitetsTyp = "Konferenssal";
-                dataColumn5 = FindLedigaFaciliteter(facilitetsTyp);
-                dataColumn6 = FindLedigaFaciliteter(facilitetsTyp);
+                dataColumn5 = FindLedigaFaciliteter(facilitetsTyp, 50);
+                dataColumn6 = FindLedigaFaciliteter(facilitetsTyp, 20);
 
-                foreach (Facilitet facilitet in dataColumn5)
+                /*foreach (Facilitet facilitet in dataColumn5)
                 {
                     if (facilitet.KonferensID.KonferensBenämning.Equals("Liten"))
                     {
@@ -244,7 +248,7 @@ namespace BusinessLayer
                     }
                     dataColumn6.Except(inaktuellaFaciliteter).ToList();
                     inaktuellaFaciliteter.Clear();
-                }
+                }*/
             }
             // Koden nedan hämtar datumen och parsar dessa till en gemensam variabel
             //string textFranDatum = string.Empty;
@@ -254,7 +258,7 @@ namespace BusinessLayer
             //string dataColumn1;
 
             List<string> DatumColumnList1 = new List<string>(); //Datum
-            // Någonting här blir tokigt, värdet blir alltid 7 (den period vi vill "lägga till")
+            
             TimeSpan dateDifference = tillDatum - franDatum;
             int periodSlutdatum = (int)dateDifference.TotalDays;
           
@@ -263,21 +267,21 @@ namespace BusinessLayer
                 DatumColumnList1.Add(franDatum.AddDays(i).ToShortDateString());
             }
 
-            List<string> LGH1ColumnList2 = new List<string>(); //LGH1
-            List<string> LGH2ColumnList3 = new List<string>(); // LGH2 
+            List<string> LGH1ColumnList2 = new List<string>(); //LGH1 - liten
+            List<string> LGH2ColumnList3 = new List<string>(); // LGH2 - stor
             List<string> CampingColumnList4 = new List<string>(); //Camping
-            List<string> Konf1ColumnList5 = new List<string>(); //Konf1
-            List<string> Konf2ColumnList6 = new List<string>(); //Konf2
+            List<string> Konf1ColumnList5 = new List<string>(); //Konf1 -stor
+            List<string> Konf2ColumnList6 = new List<string>(); //Konf2 -liten
 
             // Denna foreach-loop används för att lägga samtliga listor som ska visas i tabellen inom boendemodulen/Visa beläggning i en gemensam lista.
             foreach (string datum in DatumColumnList1)
             {
-
-                LGH1ColumnList2.Add(dataColumn2.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                LGH2ColumnList3.Add(dataColumn3.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                CampingColumnList4.Add(dataColumn4.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                Konf1ColumnList5.Add(dataColumn5.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
-                Konf2ColumnList6.Add(dataColumn6.Count(f => (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum))).ToString());
+                // Om BokningsRef == null VID datum så läggs objektet till på samtliga platser(uppräkningen sker alltså) annars tas inte uppräkning med på de platser där värdet är annat än NULL
+                LGH1ColumnList2.Add(dataColumn2.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
+                LGH2ColumnList3.Add(dataColumn3.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
+                CampingColumnList4.Add(dataColumn4.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
+                Konf1ColumnList5.Add(dataColumn5.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
+                Konf2ColumnList6.Add(dataColumn6.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
             }
 
             // columnData är det gemensamma lista som används för att hämta och presentera data i visa beläggnings fliken(boendemodulen)

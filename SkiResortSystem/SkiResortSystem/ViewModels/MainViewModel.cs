@@ -493,13 +493,59 @@ namespace SkiResortSystem.ViewModels
             }
         });
 
+
         private IList<List<string>> visaBeläggning;
         public IList<List<string>> VisaBeläggning
         {
             get { return visaBeläggning; }
-            set { visaBeläggning = value; OnPropertyChanged(); }
+            set {
+                if (value != visaBeläggning)
+                {
+                    visaBeläggning = value;
+                    // Överför listan för att skapa rader i tabellen av de inre listorna.
+                    ÖverfördVisaBeläggning = Överförd(visaBeläggning);
+                    OnPropertyChanged(nameof(visaBeläggning));
+                    OnPropertyChanged(nameof(ÖverfördVisaBeläggning));
+                }
+                visaBeläggning = value; OnPropertyChanged(); }
         }
 
+        private IList<List<string>> överfördVisaBeläggning;
+
+        public IList<List<string>> ÖverfördVisaBeläggning
+        {
+            get { return överfördVisaBeläggning; }
+            set
+            {
+                if (value != överfördVisaBeläggning)
+                {
+                    överfördVisaBeläggning = value;
+                    OnPropertyChanged(nameof(ÖverfördVisaBeläggning));
+                }
+            }
+        }
+        private IList<List<string>> Överförd(IList<List<string>> source)
+        {
+            if (source == null || source.Count == 0)
+                return source;
+
+            int rowCount = source.Count;
+            int colCount = source[0].Count;
+
+            IList<List<string>> result = new List<List<string>>();
+
+            for (int col = 0; col < colCount; col++)
+            {
+                List<string> newRow = new List<string>();
+                for (int row = 0; row < rowCount; row++)
+                {
+                    newRow.Add(source[row][col]);
+                }
+                result.Add(newRow);
+            }
+
+            return result;
+        }
         private DateTime beläggningankomsttid = DateTime.Today;
         public DateTime BeläggningAnkomsttid
         {
@@ -512,7 +558,7 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private DateTime beläggningdatumperiod = DateTime.Today;
+        private DateTime beläggningdatumperiod = DateTime.Today.AddDays(7);
         public DateTime BeläggningDatumperiod
         {
             get { return beläggningdatumperiod; }
@@ -554,6 +600,8 @@ namespace SkiResortSystem.ViewModels
             get { return aktivitetbeläggningradiobutton; }
             set { aktivitetbeläggningradiobutton = value; OnPropertyChanged(); }
         }
+
+        
 
         private ICommand visaBeläggningen = null!;
         public ICommand VisaBeläggningen => visaBeläggningen ??= visaBeläggningen = new RelayCommand(() =>

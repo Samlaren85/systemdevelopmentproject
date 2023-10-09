@@ -147,14 +147,16 @@ namespace BusinessLayer
             List<Facilitet> inaktuellaFaciliteter = new List<Facilitet>();
 
             foreach (Facilitet facilitet in faciliteter)
-            {
-                if (facilitet.LägenhetsID != null &&facilitet.LägenhetsID.Bäddar < antalPersoner)
+            { 
+                if (facilitet.LägenhetsID != null && facilitet.LägenhetsID.Bäddar < antalPersoner)
                 {
                     inaktuellaFaciliteter.Add(facilitet);
                 }
-                if (facilitet.KonferensID != null &&facilitet.KonferensID.AntalPersoner < antalPersoner)
+                
+                if (facilitet.KonferensID != null && facilitet.KonferensID.AntalPersoner < antalPersoner)
                 {
                     inaktuellaFaciliteter.Add(facilitet);
+                    
                 }
             }
             return faciliteter.Except(inaktuellaFaciliteter).ToList();
@@ -220,18 +222,60 @@ namespace BusinessLayer
             if (boende == true)
             {
                 string facilitetsTyp = "Lägenhet";
-                dataColumn3 = FindLedigaFaciliteter(facilitetsTyp, 6);
+                dataColumn3 = FindLedigaFaciliteter(facilitetsTyp, 5);
+                foreach (Facilitet lägenhet in dataColumn3)
+                {
+                    if (lägenhet.LägenhetsID != null && lägenhet.LägenhetsID.Bäddar <= 4)
+                    {
+                        inaktuellaFaciliteter.Add(lägenhet);
+
+                    }
+                }
+                dataColumn3 = dataColumn3.Except(inaktuellaFaciliteter).ToList();
+                inaktuellaFaciliteter.Clear();
+
                 dataColumn2 = FindLedigaFaciliteter(facilitetsTyp, 4);
+                foreach (Facilitet lägenhet in dataColumn2)
+                {
+                    if (lägenhet.LägenhetsID != null && lägenhet.LägenhetsID.Bäddar >= 6)
+                    {
+                        inaktuellaFaciliteter.Add(lägenhet);
+
+                    }
+                }
+                dataColumn2 = dataColumn2.Except(inaktuellaFaciliteter).ToList();
+                inaktuellaFaciliteter.Clear();
+
             }
 
             if (boende == true)
             {
                 string facilitetsTyp = "Konferenssal";
                 dataColumn5 = FindLedigaFaciliteter(facilitetsTyp, 50);
+                foreach (Facilitet konferenssal in dataColumn5)
+                {
+                    if (konferenssal.KonferensID != null && konferenssal.KonferensID.AntalPersoner < 50)
+                    {
+                        inaktuellaFaciliteter.Add(konferenssal);
+                    }
+                }
+                dataColumn5 = dataColumn5.Except(inaktuellaFaciliteter).ToList();
+                inaktuellaFaciliteter.Clear();
+
                 dataColumn6 = FindLedigaFaciliteter(facilitetsTyp, 20);
+                foreach (Facilitet konferenssal in dataColumn6)
+                {
+                    if (konferenssal.KonferensID != null && konferenssal.KonferensID.AntalPersoner > 20)
+                    {
+                        inaktuellaFaciliteter.Add(konferenssal);
+                    }
+                }
+                dataColumn6 = dataColumn6.Except(inaktuellaFaciliteter).ToList();
+                inaktuellaFaciliteter.Clear();
+
 
             }
-            
+
             List<string> DatumColumnList1 = new List<string>();
             
             TimeSpan dateDifference = tillDatum - franDatum;

@@ -692,9 +692,8 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 searchBooking = value;
-                SearchBookings(); 
-                OnPropertyChanged();
-            }
+                SearchBookings();
+                OnPropertyChanged(SearchBooking);            }
         }
 
         private Bokning selectedBooking;
@@ -735,39 +734,34 @@ namespace SkiResortSystem.ViewModels
 
         public void SearchBookings()
         {
-            if (BookingResults != null)
+            if(bookingResults != null)
             {
                 BookingResults.Clear();
             }
+
             NoBookingResult = string.Empty;
 
             BookingController bc = new BookingController();
             try
-            {
-                
+            { 
                 if(!(Ankomsttid == DateTime.Today && Avresetid == DateTime.Today))
                 {
-                    
                     BookingResults = bc.FindMasterBooking(SearchBooking, Ankomsttid, Avresetid);
-
                 }
                 else
                 {
                     BookingResults = bc.FindMasterBooking(SearchBooking);
-
                 }
-
-
-                if (searchResults.Count < 1)
+                if (BookingResults.Count < 1)
                 {
                     NoBookingResult = "Ingen bokning hittades";
+                    BookingResults.Clear();
                 }
-               
             }
             catch (Exception ex)
             {
                 NoBookingResult = "Ingen bokning hittades, " + ex.Message;
-                SearchResults = new List<Kund>();
+                BookingResults.Clear();
             }
         }
         

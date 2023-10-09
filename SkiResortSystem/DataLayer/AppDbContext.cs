@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 
 namespace DataLayer
 {
@@ -75,6 +76,9 @@ namespace DataLayer
                 Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID == "R002")));
                 SaveChanges();
             }
+          
+
+
             if (!Kunder.Any())
             {
                 Privatkund pkund = new Privatkund("990106", "Börje", "Lundin");

@@ -15,7 +15,6 @@
         <Style TargetType="TextBlock">
 
             <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="400" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
@@ -79,9 +78,9 @@
                 Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="{Binding RemoveEnabled}"/>
 
         <Button Content="Checka Ut" Height="50" Width="130" FontSize="20" BorderBrush="White" 
-                Background="#FF5E8EC2" Foreground="Black" Command="{Binding SparaBokning}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="264" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                Background="#FF5E8EC2" Foreground="White" Command="{Binding SparaBokning}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="264" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Button Content="Checka In" Height="50" Width="130" FontSize="20" BorderBrush="White"
-                Background="#FF5E8EC2" Command="{Binding TaBortBokning}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="204" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="{Binding RemoveEnabled}"/>
+                Background="#FF5E8EC2" Command="{Binding TaBortBokning}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="204" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="{Binding RemoveEnabled}" Foreground="White"/>
 
 
         <DatePicker Canvas.Left="154" Canvas.Top="302" HorizontalAlignment="Center" VerticalAlignment="Top" SelectedDate="{Binding Ankomst}"/>
@@ -93,15 +92,7 @@
             </CheckBox.LayoutTransform>
         </CheckBox>
 
-
-
-
-
-
-
-
-
-
+        
 
     </Canvas>
 

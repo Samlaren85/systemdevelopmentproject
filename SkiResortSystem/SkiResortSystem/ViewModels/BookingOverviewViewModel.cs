@@ -156,6 +156,7 @@ namespace SkiResortSystem.ViewModels
 
         });
 
+
         public BookingOverviewViewModel()
         {
 

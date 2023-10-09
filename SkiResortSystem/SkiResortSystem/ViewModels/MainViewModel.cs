@@ -304,6 +304,16 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string errorMessage3;
+        public string ErrorMessage3
+        {
+            get { return errorMessage3; }
+            set
+            {
+                errorMessage3 = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void SearchCustomers()
         {
@@ -490,6 +500,10 @@ namespace SkiResortSystem.ViewModels
                     ErrorMessage2 = string.Empty;
                     ErrorMessage2 = "Du behöver lägga till antal kunder";
                 }
+            }
+            if(Campingradiobutton == false && Konferensradiobutton == false && Lägenhetradiobutton == false) 
+            {
+                ErrorMessage3 = "Du behöver välja facilitetstyp";
             }
         });
 
@@ -687,17 +701,14 @@ namespace SkiResortSystem.ViewModels
             BookingController bc = new BookingController();
             try
             {
-                ErrorMessage = string.Empty;
+                NoBookingResult = string.Empty;
 
                 BookingResults = bc.FindMasterBooking(SearchBooking);
                 if (searchResults.Count < 1)
                 {
                     NoBookingResult = "Ingen bokning hittades";
                 }
-                else
-                {
-                    SearchActivities();
-                }
+               
             }
             catch (Exception ex)
             {

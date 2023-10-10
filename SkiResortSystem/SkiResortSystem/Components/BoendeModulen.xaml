@@ -135,34 +135,6 @@
                         <DataGridTextColumn Header="KONF1" Width="*" Binding="{Binding [4] }" ></DataGridTextColumn>
                         <DataGridTextColumn Header="KONF2" Width="*" Binding="{Binding [5] }" ></DataGridTextColumn>
                     </DataGrid.Columns>
-                    
-                    
-                    
-                        <!--<DataGrid.RowDetailsTemplate>
-                            <DataTemplate>
-                                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding}"></DataGridTextColumn>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                        
-                            </DataTemplate>
-                        </DataGrid.RowDetailsTemplate>-->
-                    <!--<DataGrid.RowDetailsTemplate>
-                        <DataTemplate>
-                            <DataGrid ItemsSource="{Binding VisaBeläggning}" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="DATUM" Width="*" Binding="{Binding }"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="LGH1" Width="*" Binding="{Binding }"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="LGH2" Width="*" Binding="{Binding }"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="CAMPING" Width="*" Binding="{Binding }"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="KONF1" Width="*" Binding="{Binding }"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="KONF2" Width="*" Binding="{Binding }"></DataGridTextColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </DataTemplate>
-                    </DataGrid.RowDetailsTemplate>-->
-
                 </DataGrid>
 
                 <TextBlock Text="Datum:" Foreground="Black" Canvas.Left="80" Canvas.Top="58" />

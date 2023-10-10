@@ -637,7 +637,7 @@ namespace SkiResortSystem.ViewModels
         public ICommand CreateBooking => createBooking ??= createBooking = new RelayCommand(() =>
         {
             BookingController bc = new BookingController();
-            bc.CreateBokning(ankomsttid, avresetid, AnvändarID, KundID, FacilitetsID, UtrustningID, AktivitetID);
+            bc.CreateBokning(ankomsttid, avresetid, AnvändarID, KundID, FacilitetsID);
         });
 
 

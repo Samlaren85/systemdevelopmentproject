@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,9 @@ namespace EntityLayer
                 }
             } 
         }
+        [ForeignKey(nameof(Bokning))]
         public Bokning Bokning { get; set; }
+        [ForeignKey(nameof(Utrustning))]
         public Utrustning Utrustning { get; set; }
         public DateTime Hämtasut {  get; set; }
         public DateTime Lämnasin { get; set; }

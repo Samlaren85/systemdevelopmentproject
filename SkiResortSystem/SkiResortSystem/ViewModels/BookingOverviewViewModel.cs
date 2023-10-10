@@ -129,10 +129,10 @@ namespace SkiResortSystem.ViewModels
         }
         
 
-        public Bokning SkapaBokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID)
+        public Bokning SkapaBokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID)
         {
             BookingController bc = new BookingController();
-            Bokning b = bc.CreateBokning(ankomsttid, avresetid, användareID, kundID, facilitetID, null, null);
+            Bokning b = bc.CreateBokning(ankomsttid, avresetid, användareID, kundID, facilitetID);
             return b;
         }
 
@@ -208,7 +208,7 @@ namespace SkiResortSystem.ViewModels
             {
                 Valdfacilitet
             };
-            Bokning = SkapaBokning(Ankomst, Avresa, SessionController.LoggedIn, ValdKund, BokadFacilitet, null, null);
+            Bokning = SkapaBokning(Ankomst, Avresa, SessionController.LoggedIn, ValdKund, BokadFacilitet);
             Bokningsnummer = Bokning.BokningsID;
 
         }

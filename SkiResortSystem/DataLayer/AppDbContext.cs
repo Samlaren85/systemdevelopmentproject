@@ -64,14 +64,6 @@ namespace DataLayer
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Aktivitet>()
-                .HasMany(e => e.FacilitetID)
-                .WithMany(e => e.)
-                .HasForeignKey(e => e.);
-        }
-
         private void Seed()
         {
             if (!Roller.Any())

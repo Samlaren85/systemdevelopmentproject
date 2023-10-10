@@ -1,6 +1,7 @@
 ﻿using DataLayer;
 using EntityLayer;
 using Microsoft.Identity.Client;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BusinessLayer
 {
@@ -295,14 +297,15 @@ namespace BusinessLayer
             // Denna foreach-loop används för att lägga samtliga listor som ska visas i tabellen inom boendemodulen/Visa beläggning i en gemensam lista.
             foreach (string datum in DatumColumnList1)
             {
-                // Om BokningsRef == null VID datum så läggs objektet till på samtliga platser(uppräkningen sker alltså) annars tas inte uppräkning med på de platser där värdet är annat än NULL
-                LGH1ColumnList2.Add(dataColumn2.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
-                LGH2ColumnList3.Add(dataColumn3.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
-                CampingColumnList4.Add(dataColumn4.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
-                Konf1ColumnList5.Add(dataColumn5.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
-                Konf2ColumnList6.Add(dataColumn6.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
+                
+                LGH1ColumnList2.Add(Räkneverk(dataColumn2, datum).ToString());
+                
+                LGH2ColumnList3.Add(Räkneverk(dataColumn3, datum).ToString());
+                CampingColumnList4.Add(Räkneverk(dataColumn4, datum).ToString());
+                Konf1ColumnList5.Add(Räkneverk(dataColumn5, datum).ToString());
+                Konf2ColumnList6.Add(Räkneverk(dataColumn6, datum).ToString());
             }
-
+            
             // columnData är det gemensamma lista som används för att hämta och presentera data i visa beläggnings fliken(boendemodulen)
             IList<List<string>> columnData = new List<List<string>>
             {
@@ -317,6 +320,36 @@ namespace BusinessLayer
 
             return columnData; //Hur ska denna faktiskt se ut?
             
+        }
+        /// <summary>
+        /// Om BokningsRef == null VID datum så läggs objektet till på samtliga platser(uppräkningen sker alltså) annars tas inte uppräkning med på de platser där värdet är annat än NULL
+        /// 
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <param name="datum"></param>
+        /// <returns></returns>
+        public int Räkneverk(IList<Facilitet>Lista, string datum)
+        {
+            int antal = 0;
+            foreach (Facilitet f in Lista)
+            {
+                if (f.BokningsRef.IsNullOrEmpty())
+                {
+                    antal++;
+                }
+                else
+                {
+                    foreach (Bokning b in f.BokningsRef)
+                    {
+                        if (b.Ankomsttid <= DateTime.Parse(datum) || b.Avresetid >= DateTime.Parse(datum))
+                        {
+                            antal++;
+                        }
+
+                    }
+                }
+            }
+            return antal;
         }
         #region Metoder för att söka fram lediga boenden.
         public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)

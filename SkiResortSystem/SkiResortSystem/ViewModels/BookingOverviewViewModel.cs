@@ -129,10 +129,10 @@ namespace SkiResortSystem.ViewModels
         }
         
 
-        public Bokning SkapaBokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID)
+        public Bokning SkapaBokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID)
         {
             BookingController bc = new BookingController();
-            Bokning b = bc.CreateBokning(ankomsttid, avresetid, användareID, kundID, facilitetID, null, null);
+            Bokning b = bc.CreateBokning(ankomsttid, avresetid, användareID, kundID, facilitetID);
             return b;
         }
 
@@ -148,6 +148,17 @@ namespace SkiResortSystem.ViewModels
 
         });
 
+        private ICommand stängTabort = null!;
+
+        public ICommand StängTabort => stängTabort ??= stängTabort = new RelayCommand<ICloseable>((view) =>
+        {
+            BookingController bc = new BookingController();
+            bc.RemoveBokning(Bokning);
+            CloseCommand.Execute(view);
+
+        });
+
+
         private ICommand closeCommand = null!;
 
         public ICommand CloseCommand => closeCommand ??= closeCommand = new RelayCommand<ICloseable>((view) =>
@@ -155,6 +166,7 @@ namespace SkiResortSystem.ViewModels
             view.Close();
 
         });
+
 
         public BookingOverviewViewModel()
         {
@@ -168,7 +180,7 @@ namespace SkiResortSystem.ViewModels
             Avresa = Valdavresetid;
             TimeSpan tidsspann = Avresa - Ankomst;
             AntalNätter = tidsspann.Days;
-            Totalpris = Facilitetspris;
+            Totalpris = (float)Math.Round(Facilitetspris, 2);
             if(AntalNätter == 0)
             {
                 PrisPerNatt = 0;
@@ -196,7 +208,7 @@ namespace SkiResortSystem.ViewModels
             {
                 Valdfacilitet
             };
-            Bokning = SkapaBokning(Ankomst, Avresa, SessionController.LoggedIn, ValdKund, BokadFacilitet, null, null);
+            Bokning = SkapaBokning(Ankomst, Avresa, SessionController.LoggedIn, ValdKund, BokadFacilitet);
             Bokningsnummer = Bokning.BokningsID;
 
         }

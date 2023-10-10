@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
+using System.Reflection.Metadata;
 
 namespace DataLayer
 {
@@ -51,7 +53,8 @@ namespace DataLayer
             {
                 if (_test) optionBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SkiResortSystem;Trusted_Connection=True;");
                 else optionBuilder.UseSqlServer("Server=sqlutb2.hb.se,56077;Database=suht2301;User Id=suht2301;Password=bax999;Encrypt=False;");
-                /*string connectionString = new ConfigurationBuilder()
+                /*
+                string connectionString = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", true, true)
                     .Build()
@@ -75,13 +78,16 @@ namespace DataLayer
                 Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID == "R002")));
                 SaveChanges();
             }
+          
+
+
             if (!Kunder.Any())
             {
                 Privatkund pkund = new Privatkund("990106", "Börje", "Lundin");
-                Kund Börje = new Kund(0.8f, 1, "Ekliden", "5190", "sandared", "112-1121121", "borje@mail.com", null, pkund);
+                Kund Börje = new Kund(10f, 1, "Ekliden", "5190", "sandared", "112-1121121", "borje@mail.com", null, pkund);
                 Kunder.Add(Börje);
                 Företagskund fkund = new Företagskund("1111111", "Ara AB", "borki", "Hidden Leaf village", "60324", "Köping");
-                Kund Ara = new Kund(0.65f, 1, "Göreborgsvägen", "51189", "borås", "911-911911", "info@ara.se", fkund, null);
+                Kund Ara = new Kund(20f, 1, "Göreborgsvägen", "51189", "borås", "911-911911", "info@ara.se", fkund, null);
                 Kunder.Add(Ara);
                 SaveChanges();
             }
@@ -140,8 +146,48 @@ namespace DataLayer
                 }
                 SaveChanges();
             }
-            /* FUNGERAR INTE ATT SEEDA UTRUSTNING ÄNNU!!!!
-             * if (!Utrustningar.Any())
+            if (!Aktiviteter.Any())
+            {
+                Grupplektion grönMO = new Grupplektion("Grön", 400, 10);
+                    Grupplektioner.Add(grönMO);
+                Grupplektion blåMO = new Grupplektion("Blå", 415, 10);
+                    Grupplektioner.Add(blåMO);
+                Grupplektion rödMO = new Grupplektion("Röd", 425, 10);
+                    Grupplektioner.Add(rödMO);
+                Grupplektion svartMO = new Grupplektion("Svart", 455, 10);
+                    Grupplektioner.Add(svartMO);
+                Grupplektion grönTF = new Grupplektion("Grön", 500, 10);
+                    Grupplektioner.Add(grönTF);
+                Grupplektion blåTF = new Grupplektion("Blå", 515, 10);
+                    Grupplektioner.Add(blåTF);
+                Grupplektion rödTF = new Grupplektion("Röd", 525, 10);
+                    Grupplektioner.Add(rödTF);
+                Grupplektion svartTF = new Grupplektion("Svart", 555, 10);
+                    Grupplektioner.Add(svartTF);
+                Privatlektion priv = new Privatlektion(5, 375);
+                    Privatlektioner.Add(priv);
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 27, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 28, 00, 00, 00), new DateTime(2023, 11, 28, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 29, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 11, 30, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 12, 01, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                SaveChanges(); 
+                foreach (Skidskola skola in Skidskolor)
+                {
+                    Aktiviteter.Add(new Aktivitet(skola,true));
+                }
+                SaveChanges();
+            }
+            //FUNGERAR INTE ATT SEEDA UTRUSTNING ÄNNU!!!!
+            if (!Utrustningar.Any())
             {
                 for (int i = 0; i < 176; i++)
                 {
@@ -158,7 +204,6 @@ namespace DataLayer
                     else if (i < 171) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "190"));
                     else Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "200"));
                 }
-                SaveChanges();
                 for (int i = 0; i < 250; i++)
                 {
                     if (i < 6) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "25"));
@@ -185,7 +230,6 @@ namespace DataLayer
                     else if (i < 249) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "46"));
                     else Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "47"));
                 }
-                SaveChanges();
                 for (int i = 0; i < 176; i++)
                 {
                     if (i < 6) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "90"));
@@ -201,7 +245,6 @@ namespace DataLayer
                     else if (i < 171) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "190"));
                     else Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "200"));
                 }
-                SaveChanges();
                 for (int i = 0; i < 250; i++)
                 {
                     if (i < 6) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "25"));
@@ -228,7 +271,6 @@ namespace DataLayer
                     else if (i < 249) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "46"));
                     else Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "47"));
                 }
-                SaveChanges();
                 for (int i = 0; i < 86; i++)
                 {
                     if (i < 8) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "120"));
@@ -238,7 +280,6 @@ namespace DataLayer
                     else if (i < 67) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "160"));
                     else Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "170"));
                 }
-                SaveChanges();
                 for (int i = 0; i < 90; i++)
                 {
                     if (i < 1) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "25"));
@@ -263,14 +304,13 @@ namespace DataLayer
                     else if (i < 87) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "44"));
                     else Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "45"));
                 }
-                SaveChanges(); 
                 for (int i = 0; i < 15; i++)
                 {
                     if (i < 10) Utrustningar.Add(new Utrustning("S" + (i + 1).ToString("00"), "Skoter lynx", 1000, "1 pers"));
                     else Utrustningar.Add(new Utrustning("S" + (i + 1).ToString("00"), "Skoter yamaha viking", 1000, "2 pers"));
                 }
                 SaveChanges();
-            }*/
+            }
         }
 
     }

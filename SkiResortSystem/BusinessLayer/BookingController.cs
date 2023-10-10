@@ -19,11 +19,9 @@ namespace BusinessLayer
             unitOfWork = new UnitOfWork();
         }
 
-        public Bokning CreateBokning(DateTime ankomsttid, DateTime avresetid, Användare användarID, Kund kundID, List<Facilitet> facilitetsID, List<Utrustning> utrustningID, List<Aktivitet> AktivitetID)
+        public Bokning CreateBokning(DateTime ankomsttid, DateTime avresetid, Användare användarID, Kund kundID, List<Facilitet> facilitetsID)
         {
-            Bokning bokning = new Bokning(ankomsttid, avresetid, användarID, kundID, facilitetsID, utrustningID, AktivitetID);
-            unitOfWork.BokningsRepository.Add(bokning);
-            unitOfWork.Save();
+            Bokning bokning = new Bokning(ankomsttid, avresetid, användarID, kundID, facilitetsID);
             return bokning;
         }
         public void SparaBokning(Bokning bokning)
@@ -31,12 +29,25 @@ namespace BusinessLayer
             unitOfWork.BokningsRepository.Add(bokning);
             unitOfWork.Save();
         }
-      
+
+        public IList<Bokning> FindMasterBooking(string searchString, DateTime Ankomst, DateTime Avresa)
+        {
+            return unitOfWork.BokningsRepository.Find(b =>
+                     (b.BokningsID.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                      b.KundID.Privatkund.Namn().Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                      b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase)) &&
+                      (b.Ankomsttid >= Ankomst && b.Avresetid <= Avresa),
+                      x => x.KundID, x => x.KundID.Företagskund, x => x.KundID.Företagskund);
+        }
 
         public IList<Bokning> FindMasterBooking(string searchString)
         {
-            return unitOfWork.BokningsRepository.Find(b => b.BokningsID.Contains(searchString) || b.KundID.Privatkund.Namn().Contains(searchString) || b.KundID.Företagskund.Företagsnamn.Contains(searchString), x => x.KundID, x => x.KundID.Företagskund, x => x.KundID.Företagskund);
+            return unitOfWork.BokningsRepository.Find(b => b.BokningsID.Contains(searchString, StringComparison.OrdinalIgnoreCase) || b.KundID.Privatkund.Namn().Contains(searchString, StringComparison.OrdinalIgnoreCase) || b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase), x => x.KundID, x => x.KundID.Företagskund, x => x.KundID.Företagskund);
         }
 
+        public void RemoveBokning(Bokning bokning)
+        {
+            unitOfWork.BokningsRepository.Remove(bokning);
+        }
     }
 }

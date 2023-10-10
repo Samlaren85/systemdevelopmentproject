@@ -31,6 +31,7 @@ namespace EntityLayer
         public string Epost { get; set; }
         public Företagskund? Företagskund { get; set; }
         public Privatkund? Privatkund { get; set; }
+        public ICollection<Bokning> BokningsRef { get; set; }
         public Kund()
         {
             

@@ -1,6 +1,7 @@
 ﻿using DataLayer;
 using EntityLayer;
 using Microsoft.Identity.Client;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BusinessLayer
 {
@@ -147,14 +149,16 @@ namespace BusinessLayer
             List<Facilitet> inaktuellaFaciliteter = new List<Facilitet>();
 
             foreach (Facilitet facilitet in faciliteter)
-            {
-                if (facilitet.LägenhetsID != null &&facilitet.LägenhetsID.Bäddar < antalPersoner)
+            { 
+                if (facilitet.LägenhetsID != null && facilitet.LägenhetsID.Bäddar < antalPersoner)
                 {
                     inaktuellaFaciliteter.Add(facilitet);
                 }
-                if (facilitet.KonferensID != null &&facilitet.KonferensID.AntalPersoner < antalPersoner)
+                
+                if (facilitet.KonferensID != null && facilitet.KonferensID.AntalPersoner < antalPersoner)
                 {
                     inaktuellaFaciliteter.Add(facilitet);
+                    
                 }
             }
             return faciliteter.Except(inaktuellaFaciliteter).ToList();
@@ -220,18 +224,60 @@ namespace BusinessLayer
             if (boende == true)
             {
                 string facilitetsTyp = "Lägenhet";
-                dataColumn3 = FindLedigaFaciliteter(facilitetsTyp, 6);
+                dataColumn3 = FindLedigaFaciliteter(facilitetsTyp, 5);
+                foreach (Facilitet lägenhet in dataColumn3)
+                {
+                    if (lägenhet.LägenhetsID != null && lägenhet.LägenhetsID.Bäddar <= 4)
+                    {
+                        inaktuellaFaciliteter.Add(lägenhet);
+
+                    }
+                }
+                dataColumn3 = dataColumn3.Except(inaktuellaFaciliteter).ToList();
+                inaktuellaFaciliteter.Clear();
+
                 dataColumn2 = FindLedigaFaciliteter(facilitetsTyp, 4);
+                foreach (Facilitet lägenhet in dataColumn2)
+                {
+                    if (lägenhet.LägenhetsID != null && lägenhet.LägenhetsID.Bäddar >= 6)
+                    {
+                        inaktuellaFaciliteter.Add(lägenhet);
+
+                    }
+                }
+                dataColumn2 = dataColumn2.Except(inaktuellaFaciliteter).ToList();
+                inaktuellaFaciliteter.Clear();
+
             }
 
             if (boende == true)
             {
                 string facilitetsTyp = "Konferenssal";
                 dataColumn5 = FindLedigaFaciliteter(facilitetsTyp, 50);
+                foreach (Facilitet konferenssal in dataColumn5)
+                {
+                    if (konferenssal.KonferensID != null && konferenssal.KonferensID.AntalPersoner < 50)
+                    {
+                        inaktuellaFaciliteter.Add(konferenssal);
+                    }
+                }
+                dataColumn5 = dataColumn5.Except(inaktuellaFaciliteter).ToList();
+                inaktuellaFaciliteter.Clear();
+
                 dataColumn6 = FindLedigaFaciliteter(facilitetsTyp, 20);
+                foreach (Facilitet konferenssal in dataColumn6)
+                {
+                    if (konferenssal.KonferensID != null && konferenssal.KonferensID.AntalPersoner > 20)
+                    {
+                        inaktuellaFaciliteter.Add(konferenssal);
+                    }
+                }
+                dataColumn6 = dataColumn6.Except(inaktuellaFaciliteter).ToList();
+                inaktuellaFaciliteter.Clear();
+
 
             }
-            
+
             List<string> DatumColumnList1 = new List<string>();
             
             TimeSpan dateDifference = tillDatum - franDatum;
@@ -251,14 +297,15 @@ namespace BusinessLayer
             // Denna foreach-loop används för att lägga samtliga listor som ska visas i tabellen inom boendemodulen/Visa beläggning i en gemensam lista.
             foreach (string datum in DatumColumnList1)
             {
-                // Om BokningsRef == null VID datum så läggs objektet till på samtliga platser(uppräkningen sker alltså) annars tas inte uppräkning med på de platser där värdet är annat än NULL
-                LGH1ColumnList2.Add(dataColumn2.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
-                LGH2ColumnList3.Add(dataColumn3.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
-                CampingColumnList4.Add(dataColumn4.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
-                Konf1ColumnList5.Add(dataColumn5.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
-                Konf2ColumnList6.Add(dataColumn6.Count(f => (f.BokningsRef == null || (f.BokningsRef.Ankomsttid <= DateTime.Parse(datum) || f.BokningsRef.Avresetid >= DateTime.Parse(datum)))).ToString());
+                
+                LGH1ColumnList2.Add(Räkneverk(dataColumn2, datum).ToString());
+                
+                LGH2ColumnList3.Add(Räkneverk(dataColumn3, datum).ToString());
+                CampingColumnList4.Add(Räkneverk(dataColumn4, datum).ToString());
+                Konf1ColumnList5.Add(Räkneverk(dataColumn5, datum).ToString());
+                Konf2ColumnList6.Add(Räkneverk(dataColumn6, datum).ToString());
             }
-
+            
             // columnData är det gemensamma lista som används för att hämta och presentera data i visa beläggnings fliken(boendemodulen)
             IList<List<string>> columnData = new List<List<string>>
             {
@@ -273,6 +320,36 @@ namespace BusinessLayer
 
             return columnData; //Hur ska denna faktiskt se ut?
             
+        }
+        /// <summary>
+        /// Om BokningsRef == null VID datum så läggs objektet till på samtliga platser(uppräkningen sker alltså) annars tas inte uppräkning med på de platser där värdet är annat än NULL
+        /// 
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <param name="datum"></param>
+        /// <returns></returns>
+        public int Räkneverk(IList<Facilitet>Lista, string datum)
+        {
+            int antal = 0;
+            foreach (Facilitet f in Lista)
+            {
+                if (f.BokningsRef.IsNullOrEmpty())
+                {
+                    antal++;
+                }
+                else
+                {
+                    foreach (Bokning b in f.BokningsRef)
+                    {
+                        if (b.Ankomsttid <= DateTime.Parse(datum) || b.Avresetid >= DateTime.Parse(datum))
+                        {
+                            antal++;
+                        }
+
+                    }
+                }
+            }
+            return antal;
         }
         #region Metoder för att söka fram lediga boenden.
         public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)

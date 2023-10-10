@@ -651,7 +651,7 @@ namespace SkiResortSystem.ViewModels
         public ICommand CreateBooking => createBooking ??= createBooking = new RelayCommand(() =>
         {
             BookingController bc = new BookingController();
-            bc.CreateBokning(ankomsttid, avresetid, AnvändarID, KundID, FacilitetsID, UtrustningID, AktivitetID);
+            bc.CreateBokning(ankomsttid, avresetid, AnvändarID, KundID, FacilitetsID);
         });
 
 
@@ -680,8 +680,11 @@ namespace SkiResortSystem.ViewModels
             get { return selectedFacility; }
             set
             {
-                selectedFacility = value; Facilitetspriset = value.Facilitetspris * ((100 - SelectedCustomer.Rabatt)/100);
-                OnPropertyChanged();
+                if (value != null)
+                {
+                    selectedFacility = value; Facilitetspriset = value.Facilitetspris * ((100 - SelectedCustomer.Rabatt) / 100);
+                    OnPropertyChanged();
+                }   
             }
         }
 
@@ -705,9 +708,12 @@ namespace SkiResortSystem.ViewModels
             get { return searchBooking; }
             set
             {
-                searchBooking = value;
-                SearchBookings(); if(searchBooking == string.Empty) { BookingResults = new List<Bokning>(); }
-                OnPropertyChanged(SearchBooking);          
+                if (value != null)
+                {
+                    searchBooking = value;
+                    SearchBookings(); if (searchBooking == string.Empty) { BookingResults = new List<Bokning>(); }
+                    OnPropertyChanged(SearchBooking);
+                }      
             }
         }
 
@@ -717,12 +723,14 @@ namespace SkiResortSystem.ViewModels
             get { return selectedBooking; }
             set
             {
+                if (value == selectedBooking) return;
                 if (value != null)
                 {
                     selectedBooking = value;
                     SearchBooking = SelectedBooking.ToString().Split(" (")[0];
-                    OnPropertyChanged();
+                    SearchActivities();
                 }
+                OnPropertyChanged();
             }
         }
 
@@ -784,7 +792,8 @@ namespace SkiResortSystem.ViewModels
 
         public void SearchActivities()
         {
-            //Inte implementerat än!
+            ActivityController ac = new ActivityController();
+            AktivitetsSökning = ac.FindSkiSchool(SelectedBooking.Ankomsttid, SelectedBooking.Avresetid);
         }
 
         private IList<Aktivitet> aktivitetsSökning;

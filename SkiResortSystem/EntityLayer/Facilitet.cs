@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,10 +25,9 @@ namespace EntityLayer
             { facilitetID = value; }
         }
 
-           
-        
-        
-        public Bokning? BokningsRef { get; set; }
+
+
+        public List<Bokning>? BokningsRef { get; set; }
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT
         public float Facilitetspris { get; set; }
         public Konferenssal? KonferensID { get; set; }

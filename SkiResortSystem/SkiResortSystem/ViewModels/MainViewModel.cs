@@ -687,6 +687,22 @@ namespace SkiResortSystem.ViewModels
             });
 
         #region AktivitetsModulen
+        public string searchActivityBooking;
+        public string SearchActivityBooking
+        {
+            get { return searchActivityBooking; }
+            set
+            {
+                if (value != null)
+                {
+                    searchActivityBooking = value;
+                    Ankomsttid = DateTime.Now;
+                    Avresetid = DateTime.Now;
+                    SearchBookings(searchActivityBooking);
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private string searchBooking;
         public string SearchBooking
@@ -697,7 +713,7 @@ namespace SkiResortSystem.ViewModels
                 if (value != null)
                 {
                     searchBooking = value;
-                    SearchBookings();
+                    SearchBookings(searchBooking);
                     OnPropertyChanged();
                 }
             }
@@ -741,7 +757,7 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        public void SearchBookings()
+        public void SearchBookings(string searchstring)
         {
             if(bookingResults != null)
             {
@@ -755,11 +771,11 @@ namespace SkiResortSystem.ViewModels
             { 
                 if(!(Ankomsttid == DateTime.Today && Avresetid == DateTime.Today))
                 {
-                    BookingResults = bc.FindMasterBooking(SearchBooking, Ankomsttid, Avresetid);
+                    BookingResults = bc.FindMasterBooking(searchstring, Ankomsttid, Avresetid);
                 }
                 else
                 {
-                    BookingResults = bc.FindMasterBooking(SearchBooking);
+                    BookingResults = bc.FindMasterBooking(searchstring);
                 }
                 if (BookingResults.Count < 1)
                 {

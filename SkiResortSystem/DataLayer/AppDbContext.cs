@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 
 namespace DataLayer
 {
@@ -61,6 +62,14 @@ namespace DataLayer
                 optionBuilder.UseSqlServer(connectionString);*/
                 base.OnConfiguring(optionBuilder);
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Aktivitet>()
+                .HasMany(e => e.FacilitetID)
+                .WithMany(e => e.)
+                .HasForeignKey(e => e.);
         }
 
         private void Seed()

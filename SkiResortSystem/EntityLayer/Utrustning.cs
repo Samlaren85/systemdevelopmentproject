@@ -15,8 +15,7 @@ namespace EntityLayer
         public string UtrustningsBenämning { get; set; }
         public float Pris { get; set; }
         public string Storlek { get; set; }
-        [ForeignKey(nameof(BokningsRef))]
-        public List<Utrustningsbokning>? BokningsRef { get; set; }
+        public ICollection<Utrustningsbokning>? BokningsRef { get; set; }
         public Utrustning()
         {
             

@@ -53,7 +53,8 @@ namespace DataLayer
             {
                 if (_test) optionBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SkiResortSystem;Trusted_Connection=True;");
                 else optionBuilder.UseSqlServer("Server=sqlutb2.hb.se,56077;Database=suht2301;User Id=suht2301;Password=bax999;Encrypt=False;");
-                /*string connectionString = new ConfigurationBuilder()
+                /*
+                string connectionString = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", true, true)
                     .Build()
@@ -185,8 +186,8 @@ namespace DataLayer
                 }
                 SaveChanges();
             }
-            /* FUNGERAR INTE ATT SEEDA UTRUSTNING ÄNNU!!!!
-             * if (!Utrustningar.Any())
+            //FUNGERAR INTE ATT SEEDA UTRUSTNING ÄNNU!!!!
+            if (!Utrustningar.Any())
             {
                 for (int i = 0; i < 176; i++)
                 {
@@ -203,7 +204,6 @@ namespace DataLayer
                     else if (i < 171) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "190"));
                     else Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "200"));
                 }
-                SaveChanges();
                 for (int i = 0; i < 250; i++)
                 {
                     if (i < 6) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "25"));
@@ -230,7 +230,6 @@ namespace DataLayer
                     else if (i < 249) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "46"));
                     else Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "47"));
                 }
-                SaveChanges();
                 for (int i = 0; i < 176; i++)
                 {
                     if (i < 6) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "90"));
@@ -246,7 +245,6 @@ namespace DataLayer
                     else if (i < 171) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "190"));
                     else Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "200"));
                 }
-                SaveChanges();
                 for (int i = 0; i < 250; i++)
                 {
                     if (i < 6) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "25"));
@@ -273,7 +271,6 @@ namespace DataLayer
                     else if (i < 249) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "46"));
                     else Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "47"));
                 }
-                SaveChanges();
                 for (int i = 0; i < 86; i++)
                 {
                     if (i < 8) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "120"));
@@ -283,7 +280,6 @@ namespace DataLayer
                     else if (i < 67) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "160"));
                     else Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "170"));
                 }
-                SaveChanges();
                 for (int i = 0; i < 90; i++)
                 {
                     if (i < 1) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "25"));
@@ -308,14 +304,13 @@ namespace DataLayer
                     else if (i < 87) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "44"));
                     else Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "45"));
                 }
-                SaveChanges(); 
                 for (int i = 0; i < 15; i++)
                 {
                     if (i < 10) Utrustningar.Add(new Utrustning("S" + (i + 1).ToString("00"), "Skoter lynx", 1000, "1 pers"));
                     else Utrustningar.Add(new Utrustning("S" + (i + 1).ToString("00"), "Skoter yamaha viking", 1000, "2 pers"));
                 }
                 SaveChanges();
-            }*/
+            }
         }
 
     }

@@ -27,7 +27,6 @@ namespace EntityLayer
 
 
 
-        [ForeignKey(nameof(BokningsRef))]
         public List<Bokning>? BokningsRef { get; set; }
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT
         public float Facilitetspris { get; set; }

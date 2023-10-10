@@ -666,8 +666,11 @@ namespace SkiResortSystem.ViewModels
             get { return selectedFacility; }
             set
             {
-                selectedFacility = value; Facilitetspriset = value.Facilitetspris * ((100 - SelectedCustomer.Rabatt)/100);
-                OnPropertyChanged();
+                if (value != null)
+                {
+                    selectedFacility = value; Facilitetspriset = value.Facilitetspris * ((100 - SelectedCustomer.Rabatt) / 100);
+                    OnPropertyChanged();
+                }   
             }
         }
 
@@ -691,9 +694,13 @@ namespace SkiResortSystem.ViewModels
             get { return searchBooking; }
             set
             {
-                searchBooking = value;
-                SearchBookings();
-                OnPropertyChanged(SearchBooking);            }
+                if (value != null)
+                {
+                    searchBooking = value;
+                    SearchBookings();
+                    OnPropertyChanged();
+                }
+            }
         }
 
         private Bokning selectedBooking;

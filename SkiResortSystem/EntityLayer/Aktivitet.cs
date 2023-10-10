@@ -31,8 +31,7 @@ namespace EntityLayer
         }
         public Skidskola Skidskola { get; set; }
         public bool Vintersäsong { get; set; }
-        [ForeignKey(nameof(BokningsRef))]
-        public List<Bokning>? BokningsRef { get; set; }
+        public ICollection<Bokning>? BokningsRef { get; set; }
         public Aktivitet()
         {
             

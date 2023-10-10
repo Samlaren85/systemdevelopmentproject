@@ -27,12 +27,10 @@ namespace EntityLayer
                 }
             } 
         }
-        [ForeignKey(nameof(Bokning))]
-        public Bokning Bokning { get; set; }
-        [ForeignKey(nameof(Utrustning))]
-        public Utrustning Utrustning { get; set; }
         public DateTime Hämtasut {  get; set; }
         public DateTime Lämnasin { get; set; }
+        public Bokning Bokning { get; set; }
+        public Utrustning Utrustning { get; set; }
         public Utrustningsbokning() { }
     }
 }

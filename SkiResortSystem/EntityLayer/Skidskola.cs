@@ -15,13 +15,15 @@ namespace EntityLayer
         
         public int AntalDeltagare { get; set; }
         public string Lärare { get; set; }
-        public List<Privatlektion>? Privatlektion { get; set; }
-        public List<Grupplektion>? Grupplektion { get; set; }
+        public DateTime VaraktighetFrån { get; set; }
+        public DateTime VaraktighetTill { get; set; }
+        public Privatlektion? Privatlektion { get; set; }
+        public Grupplektion? Grupplektion { get; set; }
         public Skidskola()
         {
             
         }
-        public Skidskola(int antaldeltagare, string lärare, List<Privatlektion>? privatlektion, List<Grupplektion>? grupplektion)
+        public Skidskola(int antaldeltagare, string lärare, Privatlektion? privatlektion, Grupplektion? grupplektion, DateTime från, DateTime till)
         {
            _antalSkidskolor++;
            SkidskolaID = "SKID" + _antalSkidskolor.ToString("00000");
@@ -29,6 +31,8 @@ namespace EntityLayer
            Lärare = lärare;
            Privatlektion = privatlektion;
            Grupplektion = grupplektion;
+            VaraktighetFrån = från;
+            VaraktighetTill = till;
         }
 
     }

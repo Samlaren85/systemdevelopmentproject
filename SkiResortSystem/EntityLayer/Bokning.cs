@@ -13,6 +13,22 @@ namespace EntityLayer
         private static int _antalBokningar = 0;
         [Key]
         public string BokningsID { get; set; }
+        private Status bokningsstatus;
+        public Status Bokningsstatus
+        {
+            get { return bokningsstatus; }
+            set
+            {
+                if (value == Status.Kommande || (value >= Status.Incheckad && value < Status.Utlämnad) || value == Status.Makulerad)
+                {
+                    bokningsstatus = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Otillåten status");
+                }
+            }
+        }
         public float UtnyttjadKredit { get; set; }
         public bool Återbetalningsskydd { get; set; }
         public DateTime Ankomsttid { get; set; }
@@ -22,18 +38,16 @@ namespace EntityLayer
 
         [ForeignKey("FacilitetsID")]
         public List<Facilitet> FacilitetID { get; set; }
-       
-        [ForeignKey("UtrustningsID")]
-        public List<Utrustning> UtrustningID { get; set; }
+        public List<Utrustningsbokning>? UtrustningRef { get; set; }
 
         [ForeignKey("AktivitetsID")]
-        public List<Aktivitet> AktivitetID{ get; set; }
+        public List<Aktivitet>? AktivitetID{ get; set; }
 
         public Bokning()
         {
 
         }
-        public Bokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, List<Utrustning> utrustningID, List<Aktivitet> aktivitetID, bool återbetalningsskydd = false)
+        public Bokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, bool återbetalningsskydd = false)
         {
             _antalBokningar++;
             BokningsID = "B" + _antalBokningar.ToString("000000");
@@ -43,8 +57,8 @@ namespace EntityLayer
             AnvändareID = användareID;
             KundID = kundID;
             FacilitetID = facilitetID;
-            UtrustningID = utrustningID;
-            AktivitetID = aktivitetID;
+            UtrustningRef = null;
+            AktivitetID = null;
             Återbetalningsskydd = återbetalningsskydd;
 
         }

@@ -12,8 +12,25 @@ namespace EntityLayer
         private static int _antalAktiviteter = 0;
         [Key]
         public string AktivitetsID { get; set; }
+        private Status aktivitetsstatus;
+        public Status Aktivitetsstatus
+        {
+            get { return aktivitetsstatus; }
+            set
+            {
+                if (value == Status.Kommande || value == Status.Genomförd || value == Status.Makulerad)
+                {
+                    aktivitetsstatus = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Otillåten status");
+                }
+            }
+        }
         public Skidskola Skidskola { get; set; }
         public bool Vintersäsong { get; set; }
+        public List<Bokning>? BokningsRef { get; set; }
         public Aktivitet()
         {
             

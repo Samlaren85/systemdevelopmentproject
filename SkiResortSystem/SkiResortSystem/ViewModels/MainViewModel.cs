@@ -250,6 +250,10 @@ namespace SkiResortSystem.ViewModels
             {
                 searchText = value;
                 SearchCustomers();
+                if(searchText == string.Empty)
+                {
+                    SearchResults = new List<Kund>();
+                }
                 OnPropertyChanged(); 
             }
         }
@@ -271,7 +275,7 @@ namespace SkiResortSystem.ViewModels
             get { return selectedCustomer; }
             set
             {
-                if (selectedCustomer == value) return; // Lägg till den här raden för att undvika oändlig loop
+                if (selectedCustomer == value) return; 
 
 
                 if (value != null)
@@ -435,7 +439,7 @@ namespace SkiResortSystem.ViewModels
         public ICommand SökLedigaFaciliteter => sökLedigaFaciliteter ??= sökLedigaFaciliteter = new RelayCommand(() =>
         {
             AccommodationController ac = new AccommodationController();
-           
+            ErrorMessage3 = string.Empty;
             if (Lägenhetradiobutton)
             {
                 if (SelectedCustomer == null)
@@ -449,8 +453,11 @@ namespace SkiResortSystem.ViewModels
                     bool success = int.TryParse(antalPersonerTillBoende, out int x);
                     if (success)
                     {
-                        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);                  
-
+                        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                        if (FacilitetsSökning.Count() < 1)
+                        {
+                            ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
+                        }
                     }
                     else
                     {
@@ -467,7 +474,10 @@ namespace SkiResortSystem.ViewModels
                 if (success)
                 {
                     FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
-                 
+                    if (FacilitetsSökning.Count() < 1)
+                    {
+                        ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
+                    }
                 }
                 else
                 {
@@ -482,6 +492,10 @@ namespace SkiResortSystem.ViewModels
                 if (success)
                 {
                     FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
+                    if(FacilitetsSökning.Count() < 1)
+                    {
+                        ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
+                    }
                   
                 }
                 else
@@ -692,8 +706,9 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 searchBooking = value;
-                SearchBookings();
-                OnPropertyChanged(SearchBooking);            }
+                SearchBookings(); if(searchBooking == string.Empty) { BookingResults = new List<Bokning>(); }
+                OnPropertyChanged(SearchBooking);          
+            }
         }
 
         private Bokning selectedBooking;
@@ -734,34 +749,35 @@ namespace SkiResortSystem.ViewModels
 
         public void SearchBookings()
         {
-            if(bookingResults != null)
-            {
-                BookingResults.Clear();
-            }
-
-            NoBookingResult = string.Empty;
-
             BookingController bc = new BookingController();
-            try
-            { 
-                if(!(Ankomsttid == DateTime.Today && Avresetid == DateTime.Today))
+            BookingResults = new List<Bokning>();
+            if (!(Ankomsttid == DateTime.Today && Avresetid == DateTime.Today && SearchBooking != null))
+            {
+                NoBookingResult = string.Empty;
+
+                try
                 {
                     BookingResults = bc.FindMasterBooking(SearchBooking, Ankomsttid, Avresetid);
                 }
-                else
+                catch (Exception ex)
+                {
+                    NoBookingResult = "Ingen bokning hittades";
+                    BookingResults = new List<Bokning>();
+                }
+            }
+            else if(SearchBooking != null) 
+            {
+                NoBookingResult = string.Empty;
+
+                try
                 {
                     BookingResults = bc.FindMasterBooking(SearchBooking);
                 }
-                if (BookingResults.Count < 1)
+                catch (Exception ex)
                 {
                     NoBookingResult = "Ingen bokning hittades";
-                    BookingResults.Clear();
+                    BookingResults = new List<Bokning>();
                 }
-            }
-            catch (Exception ex)
-            {
-                NoBookingResult = "Ingen bokning hittades, " + ex.Message;
-                BookingResults.Clear();
             }
         }
         

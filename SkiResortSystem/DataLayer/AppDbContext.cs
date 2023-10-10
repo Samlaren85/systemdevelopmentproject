@@ -153,6 +153,46 @@ namespace DataLayer
                 }
                 SaveChanges();
             }
+            if (!Aktiviteter.Any())
+            {
+                Grupplektion grönMO = new Grupplektion("Grön", 400, 10);
+                    Grupplektioner.Add(grönMO);
+                Grupplektion blåMO = new Grupplektion("Blå", 415, 10);
+                    Grupplektioner.Add(blåMO);
+                Grupplektion rödMO = new Grupplektion("Röd", 425, 10);
+                    Grupplektioner.Add(rödMO);
+                Grupplektion svartMO = new Grupplektion("Svart", 455, 10);
+                    Grupplektioner.Add(svartMO);
+                Grupplektion grönTF = new Grupplektion("Grön", 500, 10);
+                    Grupplektioner.Add(grönTF);
+                Grupplektion blåTF = new Grupplektion("Blå", 515, 10);
+                    Grupplektioner.Add(blåTF);
+                Grupplektion rödTF = new Grupplektion("Röd", 525, 10);
+                    Grupplektioner.Add(rödTF);
+                Grupplektion svartTF = new Grupplektion("Svart", 555, 10);
+                    Grupplektioner.Add(svartTF);
+                Privatlektion priv = new Privatlektion(5, 375);
+                    Privatlektioner.Add(priv);
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 27, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 28, 00, 00, 00), new DateTime(2023, 11, 28, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 29, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 11, 30, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 12, 01, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                SaveChanges(); 
+                foreach (Skidskola skola in Skidskolor)
+                {
+                    Aktiviteter.Add(new Aktivitet(skola,true));
+                }
+                SaveChanges();
+            }
             /* FUNGERAR INTE ATT SEEDA UTRUSTNING ÄNNU!!!!
              * if (!Utrustningar.Any())
             {

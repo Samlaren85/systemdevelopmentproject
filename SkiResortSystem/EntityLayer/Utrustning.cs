@@ -14,6 +14,7 @@ namespace EntityLayer
         public string UtrustningsBenämning { get; set; }
         public float Pris { get; set; }
         public string Storlek { get; set; }
+        public List<Utrustningsbokning>? BokningsRef { get; set; }
         public Utrustning()
         {
             

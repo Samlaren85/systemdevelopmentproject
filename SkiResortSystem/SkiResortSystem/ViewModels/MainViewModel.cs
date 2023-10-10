@@ -702,12 +702,14 @@ namespace SkiResortSystem.ViewModels
             get { return selectedBooking; }
             set
             {
+                if (value == selectedBooking) return;
                 if (value != null)
                 {
                     selectedBooking = value;
                     SearchBooking = SelectedBooking.ToString().Split(" (")[0];
-                    OnPropertyChanged();
+                    SearchActivities();
                 }
+                OnPropertyChanged();
             }
         }
 
@@ -768,7 +770,8 @@ namespace SkiResortSystem.ViewModels
 
         public void SearchActivities()
         {
-            //Inte implementerat än!
+            ActivityController ac = new ActivityController();
+            AktivitetsSökning = ac.FindSkiSchool(SelectedBooking.Ankomsttid, SelectedBooking.Avresetid);
         }
 
         private IList<Aktivitet> aktivitetsSökning;

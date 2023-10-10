@@ -571,6 +571,7 @@ namespace SkiResortSystem.ViewModels
             {
                 beläggningankomsttid = value;
                 BeläggningDatumperiod = beläggningankomsttid.AddDays(7);
+                VisaBeläggningen.Execute(true);
                 OnPropertyChanged();
             }
         }
@@ -618,31 +619,27 @@ namespace SkiResortSystem.ViewModels
             set { aktivitetbeläggningradiobutton = value; VisaBeläggningen.Execute(true); OnPropertyChanged(); }
         }
 
-        
-
         private ICommand visaBeläggningen = null!;
         public ICommand VisaBeläggningen => visaBeläggningen ??= visaBeläggningen = new RelayCommand(() =>
         {
-            AccommodationController ac = new AccommodationController();
-
+            
             if (BoendeKonferensbeläggningradiobutton)
             {
-                VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, true, false, false);
+                AccommodationController ac = new AccommodationController();
+                VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod);
             }
 
 
             else if (UtrustningBeläggningradiobutton)
             {
-                {
-                    VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, true, false);
-                }
+                //EquipmentController ec = new EquipmentController();
+                //VisaBeläggning = ec.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod);
             }
 
             else if (Aktivitetbeläggningradiobutton)
             {
-                {
-                    VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, false, true);
-                }
+                ActivityController ac = new ActivityController();
+                VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod);
             }
         });
 
@@ -702,7 +699,7 @@ namespace SkiResortSystem.ViewModels
 
         #region AktivitetsModulen
         public string searchActivityBooking;
-        public string SearchActivityBooking
+        public string SearchAktivityBooking
         {
             get { return searchActivityBooking; }
             set
@@ -710,8 +707,8 @@ namespace SkiResortSystem.ViewModels
                 if (value != null)
                 {
                     searchActivityBooking = value;
-                    Ankomsttid = DateTime.Now;
-                    Avresetid = DateTime.Now;
+                    if (Ankomsttid != DateTime.Today) Ankomsttid = DateTime.Today;
+                    if (Avresetid != DateTime.Today) Avresetid = DateTime.Today;
                     SearchBookings(searchActivityBooking);
                     OnPropertyChanged();
                 }
@@ -789,7 +786,7 @@ namespace SkiResortSystem.ViewModels
                     BookingResults = new List<Bokning>();
                 }
             }
-            else if(SearchBooking != null) 
+            else if(searchstring != null) 
             {
                 NoBookingResult = string.Empty;
 

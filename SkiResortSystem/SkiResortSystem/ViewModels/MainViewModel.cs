@@ -304,6 +304,16 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string errorMessage3;
+        public string ErrorMessage3
+        {
+            get { return errorMessage3; }
+            set
+            {
+                errorMessage3 = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void SearchCustomers()
         {
@@ -439,12 +449,7 @@ namespace SkiResortSystem.ViewModels
                     bool success = int.TryParse(antalPersonerTillBoende, out int x);
                     if (success)
                     {
-                        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
-                        foreach (Facilitet f in FacilitetsSökning)
-                        {
-                            Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
-                        }
-
+                        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);                  
 
                     }
                     else
@@ -462,10 +467,7 @@ namespace SkiResortSystem.ViewModels
                 if (success)
                 {
                     FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
-                    foreach (Facilitet f in FacilitetsSökning)
-                    {
-                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
-                    }
+                 
                 }
                 else
                 {
@@ -480,10 +482,7 @@ namespace SkiResortSystem.ViewModels
                 if (success)
                 {
                     FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
-                    foreach(Facilitet f in FacilitetsSökning)
-                    {
-                        Facilitetspris = f.Facilitetspris * SelectedCustomer.Rabatt;
-                    }
+                  
                 }
                 else
                 {
@@ -491,15 +490,65 @@ namespace SkiResortSystem.ViewModels
                     ErrorMessage2 = "Du behöver lägga till antal kunder";
                 }
             }
+            if(Campingradiobutton == false && Konferensradiobutton == false && Lägenhetradiobutton == false) 
+            {
+                ErrorMessage3 = "Du behöver välja facilitetstyp";
+            }
         });
+
 
         private IList<List<string>> visaBeläggning;
         public IList<List<string>> VisaBeläggning
         {
             get { return visaBeläggning; }
-            set { visaBeläggning = value; OnPropertyChanged(); }
+            set {
+                if (value != visaBeläggning)
+                {
+                    visaBeläggning = value;
+                    // Överför listan för att skapa rader i tabellen av de inre listorna.
+                    ÖverfördVisaBeläggning = Överförd(visaBeläggning);
+                    OnPropertyChanged(nameof(VisaBeläggning));
+                    OnPropertyChanged(nameof(ÖverfördVisaBeläggning));
+                }
+                visaBeläggning = value; OnPropertyChanged(); }
         }
 
+        private IList<List<string>> överfördVisaBeläggning;
+
+        public IList<List<string>> ÖverfördVisaBeläggning
+        {
+            get { return överfördVisaBeläggning; }
+            set
+            {
+                if (value != överfördVisaBeläggning)
+                {
+                    överfördVisaBeläggning = value;
+                    OnPropertyChanged(nameof(ÖverfördVisaBeläggning));
+                }
+            }
+        }
+        private IList<List<string>> Överförd(IList<List<string>> source)
+        {
+            if (source == null || source.Count == 0)
+                return source;
+
+            int rowCount = source.Count;
+            int colCount = source[0].Count;
+
+            IList<List<string>> result = new List<List<string>>();
+
+            for (int col = 0; col < colCount; col++)
+            {
+                List<string> newRow = new List<string>();
+                for (int row = 0; row < rowCount; row++)
+                {
+                    newRow.Add(source[row][col]);
+                }
+                result.Add(newRow);
+            }
+
+            return result;
+        }
         private DateTime beläggningankomsttid = DateTime.Today;
         public DateTime BeläggningAnkomsttid
         {
@@ -512,7 +561,7 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private DateTime beläggningdatumperiod = DateTime.Today;
+        private DateTime beläggningdatumperiod = DateTime.Today.AddDays(7);
         public DateTime BeläggningDatumperiod
         {
             get { return beläggningdatumperiod; }
@@ -523,13 +572,13 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private float facilitetspris;
-        public float Facilitetspris
+        private float facilitetspriset;
+        public float Facilitetspriset
         {
-            get { return facilitetspris; }
+            get { return facilitetspriset; }
             set
             {
-                facilitetspris = value;
+                facilitetspriset = value;
                 OnPropertyChanged();
             }
         }
@@ -545,15 +594,17 @@ namespace SkiResortSystem.ViewModels
         public bool UtrustningBeläggningradiobutton
         {
             get { return utrustningbeläggningradiobutton; }
-            set { utrustningbeläggningradiobutton = value; OnPropertyChanged(); }
+            set { utrustningbeläggningradiobutton = value; VisaBeläggningen.Execute(true); OnPropertyChanged(); }
         }
 
         private bool aktivitetbeläggningradiobutton;
         public bool Aktivitetbeläggningradiobutton
         {
             get { return aktivitetbeläggningradiobutton; }
-            set { aktivitetbeläggningradiobutton = value; OnPropertyChanged(); }
+            set { aktivitetbeläggningradiobutton = value; VisaBeläggningen.Execute(true); OnPropertyChanged(); }
         }
+
+        
 
         private ICommand visaBeläggningen = null!;
         public ICommand VisaBeläggningen => visaBeläggningen ??= visaBeläggningen = new RelayCommand(() =>
@@ -566,14 +617,14 @@ namespace SkiResortSystem.ViewModels
             }
 
 
-            if (UtrustningBeläggningradiobutton)
+            else if (UtrustningBeläggningradiobutton)
             {
                 {
                     VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, true, false);
                 }
             }
 
-            if (Aktivitetbeläggningradiobutton)
+            else if (Aktivitetbeläggningradiobutton)
             {
                 {
                     VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, false, true);
@@ -615,7 +666,7 @@ namespace SkiResortSystem.ViewModels
             get { return selectedFacility; }
             set
             {
-                selectedFacility = value;
+                selectedFacility = value; Facilitetspriset = value.Facilitetspris * ((100 - SelectedCustomer.Rabatt)/100);
                 OnPropertyChanged();
             }
         }
@@ -627,7 +678,7 @@ namespace SkiResortSystem.ViewModels
                 if (SelectedCustomer != null)
                 {
                     int.TryParse(antalPersonerTillBoende, out int antalpersoner);
-                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner, Facilitetspris);
+                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner, Facilitetspriset);
                     windowService.ShowDialog(bokningsöversikt);
                 }
             });
@@ -641,9 +692,8 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 searchBooking = value;
-                SearchBookings(); 
-                OnPropertyChanged();
-            }
+                SearchBookings();
+                OnPropertyChanged(SearchBooking);            }
         }
 
         private Bokning selectedBooking;
@@ -686,23 +736,37 @@ namespace SkiResortSystem.ViewModels
 
         public void SearchBookings()
         {
+            if(bookingResults != null)
+            {
+                BookingResults.Clear();
+            }
+
+            NoBookingResult = string.Empty;
+
             BookingController bc = new BookingController();
             try
-            {
-                ErrorMessage = string.Empty;
-
-                BookingResults = bc.FindMasterBooking(SearchBooking);
-                if (searchResults.Count < 1)
+            { 
+                if(!(Ankomsttid == DateTime.Today && Avresetid == DateTime.Today))
+                {
+                    BookingResults = bc.FindMasterBooking(SearchBooking, Ankomsttid, Avresetid);
+                }
+                else
+                {
+                    BookingResults = bc.FindMasterBooking(SearchBooking);
+                }
+                if (BookingResults.Count < 1)
                 {
                     NoBookingResult = "Ingen bokning hittades";
+                    BookingResults.Clear();
                 }
             }
             catch (Exception ex)
             {
                 NoBookingResult = "Ingen bokning hittades, " + ex.Message;
-                SearchResults = new List<Kund>();
+                BookingResults.Clear();
             }
         }
+        
 
         public void SearchActivities()
         {

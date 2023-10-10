@@ -15,7 +15,6 @@
         <Style TargetType="TextBlock">
 
             <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="400" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
@@ -76,15 +75,15 @@
         <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" 
                 Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="405" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White"
-                Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="{Binding RemoveEnabled}"/>
+                Background="#FF5e8ec2" Foreground="White" Command="{Binding StängTabort}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
         <Button Content="Checka Ut" Height="50" Width="130" FontSize="20" BorderBrush="White" 
-                Background="#FF5E8EC2" Foreground="Black" Command="{Binding SparaBokning}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="264" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                Background="#FF5E8EC2" Foreground="White" Command="{Binding SparaBokning}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="264" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Button Content="Checka In" Height="50" Width="130" FontSize="20" BorderBrush="White"
-                Background="#FF5E8EC2" Command="{Binding TaBortBokning}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="204" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="{Binding RemoveEnabled}"/>
+                Background="#FF5E8EC2" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="204" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
 
 
-        <DatePicker Canvas.Left="154" Canvas.Top="302" HorizontalAlignment="Center" VerticalAlignment="Top" SelectedDate="{Binding Ankomst}"/>
+        <DatePicker Canvas.Left="154" Canvas.Top="302" HorizontalAlignment="Center"  VerticalAlignment="Top" SelectedDate="{Binding Ankomst}"/>
         <DatePicker Canvas.Left="321" Canvas.Top="301" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.673,0.667" SelectedDate="{Binding Avresa}" Height="27"/>
         <TextBlock Text="Avbeställningsskydd" Canvas.Left="154" Canvas.Top="534" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <CheckBox IsChecked="{Binding Avbetalningsskydd}" Canvas.Left="154" Canvas.Top="569">
@@ -93,15 +92,7 @@
             </CheckBox.LayoutTransform>
         </CheckBox>
 
-
-
-
-
-
-
-
-
-
+        
 
     </Canvas>
 

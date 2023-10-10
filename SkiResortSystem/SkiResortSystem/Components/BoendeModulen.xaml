@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara" >
+             d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara">
 
     <TabControl TabStripPlacement="Left" Background="#FFA6C3E4">
         <TabControl.Resources>
@@ -26,9 +26,10 @@
 
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" SelectionChanged="ComboBox_SelectionChanged" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding ErrorMessage2}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="614" Canvas.Top="131" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBlock Text="{Binding ErrorMessage3}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="195" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <RadioButton Content="Lägenhet" Canvas.Left="80" Canvas.Top="169" Checked="RadioButton_Checked" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding Lägenhetradiobutton}"/>
                 <RadioButton Content="Camping" Canvas.Left="190" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding Campingradiobutton}"/>
@@ -44,7 +45,7 @@
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" />
 
 
-                <DataGrid Width="908" Height="430"  ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
+                <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
                           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedItem="{Binding Path=SelectedFacility}">
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommand}"/>
@@ -82,33 +83,38 @@
 
 
         <TabItem Header="HANTERA BOKNINGAR">
-
+           
             <Canvas Height="auto" Width="1760">
 
 
-                <DataGrid  Width="956" Height="410" AutoGenerateColumns="False"  Canvas.Left="80" Canvas.Top="149" ItemsSource="{Binding }" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <DataGrid  Width="918" Height="410" Background="White" AutoGenerateColumns="False" BorderThickness="2" Canvas.Left="80" Canvas.Top="149" ItemsSource="{Binding BookingResults, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <!--DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommand}"/>
+                    </DataGrid.InputBindings>-->
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="NAMN" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="ANKOMSTDATUM" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="AVRESEDATUM" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="ANTALPERSONER" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="TYP" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Namn" Width="*"  Binding="{Binding KundID}" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="Ankomstdatum" Binding="{Binding Ankomsttid}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Avresedatum" Binding="{Binding Avresetid}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Bokningsnummer" Binding="{Binding BokningsID}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="AntalPersoner" Width="*" Binding="{Binding FacilitetID}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Typ " Width="*" Binding="{Binding FacilitetID}"/>
+
                     </DataGrid.Columns>
                 </DataGrid>
 
 
 
-                <TextBox Canvas.Top="85" Canvas.Left="80" Width="293" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBox Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Top="85" Canvas.Left="80" Width="293" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <TextBlock Text="Förnamn/Efternamn/Bokningsnummer" Foreground="Black" Canvas.Left="80" Canvas.Top="55" />
                 <TextBlock Text="SÖK BOKNING/KONFERENS" Foreground="Black" Canvas.Left="80" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
 
-                <DatePicker Canvas.Top="85" Canvas.Left="530" />
-                <DatePicker Canvas.Top="85" Canvas.Left="750" />
+                <DatePicker Canvas.Top="85" Canvas.Left="530" SelectedDate="{Binding Ankomsttid}"/>
+                <DatePicker Canvas.Top="85" Canvas.Left="685" SelectedDate="{Binding Avresetid}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="Ankomstdatum" Canvas.Top="55" Canvas.Left="530"/>
-                <TextBlock Text="Avresedatum" Canvas.Top="55" Canvas.Left="750"  />
+                <TextBlock Text="Avresedatum" Canvas.Top="55" Canvas.Left="685" HorizontalAlignment="Left" VerticalAlignment="Center"  />
 
             </Canvas>
 
@@ -120,25 +126,28 @@
             <Canvas Height="auto" Width="1760">
 
 
-                <DataGrid Name="BeläggningsData" Width="856" Height="410" AutoGenerateColumns="False" ItemsSource ="{Binding VisaBeläggning, Mode=TwoWay}"  Canvas.Left="80" Canvas.Top="149" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <DataGrid Name="BeläggningsData" Width="856" Height="410" Background="White" AutoGenerateColumns="False" ItemsSource ="{Binding ÖverfördVisaBeläggning, Mode=TwoWay}"   BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="DATUM" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="LGH1" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="LGH2" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="CAMPING" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="KONF1" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="KONF2" Width="*" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="DATUM" Width="*" Binding="{Binding [0] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="LGH1" Width="*" Binding="{Binding [1] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="LGH2" Width="*" Binding="{Binding [2] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="CAMPING" Width="*" Binding="{Binding [3] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="KONF1" Width="*" Binding="{Binding [4] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="KONF2" Width="*" Binding="{Binding [5] }" ></DataGridTextColumn>
                     </DataGrid.Columns>
-                    <DataGrid.RowDetailsTemplate>
-                        <DataTemplate>
-                            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding}"></DataGridTextColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-
-                        </DataTemplate>
-                    </DataGrid.RowDetailsTemplate>
+                    
+                    
+                    
+                        <!--<DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding}"></DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                        
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>-->
                     <!--<DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <DataGrid ItemsSource="{Binding VisaBeläggning}" AutoGenerateColumns="False">

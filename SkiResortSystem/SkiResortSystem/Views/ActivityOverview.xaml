@@ -5,11 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         mc:Ignorable="d"
-        Title="ActivityOverview" Height="450" Width="800">
+        Title="ActivityOverview" Height="Auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized" >
     <Window.DataContext>
         <vm:ActivityOverviewViewModel/>
     </Window.DataContext>
-    <Grid>
-        
-    </Grid>
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="Auto" ></Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Canvas Background="#FFA6C3E4" Height="1000">
+        <TextBlock Text="Bokningsnummer: " Canvas.Left="180" Canvas.Top="100" FontWeight="Bold" />
+
+        <TextBlock Text="Namn" Canvas.Left="180" Canvas.Top="200"/>
+        <TextBox Background="White"  Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="180" Canvas.Top="235" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+       
+
+
+        <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding }"  IsReadOnly="True"
+           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="100" Canvas.Top="320" HorizontalAlignment="Left" VerticalAlignment="Top" >
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding }"/>
+            </DataGrid.InputBindings>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ANTAL" Width="*" Binding="{Binding}"/>
+                <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding }"/>
+                <DataGridTextColumn Header="START" Width="*" Binding="{Binding }"/>
+                <DataGridTextColumn Header="SLUT" Width="*" Binding="{Binding }"/>
+                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding }"/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+            
+
+        <Button Content="SPARA" Height="50" Width="130" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="520" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="610" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Button Content="STÄNG" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="700" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+        <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="1050" Canvas.Top="80" Width="200" Height="50" >
+          
+
+        </Border>
+
+
+    </Canvas>
+
+
+
+
+
+
 </Window>

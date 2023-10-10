@@ -36,13 +36,11 @@ namespace EntityLayer
         public Användare AnvändareID { get; set; }
         public Kund KundID { get; set; }
 
-        [ForeignKey(nameof(FacilitetID))]
-        public List<Facilitet> FacilitetID { get; set; }
-        [ForeignKey(nameof(UtrustningRef))]
-        public List<Utrustningsbokning>? UtrustningRef { get; set; }
+        public ICollection<Facilitet> FacilitetID { get; set; }
+        
+        public ICollection<Utrustningsbokning>? UtrustningRef { get; set; }
 
-        [ForeignKey(nameof(AktivitetID))]
-        public List<Aktivitet>? AktivitetID{ get; set; }
+        public ICollection<Aktivitet>? AktivitetID{ get; set; }
 
         public Bokning()
         {

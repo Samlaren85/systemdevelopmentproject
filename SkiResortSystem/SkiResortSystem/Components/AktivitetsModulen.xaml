@@ -9,115 +9,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara">
     <TabControl TabStripPlacement="Left" Background="#FFA6C3E4">
+
+
         <TabControl.Resources>
-            <Style TargetType="TabItem">
-                <Setter Property="Background" Value="#FF5e8ec2" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="BorderBrush" Value="White"/>
-                <Setter Property="Height" Value="50" />
-                <Setter Property="Width" Value="192" />
-                <Setter Property="FontSize" Value="13"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="TabItem">
-
-                            <Grid>
-
-                                <VisualStateManager.VisualStateGroups>
-
-                                    <VisualStateGroup x:Name="SelectionStates">
-                                        <VisualState x:Name="Unselected" />
-
-                                        <VisualState x:Name="Selected">
-
-                                            <Storyboard>
-
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock"
-                                                                                   Storyboard.TargetProperty="TextDecorations">
-
-                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <TextDecorationCollection>
-                                                                <TextDecoration Location="Underline" PenThicknessUnit="FontRecommended">
-                                                                    <TextDecoration.Pen>
-
-                                                                        <Pen Thickness="7" Brush="White" />
-                                                                    </TextDecoration.Pen>
-                                                                </TextDecoration>
-                                                            </TextDecorationCollection>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-
-                                <Border Background="#FF5e8ec2" BorderBrush="White" BorderThickness="0,0,0,2">
-
-                                    <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-
-            <Style TargetType="TextBox">
-
-                <Setter Property="Height" Value="20"/>
-                <Setter Property="FontSize" Value="16"/>
-
-            </Style>
-
-
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="Black"/>
-                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontSize" Value="16"/>
             </Style>
-
-            <Style TargetType="RadioButton">
-
-                <Setter Property="FontSize" Value="18"/>
-            </Style>
-
-            <Style TargetType="Button">
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="BorderBrush" Value="White" />
-                <Setter Property="Background" Value="#FF5e8ec2"/>
-                <Setter Property="Foreground" Value="White"/>
-            </Style>
-
-            <Style TargetType="DataGridCell">
-
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Height" Value="43"/>
-
-            </Style>
-
-            <Style TargetType="DataGridColumnHeader">
-                <Setter Property="Background" Value="#FF5e8ec2"/>
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Foreground" Value="White"/>
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-
-            </Style>
-
         </TabControl.Resources>
+        
         <TabItem Header="BOKA AKTIVITET">
 
             <Canvas Height="auto" Width="1760">
 
-                <TextBlock Text="Sök kund" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox ItemsSource="{Binding BookingResults}" SelectedItem="{Binding SelectedBooking}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-                <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding AktivitetsSökning, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True">
+                <DataGrid Width="908" Height="430"  ItemsSource="{Binding AktivitetsSökning, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True">
                     <DataGrid.InputBindings>
                         <MouseBinding
                         MouseAction="LeftDoubleClick"
@@ -138,7 +48,7 @@
 
             <Canvas Height="auto" Width="1760">
 
-                <TextBlock Text="Sök kund" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -149,7 +59,7 @@
                 <Button Content="Sök" Canvas.Left="614" Canvas.Top="165" Command="{Binding SearchActivities}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding TypeOfActivity, UpdateSourceTrigger=PropertyChanged}" />
 
-                <DataGrid Background="White" Width="908" Height="390" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding FoundActivities, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True">
+                <DataGrid  Width="908" Height="390"  ItemsSource="{Binding FoundActivities, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True">
                     <DataGrid.InputBindings>
                         <MouseBinding
                         MouseAction="LeftDoubleClick"
@@ -171,12 +81,12 @@
 
             <Canvas Height="auto" Width="1760">
 
-                <TextBlock Text="Sök kund" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-                <DataGrid Background="White" Width="908" Height="296" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding Equipmentlist, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <DataGrid  Width="908" Height="296" ItemsSource="{Binding Equipmentlist, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Header="UTRUSTNING" Width="*" Binding="{Binding EquipmentTyp}"/>
                         <DataGridTemplateColumn Header="FRÅN" Width="*">
@@ -197,7 +107,7 @@
                         <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Price}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <DataGrid Background="White" Width="908" Height="90" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding SizeList, Mode=TwoWay}" 
+                <DataGrid Width="908" Height="90" ItemsSource="{Binding SizeList, Mode=TwoWay}" 
                           CanUserAddRows="False" AutoGenerateColumns="True" Canvas.Left="80" Canvas.Top="489" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
@@ -220,7 +130,7 @@
         <TabItem Header="HANTERA UTRUSTNING" >
             <Canvas Height="auto" Width="1760">
 
-                <TextBlock Text="Sök kund" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />

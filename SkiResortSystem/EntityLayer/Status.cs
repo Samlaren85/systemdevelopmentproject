@@ -23,7 +23,11 @@ namespace EntityLayer
         Genomförd = 20,
 
         //Generell makulerad status 
-        Makulerad = 99
+        Makulerad = 99,
 
+        //Statusar för fakturor
+        Obetald = 30,
+        Betald = 31,
+        Arkiverad = 32,
     }
 }

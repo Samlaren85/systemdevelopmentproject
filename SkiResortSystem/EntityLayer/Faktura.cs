@@ -12,6 +12,23 @@ namespace EntityLayer
         private static int _antalFakturor = 0;
         [Key]
         public string FakturaID { get; set; }
+        private Status fakturastatus;
+        public Status Fakturastatus
+        {
+            get { return fakturastatus; }
+            set
+            {
+                if (value == Status.Obetald || value == Status.Arkiverad)
+                {
+                    fakturastatus = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Otillåten status");
+                }
+            }
+        }
+        public ICollection<Bokning> BokningsID { get; set; }
 
         public DateTime Fakturadatum { get; set; }
         public float Totalpris { get; set; }

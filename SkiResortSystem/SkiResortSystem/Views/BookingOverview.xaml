@@ -18,20 +18,7 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
-        <Style TargetType="TextBox">
-
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Style.Triggers>
-                <Trigger Property="IsReadOnly" Value="True">
-                    <Setter Property="Background" Value="#FFC5BEBE"/>
-                </Trigger>
-                <Trigger Property="IsReadOnly" Value="False">
-                    <Setter Property="Background" Value="White"/>
-                </Trigger>
-            </Style.Triggers>
-
-        </Style>
+        
 
     </Window.Resources>
 
@@ -72,14 +59,14 @@
         <TextBox Text="{Binding Totalpris}" Canvas.Left="321" Canvas.Top="485" Width="130" IsReadOnly="{Binding KreditReadOnly}" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White"/>
 
 
-        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" 
+        <Button Content="SPARA" Height="50" Width="130" BorderBrush="White" 
                 Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="405" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White"
+        <Button Content="TA BORT" Height="50" Width="130"  BorderBrush="White"
                 Background="#FF5e8ec2" Foreground="White" Command="{Binding StängTabort}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-        <Button Content="Checka Ut" Height="50" Width="130" FontSize="20" BorderBrush="White" 
+        <Button Content="Checka Ut" Height="50" Width="130" BorderBrush="White" 
                 Background="#FF5E8EC2" Foreground="White" Command="{Binding SparaBokning}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="264" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button Content="Checka In" Height="50" Width="130" FontSize="20" BorderBrush="White"
+        <Button Content="Checka In" Height="50" Width="130"  BorderBrush="White"
                 Background="#FF5E8EC2" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="724" Canvas.Top="204" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
 
 

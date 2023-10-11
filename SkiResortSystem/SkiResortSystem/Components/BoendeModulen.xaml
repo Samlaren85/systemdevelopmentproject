@@ -26,7 +26,7 @@
 
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Background="White" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding ErrorMessage2}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="614" Canvas.Top="131" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding ErrorMessage3}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="195" HorizontalAlignment="Center" VerticalAlignment="Top" />

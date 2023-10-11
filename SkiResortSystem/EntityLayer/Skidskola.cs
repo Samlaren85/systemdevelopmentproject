@@ -17,6 +17,15 @@ namespace EntityLayer
         public string Lärare { get; set; }
         public DateTime VaraktighetFrån { get; set; }
         public DateTime VaraktighetTill { get; set; }
+        public string Typ
+        {
+            get
+            {
+                if (Privatlektion != null) return "Privatlektion";
+                else if (Grupplektion != null) return "Grupplektion";
+                return "Kunde inte hitta någon typ av Skidskola";
+            }
+        }
         public Privatlektion? Privatlektion { get; set; }
         public Grupplektion? Grupplektion { get; set; }
         public Skidskola()

@@ -571,6 +571,7 @@ namespace SkiResortSystem.ViewModels
             {
                 beläggningankomsttid = value;
                 BeläggningDatumperiod = beläggningankomsttid.AddDays(7);
+                VisaBeläggningen.Execute(true);
                 OnPropertyChanged();
             }
         }
@@ -618,31 +619,27 @@ namespace SkiResortSystem.ViewModels
             set { aktivitetbeläggningradiobutton = value; VisaBeläggningen.Execute(true); OnPropertyChanged(); }
         }
 
-        
-
         private ICommand visaBeläggningen = null!;
         public ICommand VisaBeläggningen => visaBeläggningen ??= visaBeläggningen = new RelayCommand(() =>
         {
-            AccommodationController ac = new AccommodationController();
-
+            
             if (BoendeKonferensbeläggningradiobutton)
             {
-                VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, true, false, false);
+                AccommodationController ac = new AccommodationController();
+                VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod);
             }
 
 
             else if (UtrustningBeläggningradiobutton)
             {
-                {
-                    VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, true, false);
-                }
+                //EquipmentController ec = new EquipmentController();
+                //VisaBeläggning = ec.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod);
             }
 
             else if (Aktivitetbeläggningradiobutton)
             {
-                {
-                    VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod, false, false, true);
-                }
+                ActivityController ac = new ActivityController();
+                VisaBeläggning = ac.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod);
             }
         });
 
@@ -701,6 +698,22 @@ namespace SkiResortSystem.ViewModels
             });
 
         #region AktivitetsModulen
+        public string searchActivityBooking;
+        public string SearchAktivityBooking
+        {
+            get { return searchActivityBooking; }
+            set
+            {
+                if (value != null)
+                {
+                    searchActivityBooking = value;
+                    if (Ankomsttid != DateTime.Today) Ankomsttid = DateTime.Today;
+                    if (Avresetid != DateTime.Today) Avresetid = DateTime.Today;
+                    SearchBookings(searchActivityBooking);
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private string searchBooking;
         public string SearchBooking
@@ -711,7 +724,7 @@ namespace SkiResortSystem.ViewModels
                 if (value != null)
                 {
                     searchBooking = value;
-                    SearchBookings(); if (searchBooking == string.Empty) { BookingResults = new List<Bokning>(); }
+                    SearchBookings(searchBooking); if (searchBooking == string.Empty) { BookingResults = new List<Bokning>(); }
                     OnPropertyChanged(SearchBooking);
                 }      
             }
@@ -755,17 +768,17 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        public void SearchBookings()
+        public void SearchBookings(string searchstring)
         {
             BookingController bc = new BookingController();
             BookingResults = new List<Bokning>();
-            if (!(Ankomsttid == DateTime.Today && Avresetid == DateTime.Today && SearchBooking != null))
+            if (!(Ankomsttid == DateTime.Today && Avresetid == DateTime.Today && searchstring != null))
             {
                 NoBookingResult = string.Empty;
 
                 try
                 {
-                    BookingResults = bc.FindMasterBooking(SearchBooking, Ankomsttid, Avresetid);
+                    BookingResults = bc.FindMasterBooking(searchstring, Ankomsttid, Avresetid);
                 }
                 catch (Exception ex)
                 {
@@ -773,13 +786,13 @@ namespace SkiResortSystem.ViewModels
                     BookingResults = new List<Bokning>();
                 }
             }
-            else if(SearchBooking != null) 
+            else if(searchstring != null) 
             {
                 NoBookingResult = string.Empty;
 
                 try
                 {
-                    BookingResults = bc.FindMasterBooking(SearchBooking);
+                    BookingResults = bc.FindMasterBooking(searchstring);
                 }
                 catch (Exception ex)
                 {

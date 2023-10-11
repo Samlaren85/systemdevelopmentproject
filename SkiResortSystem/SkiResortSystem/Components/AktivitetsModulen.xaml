@@ -22,9 +22,9 @@
 
             <Canvas Height="auto" Width="1760">
 
-                <TextBlock Text="Sök kund" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBlock Text="Sök bokning" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox TabIndex="1" ItemsSource="{Binding BookingResults}" SelectedItem="{Binding SelectedBooking}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox TabIndex="0" Background="White"  Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBox TabIndex="0" Background="White"  Text="{Binding SearchAktivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <DataGrid Width="908" Height="430"  ItemsSource="{Binding AktivitetsSökning, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True">
@@ -34,9 +34,9 @@
                         Command="{Binding DoubleClickActivityBooking}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding}"/>
-                        <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding}"/>
-                        <DataGridTextColumn Header="ANTAL" Width="*" Binding="{Binding}"/>
+                        <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding Typ}"/>
+                        <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Varaktighet}"/>
+                        <DataGridTextColumn Header="ANTAL" Width="*" Binding="{Binding AntalPlatserKvar}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Canvas>
@@ -182,24 +182,25 @@
 
             <Canvas Height="auto" Width="1760">
 
-                <DataGrid Name="BeläggningsData" Width="856" Height="410" AutoGenerateColumns="False" Background="White" BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+                <DataGrid Name="BeläggningsData" Width="856" Height="410" Background="White" AutoGenerateColumns="False" ItemsSource ="{Binding ÖverfördVisaBeläggning, Mode=TwoWay}"   BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="DATUM" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="LGH1" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="LGH2" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="CAMPING" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="KONF1" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="KONF2" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="DATUM" Width="*" Binding="{Binding [0] }" ></DataGridTextColumn>
+                        <DataGridTextColumn x:Name="Column1" Header="LGH1"  Width="*" Binding="{Binding [1] }" ></DataGridTextColumn>
+                        <DataGridTextColumn x:Name="Column2" Header="LGH2" Width="*" Binding="{Binding [2] }" ></DataGridTextColumn>
+                        <DataGridTextColumn x:Name="Column3" Header="CAMP" Width="*" Binding="{Binding [3] }" ></DataGridTextColumn>
+                        <DataGridTextColumn x:Name="Column4" Header="KONF stor"  Width="*" Binding="{Binding [4] }" ></DataGridTextColumn>
+                        <DataGridTextColumn x:Name="Column5" Header="KONF liten" Width="*" Binding="{Binding [5] }" ></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 
+                <TextBlock Text="Datum:" Foreground="Black" Canvas.Left="80" Canvas.Top="58" />
+                <DatePicker  Canvas.Top="60" Canvas.Left="150" SelectedDate="{Binding BeläggningAnkomsttid}" />
 
-                <TextBlock Text="Datum:" Canvas.Left="80" Canvas.Top="58" />
-                <DatePicker Canvas.Top="60" Canvas.Left="150" Width="110" />
                 <TextBlock Text="Tillgängligt per datum" Foreground="Black" Canvas.Left="80" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                <RadioButton Content="Boende/Konferens" Canvas.Left="524" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <RadioButton Content="Utrustning" Canvas.Left="722" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <RadioButton Content="Aktivitet" Canvas.Left="845" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <RadioButton x:Name="BoendeRadio" Content="Boende/Konferens" IsChecked="{Binding BoendeKonferensbeläggningradiobutton}" Canvas.Left="524" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="BoendeRadio_Checked"/>
+                <RadioButton x:Name="UtrustningRadio" Content="Utrustning" IsChecked="{Binding UtrustningBeläggningradiobutton}" Canvas.Left="722" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="UtrustningRadio_Checked"/>
+                <RadioButton x:Name="AktivitetRadio" Content="Aktivitet" IsChecked="{Binding Aktivitetbeläggningradiobutton}" Canvas.Left="845" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="AktivitetRadio_Checked"/>
 
             </Canvas>
 

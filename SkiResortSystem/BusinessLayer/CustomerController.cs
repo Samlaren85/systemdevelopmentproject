@@ -75,18 +75,6 @@ namespace BusinessLayer
             return newCustomer;
         }
         /// <summary>
-        /// Söker specifik kund i databasen
-        /// </summary>
-        /// <param name="customerIdentifier"></param>
-        /// <returns></returns>
-        public Kund FindCustomer(string customerIdentifier)
-        {
-            return unitOfWork.KundRepository.FirstOrDefault(c => (c.KundID == customerIdentifier 
-                                                            || c.Privatkund.Namn().Contains(customerIdentifier) 
-                                                            || c.Företagskund.Företagsnamn.Contains(customerIdentifier)),
-                                                            x => x.Privatkund, x => x.Företagskund);
-        }
-        /// <summary>
         /// Ändrar en vald kund i databasen om den hittas
         /// </summary>
         /// <param name="customer"></param>

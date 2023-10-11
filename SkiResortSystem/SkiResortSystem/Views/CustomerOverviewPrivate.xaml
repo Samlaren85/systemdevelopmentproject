@@ -14,25 +14,12 @@
 
         <Style TargetType="TextBlock">
 
-            <Setter Property="Height" Value="30"/>
+            <Setter Property="Height" Value="Auto"/>
             <Setter Property="Width" Value="Auto" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
-        <Style TargetType="TextBox">
 
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Style.Triggers>
-                <Trigger Property="IsReadOnly" Value="True">
-                    <Setter Property="Background" Value="#FFC5BEBE"/>
-                </Trigger>
-                <Trigger Property="IsReadOnly" Value="False">
-                    <Setter Property="Background" Value="White"/>
-                </Trigger>
-            </Style.Triggers>
-
-        </Style>
 
     </Window.Resources>
 

@@ -40,7 +40,7 @@ namespace EntityLayer
         
         public ICollection<Utrustningsbokning>? UtrustningRef { get; set; }
 
-        public ICollection<Aktivitet>? AktivitetID{ get; set; }
+        public ICollection<Aktivitetsbokning>? AktivitetRef{ get; set; }
 
         public Bokning()
         {
@@ -57,7 +57,7 @@ namespace EntityLayer
             KundID = kundID;
             FacilitetID = facilitetID;
             UtrustningRef = null;
-            AktivitetID = null;
+            AktivitetRef = null;
             Återbetalningsskydd = återbetalningsskydd;
 
         }

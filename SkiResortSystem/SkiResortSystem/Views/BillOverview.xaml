@@ -15,44 +15,12 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
-        <Style TargetType="TextBox">
-
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Style.Triggers>
-                <Trigger Property="IsReadOnly" Value="True">
-                    <Setter Property="Background" Value="#FFC5BEBE"/>
-                </Trigger>
-                <Trigger Property="IsReadOnly" Value="False">
-                    <Setter Property="Background" Value="White"/>
-                </Trigger>
-            </Style.Triggers>
-
-        </Style>
-
-        <Style TargetType="DataGridCell">
-
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Height" Value="43"/>
-
-        </Style>
-
-        <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="#FF5e8ec2"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        </Style>
-
-
+        
 
     </Window.Resources>
-    <Canvas  Background="#FFA6C3E4" Height="1000" >
+    <Canvas  Background="#FFA6C3E4" Height="1000" > 
 
-        <TextBlock Text="Faktura" FontSize="20" FontWeight="Bold" Canvas.Left="128" Canvas.Top="30" />
+        <TextBlock Text="Faktura" FontWeight="Bold" Canvas.Left="128" Canvas.Top="30" />
 
 
         <TextBlock Text="Personnummer" Canvas.Left="128" Canvas.Top="125" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -117,9 +85,9 @@
 
 
 
-        <Button Content="STÄNG" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="ARKIVERA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="SKRIV UT" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="990" Canvas.Top="555" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="STÄNG" Height="50" Width="130"  BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555"/>
+        <Button Content="ARKIVERA" Height="50" Width="130"  BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" />
+        <Button Content="SKRIV UT" Height="50" Width="130"  BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="990" Canvas.Top="555" />
 
         <TextBlock Text="FAKTURAÖVERSIKT" Canvas.Left="1020" Canvas.Top="79" HorizontalAlignment="Left" VerticalAlignment="Center" />
 

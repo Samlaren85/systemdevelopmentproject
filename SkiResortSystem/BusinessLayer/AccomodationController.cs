@@ -206,7 +206,7 @@ namespace BusinessLayer
         }
  #endregion
         
-        public IList<List<string>> VisaBeläggningen(DateTime franDatum, DateTime tillDatum, bool boende , bool utrustning, bool aktivitet)
+        public IList<List<string>> VisaBeläggningen(DateTime franDatum, DateTime tillDatum)
         {
             List<Facilitet> inaktuellaFaciliteter = new List<Facilitet>(); // Används som hjälp för filtrering
             IList<Facilitet> dataColumn2 = new List<Facilitet>();
@@ -215,15 +215,10 @@ namespace BusinessLayer
             IList<Facilitet> dataColumn5 = new List<Facilitet>();
             IList<Facilitet> dataColumn6 = new List<Facilitet>();
 
-            if (boende == true)
-            {
                 string facilitetsTyp = "Campingplats";
                 dataColumn4 = FindLedigaFaciliteter(facilitetsTyp); // Data för Camping
-            }
-
-            if (boende == true)
-            {
-                string facilitetsTyp = "Lägenhet";
+           
+                facilitetsTyp = "Lägenhet";
                 dataColumn3 = FindLedigaFaciliteter(facilitetsTyp, 5);
                 foreach (Facilitet lägenhet in dataColumn3)
                 {
@@ -248,11 +243,8 @@ namespace BusinessLayer
                 dataColumn2 = dataColumn2.Except(inaktuellaFaciliteter).ToList();
                 inaktuellaFaciliteter.Clear();
 
-            }
-
-            if (boende == true)
-            {
-                string facilitetsTyp = "Konferenssal";
+            
+                facilitetsTyp = "Konferenssal";
                 dataColumn5 = FindLedigaFaciliteter(facilitetsTyp, 50);
                 foreach (Facilitet konferenssal in dataColumn5)
                 {
@@ -276,7 +268,7 @@ namespace BusinessLayer
                 inaktuellaFaciliteter.Clear();
 
 
-            }
+            
 
             List<string> DatumColumnList1 = new List<string>();
             
@@ -355,7 +347,10 @@ namespace BusinessLayer
         public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)
         {
             IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid < avrese && b.Avresetid > ankomst, X => X.FacilitetID);
-            IList<Facilitet> Faciliteter = unitOfWork.FacilitetRepository.Find(b => b.FacilitetID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase) && antalPersoner <= b.LägenhetsID.Bäddar, x => x.LägenhetsID);
+            IList<Facilitet> Faciliteter = unitOfWork.FacilitetRepository.Find(b => b.FacilitetID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase) && 
+                                ((b.LägenhetsID != null && antalPersoner <= b.LägenhetsID.Bäddar) ||
+                                (b.CampingID != null) ||
+                                (b.KonferensID != null && antalPersoner <= b.KonferensID.AntalPersoner)), x => x.LägenhetsID, x => x.CampingID, x => x.KonferensID);
             List<Facilitet> inaktuellFaciliteter = new List<Facilitet>();
             foreach (Bokning b in bokningar)
             {

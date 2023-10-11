@@ -12,6 +12,7 @@ namespace DataLayer
         private static AppDbContext _instance = null!;
         public DbSet<Kund> Kunder { get; set; } = null!;
         public DbSet<Aktivitet> Aktiviteter { get; set; } = null!;
+        public DbSet<Aktivitetsbokning> Aktivitetsbokningar { get; set; } = null!;
         public DbSet<Användare> Användare { get; set; } = null!;
         public DbSet<Behörighet> Behörigheter { get; set; } = null!;
         public DbSet<Bokning> Bokningar { get; set; } = null!;
@@ -27,7 +28,8 @@ namespace DataLayer
         public DbSet<Roll> Roller { get; set; } = null!;
         public DbSet<Skidskola> Skidskolor { get; set; } = null!;
         public DbSet<Utrustning> Utrustningar { get; set; } = null!;
-        
+        public DbSet<Utrustningsbokning> Utrustningsbokningar { get; set; } = null!;
+
 
         private static bool _test = true;
         private static bool _reset = false;

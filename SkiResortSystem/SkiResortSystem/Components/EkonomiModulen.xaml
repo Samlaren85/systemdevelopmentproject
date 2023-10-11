@@ -9,106 +9,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara" >
     <TabControl TabStripPlacement="Left" Background="#FFA6C3E4">
+
         <TabControl.Resources>
-            <Style TargetType="TabItem">
-                <Setter Property="Background" Value="#FF5e8ec2" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="BorderBrush" Value="White"/>
-                <Setter Property="Height" Value="50" />
-                <Setter Property="Width" Value="192" />
-                <Setter Property="FontSize" Value="13"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="TabItem">
-
-                            <Grid>
-
-                                <VisualStateManager.VisualStateGroups>
-
-                                    <VisualStateGroup x:Name="SelectionStates">
-                                        <VisualState x:Name="Unselected" />
-
-                                        <VisualState x:Name="Selected">
-
-                                            <Storyboard>
-
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock"
-                                                           Storyboard.TargetProperty="TextDecorations">
-
-                                                    <DiscreteObjectKeyFrame KeyTime="0">
-                                                        <DiscreteObjectKeyFrame.Value>
-                                                            <TextDecorationCollection>
-                                                                <TextDecoration Location="Underline" PenThicknessUnit="FontRecommended">
-                                                                    <TextDecoration.Pen>
-
-                                                                        <Pen Thickness="7" Brush="White" />
-                                                                    </TextDecoration.Pen>
-                                                                </TextDecoration>
-                                                            </TextDecorationCollection>
-                                                        </DiscreteObjectKeyFrame.Value>
-                                                    </DiscreteObjectKeyFrame>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-
-                                <Border Background="#FF5e8ec2" BorderBrush="White" BorderThickness="0,0,0,2">
-
-                                    <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" />
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-
-            <Style TargetType="DataGridCell">
-
-                <Style.Triggers>
-                    <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="Background" Value="#FF5E8EC2"/>
-                    </Trigger>
-
-                </Style.Triggers>
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Height" Value="43"/>
-            </Style>
-
-            <Style TargetType="DataGridColumnHeader">
-                <Setter Property="Background" Value="#FF5e8ec2"/>
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Foreground" Value="White"/>
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            </Style>
-
-
-
-
-            <Style TargetType="Button">
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="BorderBrush" Value="White" />
-                <Setter Property="Background" Value="#FF5e8ec2"/>
-                <Setter Property="Foreground" Value="White"/>
-            </Style>
             <Style TargetType="TextBlock">
-
-
                 <Setter Property="Foreground" Value="Black"/>
-                <Setter Property="FontSize" Value="18"/>
-            </Style>
-            <Style TargetType="TextBox">
-
-                <Setter Property="Height" Value="20"/>
                 <Setter Property="FontSize" Value="16"/>
-
-
             </Style>
-
         </TabControl.Resources>
 
 
@@ -153,7 +59,7 @@
                 </DataGrid>
 
                 <Button Content="SKAPA FAKTURA" Canvas.Top="640" Canvas.Left="828" HorizontalAlignment="Center" Height="50" Width="160" VerticalAlignment="Top" />
-
+                <Button Content="HÄMTA" Canvas.Top="91" Canvas.Left="854" HorizontalAlignment="Left" VerticalAlignment="Center" Width="134" Height="45" />
             </Canvas>
 
 

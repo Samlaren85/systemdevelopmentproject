@@ -118,8 +118,6 @@
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="Background" Value="White"/>
             
-
-
         </Style>
         
     </Application.Resources>

@@ -6,6 +6,7 @@
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         mc:Ignorable="d"
         Title="ActivityOverview" Height="Auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized" >
+    
     <Window.DataContext>
         <vm:ActivityOverviewViewModel/>
     </Window.DataContext>

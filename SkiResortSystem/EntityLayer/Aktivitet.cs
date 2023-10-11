@@ -66,7 +66,7 @@ namespace EntityLayer
         }
         public Skidskola Skidskola { get; set; }
         public bool Vintersäsong { get; set; }
-        public ICollection<Bokning>? BokningsRef { get; set; }
+        public ICollection<Aktivitetsbokning>? BokningsRef { get; set; }
         public Aktivitet()
         {
             

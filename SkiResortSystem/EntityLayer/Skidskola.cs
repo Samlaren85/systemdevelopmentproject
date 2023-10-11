@@ -22,8 +22,17 @@ namespace EntityLayer
             get
             {
                 if (Privatlektion != null) return "Privatlektion";
-                else if (Grupplektion != null) return "Grupplektion";
+                else if (Grupplektion != null) return $"Grupplektion {Grupplektion.Svårighetsgrad}";
                 return "Kunde inte hitta någon typ av Skidskola";
+            }
+        }
+        public float Pris
+        {
+            get
+            {
+                if (Privatlektion != null) return Privatlektion.Timpris;
+                else if (Grupplektion != null) return Grupplektion.Lektionspris;
+                return 0;
             }
         }
         public Privatlektion? Privatlektion { get; set; }

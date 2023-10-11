@@ -17,7 +17,7 @@
                 <Setter Property="FontSize" Value="16"/>
             </Style>
         </TabControl.Resources>
-        
+
         <TabItem Header="BOKA AKTIVITET">
 
             <Canvas Height="auto" Width="1760">
@@ -27,18 +27,15 @@
                 <TextBox TabIndex="0" Background="White"  Text="{Binding SearchAktivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-                <DataGrid Width="908" Height="430"  ItemsSource="{Binding AktivitetsSökning, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True">
-                    <DataGrid.InputBindings>
-                        <MouseBinding
-                        MouseAction="LeftDoubleClick"
-                        Command="{Binding DoubleClickActivityBooking}"/>
-                    </DataGrid.InputBindings>
+                <DataGrid Width="908" Height="430"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding Typ}"/>
-                        <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Varaktighet}"/>
-                        <DataGridTextColumn Header="ANTAL" Width="*" Binding="{Binding AntalPlatserKvar}"/>
+                        <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="ANTAL LEDIGA PLATSER" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="BOKAT ANTAL" Width="*" Binding="{Binding Antal}"  IsReadOnly="False"/>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button Content="Boka" Canvas.Left="868" Canvas.Top="619" Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" RenderTransformOrigin="1.311,2.576" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Canvas>
 
         </TabItem>

@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using BusinessLayer;
 using DataLayer;
 using EntityLayer;
@@ -801,12 +803,26 @@ namespace SkiResortSystem.ViewModels
                 }
             }
         }
-        
+
+        private List<Aktivitetsbokning> aktivitetsbokningar;
+        public List<Aktivitetsbokning> Aktivitetsbokningar { 
+            get { return aktivitetsbokningar; }
+            set 
+            { 
+                aktivitetsbokningar = value;
+                OnPropertyChanged();
+            } 
+        }
 
         public void SearchActivities()
         {
             ActivityController ac = new ActivityController();
             AktivitetsSökning = ac.FindSkiSchool(SelectedBooking.Ankomsttid, SelectedBooking.Avresetid);
+            Aktivitetsbokningar = new List<Aktivitetsbokning>();
+            foreach (Aktivitet a in AktivitetsSökning)
+            {
+                Aktivitetsbokningar.Add(new Aktivitetsbokning(SelectedBooking, a, 0));
+            }
         }
 
         private IList<Aktivitet> aktivitetsSökning;
@@ -819,6 +835,23 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private ICommand bookActivity;
+        public ICommand BookActivity =>
+            bookActivity ??= bookActivity = new RelayCommand(() =>
+            {
+                if (AktivitetsSökning != null)
+                {
+                    List<Aktivitetsbokning> removableActivities = new List<Aktivitetsbokning>();
+                    foreach (Aktivitetsbokning ab in Aktivitetsbokningar)
+                    {
+                        if(ab.Antal == 0) removableActivities.Add(ab);
+                    }
+                    Aktivitetsbokningar = Aktivitetsbokningar.Except(removableActivities).ToList();
+                    ActivityOverviewViewModel aktivitetsöversikt = new ActivityOverviewViewModel(SelectedBooking, Aktivitetsbokningar);
+                    windowService.ShowDialog(aktivitetsöversikt);
+                }
+            });
 
         #endregion
 

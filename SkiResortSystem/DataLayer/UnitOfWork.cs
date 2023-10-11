@@ -7,6 +7,7 @@ namespace DataLayer
         protected AppDbContext appDbContext { get; }
         public Repository<Kund> KundRepository { get; private set; }
         public Repository<Aktivitet> AktivitetRepository { get; private set; }
+        public Repository<Aktivitetsbokning> AktivitetsbokningsRepository { get; private set; }
         public Repository<Användare> AnvändarRepository { get; private set; }
         public Repository<Behörighet> BehörighetsRepository { get; private set; }
         public Repository<Bokning> BokningsRepository { get; private set; }
@@ -22,12 +23,14 @@ namespace DataLayer
         public Repository<Roll> RollRepository { get; private set; }
         public Repository<Skidskola> SkidskolaRepository { get; private set; }
         public Repository<Utrustning> UtrustningRepository { get; private set; }
+        public Repository<Utrustningsbokning> UtrustningsbokningsRepository { get; private set; }
        
         public UnitOfWork()
         {
             appDbContext = AppDbContext.Instantiate();
             KundRepository = new Repository<Kund>(appDbContext);
             AktivitetRepository = new Repository<Aktivitet>(appDbContext);
+            AktivitetsbokningsRepository = new Repository<Aktivitetsbokning>(appDbContext);
             AnvändarRepository = new Repository<Användare>(appDbContext);
             BehörighetsRepository = new Repository<Behörighet>(appDbContext);
             BokningsRepository = new Repository<Bokning>(appDbContext);
@@ -43,7 +46,7 @@ namespace DataLayer
             RollRepository = new Repository<Roll>(appDbContext);
             SkidskolaRepository = new Repository<Skidskola>(appDbContext);
             UtrustningRepository = new Repository<Utrustning>(appDbContext);
-           
+            UtrustningsbokningsRepository = new Repository<Utrustningsbokning>(appDbContext);
         }
         public void Save()
         {

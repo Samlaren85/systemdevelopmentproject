@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         mc:Ignorable="d"
         Title="ActivityOverview" Height="Auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized" >
-    
+
     <Window.DataContext>
         <vm:ActivityOverviewViewModel/>
     </Window.DataContext>
@@ -30,35 +30,35 @@
 
     <Canvas Background="#FFA6C3E4" Height="1000">
         <TextBlock Text="Bokningsnummer: " Canvas.Left="180" Canvas.Top="100" FontWeight="Bold" />
-        <TextBlock Text="{Binding Bokningsnummer}" FontWeight="Bold" Canvas.Left="354" Canvas.Top="100"/>
+        <TextBlock Text="{Binding Path=Bokningsref.BokningsID}" FontWeight="Bold" Canvas.Left="354" Canvas.Top="100"/>
 
 
-        <TextBlock Text="Namn" Canvas.Left="180" Canvas.Top="200"/>
-        <TextBox Background="White"  Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="180" Canvas.Top="235" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBlock Text="Namn:" Canvas.Left="180" Canvas.Top="200"/>
+        <TextBlock  Text="{Binding Path=Bokningsref.KundID, Mode=TwoWay}" Canvas.Left="251" Canvas.Top="200" Width="206" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
 
 
-        <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding Activities}"  IsReadOnly="True"
+        <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding Activities}" SelectedItem="{Binding Path=Aktivitetsbokning}" IsReadOnly="True"
            CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="100" Canvas.Top="320" HorizontalAlignment="Left" VerticalAlignment="Top" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ANTAL" Width="*" Binding="{Binding Antal}"/>
                 <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
                 <DataGridTextColumn Header="START" Width="*" Binding="{Binding Path=Aktivitetsref.Skidskola.VaraktighetFrån}"/>
                 <DataGridTextColumn Header="SLUT" Width="*" Binding="{Binding Path=Aktivitetsref.Skidskola.VaraktighetTill}"/>
-                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Path=Aktivitetsref.Skidskola.Pris}"/>
+                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding TotalPris}"/>
 
             </DataGrid.Columns>
         </DataGrid>
 
 
-        <Button Content="SPARA" Height="50" Width="130" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="520" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="610" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Button Content="STÄNG" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="700" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Button Content="SPARA" Height="50" Width="130" Command="{Binding SaveActivityBookingCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="520" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveActivityBookingCommand}" Canvas.Left="1050" Canvas.Top="610" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Button Content="STÄNG" Height="50" Width="130" Command="{Binding CloseActivityBookingCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="700" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-        
-        <TextBlock Text="Uttnyttnjad kredit" Canvas.Left="1050" Canvas.Top="40" FontWeight="Bold"/>
+
+        <TextBlock Text="Utnyttjad kredit" Canvas.Left="1050" Canvas.Top="40" FontWeight="Bold"/>
         <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="1050" Canvas.Top="80" Width="200" Height="50" >
-            <TextBox Height="Auto" Background="Transparent" />
+            <TextBox Height="Auto" Background="Transparent" Text="{Binding Path=Bokningsref.UtnyttjadKredit}" />
 
         </Border>
 

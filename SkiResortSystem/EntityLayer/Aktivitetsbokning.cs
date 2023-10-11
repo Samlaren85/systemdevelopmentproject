@@ -13,6 +13,7 @@ namespace EntityLayer
         public int AktivitetsbokningsID { get; set; }
         public Bokning Bokningsref { get; set; }
         public Aktivitet Aktivitetsref { get; set; }
+        public float TotalPris => Aktivitetsref.Skidskola.Pris * Antal;
         public int Antal { get; set; }
         public Aktivitetsbokning()
         {

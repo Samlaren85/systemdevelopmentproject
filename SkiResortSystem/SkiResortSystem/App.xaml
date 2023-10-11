@@ -74,7 +74,7 @@
             <Setter Property="FontSize" Value="16"/>
             <Style.Triggers>
                 <Trigger Property="IsReadOnly" Value="True">
-                    <Setter Property="Background" Value="#FFC5BEBE"/>
+                    <Setter Property="Background" Value="#FFd9d9d9"/>
                 </Trigger>
                 <Trigger Property="IsReadOnly" Value="False">
                     <Setter Property="Background" Value="White"/>

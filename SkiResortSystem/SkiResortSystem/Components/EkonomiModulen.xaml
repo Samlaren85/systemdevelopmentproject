@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara" >
     <TabControl TabStripPlacement="Left" Background="#FFA6C3E4">
-        
+
         <TabControl.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="Black"/>
@@ -59,7 +59,7 @@
                 </DataGrid>
 
                 <Button Content="SKAPA FAKTURA" Canvas.Top="640" Canvas.Left="828" HorizontalAlignment="Center" Height="50" Width="160" VerticalAlignment="Top" />
-               
+                <Button Content="HÄMTA" Canvas.Top="91" Canvas.Left="854" HorizontalAlignment="Left" VerticalAlignment="Center" Width="134" Height="45" />
             </Canvas>
 
 

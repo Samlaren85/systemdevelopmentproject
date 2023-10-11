@@ -21,7 +21,35 @@
 
         </TabControl.Resources>
 
-        <TabItem Header=""> 
+        <TabItem Header="STATISTIK">
+            <Canvas>
+                <TextBlock Text="Statistik" Canvas.Left="80" Canvas.Top="100" FontWeight="Bold"/>
+
+                <TextBlock Text="Statistikuppgift" Canvas.Left="80" Canvas.Top="170"/>
+                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="195" Width="230" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="195" Width="205" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                
+                <TextBlock Text="År" Canvas.Left="80" Canvas.Top="245"/>
+                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="270" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="270" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <TextBlock Text="Månda/Säsong" Canvas.Left="230" Canvas.Top="245"/>
+                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="230" Canvas.Top="270" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="230" Canvas.Top="270" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <TextBlock Text="År" Canvas.Left="80" Canvas.Top="320"/>
+                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="270" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="270" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+
+
+            </Canvas>
+            
+            
+        </TabItem>
+
+        <TabItem Header="RAPPORTER">
             
             
             

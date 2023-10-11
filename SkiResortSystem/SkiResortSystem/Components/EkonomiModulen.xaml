@@ -59,7 +59,7 @@
                 </DataGrid>
 
                 <Button Content="SKAPA FAKTURA" Canvas.Top="640" Canvas.Left="828" HorizontalAlignment="Center" Height="50" Width="160" VerticalAlignment="Top" />
-
+               
             </Canvas>
 
 

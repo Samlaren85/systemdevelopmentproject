@@ -22,6 +22,51 @@ namespace BusinessLayer
             return unitOfWork.AktivitetRepository.Find(a => a.Skidskola.VaraktighetFrån >= from && a.Skidskola.VaraktighetTill <= to, x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);
         }
 
+        public void SaveAktivityBooking(Aktivitetsbokning ab)
+        {
+            if (ab.Bokningsref.UtnyttjadKredit + ab.TotalPris <= ab.Bokningsref.KundID.Kreditgräns)
+            {
+                if (ab.Antal <= ab.Aktivitetsref.AntalPlatserKvar)
+                {
+                    if (unitOfWork.AktivitetsbokningsRepository.FirstOrDefault(a => a.Equals(ab)) == null)
+                    { 
+                        unitOfWork.AktivitetsbokningsRepository.Add(ab);
+                        ab.Aktivitetsref.Skidskola.AntalDeltagare += ab.Antal;
+                        ab.Bokningsref.UtnyttjadKredit += ab.TotalPris;
+                        unitOfWork.Save();
+                    }
+                    else
+                    {
+                        Aktivitetsbokning existerandeAktivitetsbokning = unitOfWork.AktivitetsbokningsRepository.FirstOrDefault(a => a.Equals(ab));
+                        existerandeAktivitetsbokning.Aktivitetsref.Skidskola.AntalDeltagare -= existerandeAktivitetsbokning.Antal;
+                        existerandeAktivitetsbokning.Bokningsref.UtnyttjadKredit -= existerandeAktivitetsbokning.TotalPris;
+                        ab.Aktivitetsref.Skidskola.AntalDeltagare += ab.Antal;
+                        ab.Bokningsref.UtnyttjadKredit += ab.TotalPris;
+                        unitOfWork.AktivitetsbokningsRepository.Update(ab);
+                        unitOfWork.Save();
+                    }
+                }
+                else throw new Exception("Antal personer överskrider kursens Deltagargräns");
+            }
+            else throw new Exception("Beloppet överskrider kundens kreditgräns!");
+        }
+
+        public bool RemoveAktivityBooking(Aktivitetsbokning ab)
+        {
+            bool done;
+            try
+            {
+                ab.Aktivitetsref.Skidskola.AntalDeltagare -= ab.Antal;
+                ab.Bokningsref.UtnyttjadKredit -= ab.TotalPris;
+                done = unitOfWork.AktivitetsbokningsRepository.Remove(ab);
+            } catch (Exception ex)
+            {
+                done = false;
+            }
+            if (done) unitOfWork.Save();
+            return done;
+        }
+
         public IList<Aktivitet> FindSkiSchool(DateTime from, DateTime to, string typ)
         {
             return unitOfWork.AktivitetRepository.Find(a => a.Skidskola.VaraktighetFrån >= from && a.Skidskola.VaraktighetTill <= to && a.Typ.Equals(typ), x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);

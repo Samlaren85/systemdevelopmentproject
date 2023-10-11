@@ -19,6 +19,11 @@
             <Setter Property="FontSize" Value="20"/>
         </Style>
 
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+
     </Window.Resources>
 
     <Canvas Background="#FFA6C3E4" Height="1000">
@@ -51,8 +56,10 @@
         <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="610" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <Button Content="STÄNG" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="700" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-        <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="1050" Canvas.Top="80" Width="200" Height="50" >
 
+        <TextBlock Text="Uttnyttnjad kredit" Canvas.Left="1050" Canvas.Top="40" FontWeight="Bold"/>
+        <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="1050" Canvas.Top="80" Width="200" Height="50" >
+            <TextBox Height="Auto" Background="Transparent" />
 
         </Border>
 

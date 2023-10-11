@@ -94,7 +94,7 @@
                 <TextBox Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Top="85" Canvas.Left="80" Width="293" HorizontalAlignment="Left" VerticalAlignment="Center"  />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-                <TextBlock Text="Förnamn/Efternamn/Bokningsnummer" Foreground="Black" Canvas.Left="80" Canvas.Top="55" />
+                <TextBlock  Text="Sök på: Förnamn/Efternamn/Bokningsnummer"  Foreground="Black" Canvas.Left="80" Canvas.Top="55" FontStyle="Italic" />
                 <TextBlock Text="SÖK BOKNING/KONFERENS" Foreground="Black" Canvas.Left="80" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <DatePicker Canvas.Top="85" Canvas.Left="530" SelectedDate="{Binding Ankomsttid}"/>
@@ -119,6 +119,22 @@
                         <DataGridTextColumn x:Name="Column4" Header="KONF stor"  Width="*" Binding="{Binding [4] }" ></DataGridTextColumn>
                         <DataGridTextColumn x:Name="Column5" Header="KONF liten" Width="*" Binding="{Binding [5] }" ></DataGridTextColumn>
                     </DataGrid.Columns>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="Height" Value="43"/>
+                        </Style>
+
+                    </DataGrid.CellStyle>
+                    
                 </DataGrid>
 
                 <TextBlock Text="Datum:" Foreground="Black" Canvas.Left="80" Canvas.Top="58" />

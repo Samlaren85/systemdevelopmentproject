@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,7 @@ namespace EntityLayer
                 return "Ingen typ hittad av aktiviteten";
             }
         }
+        
         public string Varaktighet
         {
             get
@@ -66,7 +68,7 @@ namespace EntityLayer
         }
         public Skidskola Skidskola { get; set; }
         public bool Vintersäsong { get; set; }
-        public ICollection<Bokning>? BokningsRef { get; set; }
+        public ICollection<Aktivitetsbokning>? BokningsRef { get; set; }
         public Aktivitet()
         {
             

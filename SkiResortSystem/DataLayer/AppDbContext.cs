@@ -12,6 +12,7 @@ namespace DataLayer
         private static AppDbContext _instance = null!;
         public DbSet<Kund> Kunder { get; set; } = null!;
         public DbSet<Aktivitet> Aktiviteter { get; set; } = null!;
+        public DbSet<Aktivitetsbokning> Aktivitetsbokningar { get; set; } = null!;
         public DbSet<Användare> Användare { get; set; } = null!;
         public DbSet<Behörighet> Behörigheter { get; set; } = null!;
         public DbSet<Bokning> Bokningar { get; set; } = null!;
@@ -27,7 +28,8 @@ namespace DataLayer
         public DbSet<Roll> Roller { get; set; } = null!;
         public DbSet<Skidskola> Skidskolor { get; set; } = null!;
         public DbSet<Utrustning> Utrustningar { get; set; } = null!;
-        
+        public DbSet<Utrustningsbokning> Utrustningsbokningar { get; set; } = null!;
+
 
         private static bool _test = true;
         private static bool _reset = false;
@@ -84,7 +86,7 @@ namespace DataLayer
             if (!Kunder.Any())
             {
                 Privatkund pkund = new Privatkund("990106", "Börje", "Lundin");
-                Kund Börje = new Kund(10f, 1, "Ekliden", "5190", "sandared", "112-1121121", "borje@mail.com", null, pkund);
+                Kund Börje = new Kund(10f, 12000, "Ekliden", "5190", "sandared", "112-1121121", "borje@mail.com", null, pkund);
                 Kunder.Add(Börje);
                 Företagskund fkund = new Företagskund("1111111", "Ara AB", "borki", "Hidden Leaf village", "60324", "Köping");
                 Kund Ara = new Kund(20f, 1, "Göreborgsvägen", "51189", "borås", "911-911911", "info@ara.se", fkund, null);

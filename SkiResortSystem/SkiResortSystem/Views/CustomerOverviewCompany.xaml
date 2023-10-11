@@ -16,24 +16,15 @@
 
         <Style TargetType="TextBlock">
 
-            <Setter Property="Height" Value="30"/>
+            <Setter Property="Height" Value="Auto"/>
             <Setter Property="Width" Value="Auto" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
+
         <Style TargetType="TextBox">
-
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Style.Triggers>
-                <Trigger Property="IsReadOnly" Value="True">
-                    <Setter Property="Background" Value="#FFC5BEBE"/>
-                </Trigger>
-                <Trigger Property="IsReadOnly" Value="False">
-                    <Setter Property="Background" Value="White"/>
-                </Trigger>
-            </Style.Triggers>
-
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
 
     </Window.Resources>
@@ -124,9 +115,9 @@
         <TextBox Text="{Binding Kreditgräns}" Canvas.Left="375" Canvas.Top="566" Width="179" IsReadOnly="{Binding KreditReadOnly}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 
-        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="790" Canvas.Top="485" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="640" Canvas.Top="547" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}"/>
-        <Button Content="STÄNG" Height="50" Width="130"  Canvas.Left="790" Canvas.Top="547" Foreground="White" BorderBrush="White" FontSize="20" Background="#FF5e8ec2"  />
+        <Button Content="SPARA" Height="50" Width="130"  Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="790" Canvas.Top="485" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="640" Canvas.Top="547" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}"/>
+        <Button Content="STÄNG" Height="50" Width="130"  Canvas.Left="790" Canvas.Top="547"/>
 
 
 

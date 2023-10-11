@@ -31,7 +31,13 @@ namespace SkiResortSystem.ViewModels
                 kundPresentation = kund.ToString().Split(" (")[0];
                 OnPropertyChanged(); }
         }
-        
+
+        private bool uppdateraBokning = false;
+        public bool UppdateraBokning
+        {
+            get { return uppdateraBokning; }
+            set { uppdateraBokning = value; OnPropertyChanged(); }
+        }
         private int antalNätter;
         public int AntalNätter
         {
@@ -73,8 +79,6 @@ namespace SkiResortSystem.ViewModels
             get { return avbetalningsskydd; }
             set { avbetalningsskydd = value; OnPropertyChanged(); }
         }
-
-
 
 
         private int antalPersoner;
@@ -226,10 +230,22 @@ namespace SkiResortSystem.ViewModels
         public ICommand SaveCustomer => saveCustomer ??= saveCustomer = new RelayCommand<ICloseable>((view) =>
         {
             BookingController bc = new BookingController();
-            Bokning.Återbetalningsskydd = Avbetalningsskydd;
-            bc.SparaBokning(Bokning);
-            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
-            CloseCommand.Execute(view);
+
+            if (uppdateraBokning = true) //KOLLA SÅ ATT DETTA FUNKAR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            {
+                bc.UppdateraBokning(Bokning);
+                MessageBoxResult respons = MessageBox.Show($"Ändringar för bokning {Bokning.BokningsID} är nu sparad i systemet!");
+                CloseCommand.Execute(view);
+            }
+            else
+            {
+                Bokning.Återbetalningsskydd = Avbetalningsskydd;
+                bc.SparaBokning(Bokning);
+                MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
+                CloseCommand.Execute(view);
+            }
+
+           
 
         });
 
@@ -317,6 +333,15 @@ namespace SkiResortSystem.ViewModels
                 }
             }
             Facilitetstyp = Benämning;
+            CheckaInReadOnly = true;
+            checkaUtReadOnly = true;
+            CheckaInVisibility = Visibility.Visible; 
+            CheckaUtVisibility = Visibility.Visible;
+            AnkomstReadOnly = true;
+            AvresaReadOnly = true;
+            AntalPersonerReadOnly = true;
+            uppdateraBokning = true;
+
         }
 
         public BookingOverviewViewModel(Kund ValdKund, Facilitet Valdfacilitet, DateTime Valdavresetid, DateTime Valdankomsttid, int ValdaAntalPersoner,float Facilitetspris)

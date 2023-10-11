@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SkiResortSystem.ViewModels
@@ -43,7 +44,11 @@ namespace SkiResortSystem.ViewModels
             saveActivityBooking ??= saveActivityBooking = new RelayCommand<ICloseable>((view) =>
             {
                 ActivityController ac = new ActivityController();
-                foreach (Aktivitetsbokning ab in Activities) ac.SaveAktivityBooking(ab);
+                foreach (Aktivitetsbokning ab in Activities)
+                {
+                    try { ac.SaveAktivityBooking(ab); }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                }
                 closeActivityBooking.Execute(view);
             });
         private ICommand removeActivityBooking;

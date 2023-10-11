@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -18,6 +20,7 @@ namespace SkiResortSystem
     {
         public App()
         {
+            
             Startup += (s, e) => //ta bort denna sen
             {
                 WindowService.RegisterWindow<LoginViewModel, LoginWindow>();
@@ -27,6 +30,11 @@ namespace SkiResortSystem
                 WindowService.RegisterWindow<ActivityOverviewViewModel, ActivityOverview>();
                 WindowService.RegisterWindow<EquipmentOverviewViewModel, EquipmentOverview>();
             };
+        }
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("sv-SE");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("sv-SE");
         }
     }
 }

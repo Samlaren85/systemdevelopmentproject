@@ -347,7 +347,10 @@ namespace BusinessLayer
         public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)
         {
             IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid < avrese && b.Avresetid > ankomst, X => X.FacilitetID);
-            IList<Facilitet> Faciliteter = unitOfWork.FacilitetRepository.Find(b => b.FacilitetID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase) && antalPersoner <= b.LägenhetsID.Bäddar, x => x.LägenhetsID);
+            IList<Facilitet> Faciliteter = unitOfWork.FacilitetRepository.Find(b => b.FacilitetID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase) && 
+                                ((b.LägenhetsID != null && antalPersoner <= b.LägenhetsID.Bäddar) ||
+                                (b.CampingID != null) ||
+                                (b.KonferensID != null && antalPersoner <= b.KonferensID.AntalPersoner)), x => x.LägenhetsID, x => x.CampingID, x => x.KonferensID);
             List<Facilitet> inaktuellFaciliteter = new List<Facilitet>();
             foreach (Bokning b in bokningar)
             {

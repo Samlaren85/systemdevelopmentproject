@@ -22,6 +22,26 @@ namespace BusinessLayer
             return unitOfWork.AktivitetRepository.Find(a => a.Skidskola.VaraktighetFrån >= from && a.Skidskola.VaraktighetTill <= to, x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);
         }
 
+        public void SaveAktivityBooking(Aktivitetsbokning ab)
+        {
+            unitOfWork.AktivitetsbokningsRepository.Add(ab);
+            unitOfWork.Save();
+        }
+
+        public bool RemoveAktivityBooking(Aktivitetsbokning ab)
+        {
+            bool done;
+            try
+            {
+                done = unitOfWork.AktivitetsbokningsRepository.Remove(ab);
+            } catch (Exception ex)
+            {
+                done = false;
+            }
+            if (done) unitOfWork.Save();
+            return done;
+        }
+
         public IList<Aktivitet> FindSkiSchool(DateTime from, DateTime to, string typ)
         {
             return unitOfWork.AktivitetRepository.Find(a => a.Skidskola.VaraktighetFrån >= from && a.Skidskola.VaraktighetTill <= to && a.Typ.Equals(typ), x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);

@@ -22,10 +22,6 @@ namespace SkiResortSystem.ViewModels
             get { return kundPresentation; }
             set { kundPresentation = value; OnPropertyChanged(); }
         }
-
-
-
-
         private Kund kund;
         public Kund Kund
         {
@@ -35,9 +31,7 @@ namespace SkiResortSystem.ViewModels
                 kundPresentation = kund.ToString().Split(" (")[0];
                 OnPropertyChanged(); }
         }
-
-       
-
+        
         private int antalNätter;
         public int AntalNätter
         {
@@ -90,6 +84,17 @@ namespace SkiResortSystem.ViewModels
             set { antalPersoner = value; OnPropertyChanged(); }
         }
 
+        private bool antalPersonerReadOnly = true;
+        public bool AntalPersonerReadOnly
+        {
+            get { return antalPersonerReadOnly; }
+            set
+            {
+                antalPersonerReadOnly = value;
+                OnPropertyChanged();
+            }
+        }
+
         private float prisPerNatt;
         public float PrisPerNatt
         {
@@ -114,7 +119,16 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        private bool ankomstReadOnly = true;
+        public bool AnkomstReadOnly
+        {
+            get { return ankomstReadOnly; }
+            set
+            {
+                ankomstReadOnly = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         private DateTime avresa;
@@ -127,7 +141,78 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        
+        private bool avresaReadOnly = true;
+        public bool AvresaReadOnly
+        {
+            get { return avresaReadOnly; }
+            set
+            {
+                avresaReadOnly = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool saveCustomerReadOnly = true;
+        public bool SaveCustomerReadOnly
+        {
+            get { return saveCustomerReadOnly; }
+            set
+            {
+                saveCustomerReadOnly = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool stängTabortReadOnly = true;
+        public bool StängTabortReadOnly
+        {
+            get { return stängTabortReadOnly; }
+            set
+            {
+                stängTabortReadOnly = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool checkaInReadOnly = true;
+        public bool CheckaInReadOnly
+        {
+            get { return checkaInReadOnly; }
+            set
+            {
+                checkaInReadOnly = value;
+                OnPropertyChanged();
+            }
+        }
+        private Visibility checkaInVisibility = Visibility.Collapsed;
+        public Visibility CheckaInVisibility
+        {
+            get { return checkaInVisibility; }
+            set
+            {
+                checkaInVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool checkaUtReadOnly = true;
+        public bool CheckaUtReadOnly
+        {
+            get { return checkaUtReadOnly; }
+            set
+            {
+                checkaUtReadOnly = value;
+                OnPropertyChanged();
+            }
+        }
+        private Visibility checkaUtVisibility = Visibility.Collapsed;
+        public Visibility CheckaUtVisibility
+        {
+            get { return checkaUtVisibility; }
+            set
+            {
+                checkaUtVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+
 
         public Bokning SkapaBokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID)
         {
@@ -172,6 +257,68 @@ namespace SkiResortSystem.ViewModels
         {
 
         }
+        public BookingOverviewViewModel(Bokning bokning)
+        {
+            Kund = bokning.KundID;
+            Ankomst = bokning.Ankomsttid;
+            Avresa = bokning.Avresetid;
+            TimeSpan tidsspann = Avresa - Ankomst;
+            AntalNätter = tidsspann.Days;
+            foreach(Facilitet f in bokning.FacilitetID)
+            {
+                Totalpris += (float)Math.Round(f.Facilitetspris, 2);
+            }
+            Totalpris = (float)Math.Round(Totalpris, 2);
+            if (AntalNätter == 0)
+            {
+                PrisPerNatt = 0;
+            }
+            else
+            {
+                PrisPerNatt = Totalpris / AntalNätter;
+                PrisPerNatt = (float)Math.Round(PrisPerNatt, 2);
+            }
+            string Benämning = string.Empty;
+            foreach(Facilitet f in  bokning.FacilitetID)
+            {
+
+                if(f.LägenhetsID != null)
+                {
+                    if(Benämning == string.Empty)
+                    {
+                        Benämning = f.LägenhetsID.LägenhetBenämning;
+                    }
+                    else
+                    {
+                        Benämning = Benämning + ", " + f.LägenhetsID.LägenhetBenämning;
+                    }
+                }
+                if (f.CampingID != null)
+                {
+                    if(Benämning != string.Empty)
+                    {
+                        Benämning = f.CampingID.CampingBenämning;
+                    }
+                    else
+                    {
+                        Benämning = Benämning + ", " + f.CampingID.CampingBenämning;
+                    }
+                }
+                if (f.KonferensID != null)
+                {
+                    if(Benämning == string.Empty) 
+                    {
+                        Benämning = f.KonferensID.KonferensBenämning;
+                    }
+                    else
+                    {
+                        Benämning = Benämning + ", " + f.KonferensID.KonferensBenämning;
+                    }
+                }
+            }
+            Facilitetstyp = Benämning;
+        }
+
         public BookingOverviewViewModel(Kund ValdKund, Facilitet Valdfacilitet, DateTime Valdavresetid, DateTime Valdankomsttid, int ValdaAntalPersoner,float Facilitetspris)
         { 
             Kund = ValdKund;

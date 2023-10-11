@@ -15,10 +15,10 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
-        
+
 
     </Window.Resources>
-    <Canvas  Background="#FFA6C3E4" Height="1000" > 
+    <Canvas  Background="#FFA6C3E4" Height="1000" >
 
         <TextBlock Text="Faktura" FontWeight="Bold" Canvas.Left="128" Canvas.Top="30" />
 
@@ -31,7 +31,7 @@
 
 
 
-        <TextBlock Text="Efternamn" Canvas.Left="467" Canvas.Top="205" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Text="Efternamn" Canvas.Left="308" Canvas.Top="204" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 
 
@@ -49,7 +49,7 @@
 
 
 
-        <TextBlock Text="Postort" Canvas.Left="467" Canvas.Top="365" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <TextBlock Text="Postort" Canvas.Left="308" Canvas.Top="365" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
 
 
@@ -69,14 +69,14 @@
 
 
 
-        <TextBox Canvas.Left="128" Canvas.Top="155" Width="238" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="128" Canvas.Top="235" Width="263" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="467" Canvas.Top="236" Width="286" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="128" Canvas.Top="315" Width="374" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="128" Canvas.Top="395" Width="184" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="467" Canvas.Top="395" Width="143" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="128" Canvas.Top="475" Width="130" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="128" Canvas.Top="555" Width="130" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="128" Canvas.Top="155" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Canvas.Left="128" Canvas.Top="235" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Canvas.Left="308" Canvas.Top="235" Width="165" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Canvas.Left="128" Canvas.Top="315" Width="345" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Canvas.Left="128" Canvas.Top="395" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Canvas.Left="308" Canvas.Top="395" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Canvas.Left="128" Canvas.Top="475" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Canvas.Left="128" Canvas.Top="555" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 
 

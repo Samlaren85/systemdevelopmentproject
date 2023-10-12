@@ -4,6 +4,7 @@ using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +27,8 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private List<Aktivitetsbokning> aktivitetsbokningar;
-        public List<Aktivitetsbokning> Aktivitetsbokningar
+        private ObservableCollection<Aktivitetsbokning> aktivitetsbokningar;
+        public ObservableCollection<Aktivitetsbokning> Aktivitetsbokningar
         {
             get { return aktivitetsbokningar; }
             set
@@ -37,17 +38,17 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        public void SearchActivities()
+        public void SearchActivities(DateTime? from, DateTime? to)
         {
             ActivityController ac = new ActivityController();
-            AktivitetsSökning = ac.FindSkiSchool(SelectedActivityBooking.Ankomsttid, SelectedActivityBooking.Avresetid);
-            Aktivitetsbokningar = new List<Aktivitetsbokning>();
+            AktivitetsSökning = ac.FindSkiSchool(from, to);
+            Aktivitetsbokningar = new ObservableCollection<Aktivitetsbokning>();
             foreach (Aktivitet a in AktivitetsSökning)
             {
-                if (TypeOfActivity == string.Empty || a.Skidskola.Typ.Contains(TypeOfActivity))
+                if (TypeOfActivity == string.Empty || TypeOfActivity == null || a.Skidskola.Typ.Contains(TypeOfActivity))
                 {
                     bool found = SearchBookedActivities(a);
-                    if (!found) Aktivitetsbokningar.Add(new Aktivitetsbokning(SelectedBooking, a, 0));
+                    if (!found) Aktivitetsbokningar.Add(new Aktivitetsbokning(SelectedActivityBooking, a, 0));
                 }
 
             }
@@ -100,6 +101,7 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 searchActivityCustomer = value;
+                ActivityCustomerError = string.Empty;
                 SearchActivityCustomerResults = SearchCustomers(searchActivityCustomer);
                 if (searchActivityCustomer == string.Empty)
                 {
@@ -155,6 +157,7 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 activityDate = value;
+                ActivityCustomerError = string.Empty;
                 OnPropertyChanged();
             }
         }
@@ -165,6 +168,7 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 activityEndDate = value;
+                ActivityCustomerError = string.Empty;
                 OnPropertyChanged();
             }
         }
@@ -229,8 +233,19 @@ namespace SkiResortSystem.ViewModels
                 {
                     selectedActivityBooking = value;
                     SearchActivityBooking = SelectedActivityBooking.ToString().Split(" (")[0];
-                    SearchActivities();
+                    SearchActivities(selectedActivityBooking.Ankomsttid, selectedActivityBooking.Avresetid);
                 }
+                OnPropertyChanged();
+            }
+        }
+
+        private Aktivitetsbokning selectedBookingActivity;
+        public Aktivitetsbokning SelectedBookingActivity
+        {
+            get { return selectedBookingActivity; }
+            set
+            {
+                selectedBookingActivity = value;
                 OnPropertyChanged();
             }
         }
@@ -241,22 +256,44 @@ namespace SkiResortSystem.ViewModels
                 {
                     try
                     {
-                        Aktivitetsbokningar = new List<Aktivitetsbokning>();
-                        foreach (Bokning b in SelectedActivityCustomer.BokningsRef)
+                        ActivityCustomerError = string.Empty;
+                       Aktivitetsbokningar = new ObservableCollection<Aktivitetsbokning>();
+                        if (SelectedActivityCustomer != null)
                         {
-                            if ((ActivityDate == null || b.Ankomsttid >= ActivityDate) && (ActivityEndDate == null || b.Avresetid <= ActivityEndDate))
+                            foreach (Bokning b in SelectedActivityCustomer.BokningsRef)
                             {
-                                SelectedBooking = b;
-                                SearchBookedActivities();
+                                if ((ActivityDate == null || b.Ankomsttid >= ActivityDate) && (ActivityEndDate == null || b.Avresetid <= ActivityEndDate))
+                                {
+                                    SelectedActivityBooking = b;
+                                    SearchBookedActivities();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ActivityDate != null ||  ActivityEndDate != null )
+                            {
+                                SearchActivities(ActivityDate, ActivityEndDate);
+                            }
+                            else
+                            {
+                                ActivityCustomerError = "Någon parameter måste vara angiven innan sökning";
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         ActivityCustomerError = "Hittade inga bokade aktiviteter";
                     }
                     
                 });
+
+        private ICommand doubleClickActivityCommand;
+        public ICommand DoubleClickActivityCommand =>
+            doubleClickActivityCommand ??= doubleClickActivityCommand = new RelayCommand(() =>
+            {
+                ActivityOverviewViewModel aktivitetsöversikt = new ActivityOverviewViewModel(SelectedBookingActivity.Bokningsref, new ObservableCollection<Aktivitetsbokning>(SelectedBookingActivity.Bokningsref.AktivitetRef));
+            });
 
         private ICommand bookActivity;
         public ICommand BookActivity =>
@@ -269,12 +306,12 @@ namespace SkiResortSystem.ViewModels
                     {
                         if (ab.Antal == 0) removableActivities.Add(ab);
                     }
-                    Aktivitetsbokningar = Aktivitetsbokningar.Except(removableActivities).ToList();
-                    ActivityOverviewViewModel aktivitetsöversikt = new ActivityOverviewViewModel(SelectedBooking, Aktivitetsbokningar);
+                    Aktivitetsbokningar = new ObservableCollection<Aktivitetsbokning>(Aktivitetsbokningar.Except(removableActivities).ToList());
+                    ActivityOverviewViewModel aktivitetsöversikt = new ActivityOverviewViewModel(SelectedActivityBooking, Aktivitetsbokningar);
                     windowService.ShowDialog(aktivitetsöversikt);
                     SearchActivityBooking = string.Empty;
                     SelectedActivityBooking = null!;
-                    Aktivitetsbokningar = new List<Aktivitetsbokning>();
+                    Aktivitetsbokningar = new ObservableCollection<Aktivitetsbokning>();
                 }
             });
     }

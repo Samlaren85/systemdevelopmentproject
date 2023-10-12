@@ -7,7 +7,7 @@
         xmlns:comp="clr-namespace:SkiResortSystem.Components"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="{Binding LoggedInUser, StringFormat=MainWindow ({0})}" Height="auto" Width="1920" FontFamily="Candara" Visibility="{Binding MainVisibility}" Background="#FF5e8ec2" WindowState="Maximized">
+        Title="{Binding LoggedInUser, StringFormat=Ski Resort System ({0})}" Height="auto" Width="1920" FontFamily="Candara" Visibility="{Binding MainVisibility}" Background="#FF5e8ec2" WindowState="Maximized">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>

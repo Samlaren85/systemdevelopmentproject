@@ -193,25 +193,6 @@ namespace SkiResortSystem.ViewModels
             }
         });
 
-
-        private ICommand customerPriveteOverview = null!;
-        public ICommand CustomerPrivateOverview =>
-            customerPriveteOverview ??= customerPriveteOverview = new RelayCommand(() =>
-            {
-                CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel();
-                windowService.ShowDialog(kundöversikt);
-            }
-            );
-
-        private ICommand customerCompanyOverview = null!;
-        public ICommand CustomerCompanyOverview =>
-            customerCompanyOverview ??= customerCompanyOverview = new RelayCommand(() =>
-            {
-                CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel();
-                windowService.ShowDialog(kundöversikt);
-            }
-            );
-
         private bool öppnaDropDown;
         public bool ÖppnaDropDown
         {
@@ -223,76 +204,7 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        #region Faktura listvy
-        private Bokning selectFaktura;
-        public Bokning SelectFaktura
-        {
-            get { return selectFaktura; }
-            set
-            {
-                selectFaktura = value;
-            }
-        }
-
-        private Faktura selectedFaktura;
-        public Faktura SelectedFaktura
-        {
-            get { return selectedFaktura; }
-            set
-            {
-                if (value == selectedFaktura) return;
-                if (value != null)
-                {
-                    selectedFaktura = value;
-                    SearchBills();
-                }
-                OnPropertyChanged();
-            }
-        }
-
-        private string searchFaktura;
-        public string SearchFaktura
-        {
-            get { return searchFaktura; }
-            set
-            {
-                if (value != null)
-                {
-                    searchFaktura = value;
-                    SearchBills(); if (searchFaktura == string.Empty) { FakturaResults = new List<Faktura>(); }
-                    OnPropertyChanged(SearchFaktura);
-                }
-            }
-        }
-
-        private IList<Faktura> fakturaResults;
-        public IList<Faktura> FakturaResults
-        {
-            get { return fakturaResults; }
-            set
-            {
-                fakturaResults = value;
-                OnPropertyChanged();
-            }
-        }
-        public void SearchBills()
-        {
-            EconomyController ec = new EconomyController();
-            FakturaSökning = ec.FindFaktura(SelectFaktura);
-        }
-
-        private Faktura fakturaSökning;
-        public Faktura FakturaSökning
-        {
-            get { return fakturaSökning; }
-            set
-            {
-                fakturaSökning = value;
-                OnPropertyChanged();
-            }
-        }
-
-        #endregion
+       
         /// <summary>
         /// Logga ut och stänga ner nedan 
         /// </summary>

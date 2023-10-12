@@ -33,6 +33,7 @@ namespace EntityLayer
         public bool Återbetalningsskydd { get; set; }
         public DateTime Ankomsttid { get; set; }
         public DateTime Avresetid { get; set; }
+        public string AntalPersoner { get; set; }
         public Användare AnvändareID { get; set; }
         public Kund KundID { get; set; }
 
@@ -46,7 +47,7 @@ namespace EntityLayer
         {
 
         }
-        public Bokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, bool återbetalningsskydd = false)
+        public Bokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, string antalPersoner, bool återbetalningsskydd = false)
         {
             _antalBokningar++;
             BokningsID = "B" + _antalBokningar.ToString("000000");
@@ -56,6 +57,7 @@ namespace EntityLayer
             AnvändareID = användareID;
             KundID = kundID;
             FacilitetID = facilitetID;
+            AntalPersoner = antalPersoner;
             UtrustningRef = null;
             AktivitetRef = null;
             Återbetalningsskydd = återbetalningsskydd;

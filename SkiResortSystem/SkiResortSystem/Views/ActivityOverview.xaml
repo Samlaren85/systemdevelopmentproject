@@ -33,7 +33,7 @@
 
 
         <TextBlock Text="Namn:" Canvas.Left="180" Canvas.Top="200"/>
-        <TextBlock  Text="{Binding Path=Bokningsref.KundID, Mode=TwoWay}" Canvas.Left="251" Canvas.Top="200" Width="206" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBlock  Text="{Binding Path=Bokningsref.KundID.Namn}" Canvas.Left="251" Canvas.Top="200" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
 
 

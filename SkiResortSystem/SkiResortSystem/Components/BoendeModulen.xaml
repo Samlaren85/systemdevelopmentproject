@@ -97,8 +97,8 @@
                 <TextBlock  Text="Sök på: Förnamn/Efternamn/Bokningsnummer"  Foreground="Black" Canvas.Left="80" Canvas.Top="55" FontStyle="Italic" />
                 <TextBlock Text="SÖK BOKNING/KONFERENS" Foreground="Black" Canvas.Left="80" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-                <DatePicker Canvas.Top="85" Canvas.Left="530" SelectedDate="{Binding Ankomsttid}"/>
-                <DatePicker Canvas.Top="85" Canvas.Left="685" SelectedDate="{Binding Avresetid}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <DatePicker Canvas.Top="85" Canvas.Left="530" SelectedDate="{Binding AnkomsttidÄndra}"/>
+                <DatePicker Canvas.Top="85" Canvas.Left="685" SelectedDate="{Binding AvresetidÄndra}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="Ankomstdatum" Canvas.Top="55" Canvas.Left="530"/>
                 <TextBlock Text="Avresedatum" Canvas.Top="55" Canvas.Left="685" HorizontalAlignment="Left" VerticalAlignment="Center"  />
 

@@ -20,13 +20,10 @@
         </TabControl.Resources>
         <TabItem  Header="BOKA BOENDE/KONFERENS">
 
-            <Canvas Height="auto" Width="1760">
-
-
-
+            <Canvas Height="auto" Width="1760" Margin="0,-31,0,41">
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding ErrorMessage2}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="614" Canvas.Top="131" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding ErrorMessage3}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="195" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -35,15 +32,12 @@
                 <RadioButton Content="Camping" Canvas.Left="190" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding Campingradiobutton}"/>
                 <RadioButton Content="Konferens" Canvas.Left="300" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding Konferensradiobutton}"/>
 
-
-
                 <TextBlock Text="Avresedatum"  Canvas.Left="449" Canvas.Top="144"/>
                 <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding Avresetid}"/>
                 <TextBlock Text="Ankomstdatum" Canvas.Left="449" Canvas.Top="76"/>
                 <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding Ankomsttid}"/>
                 <Button Content="Sök" Canvas.Left="614" Canvas.Top="165" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" />
-
 
                 <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
                           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedItem="{Binding Path=SelectedFacility}">
@@ -83,26 +77,19 @@
 
 
         <TabItem Header="HANTERA BOKNINGAR">
-           
-            <Canvas Height="auto" Width="1760">
 
-
-                <DataGrid  Width="918" Height="410" Background="White" AutoGenerateColumns="False" BorderThickness="2" Canvas.Left="80" Canvas.Top="149" ItemsSource="{Binding BookingResults, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <!--DataGrid.InputBindings>
-                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommand}"/>
-                    </DataGrid.InputBindings>-->
+            <Canvas Height="auto" Width="1760" Margin="0,25,0,0">
+                <DataGrid  Width="918" Height="410" Background="White" AutoGenerateColumns="False" BorderThickness="2" Canvas.Left="80" Canvas.Top="149" SelectedItem="{Binding ÄndraBokning}" ItemsSource="{Binding BookingResults, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <DataGrid.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommandÄndra}"/>
+                    </DataGrid.InputBindings>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Namn" Width="*"  Binding="{Binding KundID}" ></DataGridTextColumn>
                         <DataGridTextColumn Header="Ankomstdatum" Binding="{Binding Ankomsttid}" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Avresedatum" Binding="{Binding Avresetid}" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Bokningsnummer" Binding="{Binding BokningsID}" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="AntalPersoner" Width="*" Binding="{Binding FacilitetID}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Typ " Width="*" Binding="{Binding FacilitetID}"/>
-
                     </DataGrid.Columns>
                 </DataGrid>
-
-
 
                 <TextBox Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Top="85" Canvas.Left="80" Width="293" HorizontalAlignment="Left" VerticalAlignment="Center"  />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -110,15 +97,12 @@
                 <TextBlock  Text="Sök på: Förnamn/Efternamn/Bokningsnummer"  Foreground="Black" Canvas.Left="80" Canvas.Top="55" FontStyle="Italic" />
                 <TextBlock Text="SÖK BOKNING/KONFERENS" Foreground="Black" Canvas.Left="80" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-
                 <DatePicker Canvas.Top="85" Canvas.Left="530" SelectedDate="{Binding Ankomsttid}"/>
                 <DatePicker Canvas.Top="85" Canvas.Left="685" SelectedDate="{Binding Avresetid}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="Ankomstdatum" Canvas.Top="55" Canvas.Left="530"/>
                 <TextBlock Text="Avresedatum" Canvas.Top="55" Canvas.Left="685" HorizontalAlignment="Left" VerticalAlignment="Center"  />
 
             </Canvas>
-
-
         </TabItem>
 
         <TabItem Header="VISA BELÄGGNING">
@@ -135,6 +119,22 @@
                         <DataGridTextColumn x:Name="Column4" Header="KONF stor"  Width="*" Binding="{Binding [4] }" ></DataGridTextColumn>
                         <DataGridTextColumn x:Name="Column5" Header="KONF liten" Width="*" Binding="{Binding [5] }" ></DataGridTextColumn>
                     </DataGrid.Columns>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="Height" Value="43"/>
+                        </Style>
+
+                    </DataGrid.CellStyle>
+                    
                 </DataGrid>
 
                 <TextBlock Text="Datum:" Foreground="Black" Canvas.Left="80" Canvas.Top="58" />

@@ -86,7 +86,7 @@ namespace DataLayer
             if (!Kunder.Any())
             {
                 Privatkund pkund = new Privatkund("990106", "Börje", "Lundin");
-                Kund Börje = new Kund(10f, 1, "Ekliden", "5190", "sandared", "112-1121121", "borje@mail.com", null, pkund);
+                Kund Börje = new Kund(10f, 12000, "Ekliden", "5190", "sandared", "112-1121121", "borje@mail.com", null, pkund);
                 Kunder.Add(Börje);
                 Företagskund fkund = new Företagskund("1111111", "Ara AB", "borki", "Hidden Leaf village", "60324", "Köping");
                 Kund Ara = new Kund(20f, 1, "Göreborgsvägen", "51189", "borås", "911-911911", "info@ara.se", fkund, null);

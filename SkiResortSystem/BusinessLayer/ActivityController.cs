@@ -24,8 +24,31 @@ namespace BusinessLayer
 
         public void SaveAktivityBooking(Aktivitetsbokning ab)
         {
-            unitOfWork.AktivitetsbokningsRepository.Add(ab);
-            unitOfWork.Save();
+            if (ab.Bokningsref.UtnyttjadKredit + ab.TotalPris <= ab.Bokningsref.KundID.Kreditgräns)
+            {
+                if (ab.Antal <= ab.Aktivitetsref.AntalPlatserKvar)
+                {
+                    if (unitOfWork.AktivitetsbokningsRepository.FirstOrDefault(a => a.Equals(ab)) == null)
+                    { 
+                        unitOfWork.AktivitetsbokningsRepository.Add(ab);
+                        ab.Aktivitetsref.Skidskola.AntalDeltagare += ab.Antal;
+                        ab.Bokningsref.UtnyttjadKredit += ab.TotalPris;
+                        unitOfWork.Save();
+                    }
+                    else
+                    {
+                        Aktivitetsbokning existerandeAktivitetsbokning = unitOfWork.AktivitetsbokningsRepository.FirstOrDefault(a => a.Equals(ab));
+                        existerandeAktivitetsbokning.Aktivitetsref.Skidskola.AntalDeltagare -= existerandeAktivitetsbokning.Antal;
+                        existerandeAktivitetsbokning.Bokningsref.UtnyttjadKredit -= existerandeAktivitetsbokning.TotalPris;
+                        ab.Aktivitetsref.Skidskola.AntalDeltagare += ab.Antal;
+                        ab.Bokningsref.UtnyttjadKredit += ab.TotalPris;
+                        unitOfWork.AktivitetsbokningsRepository.Update(ab);
+                        unitOfWork.Save();
+                    }
+                }
+                else throw new Exception("Antal personer överskrider kursens Deltagargräns");
+            }
+            else throw new Exception("Beloppet överskrider kundens kreditgräns!");
         }
 
         public bool RemoveAktivityBooking(Aktivitetsbokning ab)
@@ -33,6 +56,8 @@ namespace BusinessLayer
             bool done;
             try
             {
+                ab.Aktivitetsref.Skidskola.AntalDeltagare -= ab.Antal;
+                ab.Bokningsref.UtnyttjadKredit -= ab.TotalPris;
                 done = unitOfWork.AktivitetsbokningsRepository.Remove(ab);
             } catch (Exception ex)
             {

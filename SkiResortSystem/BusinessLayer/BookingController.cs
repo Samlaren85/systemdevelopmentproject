@@ -30,6 +30,13 @@ namespace BusinessLayer
             unitOfWork.Save();
         }
 
+        public void UppdateraBokning(Bokning bokning)
+        {
+            unitOfWork.BokningsRepository.Update(bokning);
+            unitOfWork.Save();
+
+        }
+
         public IList<Bokning> FindMasterBooking(string searchString, DateTime Ankomst, DateTime Avresa)
         {
             return unitOfWork.BokningsRepository.Find(b =>

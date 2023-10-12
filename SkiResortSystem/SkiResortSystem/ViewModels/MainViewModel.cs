@@ -256,9 +256,18 @@ namespace SkiResortSystem.ViewModels
                 {
                     SearchResults = new List<Kund>();
                 }
+                if (SearchResults.Count > 0)
+                {
+                    ÖppnaDropDown = true;
+                }
+                if(SearchResults.Count <= 0 || SearchText == "")
+                {
+                    ÖppnaDropDown = false;
+                }
                 OnPropertyChanged(); 
             }
         }
+
 
         private List<Kund> searchResults = new List<Kund>();
         public List<Kund> SearchResults
@@ -675,7 +684,6 @@ namespace SkiResortSystem.ViewModels
             }
             );
 
-
         private Facilitet selectedFacility;
         public Facilitet SelectedFacility
         {
@@ -696,11 +704,29 @@ namespace SkiResortSystem.ViewModels
             {
                 if (SelectedCustomer != null)
                 {
+                    FacilitetsSökning = new List<Facilitet>();
                     int.TryParse(antalPersonerTillBoende, out int antalpersoner);
                     BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner, Facilitetspriset);
                     windowService.ShowDialog(bokningsöversikt);
                 }
             });
+        private ICommand doubleClickBookingCommandÄndra = null!;
+        public ICommand DoubleClickBookingCommandÄndra =>
+            doubleClickBookingCommandÄndra ??= doubleClickBookingCommandÄndra = new RelayCommand(() =>
+            {
+                if (ÄndraBokning != null)
+                {
+                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(ÄndraBokning);
+                    windowService.ShowDialog(bokningsöversikt);
+                }
+            });
+
+        private Bokning ändraBokning;
+        public Bokning ÄndraBokning
+        {
+            get { return ändraBokning; }
+            set { ändraBokning = value; OnPropertyChanged(); }
+        }
 
         #region AktivitetsModulen
         public string searchActivityBooking;
@@ -804,6 +830,17 @@ namespace SkiResortSystem.ViewModels
                     NoBookingResult = "Ingen bokning hittades";
                     BookingResults = new List<Bokning>();
                 }
+            }
+        }
+
+        private bool öppnaDropDown;
+        public bool ÖppnaDropDown
+        {
+            get { return öppnaDropDown; }
+            set
+            {
+                öppnaDropDown = value;
+                OnPropertyChanged();
             }
         }
 

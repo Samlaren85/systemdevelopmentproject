@@ -19,6 +19,11 @@
             <Setter Property="FontSize" Value="20"/>
         </Style>
 
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+
     </Window.Resources>
 
     <Canvas Background="#FFA6C3E4" Height="1000">

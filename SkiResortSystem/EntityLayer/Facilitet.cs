@@ -67,5 +67,27 @@ namespace EntityLayer
                 return "Databasen saknar information om facilitet.";
             }
         }
+        public string Typ
+        {
+            get
+            {
+                if (LägenhetsID != null)
+                {
+                    return LägenhetsID.LägenhetBenämning;
+                }
+                if (CampingID != null)
+                {
+                    return CampingID.CampingBenämning;
+                }
+                if (KonferensID != null)
+                {
+                    return KonferensID.KonferensBenämning;
+                }
+                else
+                {
+                    return "Saknar facilitet";
+                }
+            }
+        }
     }
 }

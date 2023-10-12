@@ -86,8 +86,7 @@ namespace SkiResortSystem.ViewModels
                 if (SelectedCustomer != null)
                 {
                     FacilitetsSökning = new List<Facilitet>();
-                    int.TryParse(antalPersonerTillBoende, out int antalpersoner);
-                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner, Facilitetspriset);
+                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalPersonerTillBoende, Facilitetspriset);
                     windowService.ShowDialog(bokningsöversikt);
                 }
             });
@@ -212,7 +211,7 @@ namespace SkiResortSystem.ViewModels
         public ICommand CreateBooking => createBooking ??= createBooking = new RelayCommand(() =>
         {
             BookingController bc = new BookingController();
-            bc.CreateBokning(ankomsttid, avresetid, AnvändarID, KundID, FacilitetsID);
+            bc.CreateBokning(ankomsttid, avresetid, AnvändarID, KundID, FacilitetsID, AntalPersonerTillBoende);
         });
 
         private Facilitet selectedFacility;

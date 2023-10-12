@@ -81,14 +81,14 @@ namespace SkiResortSystem.ViewModels
         }
 
 
-        private int antalPersoner;
-        public int AntalPersoner
+        private string antalPersoner;
+        public string AntalPersoner
         {
             get { return antalPersoner; }
             set { antalPersoner = value; OnPropertyChanged(); }
         }
 
-        private bool antalPersonerReadOnly = true;
+        private bool antalPersonerReadOnly = false;
         public bool AntalPersonerReadOnly
         {
             get { return antalPersonerReadOnly; }
@@ -226,11 +226,32 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        
+        private Visibility taBortÄndraVisability = Visibility.Collapsed;
+        public Visibility TaBortÄndraVisability
+        {
+            get { return taBortÄndraVisability; }
+            set
+            {
+                taBortÄndraVisability = value;
+                OnPropertyChanged();
+            }
+        }
+        private Visibility taBortVisability = Visibility.Visible;
+        public Visibility TaBortVisability
+        {
+            get { return taBortVisability; }
+            set
+            {
+                taBortVisability = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public Bokning SkapaBokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID)
+        public Bokning SkapaBokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, string antalPersoner)
         {
             BookingController bc = new BookingController();
-            Bokning b = bc.CreateBokning(ankomsttid, avresetid, användareID, kundID, facilitetID);
+            Bokning b = bc.CreateBokning(ankomsttid, avresetid, användareID, kundID, facilitetID, antalPersoner);
             return b;
         }
 
@@ -246,6 +267,7 @@ namespace SkiResortSystem.ViewModels
                 Bokning.Återbetalningsskydd = Avbetalningsskydd;
                 Bokning.Ankomsttid = Ankomst;
                 Bokning.Avresetid = Avresa;
+                Bokning.AntalPersoner = AntalPersoner;
                 bc.UppdateraBokning(Bokning);
                 MessageBoxResult respons = MessageBox.Show($"Ändringar för bokning {Bokning.BokningsID} är nu sparad i systemet!");
                 CloseCommand.Execute(view);
@@ -272,6 +294,38 @@ namespace SkiResortSystem.ViewModels
 
         });
 
+        private ICommand stängTabortÄndra = null!;
+
+        public ICommand StängTabortÄndra => stängTabortÄndra ??= stängTabortÄndra = new RelayCommand<ICloseable>((view) =>
+        {
+            BookingController bc = new BookingController();
+            Bokning.Bokningsstatus = Status.Makulerad;
+            bc.UppdateraBokning(Bokning);
+            CloseCommand.Execute(view);
+
+        });
+
+        private ICommand checkaIn = null!;
+        public ICommand CheckaIn => checkaIn ??= checkaIn = new RelayCommand<ICloseable>((view) =>
+        {
+            BookingController bc = new BookingController();
+            Bokning.Bokningsstatus = Status.Incheckad;
+            bc.UppdateraBokning(Bokning);
+            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu INCHECKAD i systemet!");
+            CloseCommand.Execute(view);
+        });
+
+        private ICommand checkaUt = null!;
+        public ICommand CheckaUt => checkaUt ??= checkaUt = new RelayCommand<ICloseable>((view) =>
+        {
+            BookingController bc = new BookingController();
+            Bokning.Bokningsstatus = Status.Utcheckad;
+            bc.UppdateraBokning(Bokning);
+            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu UTCHECKAD i systemet!");
+            CloseCommand.Execute(view);
+
+        });
+
 
         private ICommand closeCommand = null!;
 
@@ -293,6 +347,7 @@ namespace SkiResortSystem.ViewModels
             Bokning = bokning;
             Ankomst = bokning.Ankomsttid;
             Avresa = bokning.Avresetid;
+            AntalPersoner = Bokning.AntalPersoner;
             TimeSpan tidsspann = Avresa - Ankomst;
             AntalNätter = tidsspann.Days;
             Avbetalningsskydd = bokning.Återbetalningsskydd;
@@ -350,18 +405,26 @@ namespace SkiResortSystem.ViewModels
             }
             Facilitetstyp = Benämning;
             SkapabokningVisibility = Visibility.Collapsed;
-            CheckaInReadOnly = true;
-            checkaUtReadOnly = true;
             CheckaInVisibility = Visibility.Visible; 
             CheckaUtVisibility = Visibility.Visible;
             AnkomstReadOnly = true;
             AvresaReadOnly = true;
-            AntalPersonerReadOnly = false;
+            AntalPersonerReadOnly = true;
             uppdateraBokning = true;
-
+            taBortÄndraVisability = Visibility.Visible;
+            taBortVisability = Visibility.Collapsed;
+            if (Ankomst == DateTime.Today && bokning.Bokningsstatus != Status.Incheckad)
+            {
+                CheckaInReadOnly = true;
+            }
+            if(Avresa == DateTime.Today && bokning.Bokningsstatus == Status.Incheckad)
+            {
+                CheckaInReadOnly = false;
+                CheckaUtReadOnly = true;
+            }
         }
 
-        public BookingOverviewViewModel(Kund ValdKund, Facilitet Valdfacilitet, DateTime Valdavresetid, DateTime Valdankomsttid, int ValdaAntalPersoner,float Facilitetspris)
+        public BookingOverviewViewModel(Kund ValdKund, Facilitet Valdfacilitet, DateTime Valdavresetid, DateTime Valdankomsttid, string ValdaAntalPersoner,float Facilitetspris)
         { 
             Kund = ValdKund;
             AntalPersoner = ValdaAntalPersoner;
@@ -398,7 +461,7 @@ namespace SkiResortSystem.ViewModels
             {
                 Valdfacilitet
             };
-            Bokning = SkapaBokning(Ankomst, Avresa, SessionController.LoggedIn, ValdKund, BokadFacilitet);
+            Bokning = SkapaBokning(Ankomst, Avresa, SessionController.LoggedIn, ValdKund, BokadFacilitet, ValdaAntalPersoner);
             Bokningsnummer = Bokning.BokningsID;
             SkapabokningVisibility = Visibility.Visible;
 

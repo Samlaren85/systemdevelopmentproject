@@ -74,7 +74,8 @@ namespace SkiResortSystem.ViewModels
         public IList<List<string>> VisaBeläggning
         {
             get { return visaBeläggning; }
-            set {
+            set
+            {
                 if (value != visaBeläggning)
                 {
                     visaBeläggning = value;
@@ -83,7 +84,8 @@ namespace SkiResortSystem.ViewModels
                     OnPropertyChanged(nameof(VisaBeläggning));
                     OnPropertyChanged(nameof(ÖverfördVisaBeläggning));
                 }
-                visaBeläggning = value; OnPropertyChanged(); }
+                visaBeläggning = value; OnPropertyChanged();
+            }
         }
 
         private IList<List<string>> överfördVisaBeläggning;
@@ -141,7 +143,7 @@ namespace SkiResortSystem.ViewModels
             get { return beläggningdatumperiod; }
             set
             {
-                beläggningdatumperiod= value;
+                beläggningdatumperiod = value;
                 OnPropertyChanged();
             }
         }
@@ -221,6 +223,76 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+        #region Faktura listvy
+        private Bokning selectFaktura;
+        public Bokning SelectFaktura
+        {
+            get { return selectFaktura; }
+            set
+            {
+                selectFaktura = value;
+            }
+        }
+
+        private Faktura selectedFaktura;
+        public Faktura SelectedFaktura
+        {
+            get { return selectedFaktura; }
+            set
+            {
+                if (value == selectedFaktura) return;
+                if (value != null)
+                {
+                    selectedFaktura = value;
+                    SearchBills();
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        private string searchFaktura;
+        public string SearchFaktura
+        {
+            get { return searchFaktura; }
+            set
+            {
+                if (value != null)
+                {
+                    searchFaktura = value;
+                    SearchBills(); if (searchFaktura == string.Empty) { FakturaResults = new List<Faktura>(); }
+                    OnPropertyChanged(SearchFaktura);
+                }
+            }
+        }
+
+        private IList<Faktura> fakturaResults;
+        public IList<Faktura> FakturaResults
+        {
+            get { return fakturaResults; }
+            set
+            {
+                fakturaResults = value;
+                OnPropertyChanged();
+            }
+        }
+        public void SearchBills()
+        {
+            EconomyController ec = new EconomyController();
+            FakturaSökning = ec.FindFaktura(SelectFaktura);
+        }
+
+        private Faktura fakturaSökning;
+        public Faktura FakturaSökning
+        {
+            get { return fakturaSökning; }
+            set
+            {
+                fakturaSökning = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
         /// <summary>
         /// Logga ut och stänga ner nedan 
         /// </summary>

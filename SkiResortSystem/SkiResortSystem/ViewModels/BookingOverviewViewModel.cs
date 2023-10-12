@@ -123,7 +123,7 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        private bool ankomstReadOnly = true;
+        private bool ankomstReadOnly = false;
         public bool AnkomstReadOnly
         {
             get { return ankomstReadOnly; }
@@ -145,7 +145,7 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        private bool avresaReadOnly = true;
+        private bool avresaReadOnly = false;
         public bool AvresaReadOnly
         {
             get { return avresaReadOnly; }
@@ -175,7 +175,7 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        private bool checkaInReadOnly = true;
+        private bool checkaInReadOnly = false;
         public bool CheckaInReadOnly
         {
             get { return checkaInReadOnly; }
@@ -195,7 +195,7 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        private bool checkaUtReadOnly = true;
+        private bool checkaUtReadOnly = false;
         public bool CheckaUtReadOnly
         {
             get { return checkaUtReadOnly; }
@@ -215,8 +215,17 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
-
+        
+        private Visibility skapabokningVisibility;
+        public Visibility SkapabokningVisibility
+        {
+            get { return skapabokningVisibility; }
+            set
+            {
+                skapabokningVisibility = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Bokning SkapaBokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID)
         {
@@ -231,8 +240,12 @@ namespace SkiResortSystem.ViewModels
         {
             BookingController bc = new BookingController();
 
-            if (uppdateraBokning) //KOLLA SÅ ATT DETTA FUNKAR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            if (uppdateraBokning) 
             {
+                Bokning.Återbetalningsskydd = Avbetalningsskydd;
+                Bokning.Ankomsttid = Ankomst;
+                Bokning.Avresetid = Avresa;
                 bc.UppdateraBokning(Bokning);
                 MessageBoxResult respons = MessageBox.Show($"Ändringar för bokning {Bokning.BokningsID} är nu sparad i systemet!");
                 CloseCommand.Execute(view);
@@ -275,12 +288,14 @@ namespace SkiResortSystem.ViewModels
         }
         public BookingOverviewViewModel(Bokning bokning)
         {
+            Bokningsnummer = bokning.BokningsID;
             Kund = bokning.KundID;
             Bokning = bokning;
             Ankomst = bokning.Ankomsttid;
             Avresa = bokning.Avresetid;
             TimeSpan tidsspann = Avresa - Ankomst;
             AntalNätter = tidsspann.Days;
+            Avbetalningsskydd = bokning.Återbetalningsskydd;
             foreach(Facilitet f in bokning.FacilitetID)
             {
                 Totalpris += (float)Math.Round(f.Facilitetspris, 2);
@@ -334,13 +349,14 @@ namespace SkiResortSystem.ViewModels
                 }
             }
             Facilitetstyp = Benämning;
+            SkapabokningVisibility = Visibility.Collapsed;
             CheckaInReadOnly = true;
             checkaUtReadOnly = true;
             CheckaInVisibility = Visibility.Visible; 
             CheckaUtVisibility = Visibility.Visible;
             AnkomstReadOnly = true;
             AvresaReadOnly = true;
-            AntalPersonerReadOnly = true;
+            AntalPersonerReadOnly = false;
             uppdateraBokning = true;
 
         }
@@ -384,6 +400,7 @@ namespace SkiResortSystem.ViewModels
             };
             Bokning = SkapaBokning(Ankomst, Avresa, SessionController.LoggedIn, ValdKund, BokadFacilitet);
             Bokningsnummer = Bokning.BokningsID;
+            SkapabokningVisibility = Visibility.Visible;
 
         }
     }

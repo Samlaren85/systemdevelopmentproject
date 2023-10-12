@@ -58,7 +58,11 @@ namespace BusinessLayer
 
         public void RemoveBokning(Bokning bokning)
         {
-            unitOfWork.BokningsRepository.Remove(bokning);
+            bool Done = unitOfWork.BokningsRepository.Remove(bokning);
+            if (Done)
+            {
+                unitOfWork.Save();
+            }
         }
     }
 }

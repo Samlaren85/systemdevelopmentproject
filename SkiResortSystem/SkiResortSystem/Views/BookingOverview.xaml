@@ -19,7 +19,7 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
-        
+
 
     </Window.Resources>
 
@@ -28,6 +28,9 @@
 
 
     <Canvas  Background="#FFA6C3E4" Height="1000" >
+
+        <TextBlock Text="Skapa Bokning:" FontWeight="Bold" FontSize="25" Visibility="{Binding SkapabokningVisibility}" Canvas.Left="383" Canvas.Top="81" HorizontalAlignment="Center" VerticalAlignment="Top" Width="162"/>
+        <TextBlock Text="Ändra Bokning:" FontWeight="Bold" FontSize="25" Visibility="{Binding CheckaInVisibility}" Canvas.Left="383" Canvas.Top="81" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
         <TextBlock Text="Bokningsnummer:" FontWeight="Bold" Canvas.Left="383" Canvas.Top="133"/>
 

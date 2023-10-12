@@ -25,7 +25,7 @@
 
                 <TextBox x:Name="myTextbox"  Width="300" Canvas.Top="105" Canvas.Left="80" Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding BookingResults }" SelectedItem="{Binding Path=SelectFaktura}"  IsReadOnly="True"
+                <DataGrid Width="908" Height="430" ItemsSource="{Binding BookingResults }" SelectedItem="{Binding Path=SelectFaktura}"  IsReadOnly="True"
            CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170" HorizontalAlignment="Left" VerticalAlignment="Top" >
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding SelectedFaktura}"/>
@@ -34,7 +34,7 @@
                         <DataGridTextColumn Header="Namn" Width="*" Binding="{Binding KundID}"/>
                         <DataGridTextColumn Header="Bokningsnummer" Width="2*" Binding="{Binding BokningsID}"/>
                         <DataGridTextColumn Header="Fakturanummer" Width="2*" Binding="{Binding FakturaID}"/>
-                        <DataGridTextColumn Header="Förfallodatum" Width="2*" Binding="{Binding Fakturadatum}"/>
+                        <DataGridTextColumn Header="Förfallodatum" Width="2*" Binding="{Binding Förfallodatum}"/>
                         <DataGridTextColumn Header="Betald" Width="*" Binding="{Binding Fakturastatus}"/>
                     </DataGrid.Columns>
                 </DataGrid>

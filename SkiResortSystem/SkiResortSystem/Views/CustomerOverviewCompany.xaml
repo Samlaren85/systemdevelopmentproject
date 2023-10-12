@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         mc:Ignorable="d"
-        Title="Företagskund" Height="auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">
+        Title="Företagskund" Height="Auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">
     <Window.DataContext>
         <vm:CustomerOverviewCompanyViewModel/>
     </Window.DataContext>
@@ -24,7 +24,7 @@
 
         <Style TargetType="TextBox">
             <Setter Property="Height" Value="25"/>
-            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontSize" Value="16"/>
         </Style>
 
     </Window.Resources>
@@ -117,7 +117,7 @@
 
         <Button Content="SPARA" Height="50" Width="130"  Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="790" Canvas.Top="485" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="640" Canvas.Top="547" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}"/>
-        <Button Content="STÄNG" Height="50" Width="130"  Canvas.Left="790" Canvas.Top="547"/>
+        <Button Content="STÄNG" Height="50" Width="130"  Canvas.Left="790" Canvas.Top="547" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" />
 
 
 

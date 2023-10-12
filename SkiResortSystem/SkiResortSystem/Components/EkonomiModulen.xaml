@@ -26,12 +26,12 @@
                 <TextBox x:Name="myTextbox"  Width="300" Canvas.Top="105" Canvas.Left="80" Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <DataGrid Width="908" Height="430" ItemsSource="{Binding BookingResults }" SelectedItem="{Binding Path=SelectFaktura}"  IsReadOnly="True"
-           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170" HorizontalAlignment="Left" VerticalAlignment="Top" >
+           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170">
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding SelectedFaktura}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Namn" Width="*" Binding="{Binding KundID}"/>
+                        <DataGridTextColumn Header="Namn" Width="2*" Binding="{Binding KundID}"/>
                         <DataGridTextColumn Header="Bokningsnummer" Width="2*" Binding="{Binding BokningsID}"/>
                         <DataGridTextColumn Header="Fakturanummer" Width="2*" Binding="{Binding FakturaID}"/>
                         <DataGridTextColumn Header="Förfallodatum" Width="2*" Binding="{Binding Förfallodatum}"/>
@@ -46,7 +46,7 @@
 
             <Canvas>
                 <TextBlock Text="BOKNINGAR ATT FAKTURERA" FontSize="22" Canvas.Top="100" Canvas.Left="80"/>
-                <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding }"  IsReadOnly="True"
+                <DataGrid  Width="908" Height="430"  ItemsSource="{Binding }"  IsReadOnly="True"
                 CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170">
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding }"/>
@@ -59,7 +59,7 @@
                 </DataGrid>
 
                 <Button Content="SKAPA FAKTURA" Canvas.Top="640" Canvas.Left="828" HorizontalAlignment="Center" Height="50" Width="160" VerticalAlignment="Top" />
-                <Button Content="HÄMTA" Canvas.Top="91" Canvas.Left="854" HorizontalAlignment="Left" VerticalAlignment="Center" Width="134" Height="45" />
+                <Button Content="HÄMTA" Canvas.Top="99" Canvas.Left="854" HorizontalAlignment="Center" VerticalAlignment="Top" Width="134" Height="45" />
             </Canvas>
 
 

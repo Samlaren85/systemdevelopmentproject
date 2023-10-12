@@ -16,10 +16,7 @@
             <Setter Property="FontSize" Value="20"/>
         </Style>
 
-        <Style TargetType="TextBox">
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="FontSize" Value="18"/>
-        </Style>
+       
 
 
     </Window.Resources>
@@ -90,7 +87,7 @@
 
 
 
-        <Button Content="STÄNG" Height="50" Width="130"  BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555"/>
+        <Button Content="STÄNG" Height="50" Width="130"  BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555"/>
         <Button Content="ARKIVERA" Height="50" Width="130"  BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" />
         <Button Content="SKRIV UT" Height="50" Width="130"  BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="990" Canvas.Top="555" />
 

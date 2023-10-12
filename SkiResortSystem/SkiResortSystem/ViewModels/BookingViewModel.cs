@@ -121,7 +121,7 @@ namespace SkiResortSystem.ViewModels
                 if (value != null)
                 {
                     searchBooking = value;
-                    SearchBookings(searchBooking); if (searchBooking == string.Empty) { BookingResults = new List<Bokning>(); }
+                    BookingResults = SearchBookings(searchBooking, AnkomsttidÄndra, AvresetidÄndra); if (searchBooking == string.Empty) { BookingResults = new List<Bokning>(); }
                     OnPropertyChanged(SearchBooking);
                 }
             }
@@ -165,21 +165,21 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        public List<Bokning> SearchBookings(string searchstring, DateTime from, DateTime to)
+        public IList<Bokning> SearchBookings(string searchstring, DateTime? from, DateTime? to)
         {
             BookingController bc = new BookingController();
-            BookingResults = new List<Bokning>();
-            if (!(AnkomsttidÄndra == DateTime.Today && AvresetidÄndra == DateTime.Today && searchstring != null))
+            IList<Bokning> results = new List<Bokning>();
+            if ((from != null && to != null) && !(from == DateTime.Today && to == DateTime.Today && searchstring != null))
             {
                 NoBookingResult = string.Empty;
 
                 try
                 {
-                    BookingResults = bc.FindMasterBooking(searchstring, AnkomsttidÄndra, AvresetidÄndra);
+                    results = bc.FindMasterBooking(searchstring, from, to);
                 }
                 catch (Exception ex)
                 {
-                    BookingResults = new List<Bokning>();
+                    results = new List<Bokning>();
                     NoBookingResult = "Ingen bokning hittades";
 
                 }
@@ -190,8 +190,8 @@ namespace SkiResortSystem.ViewModels
 
                 try
                 {
-                    BookingResults = bc.FindMasterBooking(searchstring);
-                    if(BookingResults.Count() == 0)
+                    results = bc.FindMasterBooking(searchstring);
+                    if(results.Count() == 0)
                     {
                         NoBookingResult = "Ingen bokning hittades";
 
@@ -199,11 +199,12 @@ namespace SkiResortSystem.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    BookingResults = new List<Bokning>();
+                    results = new List<Bokning>();
                     NoBookingResult = "Ingen bokning hittades";
 
                 }
             }
+            return results;
         }
 
         private ICommand createBooking = null!;

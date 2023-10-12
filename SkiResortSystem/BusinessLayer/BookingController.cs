@@ -37,7 +37,7 @@ namespace BusinessLayer
 
         }
 
-        public IList<Bokning> FindMasterBooking(string searchString, DateTime Ankomst, DateTime Avresa)
+        public IList<Bokning> FindMasterBooking(string searchString, DateTime? Ankomst, DateTime? Avresa)
         {
             return unitOfWork.BokningsRepository.Find(b =>
                     (b.BokningsID.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||

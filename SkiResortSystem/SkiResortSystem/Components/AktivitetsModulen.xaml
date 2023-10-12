@@ -24,7 +24,7 @@
 
                 <TextBlock Text="Sök bokning" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox TabIndex="1" ItemsSource="{Binding ActivityBookingResults}" SelectedItem="{Binding SelectedActivityBooking}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox TabIndex="0" Background="White"  Text="{Binding SearchAktivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBox TabIndex="0" Background="White"  Text="{Binding SearchActivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <DataGrid Width="908" Height="430"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top">

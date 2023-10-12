@@ -40,7 +40,7 @@ namespace SkiResortSystem.ViewModels
         public void SearchActivities()
         {
             ActivityController ac = new ActivityController();
-            AktivitetsSökning = ac.FindSkiSchool(SelectedBooking.Ankomsttid, SelectedBooking.Avresetid);
+            AktivitetsSökning = ac.FindSkiSchool(SelectedActivityBooking.Ankomsttid, SelectedActivityBooking.Avresetid);
             Aktivitetsbokningar = new List<Aktivitetsbokning>();
             foreach (Aktivitet a in AktivitetsSökning)
             {
@@ -56,9 +56,9 @@ namespace SkiResortSystem.ViewModels
         public bool SearchBookedActivities()
         {
             bool found = false; 
-            if (SelectedBooking.AktivitetRef != null)
+            if (SelectedActivityBooking.AktivitetRef != null)
             {
-                foreach (Aktivitetsbokning ab in SelectedBooking.AktivitetRef)
+                foreach (Aktivitetsbokning ab in SelectedActivityBooking.AktivitetRef)
                 {
                     Aktivitetsbokningar.Add(ab);
                 }
@@ -68,9 +68,9 @@ namespace SkiResortSystem.ViewModels
         public bool SearchBookedActivities(Aktivitet aktivitet)
         {
             bool found = false;
-            if (SelectedBooking.AktivitetRef != null)
+            if (SelectedActivityBooking.AktivitetRef != null)
             {
-                foreach (Aktivitetsbokning ab in SelectedBooking.AktivitetRef)
+                foreach (Aktivitetsbokning ab in SelectedActivityBooking.AktivitetRef)
                 {
                     if (ab.Aktivitetsref.Equals(aktivitet))
                     {
@@ -100,7 +100,7 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 searchActivityCustomer = value;
-                SearchCustomers();
+                SearchActivityCustomerResults = SearchCustomers(searchActivityCustomer);
                 if (searchActivityCustomer == string.Empty)
                 {
                     SearchActivityCustomerResults = new List<Kund>();
@@ -118,8 +118,8 @@ namespace SkiResortSystem.ViewModels
         }
 
 
-        private List<Kund> searchActivityCustomerResults = new List<Kund>();
-        public List<Kund> SearchActivityCustomerResults
+        private IList<Kund> searchActivityCustomerResults = new List<Kund>();
+        public IList<Kund> SearchActivityCustomerResults
         {
             get { return searchActivityCustomerResults; }
             set
@@ -178,9 +178,20 @@ namespace SkiResortSystem.ViewModels
                 if (value != null)
                 {
                     searchActivityBooking = value;
-                    SearchBookings(searchActivityBooking);
-                    if (searchActivityBooking == string.Empty) { BookingResults = new List<Bokning>(); }
-                    OnPropertyChanged(SearchActivityBooking);
+                    ActivityBookingResults = SearchBookings(searchActivityBooking, ActivityDate, ActivityEndDate);
+                    if (searchActivityBooking == string.Empty)
+                    {
+                        ActivityBookingResults = new List<Bokning>();
+                    }
+                    if (ActivityBookingResults.Count > 0)
+                    {
+                        ÖppnaDropDown = true;
+                    }
+                    if (ActivityBookingResults.Count <= 0 || SearchActivityBooking == "")
+                    {
+                        ÖppnaDropDown = false;
+                    }
+                    OnPropertyChanged();
                 }
             }
         }

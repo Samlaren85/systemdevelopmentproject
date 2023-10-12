@@ -137,7 +137,6 @@ namespace SkiResortSystem.ViewModels
                 {
                     selectedBooking = value;
                     SearchBooking = SelectedBooking.ToString().Split(" (")[0];
-                    SearchActivities();
                 }
                 OnPropertyChanged();
             }

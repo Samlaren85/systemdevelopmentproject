@@ -24,31 +24,40 @@ namespace BusinessLayer
 
         public void SaveAktivityBooking(Aktivitetsbokning ab)
         {
-            if (ab.Bokningsref.UtnyttjadKredit + ab.TotalPris <= ab.Bokningsref.KundID.Kreditgräns)
+           
+            if (unitOfWork.AktivitetsbokningsRepository.FirstOrDefault(a => a.Equals(ab)) == null)
             {
-                if (ab.Antal <= ab.Aktivitetsref.AntalPlatserKvar)
+                if (ab.Bokningsref.UtnyttjadKredit + ab.TotalPris <= ab.Bokningsref.KundID.Kreditgräns)
                 {
-                    if (unitOfWork.AktivitetsbokningsRepository.FirstOrDefault(a => a.Equals(ab)) == null)
-                    { 
+                    if (ab.Antal <= ab.Aktivitetsref.AntalPlatserKvar)
+                    {
                         unitOfWork.AktivitetsbokningsRepository.Add(ab);
                         ab.Aktivitetsref.Skidskola.AntalDeltagare += ab.Antal;
                         ab.Bokningsref.UtnyttjadKredit += ab.TotalPris;
                         unitOfWork.Save();
                     }
-                    else
+                    else throw new Exception("Antal personer överskrider kursens Deltagargräns");
+                }
+                else throw new Exception("Beloppet överskrider kundens kreditgräns!");
+            }
+            else
+            {
+                Aktivitetsbokning existerandeAktivitetsbokning = unitOfWork.AktivitetsbokningsRepository.FirstOrDefault(a => a.Equals(ab));
+                if (ab.Bokningsref.UtnyttjadKredit - existerandeAktivitetsbokning.TotalPris + ab.TotalPris <= ab.Bokningsref.KundID.Kreditgräns)
+                {
+                    if (ab.Antal - existerandeAktivitetsbokning.Antal <= ab.Aktivitetsref.AntalPlatserKvar)
                     {
-                        Aktivitetsbokning existerandeAktivitetsbokning = unitOfWork.AktivitetsbokningsRepository.FirstOrDefault(a => a.Equals(ab));
-                        existerandeAktivitetsbokning.Aktivitetsref.Skidskola.AntalDeltagare -= existerandeAktivitetsbokning.Antal;
-                        existerandeAktivitetsbokning.Bokningsref.UtnyttjadKredit -= existerandeAktivitetsbokning.TotalPris;
+                        ab.Aktivitetsref.Skidskola.AntalDeltagare -= existerandeAktivitetsbokning.Antal;
+                        ab.Bokningsref.UtnyttjadKredit -= existerandeAktivitetsbokning.TotalPris;
                         ab.Aktivitetsref.Skidskola.AntalDeltagare += ab.Antal;
                         ab.Bokningsref.UtnyttjadKredit += ab.TotalPris;
                         unitOfWork.AktivitetsbokningsRepository.Update(ab);
                         unitOfWork.Save();
                     }
+                    else throw new Exception("Antal personer överskrider kursens Deltagargräns");
                 }
-                else throw new Exception("Antal personer överskrider kursens Deltagargräns");
+                else throw new Exception("Beloppet överskrider kundens kreditgräns!");
             }
-            else throw new Exception("Beloppet överskrider kundens kreditgräns!");
         }
 
         public bool RemoveAktivityBooking(Aktivitetsbokning ab)

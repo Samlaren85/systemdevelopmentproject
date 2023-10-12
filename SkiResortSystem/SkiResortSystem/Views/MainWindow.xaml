@@ -7,17 +7,14 @@
         xmlns:comp="clr-namespace:SkiResortSystem.Components"
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="auto" Width="1920" FontFamily="Candara" Background="#FF5e8ec2" WindowState="Maximized">
-    
+        Title="{Binding LoggedInUser, StringFormat=MainWindow ({0})}" Height="auto" Width="1920" FontFamily="Candara" Visibility="{Binding MainVisibility}" Background="#FF5e8ec2" WindowState="Maximized">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
-    
-
     <TabControl Background="#FFA6C3E4" Height="1000" Width="auto" BorderBrush="White" BorderThickness="0,2,0,0" Padding="-4,0,0,0" >
-        
+
         <TabControl.Resources>
-            
+
             <Style TargetType="TabItem" x:Key="TB1">
                 <Setter Property="Background" Value="#FF5e8ec2" />
                 <Setter Property="Foreground" Value="White" />
@@ -58,8 +55,8 @@
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
-                                      
-                                        
+
+
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
                                 <Border Background="#FF5e8ec2" BorderThickness="0,0,2,0" BorderBrush="White">
@@ -86,23 +83,23 @@
             </Style>
 
         </TabControl.Resources>
-        
 
-        
-        <TabItem >
+
+
+        <TabItem>
             <TabItem.Header >
-              
-                    <Image Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Source="./images/Logo.png"/>
-               
+
+                <Image Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Source="./images/Logo.png"/>
+
             </TabItem.Header>
-            
+
             <TabItem.Style>
-            <Style TargetType="TabItem" >
+                <Style TargetType="TabItem" >
                     <Setter Property="Background" Value="#FF5e8ec2" />
                     <Setter Property="Height" Value="50" />
-                <Setter Property="Width" Value="192" />
-                
-            </Style>
+                    <Setter Property="Width" Value="192" />
+
+                </Style>
             </TabItem.Style>
 
             <TabItem.Template>
@@ -115,12 +112,13 @@
                 </ControlTemplate>
             </TabItem.Template>
 
-
-
-
-
-            <Image Source="./images/Logo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="500" Margin="0,0,0,200" ></Image>
-
+            <TabControl SelectedItem="{Binding MenuChoise}" TabStripPlacement="Left" Background="#FFA6C3E4">
+                <TabItem Header="HuvudMeny" Height="0" IsSelected="True">
+                    <Image Source="./images/Logo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="500" />
+                </TabItem>
+                <TabItem Header="Logga ut"/>
+                <TabItem Header="Avsluta"/>
+            </TabControl>
         </TabItem>
 
         <TabItem Header="BOENDE &amp; KONFERENS" Style="{StaticResource TB1}" >

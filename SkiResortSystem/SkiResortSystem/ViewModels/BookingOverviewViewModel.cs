@@ -231,7 +231,7 @@ namespace SkiResortSystem.ViewModels
         {
             BookingController bc = new BookingController();
 
-            if (uppdateraBokning = true) //KOLLA SÅ ATT DETTA FUNKAR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            if (uppdateraBokning) //KOLLA SÅ ATT DETTA FUNKAR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             {
                 bc.UppdateraBokning(Bokning);
                 MessageBoxResult respons = MessageBox.Show($"Ändringar för bokning {Bokning.BokningsID} är nu sparad i systemet!");
@@ -276,6 +276,7 @@ namespace SkiResortSystem.ViewModels
         public BookingOverviewViewModel(Bokning bokning)
         {
             Kund = bokning.KundID;
+            Bokning = bokning;
             Ankomst = bokning.Ankomsttid;
             Avresa = bokning.Avresetid;
             TimeSpan tidsspann = Avresa - Ankomst;
@@ -353,7 +354,8 @@ namespace SkiResortSystem.ViewModels
             TimeSpan tidsspann = Avresa - Ankomst;
             AntalNätter = tidsspann.Days;
             Totalpris = (float)Math.Round(Facilitetspris, 2);
-            if(AntalNätter == 0)
+            uppdateraBokning = false; 
+            if (AntalNätter == 0)
             {
                 PrisPerNatt = 0;
             }

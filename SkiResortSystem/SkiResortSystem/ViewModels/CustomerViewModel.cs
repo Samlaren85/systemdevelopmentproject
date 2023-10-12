@@ -258,5 +258,22 @@ namespace SkiResortSystem.ViewModels
             CustomerController cc = new CustomerController();
             cc.AddCompanyCustomer(OrganisationsnummerID, Företagsnamn, Kontaktperson, Besöksaddress, Besökspostnummer, Besöksort, GatuadressFöretag, PostnummerFöretag, OrtFöretag, TelefonnummerFöretag, epost);
         });
+        private ICommand customerPrivateOverview = null!;
+        public ICommand CustomerPrivateOverview =>
+            customerPrivateOverview ??= customerPrivateOverview = new RelayCommand(() =>
+            {
+                CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel();
+                windowService.ShowDialog(kundöversikt);
+            }
+            );
+
+        private ICommand customerCompanyOverview = null!;
+        public ICommand CustomerCompanyOverview =>
+            customerCompanyOverview ??= customerCompanyOverview = new RelayCommand(() =>
+            {
+                CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel();
+                windowService.ShowDialog(kundöversikt);
+            }
+            );
     }
 }

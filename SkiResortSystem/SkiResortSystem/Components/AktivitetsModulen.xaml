@@ -23,7 +23,7 @@
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="Sök bokning" Canvas.Left="80" Canvas.Top="76"/>
-                <ComboBox TabIndex="1" ItemsSource="{Binding BookingResults}" SelectedItem="{Binding SelectedBooking}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <ComboBox TabIndex="1" ItemsSource="{Binding ActivityBookingResults}" SelectedItem="{Binding SelectedActivityBooking}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox TabIndex="0" Background="White"  Text="{Binding SearchAktivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
@@ -32,7 +32,7 @@
                         <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="ANTAL LEDIGA PLATSER" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="BOKAT ANTAL" Width="*" Binding="{Binding Antal}"  IsReadOnly="False"/>
+                        <DataGridTextColumn Header="ANTAL DELTAGARE" Width="*" Binding="{Binding Antal}"  IsReadOnly="False"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Content="Boka" Canvas.Left="868" Canvas.Top="619" Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" RenderTransformOrigin="1.311,2.576" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -46,27 +46,26 @@
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <ComboBox ItemsSource="{Binding SearchActivityCustomerResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox Background="White"  Text="{Binding SearchActivityCustomer, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ActivityCustomerError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <TextBlock Text="Ankomstdatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="76"/>
-                <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding Ankomsttid}"/>
+                <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding ActivityDate}"/>
                 <TextBlock Text="Avresedatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding Avresetid}"/>
+                <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding ActivityEndDate}"/>
                 <Button Content="Sök" Canvas.Left="614" Canvas.Top="165" Command="{Binding SearchActivitiesCommand}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding TypeOfActivity}" />
 
-                <DataGrid  Width="908" Height="390"  ItemsSource="{Binding FoundActivities, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True">
+                <DataGrid  Width="908" Height="390"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True">
                     <DataGrid.InputBindings>
                         <MouseBinding
                         MouseAction="LeftDoubleClick"
                         Command="{Binding DoubleClickActivityCommand}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding}"/>
-                        <DataGridTextColumn Header="STARTDATUM" Width="*" Binding="{Binding}"/>
-                        <DataGridTextColumn Header="SLUTDATUM" Width="*" Binding="{Binding}"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding}"/>
+                        <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=Bokningsref.KundID.Namn}"/>
+                        <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding Path=Bokningsref.BokningsID}"/>
                         <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding}"/>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -128,13 +127,13 @@
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <ComboBox ItemsSource="{Binding SearchActivityCustomerResults}" SelectedItem="{Binding SelectedActivityCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox Background="White"  Text="{Binding SearchActivityCustomer, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding ActivityCustomerError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <TextBlock Text="Avresedatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding FetchDate}"/>
+                <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding ActivityDate}"/>
                 <TextBlock Text="Ankomstdatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="76"/>
-                <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding ReturnDate}"/>
+                <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding ActivityEndDate}"/>
                 <Button Content="Sök" Canvas.Left="614" Canvas.Top="165" Command="{Binding SearchEquipment}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding TypeOfEquipment, UpdateSourceTrigger=PropertyChanged}" />
 

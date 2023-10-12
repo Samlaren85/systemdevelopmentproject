@@ -136,7 +136,6 @@ namespace SkiResortSystem.ViewModels
                 {
                     selectedBooking = value;
                     SearchBooking = SelectedBooking.ToString().Split(" (")[0];
-                    SearchAktivityBooking = SelectedBooking.ToString().Split(" (")[0];
                     SearchActivities();
                 }
                 OnPropertyChanged();
@@ -164,7 +163,7 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        public void SearchBookings(string searchstring)
+        public List<Bokning> SearchBookings(string searchstring, DateTime from, DateTime to)
         {
             BookingController bc = new BookingController();
             BookingResults = new List<Bokning>();

@@ -193,25 +193,6 @@ namespace SkiResortSystem.ViewModels
             }
         });
 
-
-        private ICommand customerPriveteOverview = null!;
-        public ICommand CustomerPrivateOverview =>
-            customerPriveteOverview ??= customerPriveteOverview = new RelayCommand(() =>
-            {
-                CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel();
-                windowService.ShowDialog(kundöversikt);
-            }
-            );
-
-        private ICommand customerCompanyOverview = null!;
-        public ICommand CustomerCompanyOverview =>
-            customerCompanyOverview ??= customerCompanyOverview = new RelayCommand(() =>
-            {
-                CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel();
-                windowService.ShowDialog(kundöversikt);
-            }
-            );
-
         private bool öppnaDropDown;
         public bool ÖppnaDropDown
         {

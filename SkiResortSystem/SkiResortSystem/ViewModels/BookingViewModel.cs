@@ -98,6 +98,8 @@ namespace SkiResortSystem.ViewModels
                 if (ÄndraBokning != null)
                 {
                     BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(ÄndraBokning);
+                    BookingResults = new List<Bokning>();
+                    SearchBooking = string.Empty;
                     windowService.ShowDialog(bokningsöversikt);
                 }
             });
@@ -167,18 +169,19 @@ namespace SkiResortSystem.ViewModels
         {
             BookingController bc = new BookingController();
             BookingResults = new List<Bokning>();
-            if (!(Ankomsttid == DateTime.Today && Avresetid == DateTime.Today && searchstring != null))
+            if (!(AnkomsttidÄndra == DateTime.Today && AvresetidÄndra == DateTime.Today && searchstring != null))
             {
                 NoBookingResult = string.Empty;
 
                 try
                 {
-                    BookingResults = bc.FindMasterBooking(searchstring, Ankomsttid, Avresetid);
+                    BookingResults = bc.FindMasterBooking(searchstring, AnkomsttidÄndra, AvresetidÄndra);
                 }
                 catch (Exception ex)
                 {
-                    NoBookingResult = "Ingen bokning hittades";
                     BookingResults = new List<Bokning>();
+                    NoBookingResult = "Ingen bokning hittades";
+
                 }
             }
             else if (searchstring != null)
@@ -188,11 +191,17 @@ namespace SkiResortSystem.ViewModels
                 try
                 {
                     BookingResults = bc.FindMasterBooking(searchstring);
+                    if(BookingResults.Count() == 0)
+                    {
+                        NoBookingResult = "Ingen bokning hittades";
+
+                    }
                 }
                 catch (Exception ex)
                 {
-                    NoBookingResult = "Ingen bokning hittades";
                     BookingResults = new List<Bokning>();
+                    NoBookingResult = "Ingen bokning hittades";
+
                 }
             }
         }
@@ -248,6 +257,28 @@ namespace SkiResortSystem.ViewModels
             {
                 if (value < ankomsttid) avresetid = Ankomsttid;
                 else avresetid = value;
+                OnPropertyChanged();
+            }
+        }
+        private DateTime ankomsttidÄndra = DateTime.Today;
+        public DateTime AnkomsttidÄndra
+        {
+            get { return ankomsttidÄndra; }
+            set
+            {
+                ankomsttidÄndra = value;
+                if (ankomsttidÄndra > avresetidÄndra) AvresetidÄndra = ankomsttidÄndra;
+                OnPropertyChanged();
+            }
+        }
+        private DateTime avresetidÄndra = DateTime.Today;
+        public DateTime AvresetidÄndra
+        {
+            get { return avresetidÄndra; }
+            set
+            {
+                if (value < ankomsttidÄndra) avresetidÄndra = AnkomsttidÄndra;
+                else avresetidÄndra = value;
                 OnPropertyChanged();
             }
         }

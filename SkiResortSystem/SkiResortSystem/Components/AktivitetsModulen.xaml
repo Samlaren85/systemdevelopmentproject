@@ -14,7 +14,7 @@
         <TabControl.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="Black"/>
-                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontSize" Value="18"/>
             </Style>
         </TabControl.Resources>
 

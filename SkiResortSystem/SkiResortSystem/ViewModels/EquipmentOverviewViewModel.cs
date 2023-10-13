@@ -13,6 +13,11 @@ namespace SkiResortSystem.ViewModels
     public class EquipmentOverviewViewModel : ObservableObject
     {
 
-       
+        private ICommand closeCommand = null;
+        public ICommand CloseCommand =>
+            closeCommand ??= closeCommand = new RelayCommand<ICloseable>((closeable) =>
+            {
+                closeable.Close();
+            });
     }
 }

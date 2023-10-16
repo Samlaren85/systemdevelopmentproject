@@ -320,7 +320,10 @@ namespace SkiResortSystem.ViewModels
 
         public ICommand SökLedigaFaciliteter => sökLedigaFaciliteter ??= sökLedigaFaciliteter = new RelayCommand(() =>
         {
+            
+            FacilitetsSökning = new List<Facilitet>(); 
             AccommodationController ac = new AccommodationController();
+            ErrorMessage2 = string.Empty;
             ErrorMessage3 = string.Empty;
             if (Lägenhetradiobutton)
             {
@@ -329,6 +332,27 @@ namespace SkiResortSystem.ViewModels
                     ErrorMessage = "Du behöver välja kund!";
 
 
+                }
+                if ((Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday) &&
+                    (Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday))
+                {
+                    ErrorMessage2 = "Ankomst- och avresetid måste vara en fredag eller en söndag";
+                }
+                else if (Ankomsttid.DayOfWeek == DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    ErrorMessage2 = "För vald ankomsttid måste avresetid vara en söndag";
+                }
+                else if (Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    ErrorMessage2 = "För vald ankomsttid måste avresetid vara en fredag eller en söndag";
+                }
+                else if (Avresetid.DayOfWeek == DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    ErrorMessage2 = "För vald avresetid måste ankomsttid vara en söndag";
+                }
+                else if (Avresetid.DayOfWeek == DayOfWeek.Sunday && Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    ErrorMessage2 = "För vald avresetid måste ankomst vara en fredag eller en söndag";
                 }
                 else
                 {

@@ -413,11 +413,11 @@ namespace SkiResortSystem.ViewModels
             uppdateraBokning = true;
             taBortÄndraVisability = Visibility.Visible;
             taBortVisability = Visibility.Collapsed;
-            if (Ankomst == DateTime.Today && bokning.Bokningsstatus != Status.Incheckad)
+            if (Ankomst == DateTime.Today && bokning.Bokningsstatus != Status.Incheckad && bokning.Bokningsstatus != Status.Utcheckad)
             {
                 CheckaInReadOnly = true;
             }
-            if(Avresa == DateTime.Today && bokning.Bokningsstatus == Status.Incheckad)
+            if(Avresa == DateTime.Today && bokning.Bokningsstatus == Status.Incheckad && bokning.Bokningsstatus != Status.Utcheckad) 
             {
                 CheckaInReadOnly = false;
                 CheckaUtReadOnly = true;

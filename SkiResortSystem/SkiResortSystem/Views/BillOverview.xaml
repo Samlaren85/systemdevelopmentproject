@@ -102,6 +102,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Artikel" Width="2*"/>
                 <DataGridTextColumn Header="Pris" Width="*"/>
+               
             </DataGrid.Columns>
         </DataGrid>
 

@@ -17,11 +17,10 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="Auto" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="Height" Value="25"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
@@ -34,7 +33,7 @@
 
 
         <TextBlock Text="Namn:" Canvas.Left="180" Canvas.Top="200"/>
-        <TextBlock  Text="{Binding Path=Bokningsref.KundID, Mode=TwoWay}" Canvas.Left="251" Canvas.Top="200" Width="206" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBlock  Text="{Binding Path=Bokningsref.KundID.Namn}" Canvas.Left="251" Canvas.Top="200" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
 
 

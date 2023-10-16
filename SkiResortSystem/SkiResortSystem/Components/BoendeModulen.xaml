@@ -14,7 +14,7 @@
 
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="Black"/>
-                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontSize" Value="18"/>
             </Style>
 
         </TabControl.Resources>
@@ -36,11 +36,11 @@
                 <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding Avresetid}"/>
                 <TextBlock Text="Ankomstdatum" Canvas.Left="449" Canvas.Top="76"/>
                 <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding Ankomsttid}"/>
-                <Button Content="Sök" Canvas.Left="614" Canvas.Top="165" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+                <Button Content="Sök" Height="40" Canvas.Left="868" Canvas.Top="195" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" />
 
-                <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
-                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedItem="{Binding Path=SelectedFacility}">
+                <DataGrid  Width="908" Height="430"  ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
+                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" SelectedItem="{Binding Path=SelectedFacility}">
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommand}"/>
                     </DataGrid.InputBindings>
@@ -79,7 +79,7 @@
         <TabItem Header="HANTERA BOKNINGAR">
 
             <Canvas Height="auto" Width="1760" Margin="0,25,0,0">
-                <DataGrid  Width="918" Height="410" Background="White" AutoGenerateColumns="False" BorderThickness="2" Canvas.Left="80" Canvas.Top="149" SelectedItem="{Binding ÄndraBokning}" ItemsSource="{Binding BookingResults, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <DataGrid  Width="918" Height="410"  AutoGenerateColumns="False"  Canvas.Left="80" Canvas.Top="149" SelectedItem="{Binding ÄndraBokning}" ItemsSource="{Binding BookingResults, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" >
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommandÄndra}"/>
                     </DataGrid.InputBindings>
@@ -97,8 +97,8 @@
                 <TextBlock  Text="Sök på: Förnamn/Efternamn/Bokningsnummer"  Foreground="Black" Canvas.Left="80" Canvas.Top="55" FontStyle="Italic" />
                 <TextBlock Text="SÖK BOKNING/KONFERENS" Foreground="Black" Canvas.Left="80" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-                <DatePicker Canvas.Top="85" Canvas.Left="530" SelectedDate="{Binding Ankomsttid}"/>
-                <DatePicker Canvas.Top="85" Canvas.Left="685" SelectedDate="{Binding Avresetid}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <DatePicker Canvas.Top="85" Canvas.Left="530" SelectedDate="{Binding AnkomsttidÄndra}"/>
+                <DatePicker Canvas.Top="85" Canvas.Left="685" SelectedDate="{Binding AvresetidÄndra}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="Ankomstdatum" Canvas.Top="55" Canvas.Left="530"/>
                 <TextBlock Text="Avresedatum" Canvas.Top="55" Canvas.Left="685" HorizontalAlignment="Left" VerticalAlignment="Center"  />
 
@@ -110,31 +110,18 @@
             <Canvas Height="auto" Width="1760">
 
 
-                <DataGrid Name="BeläggningsData" Width="856" Height="410" Background="White" AutoGenerateColumns="False" ItemsSource ="{Binding ÖverfördVisaBeläggning, Mode=TwoWay}"   BorderThickness="2" Canvas.Left="80" Canvas.Top="149" Foreground="Black" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <DataGrid Name="BeläggningsData" IsEnabled="False" Width="856" Height="321" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource ="{Binding ÖverfördVisaBeläggning, Mode=TwoWay}"  Canvas.Left="80" Canvas.Top="149"  >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="DATUM" Width="*" Binding="{Binding [0] }" ></DataGridTextColumn>
-                        <DataGridTextColumn x:Name="Column1" Header="LGH1"  Width="*" Binding="{Binding [1] }" ></DataGridTextColumn>
-                        <DataGridTextColumn x:Name="Column2" Header="LGH2" Width="*" Binding="{Binding [2] }" ></DataGridTextColumn>
-                        <DataGridTextColumn x:Name="Column3" Header="CAMP" Width="*" Binding="{Binding [3] }" ></DataGridTextColumn>
-                        <DataGridTextColumn x:Name="Column4" Header="KONF stor"  Width="*" Binding="{Binding [4] }" ></DataGridTextColumn>
-                        <DataGridTextColumn x:Name="Column5" Header="KONF liten" Width="*" Binding="{Binding [5] }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="DATUM" Width="*" Binding="{Binding [0] }"  IsReadOnly="True"/>
+                        <DataGridTextColumn x:Name="Column1" Header="LGH1"  Width="*" Binding="{Binding [1] }" IsReadOnly="True" ></DataGridTextColumn>
+                        <DataGridTextColumn x:Name="Column2" Header="LGH2" Width="*" Binding="{Binding [2] }"  IsReadOnly="True"></DataGridTextColumn>
+                        <DataGridTextColumn x:Name="Column3" Header="CAMP" Width="*" Binding="{Binding [3] }"  IsReadOnly="True"></DataGridTextColumn>
+                        <DataGridTextColumn x:Name="Column4" Header="KONF stor"  Width="*" Binding="{Binding [4] }"  IsReadOnly="True"></DataGridTextColumn>
+                        <DataGridTextColumn x:Name="Column5" Header="KONF liten" Width="*" Binding="{Binding [5] }"  IsReadOnly="True"></DataGridTextColumn>
                     </DataGrid.Columns>
-                    <DataGrid.CellStyle>
-                        <Style TargetType="DataGridCell">
 
-                            <Style.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="LightGray"/>
-                                </Trigger>
-                            </Style.Triggers>
 
-                            <Setter Property="Background" Value="White"/>
-                            <Setter Property="FontSize" Value="16"/>
-                            <Setter Property="Height" Value="43"/>
-                        </Style>
 
-                    </DataGrid.CellStyle>
-                    
                 </DataGrid>
 
                 <TextBlock Text="Datum:" Foreground="Black" Canvas.Left="80" Canvas.Top="58" />

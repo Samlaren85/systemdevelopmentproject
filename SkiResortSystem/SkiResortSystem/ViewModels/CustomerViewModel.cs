@@ -154,7 +154,7 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 searchText = value;
-                SearchCustomers();
+                SearchResults = SearchCustomers(SearchText);
                 if (searchText == string.Empty)
                 {
                     SearchResults = new List<Kund>();
@@ -172,8 +172,8 @@ namespace SkiResortSystem.ViewModels
         }
 
 
-        private List<Kund> searchResults = new List<Kund>();
-        public List<Kund> SearchResults
+        private IList<Kund> searchResults = new List<Kund>();
+        public IList<Kund> SearchResults
         {
             get { return searchResults; }
             set
@@ -202,15 +202,16 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private void SearchCustomers()
+        private IList<Kund> SearchCustomers(string searchString)
         {
+            List<Kund> results;
             CustomerController cc = new CustomerController();
             try
             {
                 ErrorMessage = string.Empty;
 
-                SearchResults = cc.GetSearchResults(SearchText);
-                if (searchResults.Count < 1)
+                results = cc.GetSearchResults(searchString);
+                if (results.Count < 1)
                 {
                     ErrorMessage = "Ingen kund hittades";
 
@@ -220,8 +221,9 @@ namespace SkiResortSystem.ViewModels
             catch (Exception ex)
             {
                 ErrorMessage = "Ingen kund hittades, " + ex.Message;
-                SearchResults = new List<Kund>();
+                results = new List<Kund>();
             }
+            return results;
         }
 
         private Kund selectCustomer;
@@ -258,5 +260,22 @@ namespace SkiResortSystem.ViewModels
             CustomerController cc = new CustomerController();
             cc.AddCompanyCustomer(OrganisationsnummerID, Företagsnamn, Kontaktperson, Besöksaddress, Besökspostnummer, Besöksort, GatuadressFöretag, PostnummerFöretag, OrtFöretag, TelefonnummerFöretag, epost);
         });
+        private ICommand customerPrivateOverview = null!;
+        public ICommand CustomerPrivateOverview =>
+            customerPrivateOverview ??= customerPrivateOverview = new RelayCommand(() =>
+            {
+                CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel();
+                windowService.ShowDialog(kundöversikt);
+            }
+            );
+
+        private ICommand customerCompanyOverview = null!;
+        public ICommand CustomerCompanyOverview =>
+            customerCompanyOverview ??= customerCompanyOverview = new RelayCommand(() =>
+            {
+                CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel();
+                windowService.ShowDialog(kundöversikt);
+            }
+            );
     }
 }

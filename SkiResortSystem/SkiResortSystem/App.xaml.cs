@@ -29,12 +29,10 @@ namespace SkiResortSystem
                 WindowService.RegisterWindow<BookingOverviewViewModel, BookingOverview>();
                 WindowService.RegisterWindow<ActivityOverviewViewModel, ActivityOverview>();
                 WindowService.RegisterWindow<EquipmentOverviewViewModel, EquipmentOverview>();
+                WindowService.RegisterWindow<BillOverviewViewModel, BillOverview>();
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("sv-SE");
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("sv-SE");
             };
-        }
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("sv-SE");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("sv-SE");
         }
     }
 }

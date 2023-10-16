@@ -17,24 +17,10 @@
             <Setter Property="Height" Value="Auto"/>
             <Setter Property="Width" Value="Auto" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
 
-        <Style TargetType="TextBox">
 
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Style.Triggers>
-                <Trigger Property="IsReadOnly" Value="True">
-                    <Setter Property="Background" Value="#FFd9d9d9"/>
-                </Trigger>
-                <Trigger Property="IsReadOnly" Value="False">
-                    <Setter Property="Background" Value="White"/>
-                </Trigger>
-            </Style.Triggers>
-
-
-        </Style>
 
 
 
@@ -109,6 +95,6 @@
 
         <Button Content="SPARA" Height="50" Width="130"  Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="945" Canvas.Top="475" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="785" Canvas.Top="535" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}"/>
-        <Button Content="STÄNG" Height="50" Width="130" Canvas.Left="945" Canvas.Top="535"  />
+        <Button Content="STÄNG" Height="50" Width="130" Canvas.Left="945" Canvas.Top="535" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" />
     </Canvas>
 </Window>

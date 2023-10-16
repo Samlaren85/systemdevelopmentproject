@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         mc:Ignorable="d"
-        Title="EquipmentOverview"  Height="auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">
+        Title="EquipmentOverview"  Height="Auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">
     <Window.DataContext>
         <vm:EquipmentOverviewViewModel/>
     </Window.DataContext>
@@ -16,13 +16,10 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="Auto" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
-
-        <Style TargetType="TextBox">
-            <Setter Property="Height" Value="25"/>
             <Setter Property="FontSize" Value="18"/>
         </Style>
+
+        
 
     </Window.Resources>
 
@@ -54,12 +51,12 @@
 
         <Button Content="SPARA" Height="50" Width="130" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="520" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="610" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Button Content="STÄNG" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="700" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Button Content="STÄNG" Height="50" Width="130" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="700" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
 
         <TextBlock Text="Uttnyttnjad kredit" Canvas.Left="1050" Canvas.Top="40" FontWeight="Bold"/>
         <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="1050" Canvas.Top="80" Width="200" Height="50" >
-            <TextBox Height="Auto" Background="Transparent" />
+            <TextBox Height="Auto" TextAlignment="Center" Background="Transparent" />
 
         </Border>
 

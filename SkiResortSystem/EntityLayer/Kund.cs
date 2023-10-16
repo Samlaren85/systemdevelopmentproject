@@ -29,6 +29,14 @@ namespace EntityLayer
         public string Ort { get; set; }
         public string Telefonnummer { get; set; }
         public string Epost { get; set; }
+        public string Namn
+        {
+            get 
+            { 
+                if (Privatkund != null) return Privatkund.Namn() + " (Privatkund)";
+                else return Företagskund.Företagsnamn + " (Företagskund)";
+            }
+        }
         public Företagskund? Företagskund { get; set; }
         public Privatkund? Privatkund { get; set; }
         public ICollection<Bokning> BokningsRef { get; set; }

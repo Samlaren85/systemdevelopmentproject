@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SkiResortSystem.Views"
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         mc:Ignorable="d"
-        Title="Företagskund" Height="auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">
+        Title="Företagskund" Height="Auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">
     <Window.DataContext>
         <vm:CustomerOverviewCompanyViewModel/>
     </Window.DataContext>
@@ -19,13 +19,10 @@
             <Setter Property="Height" Value="Auto"/>
             <Setter Property="Width" Value="Auto" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
-
-        <Style TargetType="TextBox">
-            <Setter Property="Height" Value="25"/>
             <Setter Property="FontSize" Value="18"/>
         </Style>
+
+
 
     </Window.Resources>
 
@@ -55,7 +52,7 @@
         <TextBlock Text="FAKTURAADRESS" TextDecorations="Underline" Canvas.Left="629" Canvas.Top="183" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 
-        <TextBlock Text="Gatuadress" Margin="154,214,1366,756"/>
+        <TextBlock Text="Gatuadress" Canvas.Left="154" Canvas.Top="219" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
 
 
@@ -100,11 +97,11 @@
 
         <TextBlock Text="Kreditgräns" Canvas.Left="374" Canvas.Top="530" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-        <TextBox Text="{Binding Organisationsnummer}" Canvas.Left="154" Canvas.Top="134" Width="243" HorizontalAlignment="Left" VerticalAlignment="Center" IsReadOnly="{Binding KundIDReadOnly}"/>
+        <TextBox Text="{Binding Organisationsnummer}" Canvas.Left="154" Canvas.Top="134" Width="243"  IsReadOnly="{Binding KundIDReadOnly}"/>
         <TextBox Text="{Binding Företagsnamn}" Canvas.Left="480" Canvas.Top="134" Width="232"/>
-        <TextBox Text="{Binding Besöksadress}" Canvas.Left="154" Canvas.Top="244" Width="400"/>
+        <TextBox Text="{Binding Besöksadress}" Canvas.Left="154" Canvas.Top="251" Width="400" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Besökspostnummer}" Canvas.Left="154" Canvas.Top="321" Width="166" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Text="{Binding Besöksort}" Canvas.Left="391" Canvas.Top="321" Width="163"/>
+        <TextBox Text="{Binding Besöksort}" Canvas.Left="365" Canvas.Top="321" Width="163" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox Text="{Binding Gatuadress}" Canvas.Left="629" Canvas.Top="250" Width="291" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox Text="{Binding Postnummer}" Canvas.Left="631" Canvas.Top="322" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox Text="{Binding Postort}" Canvas.Left="785" Canvas.Top="322" Width="133" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -117,7 +114,7 @@
 
         <Button Content="SPARA" Height="50" Width="130"  Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="790" Canvas.Top="485" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="640" Canvas.Top="547" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}"/>
-        <Button Content="STÄNG" Height="50" Width="130"  Canvas.Left="790" Canvas.Top="547"/>
+        <Button Content="STÄNG" Height="50" Width="130"  Canvas.Left="790" Canvas.Top="547" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" />
 
 
 

@@ -76,9 +76,17 @@ namespace BusinessLayer
             return done;
         }
 
+        public IList<Aktivitetsbokning> FindBookedActivities (DateTime? from, DateTime? to, string typ)
+        {
+            return unitOfWork.AktivitetsbokningsRepository.Find(ab => ((from == null || ab.Aktivitetsref.Skidskola.VaraktighetFrån.Equals(from)) &&
+                                                                      (to == null || ab.Aktivitetsref.Skidskola.VaraktighetTill.Equals(to)) &&
+                                                                      (typ == null || typ == string.Empty || ab.Aktivitetsref.Typ.Equals(typ))) &&
+                                                                      !ab.Bokningsref.Bokningsstatus.Equals(Status.Makulerad), x => x.Aktivitetsref, x => x.Aktivitetsref.Skidskola);
+        }
+
         public IList<Aktivitet> FindSkiSchool(DateTime from, DateTime to, string typ)
         {
-            return unitOfWork.AktivitetRepository.Find(a => a.Skidskola.VaraktighetFrån >= from && a.Skidskola.VaraktighetTill <= to && a.Typ.Equals(typ), x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);
+            return unitOfWork.AktivitetRepository.Find(a => a.Skidskola.VaraktighetFrån >= from && a.Skidskola.VaraktighetTill <= to && a.Typ.Contains(typ), x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);
         }
 
         public IList<List<string>> VisaBeläggningen(DateTime franDatum, DateTime tillDatum)

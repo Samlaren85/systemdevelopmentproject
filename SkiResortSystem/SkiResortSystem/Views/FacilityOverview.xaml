@@ -1,0 +1,52 @@
+﻿<Window x:Class="SkiResortSystem.Views.FacilityOverview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SkiResortSystem.Views"
+        xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
+        mc:Ignorable="d"
+        Title="FacilityOverview" Height="Auto" Width="1920">
+
+    <Window.DataContext>
+        <vm:FacilityOverviewViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="Auto" ></Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+
+
+
+
+    </Window.Resources>
+    <Canvas  Background="#FFA6C3E4" Height="1000" >
+
+        <TextBlock Text="LÄGG TILL NY FACILITET" FontSize="20" Canvas.Left="157" Canvas.Top="52" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+
+        <TextBlock Text="Facilitetsnamn" Canvas.Left="157" Canvas.Top="135"/>
+        <TextBox Text="{Binding Personnummer}" Canvas.Left="157" Canvas.Top="165" Width="238" />
+
+        <TextBlock Text="ID" Canvas.Left="157" Canvas.Top="215" />
+        <TextBox Text="{Binding Förnamn}" Canvas.Left="157" Canvas.Top="245" Width="113" />
+
+
+
+        <TextBlock Text="Pris" Canvas.Left="363" Canvas.Top="215" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="-1.895,0.642"/>
+        <TextBox Text="{Binding Efternamn}" Canvas.Left="362" Canvas.Top="245" Width="126" />
+
+
+
+
+
+
+        <Button Content="SPARA" Height="50" Width="130"  Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="564" Canvas.Top="320" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="564" Canvas.Top="390" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}" RenderTransformOrigin="-0.348,0.049"/>
+        <Button Content="STÄNG" Height="50" Width="130" Canvas.Left="564" Canvas.Top="460" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" />
+    </Canvas>
+
+</Window>

@@ -8,10 +8,104 @@
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920" FontFamily="Candara" >
-    
-    <TabControl TabStripPlacement="Left" Background="#FFA6C3E4">
-        
-        <!--Skriv innehåll här-->
 
+    <TabControl TabStripPlacement="Left" Background="#FFA6C3E4">
+
+        <TabControl.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+        </TabControl.Resources>
+
+
+        <TabItem Header="HANTERA FACILITET">
+
+            <Canvas Height="auto" Width="1760">
+
+                <TextBlock Text="SÖK FACILITET" Canvas.Left="80" Canvas.Top="76"/>
+                <ComboBox TabIndex="1" ItemsSource="{Binding ActivityBookingResults}" SelectedItem="{Binding SelectedActivityBooking}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox TabIndex="0" Background="White"  Text="{Binding SearchActivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                <DataGrid Width="908" Height="345"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="FACILITETSNAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
+                        <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
+                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Content="LÄGGA TILL NY" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            </Canvas>
+
+        </TabItem>
+
+        <TabItem Header="HANTERA AKTIVITET">
+            
+            <Canvas Height="auto" Width="1760">
+
+                <TextBlock Text="SÖK AKTIVITET" Canvas.Left="80" Canvas.Top="76"/>
+                <ComboBox TabIndex="1" ItemsSource="{Binding ActivityBookingResults}" SelectedItem="{Binding SelectedActivityBooking}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox TabIndex="0" Background="White"  Text="{Binding SearchActivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                <DataGrid Width="908" Height="345"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="AKTIVITETSNAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
+                        <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
+                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Content="LÄGGA TILL NY" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            </Canvas>
+
+
+
+        </TabItem>
+        <TabItem Header="HANTERA UTRUSTNING">
+
+            <Canvas Height="auto" Width="1760">
+
+                <TextBlock Text="SÖK UTRUSTNING" Canvas.Left="80" Canvas.Top="76"/>
+                <ComboBox TabIndex="1" ItemsSource="{Binding ActivityBookingResults}" SelectedItem="{Binding SelectedActivityBooking}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox TabIndex="0" Background="White"  Text="{Binding SearchActivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                <DataGrid Width="908" Height="345"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="UTRUSTNINGSNAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
+                        <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
+                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Content="LÄGGA TILL NY" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            </Canvas>
+
+
+
+        </TabItem>
+        <TabItem Header="HANTERA SYSTEMANVÄNDARE">
+
+            <Canvas Height="auto" Width="1760">
+
+                <TextBlock Text="SÖK SYSTEMAVÄNDARE" Canvas.Left="80" Canvas.Top="76"/>
+                <ComboBox TabIndex="1" ItemsSource="{Binding ActivityBookingResults}" SelectedItem="{Binding SelectedActivityBooking}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox TabIndex="0" Background="White"  Text="{Binding SearchActivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                <DataGrid Width="908" Height="345"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
+                        <DataGridTextColumn Header="ROLL" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Content="LÄGGA TILL NY" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            </Canvas>
+            
+        </TabItem>
+        
+        
+        
+        
     </TabControl>
 </UserControl>

@@ -9,6 +9,7 @@
     <Window.DataContext>
         <vm:BillOverviewViewModel/>
     </Window.DataContext>
+    
     <Window.Resources>
         <Style TargetType="TextBlock">
 
@@ -102,6 +103,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Artikel" Width="2*"/>
                 <DataGridTextColumn Header="Pris" Width="*"/>
+               
             </DataGrid.Columns>
         </DataGrid>
 

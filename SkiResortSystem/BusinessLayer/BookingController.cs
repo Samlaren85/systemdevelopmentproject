@@ -40,23 +40,24 @@ namespace BusinessLayer
         public IList<Bokning> FindMasterBooking(string searchString, DateTime? Ankomst, DateTime? Avresa)
         {
             return unitOfWork.BokningsRepository.Find(b =>
-                    ((b.BokningsID.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    (b.BokningsID.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
                     (b.KundID.Privatkund != null && b.KundID.Privatkund.Namn().Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
                     (b.KundID.Företagskund != null && b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase))) &&
-                    (b.Ankomsttid >= Ankomst && b.Avresetid <= Avresa)) &&
+                    (b.Ankomsttid >= Ankomst && b.Avresetid <= Avresa) &&
                     (b.Bokningsstatus != Status.Makulerad),
                     x => x.KundID, x => x.KundID.Privatkund, x => x.KundID.Företagskund);
         }
 
         public IList<Bokning> FindMasterBooking(string searchString)
         {
-            return unitOfWork.BokningsRepository.Find(b => 
+            return unitOfWork.BokningsRepository.Find(b =>
                     (b.BokningsID.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
                     (b.KundID.Privatkund != null && b.KundID.Privatkund.Namn().Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
-                    (b.KundID.Företagskund != null && b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase)) &&
-                    (b.Bokningsstatus != Status.Makulerad)),
+                    (b.KundID.Företagskund != null && b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase))) &&
+                    (b.Bokningsstatus != Status.Makulerad),
                     x => x.KundID, x => x.KundID.Privatkund, x => x.KundID.Företagskund);
         }
+
 
         public void RemoveBokning(Bokning bokning)
         {

@@ -36,7 +36,7 @@
                 <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding Avresetid}"/>
                 <TextBlock Text="Ankomstdatum" Canvas.Left="449" Canvas.Top="76"/>
                 <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding Ankomsttid}"/>
-                <Button Content="Sök" Height="40" Canvas.Left="868" Canvas.Top="195" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                <Button Content="Sök" Height="40" Canvas.Left="614" Canvas.Top="155" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" />
 
                 <DataGrid  Width="908" Height="430"  ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"

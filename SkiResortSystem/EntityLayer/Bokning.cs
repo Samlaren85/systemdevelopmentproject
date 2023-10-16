@@ -29,6 +29,23 @@ namespace EntityLayer
                 }
             }
         }
+        private Status betalningsstatus;
+        public Status Betalningsstatus
+        {
+            get { return betalningsstatus; }
+            set
+            { 
+            
+                if ((value >= Status.Obetald && value <= Status.Ofakturerad) || value == Status.Makulerad)
+                {
+                    bokningsstatus = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Otillåten status");
+                }
+            }
+        }
         public float UtnyttjadKredit { get; set; }
         public bool Återbetalningsskydd { get; set; }
         public DateTime Ankomsttid { get; set; }
@@ -41,6 +58,8 @@ namespace EntityLayer
         public ICollection<Utrustningsbokning>? UtrustningRef { get; set; }
 
         public ICollection<Aktivitetsbokning>? AktivitetRef{ get; set; }
+
+        public ICollection<Faktura> Fakturaref { get; set; }
 
         public Bokning()
         {

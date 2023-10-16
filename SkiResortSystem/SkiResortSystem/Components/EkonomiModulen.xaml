@@ -46,20 +46,18 @@
 
             <Canvas>
                 <TextBlock Text="BOKNINGAR ATT FAKTURERA" FontSize="22" Canvas.Top="100" Canvas.Left="80"/>
-                <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding }"  IsReadOnly="True"
-                CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170">
-                    <DataGrid.InputBindings>
-                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding }"/>
-                    </DataGrid.InputBindings>
+                <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding HämtadeFakturor}"  IsReadOnly="True"
+                CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170" SelectionChanged="DataGrid_SelectionChanged">
+                    
                     <DataGrid.Columns>
 
-                        <DataGridTextColumn Header="Namn" Width="*" Binding="{Binding}"/>
+                        <DataGridTextColumn Header="Namn" Width="*" Binding="{Binding }"/>
                         <DataGridTextColumn Header="Bokningsnummer" Width="*" Binding="{Binding }"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Button Content="SKAPA FAKTURA" Canvas.Top="640" Canvas.Left="828" HorizontalAlignment="Center" Height="50" Width="160" VerticalAlignment="Top" />
-                <Button Content="HÄMTA" Canvas.Top="91" Canvas.Left="854" HorizontalAlignment="Left" VerticalAlignment="Center" Width="134" Height="45" />
+                <Button Content="SKAPA FAKTURA" Command="{Binding }" Canvas.Top="640" Canvas.Left="828" HorizontalAlignment="Center" Height="50" Width="160" VerticalAlignment="Top" />
+                <Button Content="HÄMTA" Command="{Binding FetchFaktura}" Canvas.Top="91" Canvas.Left="854" HorizontalAlignment="Left" VerticalAlignment="Center" Width="134" Height="45" />
             </Canvas>
 
 

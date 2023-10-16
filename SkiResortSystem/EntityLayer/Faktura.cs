@@ -19,7 +19,7 @@ namespace EntityLayer
             get { return fakturastatus; }
             set
             {
-                if (value == Status.Obetald || value == Status.Arkiverad)
+                if (value == Status.Obetald || value == Status.Makulerad)
                 {
                     fakturastatus = value;
                 }
@@ -35,19 +35,19 @@ namespace EntityLayer
             get { return Förfallodatum; }
             set
             {
-                    if (Förfallodatum == Fakturadatum.AddDays(20))
+                // 20% ska betalas inom 30dagar efter att fakturan skapats!    
+                if (Förfallodatum == Fakturadatum.AddDays(30))
                 {
                     förfallodatum = value;
                 }
-                else if (Förfallodatum != Fakturadatum.AddDays(20))
+                else if (Förfallodatum != Fakturadatum.AddDays(30))
                 {
-                    foreach (Bokning b in BokningsID)
+                    foreach (Bokning b in Bokningsref)
                     {
-                        if (Förfallodatum != b.Avresetid.AddDays(30))
+                        if (b.BokningsID != null && b.Bokningsstatus.Equals(0))
                         {
-                            förfallodatum = b.Avresetid.AddDays(30);
+                            förfallodatum = b.Ankomsttid;
                         }
-                        
                     }
                 }
                 else
@@ -56,7 +56,7 @@ namespace EntityLayer
                 }
             } 
         }
-        public ICollection<Bokning> BokningsID { get; set; }
+        public ICollection<Bokning> Bokningsref { get; set; }
 
         public DateTime Fakturadatum { get; set; }
         public float Totalpris { get; set; }

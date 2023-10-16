@@ -55,6 +55,11 @@ namespace BusinessLayer
                     (b.KundID.Företagskund != null && b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase)),
                     x => x.KundID, x => x.KundID.Privatkund, x => x.KundID.Företagskund);
         }
+        public IList<Bokning> FindMasterBooking()
+        {
+            return unitOfWork.BokningsRepository.Find(b =>
+                    b.Bokningsstatus.Equals(Status.Ofakturerad) && b.Bokningsstatus.Equals(Status.Obetald)));
+        }
 
         public void RemoveBokning(Bokning bokning)
         {

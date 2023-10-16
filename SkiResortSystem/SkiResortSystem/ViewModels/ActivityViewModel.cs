@@ -257,7 +257,7 @@ namespace SkiResortSystem.ViewModels
                     try
                     {
                         ActivityCustomerError = string.Empty;
-                       Aktivitetsbokningar = new ObservableCollection<Aktivitetsbokning>();
+                        Aktivitetsbokningar = new ObservableCollection<Aktivitetsbokning>();
                         if (SelectedActivityCustomer != null)
                         {
                             foreach (Bokning b in SelectedActivityCustomer.BokningsRef)

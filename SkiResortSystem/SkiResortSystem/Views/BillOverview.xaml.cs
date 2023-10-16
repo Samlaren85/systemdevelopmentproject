@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkiResortSystem.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace SkiResortSystem.Views
     /// <summary>
     /// Interaction logic for BillOverview.xaml
     /// </summary>
-    public partial class BillOverview : Window
+    public partial class BillOverview : Window, ICloseable
     {
         public BillOverview()
         {

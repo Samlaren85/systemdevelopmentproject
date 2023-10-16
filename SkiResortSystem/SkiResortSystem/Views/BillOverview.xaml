@@ -15,7 +15,7 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="Auto" ></Setter>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
 
        
@@ -89,18 +89,18 @@
 
 
 
-        <Button Content="STÄNG" Height="50" Width="130"  BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555"/>
-        <Button Content="ARKIVERA" Height="50" Width="130"  BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" />
-        <Button Content="SKRIV UT" Height="50" Width="130"  BorderBrush="White" Background="#FF5e8ec2" Foreground="White" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="990" Canvas.Top="555" />
+        <Button Content="STÄNG" Height="50" Width="130" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555"/>
+        <Button Content="ARKIVERA" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" />
+        <Button Content="SKRIV UT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="990" Canvas.Top="555" />
 
         <TextBlock Text="FAKTURAÖVERSIKT" Canvas.Left="1020" Canvas.Top="79" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <DataGrid Background="White" Width="308" Height="330"  BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
+        <DataGrid Width="308" Height="330" ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="950" Canvas.Top="130">
 
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Artikel" Width="3*"/>
+                <DataGridTextColumn Header="Artikel" Width="2*"/>
                 <DataGridTextColumn Header="Pris" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

@@ -19,11 +19,11 @@ namespace DynamicPDFCoreSuite.Examples
             {
                 x = "Ja";
             }
-            string labelText = $"Bokningsnummer: {bokning.BokningsID}\nKund: {bokning.KundID.Namn}\nAnkomsttid: {bokning.Ankomsttid}\nAvresetid: {bokning.Avresetid}\nÅterbetalningsskydd: {x}";
-            Label label = new Label(labelText, 0, 0, 504, 100, Font.Helvetica, 18, TextAlign.Center);
+            string labelText = $"Bokningsbekräftelse\n\nBokningsnummer: {bokning.BokningsID}\nKund: {bokning.KundID.Namn}\nAnkomsttid: {bokning.Ankomsttid}\nAvresetid: {bokning.Avresetid}\nÅterbetalningsskydd: {x}";
+            Label label = new Label(labelText, 0, 0, 504, 500, Font.Helvetica, 18, TextAlign.Center);
             page.Elements.Add(label);
-
-            document.Draw(Util.GetPath("Output/CreatePDF.pdf"));
+            string uniqueFileName = $"Bokningsbekräftelse_{bokning.BokningsID}.pdf";
+            document.Draw(Util.GetPath($"Bokningsbekräftelser/{uniqueFileName}"));
         }
     }
 }

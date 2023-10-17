@@ -11,7 +11,6 @@ namespace DynamicPDFCoreSuite.Examples
         public static void Run(Bokning bokning)
         {
             Document document = new Document();
-
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
             document.Pages.Add(page);
             string x = "Nej";
@@ -20,10 +19,21 @@ namespace DynamicPDFCoreSuite.Examples
                 x = "Ja";
             }
             string labelText = $"Bokningsbekräftelse\n\nBokningsnummer: {bokning.BokningsID}\nKund: {bokning.KundID.Namn}\nAnkomsttid: {bokning.Ankomsttid}\nAvresetid: {bokning.Avresetid}\nÅterbetalningsskydd: {x}";
-            Label label = new Label(labelText, 0, 0, 504, 500, Font.Helvetica, 18, TextAlign.Center);
+            Label label = new Label(labelText, 0, 0, 504, 700, Font.Helvetica, 18, TextAlign.Center);
             page.Elements.Add(label);
             string uniqueFileName = $"Bokningsbekräftelse_{bokning.BokningsID}.pdf";
             document.Draw(Util.GetPath($"Bokningsbekräftelser/{uniqueFileName}"));
+        }
+        public static void Run(Faktura faktura)
+        {
+            Document document = new Document();
+            Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
+            document.Pages.Add(page);
+            string labelText = $"Fakturadatum: {faktura.Fakturadatum}\t\t\t\t\t\tFakturanummer: {faktura.FakturaID}\nFörfallodatum: {faktura.Förfallodatum}\n\nTotalpris:{faktura.Totalpris}\nStatus: {faktura.Fakturastatus}";
+            Label label = new Label(labelText, 0, 0, 504, 500, Font.Helvetica, 18, TextAlign.Center);
+            page.Elements.Add(label);
+            string uniqueFileName = $"Faktura_{faktura.FakturaID}.pdf";
+            document.Draw(Util.GetPath($"Fakturor/{uniqueFileName}"));
         }
     }
 }

@@ -21,5 +21,11 @@ namespace BusinessLayer
         {
             return unitOfWork.FakturaRepository.FirstOrDefault(f => (f.BokningsID.Equals(kundbokning.BokningsID)));
         }
+        public void UpdateFaktura(Faktura faktura)
+        {
+            unitOfWork.FakturaRepository.Update(faktura);
+            unitOfWork.Save();
+
+        }
     }
 }

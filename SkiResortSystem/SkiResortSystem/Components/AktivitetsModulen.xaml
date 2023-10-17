@@ -84,9 +84,9 @@
                 <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding ActivityDate}"/>
                 <TextBlock Text="Avresedatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding ActivityEndDate}"/>
-                
+
                 <Button Content="Sök" Height="40" Canvas.Left="868" Canvas.Top="158" Command="{Binding SearchActivitiesCommand}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
-                <TextBlock Text="Antal personer" Canvas.Left="614" Canvas.Top="77"/>
+                <TextBlock Text="Typ av aktivitet" Canvas.Left="614" Canvas.Top="77"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding TypeOfActivity}" />
 
                 <DataGrid  Width="908" Height="390"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" SelectedItem="{Binding SelectedBookingActivity}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True">
@@ -112,9 +112,9 @@
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <ComboBox ItemsSource="{Binding SearchEquipmentOrderResult}" SelectedItem="{Binding SelectedEquipmentOrder}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox Background="White"  Text="{Binding SearchEquipmentOrder, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding EquipmentOrderError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <DataGrid  Width="908" Height="296" ItemsSource="{Binding Equipmentlist, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
@@ -152,6 +152,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button Content="Boka" Canvas.Left="868" Canvas.Top="596" Height="40" Command="{Binding BookEquipment}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" />
             </Canvas>
 
         </TabItem>
@@ -161,16 +162,16 @@
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
-                <ComboBox ItemsSource="{Binding SearchActivityCustomerResults}" SelectedItem="{Binding SelectedActivityCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchActivityCustomer, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <TextBlock Text="{Binding ActivityCustomerError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                <TextBlock Text="Avresedatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding ActivityDate}"/>
-                <TextBlock Text="Ankomstdatum" Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="76"/>
-                <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding ActivityEndDate}"/>
-                
+                <ComboBox ItemsSource="{Binding SearchEquipmentCustomerResult}" SelectedItem="{Binding SelectedEquipmentCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBox Background="White"  Text="{Binding SearchEquipmentCustomer, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding EquipmentCustomerError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <TextBlock Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="sv-se" Text="Återlämnings"/><Run Text="datum"/></TextBlock>
+                <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding FetchDate}"/>
+                <TextBlock Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="76"><Run Language="sv-se" Text="Utlämnings"/><Run Text="datum"/></TextBlock>
+                <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding ReturnDate}"/>
+
                 <Button Content="Sök" Height="40" Canvas.Left="868" Canvas.Top="155" Command="{Binding SearchEquipment}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-                <TextBlock Text="Antal personer" Canvas.Left="614" Canvas.Top="77"/>
+                <TextBlock Text="Typ av utrustning" Canvas.Left="614" Canvas.Top="77"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding TypeOfEquipment, UpdateSourceTrigger=PropertyChanged}" />
 
                 <DataGrid  Width="908" Height="390" ItemsSource="{Binding FoundEquipment, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" IsReadOnly="True">

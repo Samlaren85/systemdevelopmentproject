@@ -76,8 +76,8 @@
          Background="#FF5e8ec2" Foreground="White" Command="{Binding StängTabort}" CommandParameter="{Binding ElementName=View}" Visibility="{Binding TaBortVisability}" Canvas.Left="953" Canvas.Top="499" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White"
         Background="#FF5e8ec2" Foreground="White" Command="{Binding StängTabortÄndra}" Visibility="{Binding TaBortÄndraVisability}" CommandParameter="{Binding ElementName=View}"  Canvas.Left="953" Canvas.Top="499" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <!--KOLLA DETTA IMORGON HITTA MAKULERAD SÖKNINGEN HITTAR MAKULERADE-->
 
+        
         <DatePicker Canvas.Left="383" Canvas.Top="336" HorizontalAlignment="Left"  VerticalAlignment="Top" SelectedDate="{Binding Ankomst}" IsEnabled="{Binding AnkomstReadOnly}"/>
         <DatePicker Canvas.Left="550" Canvas.Top="335" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.673,0.667" SelectedDate="{Binding Avresa}" IsEnabled="{Binding AvresaReadOnly}" Height="27"/>
         <TextBlock Text="Avbeställningsskydd" Canvas.Left="383"  Canvas.Top="568" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -86,6 +86,7 @@
                 <ScaleTransform ScaleX="2" ScaleY="2" />
             </CheckBox.LayoutTransform>
         </CheckBox>
+        <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" Canvas.Left="383" Canvas.Top="366"/>
 
 
 

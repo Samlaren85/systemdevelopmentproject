@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.DirectoryServices;
+using DynamicPDFCoreSuite.Examples;
 
 namespace SkiResortSystem.ViewModels
 {
@@ -247,6 +249,16 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set
+            {
+                errorMessage = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Bokning SkapaBokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, string antalPersoner)
         {
@@ -260,28 +272,64 @@ namespace SkiResortSystem.ViewModels
         public ICommand SaveCustomer => saveCustomer ??= saveCustomer = new RelayCommand<ICloseable>((view) =>
         {
             BookingController bc = new BookingController();
+            TimeSpan bokningsLängd = Avresa - Ankomst;
 
-
-            if (uppdateraBokning) 
+            if ((Ankomst.DayOfWeek != DayOfWeek.Friday && Ankomst.DayOfWeek != DayOfWeek.Sunday) &&
+                (Avresa.DayOfWeek != DayOfWeek.Friday && Avresa.DayOfWeek != DayOfWeek.Sunday))
             {
-                Bokning.Återbetalningsskydd = Avbetalningsskydd;
-                Bokning.Ankomsttid = Ankomst;
-                Bokning.Avresetid = Avresa;
-                Bokning.AntalPersoner = AntalPersoner;
-                bc.UppdateraBokning(Bokning);
-                MessageBoxResult respons = MessageBox.Show($"Ändringar för bokning {Bokning.BokningsID} är nu sparad i systemet!");
-                CloseCommand.Execute(view);
+                ErrorMessage = "Ankomst- och avresetid måste vara en fredag eller en söndag";
+            }
+            else if (Ankomst.DayOfWeek == DayOfWeek.Friday && Avresa.DayOfWeek != DayOfWeek.Sunday)
+            {
+                ErrorMessage = "För vald ankomsttid måste avresetid vara en söndag";
+            }
+            else if (Ankomst.DayOfWeek == DayOfWeek.Sunday && Avresa.DayOfWeek != DayOfWeek.Friday && Avresa.DayOfWeek != DayOfWeek.Sunday)
+            {
+                ErrorMessage = "För vald ankomsttid måste avresetid vara en fredag eller en söndag";
+            }
+            else if (Avresa.DayOfWeek == DayOfWeek.Friday && Ankomst.DayOfWeek != DayOfWeek.Sunday)
+            {
+                ErrorMessage = "För vald avresetid måste ankomsttid vara en söndag";
+            }
+            else if (Avresa.DayOfWeek == DayOfWeek.Sunday && Ankomst.DayOfWeek != DayOfWeek.Friday && Ankomst.DayOfWeek != DayOfWeek.Sunday)
+            {
+                ErrorMessage = "För vald avresetid måste ankomst vara en fredag eller en söndag";
+            }
+            else if (bokningsLängd.Days > 6 && Ankomst.DayOfWeek == DayOfWeek.Sunday && Avresa.DayOfWeek == DayOfWeek.Friday)
+            {
+                ErrorMessage = "Bokning Kortvecka får vara högst 6 dagar / 5 nätter";
+            }
+            else if (bokningsLängd.Days > 2 && Ankomst.DayOfWeek == DayOfWeek.Friday && Avresa.DayOfWeek == DayOfWeek.Sunday)
+            {
+                ErrorMessage = "Bokning Weekend får vara högst 3 dagar / 2 nätter";
+            }
+            else if (bokningsLängd.Days > 7 && Ankomst.DayOfWeek == DayOfWeek.Sunday && Avresa.DayOfWeek == DayOfWeek.Sunday)
+            {
+                ErrorMessage = "Bokning Vecka får vara högst 8 dagar / 7 nätter";
             }
             else
             {
-                Bokning.Återbetalningsskydd = Avbetalningsskydd;
-                bc.SparaBokning(Bokning);
-                MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
-                CloseCommand.Execute(view);
+                if (uppdateraBokning)
+                {
+                    Bokning.Återbetalningsskydd = Avbetalningsskydd;
+                    Bokning.Ankomsttid = Ankomst;
+                    Bokning.Avresetid = Avresa;
+                    Bokning.AntalPersoner = AntalPersoner;
+                    bc.UppdateraBokning(Bokning);
+                    MessageBoxResult respons = MessageBox.Show($"Ändringar för bokning {Bokning.BokningsID} är nu sparad i systemet!");
+                    CloseCommand.Execute(view);
+                }
+                else
+                {
+                    Bokning.Återbetalningsskydd = Avbetalningsskydd;
+                    Bokning.Bokningsstatus = Status.Kommande;
+                    bc.SparaBokning(Bokning);
+                    MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
+                    CreatePDF.Run(Bokning);
+                    //DETTA OCH konfigurera pdf i create
+                    CloseCommand.Execute(view);
+                }
             }
-
-           
-
         });
 
         private ICommand stängTabort = null!;
@@ -308,6 +356,11 @@ namespace SkiResortSystem.ViewModels
         private ICommand checkaIn = null!;
         public ICommand CheckaIn => checkaIn ??= checkaIn = new RelayCommand<ICloseable>((view) =>
         {
+            if(CheckaUtReadOnly == false)
+            {
+                MessageBoxResult responsif = MessageBox.Show($"Du måste ha checkat in eller vara {Bokning.Avresetid} för att kunna CHECKA UT");
+
+            }
             BookingController bc = new BookingController();
             Bokning.Bokningsstatus = Status.Incheckad;
             bc.UppdateraBokning(Bokning);

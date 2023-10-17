@@ -15,7 +15,7 @@ namespace DynamicPDFCoreSuite.Examples
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
             document.Pages.Add(page);
             string x = "Nej";
-            if(bokning.Återbetalningsskydd = true)
+            if(bokning.Återbetalningsskydd == true)
             {
                 x = "Ja";
             }

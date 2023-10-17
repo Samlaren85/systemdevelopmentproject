@@ -1,6 +1,8 @@
 ﻿using ceTe.DynamicPDF;
 using ceTe.DynamicPDF.PageElements;
 using EntityLayer;
+using System.Collections.Generic;
+using System;
 
 namespace DynamicPDFCoreSuite.Examples
 {
@@ -12,12 +14,29 @@ namespace DynamicPDFCoreSuite.Examples
 
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
             document.Pages.Add(page);
-
-            string labelText = "Hello World...\nFrom DynamicPDF Generator for .NET\nDynamicPDF.com";
+            string x = "Nej";
+            if(bokning.Återbetalningsskydd = true)
+            {
+                x = "Ja";
+            }
+            string labelText = $"Bokningsnummer: {bokning.BokningsID}\nKund: {bokning.KundID.Namn}\nAnkomsttid: {bokning.Ankomsttid}\nAvresetid: {bokning.Avresetid}\nÅterbetalningsskydd: {x}";
             Label label = new Label(labelText, 0, 0, 504, 100, Font.Helvetica, 18, TextAlign.Center);
             page.Elements.Add(label);
 
-            document.Draw(Util.GetPath("CreatePDF.pdf"));
+            document.Draw(Util.GetPath("Output/CreatePDF.pdf"));
         }
     }
 }
+//public float UtnyttjadKredit { get; set; }
+//public bool Återbetalningsskydd { get; set; }
+//public DateTime Ankomsttid { get; set; }
+//public DateTime Avresetid { get; set; }
+//public string AntalPersoner { get; set; }
+//public Användare AnvändareID { get; set; }
+//public Kund KundID { get; set; }
+
+//public ICollection<Facilitet> FacilitetID { get; set; }
+
+//public ICollection<Utrustningsbokning>? UtrustningRef { get; set; }
+
+//public ICollection<Aktivitetsbokning>? AktivitetRef { get; set; }

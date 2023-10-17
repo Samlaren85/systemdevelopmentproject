@@ -31,11 +31,9 @@
                 <DataGrid Width="908" Height="345"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="FACILITETSNAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
-                        <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
-                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="LÄGGA TILL NY" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button Content="LÄGG TILL " Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Canvas>
 
         </TabItem>
@@ -52,11 +50,9 @@
                 <DataGrid Width="908" Height="345"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="AKTIVITETSNAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
-                        <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
-                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="LÄGGA TILL NY" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button Content="LÄGG TILL" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Canvas>
 
 
@@ -74,11 +70,10 @@
                 <DataGrid Width="908" Height="345"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="UTRUSTNINGSNAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
-                        <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
-                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" />
+                        
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="LÄGGA TILL NY" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button Content="LÄGG TILL" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Canvas>
 
 
@@ -96,10 +91,9 @@
                 <DataGrid Width="908" Height="345"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
-                        <DataGridTextColumn Header="ROLL" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="LÄGGA TILL NY" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button Content="LÄGG TILL" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Canvas>
             
         </TabItem>

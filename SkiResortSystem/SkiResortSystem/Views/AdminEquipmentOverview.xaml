@@ -28,27 +28,27 @@
 
     <Canvas  Background="#FFA6C3E4" Height="1000" >
 
-        <TextBlock Text="LÄGG TILL NY FACILITET" FontSize="20" Canvas.Left="157" Canvas.Top="52" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBlock Text="LÄGG TILL NY UTRUSTNING" FontSize="20" Canvas.Left="157" Canvas.Top="52" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
 
         <TextBlock Text="Facilitetsnamn" Canvas.Left="157" Canvas.Top="135"/>
         <TextBox Text="{Binding Personnummer}" Canvas.Left="157" Canvas.Top="165" Width="238" />
 
-        <TextBlock Text="ID" Canvas.Left="157" Canvas.Top="215" />
+        <TextBlock Text="Storlek" Canvas.Left="157" Canvas.Top="215" />
         <TextBox Text="{Binding Förnamn}" Canvas.Left="157" Canvas.Top="245" Width="113" />
-
-
 
         <TextBlock Text="Pris" Canvas.Left="363" Canvas.Top="215" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="-1.895,0.642"/>
         <TextBox Text="{Binding Efternamn}" Canvas.Left="362" Canvas.Top="245" Width="126" />
 
+        <TextBlock Text="Antal" Canvas.Left="157" Canvas.Top="295" />
+        <TextBox Text="{Binding Förnamn}" Canvas.Left="157" Canvas.Top="325" Width="113" />
 
 
 
 
 
-        <Button Content="SPARA" Height="50" Width="130"  Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="564" Canvas.Top="320" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="564" Canvas.Top="390" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}" RenderTransformOrigin="-0.348,0.049"/>
-        <Button Content="STÄNG" Height="50" Width="130" Canvas.Left="564" Canvas.Top="460" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" />
+        <Button Content="SPARA" Height="50" Width="130"  Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="630" Canvas.Top="420" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="ARKIVERA" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="470" Canvas.Top="500" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="{Binding RemoveEnabled}" />
+        <Button Content="STÄNG" Height="50" Width="130" Canvas.Left="630" Canvas.Top="500" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" />
     </Canvas>
 
 

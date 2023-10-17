@@ -45,7 +45,40 @@
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommand}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Typ" Width="*" Binding="{Binding}"/>
+                        <DataGridTextColumn Header="Typ" Width="*" Binding="{Binding}">
+                            <DataGridTextColumn.CellStyle>
+                                
+                                <Style TargetType="DataGridCell">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#FF5e8ec2"/>
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Trigger>
+
+                                    </Style.Triggers>
+
+                                    <Setter Property="Background" Value="LightGray"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="Height" Value="40"/>
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="DataGridCell" >
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Style>
+
+
+                            </DataGridTextColumn.CellStyle>
+                            
+                            
+                        </DataGridTextColumn>
+                        
                         <DataGridTextColumn Header="Pris" Width="*" Binding="{Binding Facilitetspris}"/>
                     </DataGrid.Columns>
                 </DataGrid>

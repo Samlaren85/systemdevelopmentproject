@@ -28,67 +28,36 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        private Faktura personnummer;
-        public Faktura Personnummer
+        private List<string> artikel;
+        public List<string> Artikel
         {
-            get { return personnummer; }
+            get { return artikel; }
             set
             {
-                personnummer = value;
+                artikel = value;
                 OnPropertyChanged();
             }
         }
-        private Faktura förnamn;
-        public Faktura Förnamn
+        private List<string> pris;
+        public List<string> Pris
         {
-            get { return förnamn; }
+            get { return pris; }
             set
             {
-                förnamn = value;
+                pris = value;
                 OnPropertyChanged();
             }
         }
-        private Faktura efternamn;
-        public Faktura Efternamn
+        private Bokning bokning;
+        public Bokning Bokning
         {
-            get { return efternamn; }
+            get { return bokning; }
             set
             {
-                efternamn = value;
+                bokning = value;
                 OnPropertyChanged();
             }
         }
-        private Faktura gatuadress;
-        public Faktura Gatuadress
-        {
-            get { return gatuadress; }
-            set
-            {
-                gatuadress = value;
-                OnPropertyChanged();
-            }
-        }
-        private Faktura postnummer;
-        public Faktura Postnummer
-        {
-            get { return postnummer; }
-            set
-            {
-                postnummer = value;
-                OnPropertyChanged();
-            }
-        }
-        private Faktura postort;
-        public Faktura Postort
-        { 
-            get { return postort; }
-            set
-            {
-                postort = value;
-                OnPropertyChanged();
-            }
-        }
-
 
         private ICommand arkiveraFaktura = null!;
         public ICommand ArkiveraFaktura =>
@@ -121,7 +90,24 @@ namespace SkiResortSystem.ViewModels
         }
         public BillOverviewViewModel(Faktura faktura)
         {
+
             Faktura = faktura;
+            Bokning = faktura.Bokningsref;
+            foreach(Facilitet f in Bokning.FacilitetID)
+            {
+                Artikel.Add(f.Typ);
+                Pris.Add(f.Facilitetspris.ToString());
+            }
+            foreach(Utrustningsbokning u in Bokning.UtrustningRef)
+            {
+                Artikel.Add(u.Utrustning.UtrustningsBenämning);
+                Pris.Add(u.Utrustning.Pris.ToString());
+            }
+            foreach(Aktivitetsbokning a in Bokning.AktivitetRef)
+            {
+                Artikel.Add(a.Aktivitetsref.Typ);
+                Pris.Add(a.TotalPris.ToString());
+            }
             
         }
     }

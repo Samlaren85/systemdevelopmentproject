@@ -222,6 +222,118 @@ namespace SkiResortSystem.ViewModels
             exitCommand ??= exitCommand = new RelayCommand(() =>
                 {
                     Application.Current.Shutdown();
-                });   
+                });
+
+        private bool admin = false;
+        public bool Admin
+        {
+            get { return admin; }
+            set
+            {
+                if (admin != value)
+                {
+                    admin = value;
+                    OnPropertyChanged(nameof(Admin));
+                }
+            }
+        }
+
+        private bool receptionist = false;
+        public bool Receptionist
+        {
+            get { return receptionist; }
+            set
+            {
+                if (receptionist != value)
+                {
+                    receptionist = value;
+                    OnPropertyChanged(nameof(Receptionist));
+                }
+            }
+        }
+
+        private bool storeEmployee = false;
+        public bool StoreEmployee
+        {
+            get { return storeEmployee; }
+            set
+            {
+                if (storeEmployee != value)
+                {
+                    storeEmployee = value;
+                    OnPropertyChanged(nameof(StoreEmployee));
+                }
+            }
+        }
+
+        private bool financeEmployees = false;
+        public bool FinanceEmployees
+        {
+            get { return financeEmployees; }
+            set
+            {
+                if (financeEmployees != value)
+                {
+                    financeEmployees = value;
+                    OnPropertyChanged(nameof(FinanceEmployees));
+                }
+            }
+        }
+
+        private bool marketingManager = false;
+        public bool MarketingManager
+        {
+            get { return marketingManager; }
+            set
+            {
+                if (marketingManager != value)
+                {
+                    marketingManager = value;
+                    OnPropertyChanged(nameof(MarketingManager));
+                }
+            }
+        }
+
+        private bool storeManager = false;
+        public bool StoreManager
+        {
+            get { return storeManager; }
+            set
+            {
+                if (storeManager != value)
+                {
+                    storeManager = value;
+                    OnPropertyChanged(nameof(StoreManager));
+                }
+            }
+        }
+
+        private bool financialManager = false;
+        public bool FinancialManager
+        {
+            get { return financialManager; }
+            set
+            {
+                if (financialManager != value)
+                {
+                    financialManager = value;
+                    OnPropertyChanged(nameof(FinancialManager));
+                }
+            }
+        }
+
+        private bool ceo  = false;
+        public bool CEO
+        {
+            get { return ceo; }
+            set
+            {
+                if (ceo != value)
+                {
+                    ceo = value;
+                    OnPropertyChanged(nameof(CEO));
+                }
+            }
+        }
     }
 }

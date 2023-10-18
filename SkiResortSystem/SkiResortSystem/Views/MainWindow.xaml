@@ -50,36 +50,117 @@
         </TabItem>
 
         <TabItem Header="BOENDE &amp; KONFERENS" >
+            <TabItem.Style>
+                <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Receptionist}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                </Style>
+
+
+            </TabItem.Style>
 
             <comp:BoendeModulen/>
 
         </TabItem>
 
-        <TabItem Header="AKTIVITET &amp; UTRUSTNING"    >
+        <TabItem Header="AKTIVITET &amp; UTRUSTNING">
+            <TabItem.Style>
+                <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Admin}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden"/>
+
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                </Style>
+
+
+            </TabItem.Style>
 
             <comp:AktivitetsModulen/>
 
         </TabItem>
 
         <TabItem Header="KUND">
+            <TabItem.Style>
+                <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Admin}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden"/>
+
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                </Style>
+
+
+            </TabItem.Style>
 
             <comp:KundModulen/>
 
         </TabItem>
 
-        <TabItem Header="EKONOMI"   >
+        <TabItem Header="EKONOMI">
+            <TabItem.Style>
+                <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Admin}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden"/>
+
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Receptionist}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+
+                        </DataTrigger>
+                    </Style.Triggers>
+                    
+                </Style>
+                
+                
+            </TabItem.Style>
 
             <comp:EkonomiModulen/>
 
         </TabItem>
 
         <TabItem Header="STYRNING">
+            <TabItem.Style>
+                <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Receptionist}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                </Style>
+
+
+            </TabItem.Style>
 
             <comp:StyrningsModulen/>
 
         </TabItem>
 
         <TabItem Header="ADMIN">
+            
+            <TabItem.Style>
+                <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Receptionist}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                </Style>
+
+
+            </TabItem.Style>
 
             <comp:AdminModulen/>
 

@@ -121,6 +121,7 @@
                         <DataGridTextColumn Header="Ankomstdatum" Binding="{Binding Ankomsttid}" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Avresedatum" Binding="{Binding Avresetid}" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="Bokningsnummer" Binding="{Binding BokningsID}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Status" Binding="{Binding BokningsID}" Width="*"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 

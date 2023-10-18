@@ -28,6 +28,14 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string privFöre;
+
+        public string PrivFöre
+        {
+            get { return privFöre; }
+            set { privFöre = value; }
+        }
+
         private List<string> artikel;
         public List<string> Artikel
         {
@@ -93,24 +101,29 @@ namespace SkiResortSystem.ViewModels
 
             Faktura = faktura;
             Bokning = faktura.Bokningsref;
-            foreach(Facilitet f in Bokning.FacilitetID)
+            if(Bokning.KundID.Företagskund != null)
             {
-                if (Artikel != null && Pris != null)
-                Artikel.Add(f.Typ);
-                Pris.Add(f.Facilitetspris.ToString());
+                PrivFöre = "Organisationsnummer";
             }
-            foreach(Utrustningsbokning u in Bokning.UtrustningRef)
+            else
             {
-                if (Artikel != null && Pris != null)
-                Artikel.Add(u.Utrustning.UtrustningsBenämning);
-                Pris.Add(u.Utrustning.Pris.ToString());
+                PrivFöre = "Personnummer";
             }
-            foreach(Aktivitetsbokning a in Bokning.AktivitetRef)
-            {
-                if (Artikel != null && Pris != null)
-                Artikel.Add(a.Aktivitetsref.Typ);
-                Pris.Add(a.TotalPris.ToString());
-            }
+            //foreach(Facilitet f in Bokning.FacilitetID)
+            //{
+            //    Artikel.Add(f.Typ);
+            //    Pris.Add(f.Facilitetspris.ToString());
+            //}
+            //foreach(Utrustningsbokning u in Bokning.UtrustningRef)
+            //{
+            //    Artikel.Add(u.Utrustning.UtrustningsBenämning);
+            //    Pris.Add(u.Utrustning.Pris.ToString());
+            //}
+            //foreach(Aktivitetsbokning a in Bokning.AktivitetRef)
+            //{
+            //    Artikel.Add(a.Aktivitetsref.Typ);
+            //    Pris.Add(a.TotalPris.ToString());
+            //}
             
         }
     }

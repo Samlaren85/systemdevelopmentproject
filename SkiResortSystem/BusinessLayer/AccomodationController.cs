@@ -110,11 +110,11 @@ namespace BusinessLayer
                     if (facilitet.LägenhetsID == null && facilitetsTyp.Equals("Lägenhet")) inaktuellBokningar.Add(bokning);
                 }
             }
-            return bokningar.Except(inaktuellBokningar).ToList(); //Vad händer om första sökkriteriet blir null?!? Ta bort efter testkörning
+            return bokningar.Except(inaktuellBokningar).ToList();
         }
 
         /// <summary>
-        /// Metoden presenterar lediga faciliteter för användaren baserat på val Konferens, Lägenhet, Camping
+        /// Metoden presenterar lediga faciliteter för användaren baserat på val Konferens, Lägenhet, Camping i fliken "Visa beläggning" i boendemodulen.
         /// </summary>
         /// <param name="facilitetsval"></param>
         /// <returns></returns>

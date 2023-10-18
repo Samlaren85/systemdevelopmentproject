@@ -151,6 +151,7 @@ namespace SkiResortSystem.ViewModels
             BookingController bc = new BookingController();
             List<Bokning> Lista = bc.FindMasterBooking(SökFaktureradeFakturor).ToList();
             FaktureradeFakturor = ec.HämtaFaktureradeFakturor(Lista);
+            OnPropertyChanged(nameof(FaktureradeFakturor));
         }
         );
        /* private ICommand doubleClickBillingCommand = null!;

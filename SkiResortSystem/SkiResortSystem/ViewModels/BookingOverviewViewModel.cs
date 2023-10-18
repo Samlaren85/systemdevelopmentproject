@@ -349,6 +349,10 @@ namespace SkiResortSystem.ViewModels
             BookingController bc = new BookingController();
             Bokning.Bokningsstatus = Status.Makulerad;
             bc.UppdateraBokning(Bokning);
+            if(Bokning.Fakturaref != null)
+            {
+                
+            }
             CloseCommand.Execute(view);
 
         });

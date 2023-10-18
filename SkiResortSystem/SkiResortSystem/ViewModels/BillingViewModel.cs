@@ -174,9 +174,9 @@ namespace SkiResortSystem.ViewModels
         public ICommand DoubleClickBillingCommand =>
             doubleClickBillingCommand ??= doubleClickBillingCommand = new RelayCommand(() =>
             {
-                if (SelectedFaktura != null)
+                if (SelectFaktura != null)
                 {
-                    BillOverviewViewModel fakturaöversikt = new BillOverviewViewModel(SelectedFaktura);
+                    BillOverviewViewModel fakturaöversikt = new BillOverviewViewModel(SelectFaktura);
                     windowService.ShowDialog(fakturaöversikt);
                 }
             });

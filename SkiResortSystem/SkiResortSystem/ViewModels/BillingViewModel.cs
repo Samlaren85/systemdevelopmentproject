@@ -5,6 +5,7 @@ using SkiResortSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,17 +54,12 @@ namespace SkiResortSystem.ViewModels
             get { return selectedFaktura; }
             set
             {
-                if (value == selectedFaktura) return;
-                if (value != null)
-                {
-                    selectedFaktura = value;
-                    SearchBills();
-                }
+                selectedFaktura = value;
                 OnPropertyChanged();
             }
         }
 
-        private string searchFaktura;
+        /*private string searchFaktura;
         public string SearchFaktura
         {
             get { return searchFaktura; }
@@ -76,7 +72,7 @@ namespace SkiResortSystem.ViewModels
                     OnPropertyChanged(SearchFaktura);
                 }
             }
-        }
+        }*/
 
         private IList<Faktura> fakturaResults;
         public IList<Faktura> FakturaResults
@@ -88,11 +84,11 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        public void SearchBills()
+        /*public void SearchBills()
         {
             EconomyController ec = new EconomyController();
-            //FakturaSökning = ec.FindFaktura(SelectFaktura);
-        }
+            FakturaSökning = ec.FindFaktura(SelectFaktura);
+        }*/
 
 
         private Faktura fakturaSökning;
@@ -128,12 +124,33 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string fakturaerrormsg { get; set; }
+        public string Fakturaerrormsg
+        {
+            get { return fakturaerrormsg; }
+            set 
+            {
+                fakturaerrormsg = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ICommand createFaktura = null!;
         public ICommand CreateFaktura =>
             createFaktura ??= createFaktura = new RelayCommand(() =>
             {
+                Fakturaerrormsg = string.Empty;
                 EconomyController ec = new EconomyController();
-                ec.CreateFaktura(SkapandeAvFakturor);
+                if (SkapandeAvFakturor == null)
+                {
+                    Fakturaerrormsg= "Du behöver välja en bokning i listan";
+                }
+                else
+                {
+                    ec.CreateFaktura(SkapandeAvFakturor);
+                    HämtadeBokningarAttFakturera = new List<Bokning>();
+
+                }
             }
             );
         private ICommand fetchFaktura = null!;
@@ -153,15 +170,15 @@ namespace SkiResortSystem.ViewModels
             FaktureradeFakturor = ec.HämtaFaktureradeFakturor(Lista);
         }
         );
-       /* private ICommand doubleClickBillingCommand = null!;
+        private ICommand doubleClickBillingCommand = null!;
         public ICommand DoubleClickBillingCommand =>
             doubleClickBillingCommand ??= doubleClickBillingCommand = new RelayCommand(() =>
             {
-                if (SelectedFaktura != null)
+                if (SelectFaktura != null)
                 {
-                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, Avresetid, Ankomsttid, antalpersoner, Facilitetspriset);
-                    windowService.ShowDialog(bokningsöversikt);
+                    BillOverviewViewModel fakturaöversikt = new BillOverviewViewModel(SelectFaktura);
+                    windowService.ShowDialog(fakturaöversikt);
                 }
-            });*/
+            });
     }
 }

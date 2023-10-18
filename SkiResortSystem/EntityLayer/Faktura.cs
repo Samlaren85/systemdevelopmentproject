@@ -29,23 +29,7 @@ namespace EntityLayer
                 }
             }
         }
-        private DateTime förfallodatum;
-        public DateTime Förfallodatum 
-        {
-            get { return Förfallodatum; }
-            set
-            {
-                // 20% ska betalas inom 30dagar efter att fakturan skapats!    
-                if (Förfallodatum == Fakturadatum.AddDays(30))
-                {
-                    förfallodatum = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Felaktigt förfallodatum");
-                }
-            } 
-        }
+        public DateTime Förfallodatum {  get; set; }
         public Bokning Bokningsref { get; set; }
 
         public DateTime Fakturadatum { get; set; }
@@ -59,10 +43,12 @@ namespace EntityLayer
         {
             _antalFakturor++;
             FakturaID = "FAKT" + _antalFakturor.ToString("000000");
-            Fakturadatum = fakturadatum; 
+            Fakturadatum = fakturadatum;
+            Förfallodatum = Fakturadatum.AddDays(30);
             Totalpris = totalpris; 
             Moms = moms;
             Bokningsref = bokning;
+            Fakturastatus = Status.Obetald;
         }
     }
 }

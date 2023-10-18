@@ -68,8 +68,8 @@ namespace SkiResortSystem.ViewModels
             set { bokningsnummer = value; OnPropertyChanged(); }
         }
 
-        private Bokning bokning;
-        public Bokning Bokning
+        private Bokning? bokning;
+        public Bokning? Bokning
         {
             get { return bokning; }
             set { bokning = value; OnPropertyChanged(); }
@@ -336,8 +336,7 @@ namespace SkiResortSystem.ViewModels
 
         public ICommand StängTabort => stängTabort ??= stängTabort = new RelayCommand<ICloseable>((view) =>
         {
-            BookingController bc = new BookingController();
-            bc.RemoveBokning(Bokning);
+            Bokning = null;
             CloseCommand.Execute(view);
 
         });
@@ -351,7 +350,10 @@ namespace SkiResortSystem.ViewModels
             bc.UppdateraBokning(Bokning);
             if(Bokning.Fakturaref != null)
             {
-                
+                foreach(Faktura f in Bokning.Fakturaref)
+                {
+                    f.Fakturastatus = Status.Makulerad;
+                }
             }
             CloseCommand.Execute(view);
 

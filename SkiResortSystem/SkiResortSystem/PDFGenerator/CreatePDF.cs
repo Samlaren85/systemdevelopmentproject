@@ -29,24 +29,12 @@ namespace DynamicPDFCoreSuite.Examples
             Document document = new Document();
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
             document.Pages.Add(page);
-            string labelText = $"Fakturadatum: {faktura.Fakturadatum}\t\t\t\t\t\tFakturanummer: {faktura.FakturaID}\nFörfallodatum: {faktura.Förfallodatum}\n\nTotalpris:{faktura.Totalpris}\nStatus: {faktura.Fakturastatus}";
-            Label label = new Label(labelText, 0, 0, 504, 500, Font.Helvetica, 18, TextAlign.Center);
+            string labelText = $"Fakturadatum: {faktura.Fakturadatum}\t\t\t\t\t\tFakturanummer: {faktura.FakturaID}\nFörfallodatum: {faktura.Förfallodatum}\n\n" +
+                $"Totalpris:{faktura.Totalpris}\nStatus: {faktura.Fakturastatus}\nKund: {faktura.Bokningsref.KundID}\nMoms: {faktura.Moms}";
+            Label label = new Label(labelText, 0, 0, 504, 800, Font.Helvetica, 18, TextAlign.Center);
             page.Elements.Add(label);
             string uniqueFileName = $"Faktura_{faktura.FakturaID}.pdf";
             document.Draw(Util.GetPath($"Fakturor/{uniqueFileName}"));
         }
     }
 }
-//public float UtnyttjadKredit { get; set; }
-//public bool Återbetalningsskydd { get; set; }
-//public DateTime Ankomsttid { get; set; }
-//public DateTime Avresetid { get; set; }
-//public string AntalPersoner { get; set; }
-//public Användare AnvändareID { get; set; }
-//public Kund KundID { get; set; }
-
-//public ICollection<Facilitet> FacilitetID { get; set; }
-
-//public ICollection<Utrustningsbokning>? UtrustningRef { get; set; }
-
-//public ICollection<Aktivitetsbokning>? AktivitetRef { get; set; }

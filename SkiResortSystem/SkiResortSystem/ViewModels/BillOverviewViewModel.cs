@@ -94,7 +94,7 @@ namespace SkiResortSystem.ViewModels
         public ICommand ArkiveraFaktura =>
             arkiveraFaktura ??= arkiveraFaktura = new RelayCommand<ICloseable>((view) =>
             {
-                Faktura.Fakturastatus = Status.Arkiverad;
+                Faktura.Fakturastatus = Status.Makulerad;
                 EconomyController ec = new EconomyController();
                 ec.UpdateFaktura(Faktura);
                 MessageBoxResult respons = MessageBox.Show($"Faktura {Faktura.FakturaID} är nu arkiverad i systemet!");
@@ -116,11 +116,13 @@ namespace SkiResortSystem.ViewModels
                 view.Close();
             });
 
+        public BillOverviewViewModel()
+        {
+        }
         public BillOverviewViewModel(Faktura faktura)
         {
             Faktura = faktura;
             
-
         }
     }
 }

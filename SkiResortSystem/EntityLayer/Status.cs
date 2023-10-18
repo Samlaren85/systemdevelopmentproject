@@ -28,6 +28,6 @@ namespace EntityLayer
         //Statusar för fakturor
         Obetald = 30,
         Betald = 31,
-        Arkiverad = 32,
+        Ofakturerad = 32,
     }
 }

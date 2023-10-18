@@ -1,5 +1,7 @@
 ﻿using DataLayer;
 using EntityLayer;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +21,89 @@ namespace BusinessLayer
 
         public Faktura FindFaktura(Bokning kundbokning)
         {
-            return unitOfWork.FakturaRepository.FirstOrDefault(f => (f.BokningsID.Equals(kundbokning.BokningsID)));
+            return unitOfWork.FakturaRepository.FirstOrDefault(f => (f.Bokningsref.Equals(kundbokning.BokningsID)));
+        }
+
+       /* public List<Faktura> FetchBillableBills(IList<Bokning> Lista)
+        {
+            List<Faktura> billableBills = new List<Faktura>();
+            foreach (Bokning b in Lista)
+            {
+              foreach (Faktura f in b.Fakturaref)
+              {
+                    if (f.Förfallodatum == null && b.Ankomsttid >= DateTime.Today)
+                    {
+                        billableBills.Add(f);
+                    }
+              }
+                
+            }
+            return billableBills;
+        }*/ //Den här utkommenterade kan med fördel tas bort?!
+
+        /// <summary>
+        /// Metoden tar emot en fullständig lista med bokningar som sökts fram och hanterar endast de som i nuläget är ofakturerade.
+        /// Resultatet kommer sedan att användas vid skapande av fakturor för ofakturerade bokningar.
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <returns></returns>
+        
+        public List<Faktura> HämtaFaktureradeFakturor(IList<Bokning> Lista)
+        {
+            List<Faktura> faktureradeFakturor = new List<Faktura>();
+            foreach (Bokning b in Lista)
+            {
+                if (b.Betalningsstatus == Status.Obetald || b.Betalningsstatus == Status.Betald)
+                {
+                    foreach (Faktura f in b.Fakturaref)
+                    {
+                        faktureradeFakturor.Add(f);
+                    }
+                }
+            }
+            return faktureradeFakturor;
+        }
+
+        public Faktura CreateFaktura(Bokning kundensBokning)
+        {
+            DateTime fakturadatum = DateTime.Today;
+            float pris = 0;
+
+            
+                
+                    if (kundensBokning.FacilitetID != null)
+                    {
+                        foreach (Facilitet f in kundensBokning.FacilitetID)
+                        {
+                                pris += f.Facilitetspris;
+                        };
+                    }
+
+
+                    if (kundensBokning.AktivitetRef != null)
+                    {
+                        foreach (Aktivitetsbokning a in kundensBokning.AktivitetRef)
+                        {
+                                pris += a.TotalPris;
+                        }
+                    }
+
+                    if (kundensBokning.UtrustningRef != null)
+                    {
+                        foreach (Utrustningsbokning u in kundensBokning.UtrustningRef)
+                        {
+                                pris += u.Utrustning.Pris;
+                        }
+                    }
+
+            
+            float moms = (float)(0.2 * pris);
+            float totalpris = (pris+moms);//ska hämta priset för allt som tillhör fakturan
+            Faktura faktura= new Faktura(fakturadatum, totalpris, moms, kundensBokning);
+            
+            unitOfWork.FakturaRepository.Add(faktura);
+            unitOfWork.Save();
+            return faktura;
         }
         public void UpdateFaktura(Faktura faktura)
         {

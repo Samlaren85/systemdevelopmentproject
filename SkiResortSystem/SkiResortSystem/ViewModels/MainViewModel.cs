@@ -238,44 +238,44 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private bool receptionist = false;
-        public bool Receptionist
+        private bool reception = false;
+        public bool Reception
         {
-            get { return receptionist; }
+            get { return reception; }
             set
             {
-                if (receptionist != value)
+                if (reception != value)
                 {
-                    receptionist = value;
-                    OnPropertyChanged(nameof(Receptionist));
+                    reception = value;
+                    OnPropertyChanged(nameof(Reception));
                 }
             }
         }
 
-        private bool storeEmployee = false;
-        public bool StoreEmployee
+        private bool shop = false;
+        public bool Shop
         {
-            get { return storeEmployee; }
+            get { return shop; }
             set
             {
-                if (storeEmployee != value)
+                if (shop != value)
                 {
-                    storeEmployee = value;
-                    OnPropertyChanged(nameof(StoreEmployee));
+                    shop = value;
+                    OnPropertyChanged(nameof(Shop));
                 }
             }
         }
 
-        private bool financeEmployees = false;
-        public bool FinanceEmployees
+        private bool economy = false;
+        public bool Economy
         {
-            get { return financeEmployees; }
+            get { return economy; }
             set
             {
-                if (financeEmployees != value)
+                if (economy != value)
                 {
-                    financeEmployees = value;
-                    OnPropertyChanged(nameof(FinanceEmployees));
+                    economy = value;
+                    OnPropertyChanged(nameof(Economy));
                 }
             }
         }
@@ -294,35 +294,22 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private bool storeManager = false;
-        public bool StoreManager
+        private bool governance  = false;
+        public bool Governance 
         {
-            get { return storeManager; }
+            get { return governance; }
             set
             {
-                if (storeManager != value)
+                if (governance != value)
                 {
-                    storeManager = value;
-                    OnPropertyChanged(nameof(StoreManager));
+                    governance = value;
+                    OnPropertyChanged(nameof(Governance));
                 }
             }
         }
 
-        private bool financialManager = false;
-        public bool FinancialManager
-        {
-            get { return financialManager; }
-            set
-            {
-                if (financialManager != value)
-                {
-                    financialManager = value;
-                    OnPropertyChanged(nameof(FinancialManager));
-                }
-            }
-        }
 
-        private bool ceo  = false;
+        private bool ceo = false;
         public bool CEO
         {
             get { return ceo; }

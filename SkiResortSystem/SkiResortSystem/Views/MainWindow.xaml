@@ -13,6 +13,7 @@
     </Window.DataContext>
     <TabControl Background="#FFA6C3E4" Height="1000" Width="auto" Padding="-3,0,0,0" >
 
+      
 
         <TabItem>
             <TabItem.Header >
@@ -49,7 +50,7 @@
             </TabControl>
         </TabItem>
 
-        <TabItem Header="BOENDE &amp; KONFERENS" >
+        <TabItem Header="BOENDE &amp; KONFERENS">
             <TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
@@ -71,10 +72,12 @@
             <TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Admin}" Value="True">
-                            <Setter Property="Visibility" Value="Hidden"/>
-
+                       
+                        <DataTrigger Binding="{Binding Shop}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
+
+
                     </Style.Triggers>
 
                 </Style>
@@ -90,9 +93,12 @@
             <TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Admin}" Value="True">
-                            <Setter Property="Visibility" Value="Hidden"/>
+                        <DataTrigger Binding="{Binding Reception}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
 
+                        <DataTrigger Binding="{Binding Shop}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
                     </Style.Triggers>
 
@@ -109,14 +115,8 @@
             <TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Admin}" Value="True">
-                            <Setter Property="Visibility" Value="Hidden"/>
-
-                        </DataTrigger>
-
-                        <DataTrigger Binding="{Binding Receptionist}">
-                            <Setter Property="Visibility" Value="Hidden"/>
-
+                        <DataTrigger Binding="{Binding Economy}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
                     </Style.Triggers>
                     
@@ -129,12 +129,12 @@
 
         </TabItem>
 
-        <TabItem Header="STYRNING">
+        <TabItem Header="STYRNING" >
             <TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Receptionist}" Value="True">
-                            <Setter Property="Visibility" Value="Hidden"/>
+                        <DataTrigger Binding="{Binding Governance}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
                     </Style.Triggers>
 
@@ -147,13 +147,17 @@
 
         </TabItem>
 
-        <TabItem Header="ADMIN">
+        <TabItem Header="ADMIN" >
             
             <TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Receptionist}" Value="True">
-                            <Setter Property="Visibility" Value="Hidden"/>
+                        <DataTrigger Binding="{Binding Admin}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        
+                        <DataTrigger Binding="{Binding CEO}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
                     </Style.Triggers>
 

@@ -291,5 +291,19 @@ namespace SkiResortSystem.ViewModels
             {
                 closeable.Close();
             });
+
+        private bool marketingManager = false;
+        public bool MarketingManager
+        {
+            get { return marketingManager; }
+            set
+            {
+                if (marketingManager != value)
+                {
+                    marketingManager = value;
+                    OnPropertyChanged(nameof(MarketingManager));
+                }
+            }
+        }
     }
 }

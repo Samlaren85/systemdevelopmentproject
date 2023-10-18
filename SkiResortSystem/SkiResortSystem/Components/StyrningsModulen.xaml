@@ -22,6 +22,16 @@
         </TabControl.Resources>
 
         <TabItem Header="STATISTIK">
+            <TabItem.Style>
+                <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CEO}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+ 
+            </TabItem.Style>
             <Canvas>
                 <TextBlock Text="STATISTIK" Canvas.Left="80" Canvas.Top="70" FontWeight="Bold"/>
 

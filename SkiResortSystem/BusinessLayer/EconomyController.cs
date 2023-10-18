@@ -105,5 +105,11 @@ namespace BusinessLayer
             unitOfWork.Save();
             return faktura;
         }
+        public void UpdateFaktura(Faktura faktura)
+        {
+            unitOfWork.FakturaRepository.Update(faktura);
+            unitOfWork.Save();
+
+        }
     }
 }

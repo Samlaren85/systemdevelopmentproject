@@ -9,6 +9,7 @@
     <Window.DataContext>
         <vm:BillOverviewViewModel/>
     </Window.DataContext>
+    
     <Window.Resources>
         <Style TargetType="TextBlock">
 
@@ -59,7 +60,7 @@
 
 
 
-        <TextBlock Text="Pris" Canvas.Left="128" Canvas.Top="525" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Text="Totalpris" Canvas.Left="128" Canvas.Top="525" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
 
 
@@ -73,14 +74,14 @@
 
 
 
-        <TextBox Canvas.Left="128" Canvas.Top="155" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Canvas.Left="128" Canvas.Top="235" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Canvas.Left="308" Canvas.Top="235" Width="165" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBox Canvas.Left="128" Canvas.Top="315" Width="345" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Canvas.Left="128" Canvas.Top="395" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Canvas.Left="308" Canvas.Top="395" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Canvas.Left="128" Canvas.Top="475" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Canvas.Left="128" Canvas.Top="555" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Personnummer}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="155" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Förnamn}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="235" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Efternamn}" IsReadOnly="True" Canvas.Left="308" Canvas.Top="235" Width="165" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox Text ="{Binding Gatuadress}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="315" Width="345" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Postnummer}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="395" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Postort}" IsReadOnly="True" Canvas.Left="308" Canvas.Top="395" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Faktura.Förfallodatum}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="475" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Faktura.Totalpris}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="555" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
 
 
@@ -90,8 +91,8 @@
 
 
         <Button Content="STÄNG" Height="50" Width="130" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555"/>
-        <Button Content="ARKIVERA" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" />
-        <Button Content="SKRIV UT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="990" Canvas.Top="555" />
+        <Button Content="ARKIVERA" Height="50" Width="130" Command="{Binding ArkiveraFaktura}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" />
+        <Button Content="SKRIV UT" Height="50" Width="130" Command="{Binding SkrivUtFaktura}" Canvas.Left="990" Canvas.Top="555" />
 
         <TextBlock Text="FAKTURAÖVERSIKT" Canvas.Left="1020" Canvas.Top="79" HorizontalAlignment="Left" VerticalAlignment="Center" />
 

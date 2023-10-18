@@ -12,7 +12,6 @@
             
             <Setter Property="Background" Value="#FF5e8ec2" />
             <Setter Property="Foreground" Value="White" />
-            <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="Height" Value="50" />
             <Setter Property="Width" Value="195" />
             <Setter Property="FontSize" Value="13"/>
@@ -53,7 +52,7 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
 
-                            <Border Background="#FF5e8ec2" BorderThickness="0,0,0,2" BorderBrush="White">
+                            <Border Background="#FF5e8ec2" BorderThickness="0,0,2,2" BorderBrush="White">
 
                                 <TextBlock x:Name="TextBlock" Text="{TemplateBinding Header}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
                             </Border>
@@ -139,6 +138,7 @@
 
         <Style TargetType="DataGrid">
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Background" Value="LightGray"/>

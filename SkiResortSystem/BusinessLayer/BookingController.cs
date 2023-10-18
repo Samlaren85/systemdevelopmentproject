@@ -64,13 +64,6 @@ namespace BusinessLayer
         }
 
 
-        public void RemoveBokning(Bokning bokning)
-        {
-            bool Done = unitOfWork.BokningsRepository.Remove(bokning);
-            if (Done)
-            {
-                unitOfWork.Save();
-            }
-        }
+        
     }
 }

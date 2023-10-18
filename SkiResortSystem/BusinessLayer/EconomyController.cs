@@ -24,7 +24,7 @@ namespace BusinessLayer
             return unitOfWork.FakturaRepository.FirstOrDefault(f => (f.Bokningsref.Equals(kundbokning.BokningsID)));
         }
 
-        public List<Faktura> FetchBillableBills(IList<Bokning> Lista)
+       /* public List<Faktura> FetchBillableBills(IList<Bokning> Lista)
         {
             List<Faktura> billableBills = new List<Faktura>();
             foreach (Bokning b in Lista)
@@ -39,43 +39,69 @@ namespace BusinessLayer
                 
             }
             return billableBills;
+        }*/ //Den här utkommenterade kan med fördel tas bort?!
+
+        /// <summary>
+        /// Metoden tar emot en fullständig lista med bokningar som sökts fram och hanterar endast de som i nuläget är ofakturerade.
+        /// Resultatet kommer sedan att användas vid skapande av fakturor för ofakturerade bokningar.
+        /// </summary>
+        /// <param name="Lista"></param>
+        /// <returns></returns>
+        
+        public List<Faktura> HämtaFaktureradeFakturor(IList<Bokning> Lista)
+        {
+            List<Faktura> faktureradeFakturor = new List<Faktura>();
+            foreach (Bokning b in Lista)
+            {
+                if (b.Betalningsstatus == Status.Obetald || b.Betalningsstatus == Status.Betald)
+                {
+                    foreach (Faktura f in b.Fakturaref)
+                    {
+                        faktureradeFakturor.Add(f);
+                    }
+                }
+            }
+            return faktureradeFakturor;
         }
+
         public Faktura CreateFaktura(Bokning kundensBokning)
         {
             DateTime fakturadatum = DateTime.Today;
             float pris = 0;
 
-            if (pris == 0)
-            {
-                foreach (Facilitet f in kundensBokning.FacilitetID)
-                {
+            
+                
                     if (kundensBokning.FacilitetID != null)
                     {
-                        pris += f.Facilitetspris;
+                        foreach (Facilitet f in kundensBokning.FacilitetID)
+                        {
+                                pris += f.Facilitetspris;
+                        };
                     }
-                };
-                foreach (Aktivitetsbokning a in kundensBokning.AktivitetRef)
-                {
-                    if (a.AktivitetsbokningsID.Equals(kundensBokning.AktivitetRef.FirstOrDefault(a)))
+
+
+                    if (kundensBokning.AktivitetRef != null)
                     {
-                        pris += a.TotalPris;
+                        foreach (Aktivitetsbokning a in kundensBokning.AktivitetRef)
+                        {
+                                pris += a.TotalPris;
+                        }
                     }
-                }
-                foreach (Utrustningsbokning u in kundensBokning.UtrustningRef)
-                {
-                    if (u.UtrustningsbokningsID.Equals(kundensBokning.UtrustningRef.FirstOrDefault(u)))
+
+                    if (kundensBokning.UtrustningRef != null)
                     {
-                        pris += u.Utrustning.Pris;
+                        foreach (Utrustningsbokning u in kundensBokning.UtrustningRef)
+                        {
+                                pris += u.Utrustning.Pris;
+                        }
                     }
-                    
-                }
-            }
+
             
-            float totalpris = 0 ;//ska hämta priset för allt som tillhör fakturan
             float moms = (float)(0.2 * pris);
-            Faktura faktura= new Faktura(fakturadatum, totalpris, moms);
+            float totalpris = (pris+moms);//ska hämta priset för allt som tillhör fakturan
+            Faktura faktura= new Faktura(fakturadatum, totalpris, moms, kundensBokning);
+            
             unitOfWork.FakturaRepository.Add(faktura);
-            kundensBokning.Fakturaref.Add(faktura);
             unitOfWork.Save();
             return faktura;
         }

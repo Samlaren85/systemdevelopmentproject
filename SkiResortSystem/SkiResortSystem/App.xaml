@@ -140,7 +140,7 @@
         <Style TargetType="DataGrid">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
-         
+            <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Background" Value="LightGray"/>
             
         </Style>

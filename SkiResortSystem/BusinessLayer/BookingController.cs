@@ -60,7 +60,7 @@ namespace BusinessLayer
         public IList<Bokning> FindMasterBooking()
         {
             return unitOfWork.BokningsRepository.Find(b =>
-                    b.Bokningsstatus.Equals(Status.Ofakturerad) && b.Bokningsstatus.Equals(Status.Obetald)));
+                    b.Betalningsstatus.Equals(Status.Ofakturerad) && b.Bokningsstatus.Equals(Status.Kommande));
         }
 
         public void RemoveBokning(Bokning bokning)

@@ -38,7 +38,7 @@ namespace EntityLayer
             
                 if ((value >= Status.Obetald && value <= Status.Ofakturerad) || value == Status.Makulerad)
                 {
-                    bokningsstatus = value;
+                    betalningsstatus = value;
                 }
                 else
                 {
@@ -60,7 +60,7 @@ namespace EntityLayer
 
         public ICollection<Aktivitetsbokning>? AktivitetRef{ get; set; }
 
-        public ICollection<Faktura> Fakturaref { get; set; }
+        public ICollection<Faktura>? Fakturaref { get; set; }
 
         public Bokning()
         {
@@ -79,8 +79,10 @@ namespace EntityLayer
             AntalPersoner = antalPersoner;
             UtrustningRef = null;
             AktivitetRef = null;
+            Fakturaref = null;
             Återbetalningsskydd = återbetalningsskydd;
-
+            Bokningsstatus = Status.Kommande;
+            Betalningsstatus = Status.Ofakturerad;
         }
 
         public override string ToString()

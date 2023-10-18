@@ -40,23 +40,13 @@ namespace EntityLayer
                 {
                     förfallodatum = value;
                 }
-                else if (Förfallodatum != Fakturadatum.AddDays(30))
-                {
-                    foreach (Bokning b in Bokningsref)
-                    {
-                        if (b.BokningsID != null && b.Bokningsstatus.Equals(0))
-                        {
-                            förfallodatum = b.Ankomsttid;
-                        }
-                    }
-                }
                 else
                 {
                     throw new ArgumentException("Felaktigt förfallodatum");
                 }
             } 
         }
-        public ICollection<Bokning> Bokningsref { get; set; }
+        public Bokning Bokningsref { get; set; }
 
         public DateTime Fakturadatum { get; set; }
         public float Totalpris { get; set; }
@@ -65,13 +55,14 @@ namespace EntityLayer
         {
             
         }
-        public Faktura(DateTime fakturadatum, float totalpris, float moms)
+        public Faktura(DateTime fakturadatum, float totalpris, float moms, Bokning bokning)
         {
             _antalFakturor++;
             FakturaID = "FAKT" + _antalFakturor.ToString("000000");
             Fakturadatum = fakturadatum; 
             Totalpris = totalpris; 
             Moms = moms;
+            Bokningsref = bokning;
         }
     }
 }

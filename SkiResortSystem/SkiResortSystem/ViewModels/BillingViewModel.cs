@@ -124,7 +124,7 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        private string fakturaerrormsg;
+        private string fakturaerrormsg { get; set; }
         public string Fakturaerrormsg
         {
             get { return fakturaerrormsg; }

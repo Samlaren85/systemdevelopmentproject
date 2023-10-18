@@ -24,23 +24,6 @@ namespace BusinessLayer
             return unitOfWork.FakturaRepository.FirstOrDefault(f => (f.Bokningsref.Equals(kundbokning.BokningsID)));
         }
 
-       /* public List<Faktura> FetchBillableBills(IList<Bokning> Lista)
-        {
-            List<Faktura> billableBills = new List<Faktura>();
-            foreach (Bokning b in Lista)
-            {
-              foreach (Faktura f in b.Fakturaref)
-              {
-                    if (f.Förfallodatum == null && b.Ankomsttid >= DateTime.Today)
-                    {
-                        billableBills.Add(f);
-                    }
-              }
-                
-            }
-            return billableBills;
-        }*/ //Den här utkommenterade kan med fördel tas bort?!
-
         /// <summary>
         /// Metoden tar emot en fullständig lista med bokningar som sökts fram och hanterar endast de som i nuläget är ofakturerade.
         /// Resultatet kommer sedan att användas vid skapande av fakturor för ofakturerade bokningar.
@@ -57,7 +40,10 @@ namespace BusinessLayer
                 {
                     foreach (Faktura f in b.Fakturaref)
                     {
-                        faktureradeFakturor.Add(f);
+                        if (f.Fakturastatus != Status.Makulerad)
+                        {
+                            faktureradeFakturor.Add(f);
+                        }
                     }
                 }
             }

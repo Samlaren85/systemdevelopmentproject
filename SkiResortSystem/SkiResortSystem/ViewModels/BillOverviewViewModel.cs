@@ -95,16 +95,19 @@ namespace SkiResortSystem.ViewModels
             Bokning = faktura.Bokningsref;
             foreach(Facilitet f in Bokning.FacilitetID)
             {
+                if (Artikel != null && Pris != null)
                 Artikel.Add(f.Typ);
                 Pris.Add(f.Facilitetspris.ToString());
             }
             foreach(Utrustningsbokning u in Bokning.UtrustningRef)
             {
+                if (Artikel != null && Pris != null)
                 Artikel.Add(u.Utrustning.UtrustningsBenämning);
                 Pris.Add(u.Utrustning.Pris.ToString());
             }
             foreach(Aktivitetsbokning a in Bokning.AktivitetRef)
             {
+                if (Artikel != null && Pris != null)
                 Artikel.Add(a.Aktivitetsref.Typ);
                 Pris.Add(a.TotalPris.ToString());
             }

@@ -116,11 +116,13 @@ namespace SkiResortSystem.ViewModels
                 view.Close();
             });
 
+        public BillOverviewViewModel()
+        {
+        }
         public BillOverviewViewModel(Faktura faktura)
         {
             Faktura = faktura;
             
-
         }
     }
 }

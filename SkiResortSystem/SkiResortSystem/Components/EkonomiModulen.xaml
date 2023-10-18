@@ -26,9 +26,9 @@
                 <TextBox x:Name="myTextbox"  Width="300" Canvas.Top="105" Canvas.Left="80" Text="{Binding SökFaktureradeFakturor, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <DataGrid Width="908" Height="430" ItemsSource="{Binding FaktureradeFakturor }" SelectedItem="{Binding Path=SelectFaktura}"  IsReadOnly="True"
-           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170">
+           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170" SelectionChanged="DataGrid_SelectionChanged_1">
                     <DataGrid.InputBindings>
-                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding SelectedFaktura}"/>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBillingCommand}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Namn" Width="2*" Binding="{Binding Path=Bokningsref.KundID}"/>
@@ -48,7 +48,7 @@
                 <TextBlock Text="BOKNINGAR ATT FAKTURERA" FontSize="22" Canvas.Top="100" Canvas.Left="80"/>
                 <DataGrid  Width="908" Height="430" ItemsSource="{Binding HämtadeBokningarAttFakturera}" SelectedItem="{Binding Path=SkapandeAvFakturor}" IsReadOnly="True"
                 CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170">
-                    
+
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Namn" Width="*" Binding="{Binding Path=KundID.Namn }"/>
                         <DataGridTextColumn Header="Bokningsnummer" Width="*" Binding="{Binding BokningsID }"/>
@@ -57,6 +57,7 @@
 
                 <Button Content="SKAPA FAKTURA" Command="{Binding CreateFaktura}" Canvas.Top="640" Canvas.Left="828" HorizontalAlignment="Center" Height="50" Width="160" VerticalAlignment="Top" />
                 <Button Content="HÄMTA" Command="{Binding FetchFaktura}" Canvas.Top="99" Canvas.Left="854" HorizontalAlignment="Center" VerticalAlignment="Top" Width="134" Height="45" />
+                <TextBlock Canvas.Left="484"  Text="{Binding Fakturaerrormsg}" Canvas.Top="648" Foreground="Red"/>
             </Canvas>
 
 

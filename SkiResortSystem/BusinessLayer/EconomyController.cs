@@ -103,6 +103,7 @@ namespace BusinessLayer
             
             unitOfWork.FakturaRepository.Add(faktura);
             unitOfWork.Save();
+            kundensBokning.Betalningsstatus = Status.Obetald;
             return faktura;
         }
         public void UpdateFaktura(Faktura faktura)

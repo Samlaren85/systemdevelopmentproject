@@ -36,7 +36,7 @@ namespace SkiResortSystem.ViewModels
             }
         }
         
-
+        
         private Faktura selectFaktura;
         public Faktura SelectFaktura
         {

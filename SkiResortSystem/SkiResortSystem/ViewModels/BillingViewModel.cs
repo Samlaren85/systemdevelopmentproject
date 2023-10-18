@@ -13,8 +13,14 @@ using System.Windows.Input;
 
 namespace SkiResortSystem.ViewModels
 {
+    /// <summary>
+    /// Partiell-klass. Vy-modell som innehåller metoder som berör fakturering/ekonomi.
+    /// </summary>
     public partial class MainViewModel : ObservableObject
     {
+        /// <summary>
+        /// Lista som ska 
+        /// </summary>
         private IList<Bokning> hämtadeBokningarAttFakturera { get; set; }
         public IList<Bokning> HämtadeBokningarAttFakturera 
         {
@@ -124,7 +130,7 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        private string fakturaerrormsg;
+        private string fakturaerrormsg { get; set; }
         public string Fakturaerrormsg
         {
             get { return fakturaerrormsg; }

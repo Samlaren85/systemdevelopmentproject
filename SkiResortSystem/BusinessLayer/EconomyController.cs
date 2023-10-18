@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
+    /// <summary>
+    /// EconomyController är controller-klass för de metoder som hanteras i systemets ekonomidel.
+    /// </summary>
     public class EconomyController
     {
         public UnitOfWork unitOfWork;
@@ -18,28 +21,11 @@ namespace BusinessLayer
         {
             unitOfWork = new UnitOfWork();
         }
-
+        /*
         public Faktura FindFaktura(Bokning kundbokning)
         {
             return unitOfWork.FakturaRepository.FirstOrDefault(f => (f.Bokningsref.Equals(kundbokning.BokningsID)));
-        }
-
-       /* public List<Faktura> FetchBillableBills(IList<Bokning> Lista)
-        {
-            List<Faktura> billableBills = new List<Faktura>();
-            foreach (Bokning b in Lista)
-            {
-              foreach (Faktura f in b.Fakturaref)
-              {
-                    if (f.Förfallodatum == null && b.Ankomsttid >= DateTime.Today)
-                    {
-                        billableBills.Add(f);
-                    }
-              }
-                
-            }
-            return billableBills;
-        }*/ //Den här utkommenterade kan med fördel tas bort?!
+        }*/ //Den här metoden används inte eller?! Kan i så fall ta bort det utkommenterade
 
         /// <summary>
         /// Metoden tar emot en fullständig lista med bokningar som sökts fram och hanterar endast de som i nuläget är ofakturerade.
@@ -57,13 +43,21 @@ namespace BusinessLayer
                 {
                     foreach (Faktura f in b.Fakturaref)
                     {
-                        faktureradeFakturor.Add(f);
+                        if (f.Fakturastatus != Status.Makulerad)
+                        {
+                            faktureradeFakturor.Add(f);
+                        }
                     }
                 }
             }
             return faktureradeFakturor;
         }
 
+        /// <summary>
+        /// CreateFaktura: skapar upp en faktura utifrån en befintlig boendebokning.
+        /// </summary>
+        /// <param name="kundensBokning"></param>
+        /// <returns></returns>
         public Faktura CreateFaktura(Bokning kundensBokning)
         {
             DateTime fakturadatum = DateTime.Today;
@@ -106,6 +100,10 @@ namespace BusinessLayer
             kundensBokning.Betalningsstatus = Status.Obetald;
             return faktura;
         }
+        /// <summary>
+        /// Metoden uppdaterar databasen med nytt värde.
+        /// </summary>
+        /// <param name="faktura"></param>
         public void UpdateFaktura(Faktura faktura)
         {
             unitOfWork.FakturaRepository.Update(faktura);

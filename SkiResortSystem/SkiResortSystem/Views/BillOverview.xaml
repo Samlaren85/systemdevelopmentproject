@@ -22,7 +22,7 @@
     </Window.Resources>
     <Canvas  Background="#FFA6C3E4" Height="1000" >
         <TextBlock Text="Faktura" FontWeight="Bold" Canvas.Left="128" Canvas.Top="30" />
-        <TextBlock Text="Personnummer" Canvas.Left="128" Canvas.Top="125" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding PrivFöre}" Canvas.Left="128" Canvas.Top="125" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBlock Text="Namn" Canvas.Left="128" Canvas.Top="205" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBlock Text="Gatuadress" Canvas.Left="128" Canvas.Top="285" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <TextBlock Text="Postort" Canvas.Left="308" Canvas.Top="365" HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -30,13 +30,13 @@
         <TextBlock Text="Postnummer" Canvas.Left="128" Canvas.Top="365" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBlock Text="Förfallodatum" Canvas.Left="128" Canvas.Top="445" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-        <TextBox Text ="{Binding Bokning.KundID}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="155" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Text ="{Binding Bokning.KundID.Namn}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="235" Width="345" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Text ="{Binding Bokning.KundID.Gatuadress}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="315" Width="345" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Text ="{Binding Bokning.KundID.Postnummer}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="395" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Text ="{Binding Bokning.KundID.Ort}" IsReadOnly="True" Canvas.Left="308" Canvas.Top="395" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Text ="{Binding Faktura.Förfallodatum}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="475" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox Text ="{Binding Faktura.Totalpris}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="555" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Path=Bokning.KundID.KundID}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="155" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Path=Bokning.KundID.Namn, Mode=OneWay}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="235" Width="345" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Path=Bokning.KundID.Gatuadress}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="315" Width="345" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Path=Bokning.KundID.Postnummer}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="395" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Path=Bokning.KundID.Ort}" IsReadOnly="True" Canvas.Left="308" Canvas.Top="395" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Path=Faktura.Förfallodatum}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="475" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Text ="{Binding Path=Faktura.Totalpris}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="555" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
         <Button Content="Stäng" Height="50" Width="130" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555"/>
         <Button Content="Makulera" Height="50" Width="130" Command="{Binding ArkiveraFaktura}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" />

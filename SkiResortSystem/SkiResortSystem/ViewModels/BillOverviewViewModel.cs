@@ -28,6 +28,14 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string privFöre;
+
+        public string PrivFöre
+        {
+            get { return privFöre; }
+            set { privFöre = value; }
+        }
+
         private List<string> artikel;
         public List<string> Artikel
         {
@@ -93,25 +101,54 @@ namespace SkiResortSystem.ViewModels
 
             Faktura = faktura;
             Bokning = faktura.Bokningsref;
-            foreach(Facilitet f in Bokning.FacilitetID)
+            if(Bokning.KundID.Företagskund != null)
             {
-                if (Artikel != null && Pris != null)
-                Artikel.Add(f.Typ);
-                Pris.Add(f.Facilitetspris.ToString());
+                PrivFöre = "Organisationsnummer";
             }
-            foreach(Utrustningsbokning u in Bokning.UtrustningRef)
+            else
             {
-                if (Artikel != null && Pris != null)
-                Artikel.Add(u.Utrustning.UtrustningsBenämning);
-                Pris.Add(u.Utrustning.Pris.ToString());
+                PrivFöre = "Personnummer";
+            }
+            foreach (Facilitet f in Bokning.FacilitetID)
+            {
+                if(f.Typ != null)
+                {
+                    Artikel.Add(f.Typ);
+
+                }
+                if(f.Facilitetspris != null)
+                {
+                    Pris.Add(f.Facilitetspris.ToString());
+
+                }
+            }
+            foreach (Utrustningsbokning u in Bokning.UtrustningRef)
+            {
+                if(u.Utrustning.UtrustningsBenämning != null)
+                {
+                    Artikel.Add(u.Utrustning.UtrustningsBenämning);
+
+                }
+                if(u.Utrustning.Pris != null)
+                {
+                    Pris.Add(u.Utrustning.Pris.ToString());
+
+                }
             }
             foreach(Aktivitetsbokning a in Bokning.AktivitetRef)
             {
-                if (Artikel != null && Pris != null)
-                Artikel.Add(a.Aktivitetsref.Typ);
-                Pris.Add(a.TotalPris.ToString());
+                if(a.Aktivitetsref.Typ != null)
+                {
+                    Artikel.Add(a.Aktivitetsref.Typ);
+
+                }
+                if(a.TotalPris != null)
+                {
+                    Pris.Add(a.TotalPris.ToString());
+
+                }
             }
-            
+
         }
     }
 }

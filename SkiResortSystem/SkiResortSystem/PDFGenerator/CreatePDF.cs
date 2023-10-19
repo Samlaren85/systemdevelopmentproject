@@ -29,9 +29,9 @@ namespace DynamicPDFCoreSuite.Examples
             Document document = new Document();
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
             document.Pages.Add(page);
-            string labelText = $"Fakturadatum: {faktura.Fakturadatum}\t\t\t\t\t\tFakturanummer: {faktura.FakturaID}\nFörfallodatum: {faktura.Förfallodatum}\n\n" +
-                $"Totalpris:{faktura.Totalpris}\nStatus: {faktura.Fakturastatus}\nKund: {faktura.Bokningsref.KundID}\nMoms: {faktura.Moms}";
-            Label label = new Label(labelText, 0, 0, 504, 800, Font.Helvetica, 18, TextAlign.Center);
+            string labelText = $"Fakturadatum: {faktura.Fakturadatum}\t\t\t\t\t\t\t\t\tFakturanummer: {faktura.FakturaID}\n\nFörfallodatum: {faktura.Förfallodatum}\n\n\n" +
+                $"Totalpris:{faktura.Totalpris}\n\nStatus: {faktura.Fakturastatus}\n\nKund: {faktura.Bokningsref.KundID}\n\nMoms: {faktura.Moms}";
+            Label label = new Label(labelText, 0, 0, 704, 800, Font.Helvetica, 12, TextAlign.Left);
             page.Elements.Add(label);
             string uniqueFileName = $"Faktura_{faktura.FakturaID}.pdf";
             document.Draw(Util.GetPath($"Fakturor/{uniqueFileName}"));

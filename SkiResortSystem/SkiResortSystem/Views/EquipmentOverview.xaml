@@ -31,14 +31,15 @@
 
 
 
-        <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding Utrustningsbokningar}" SelectedItem="{Binding SelectedUtrustningsbokning}" IsReadOnly="True"
+        <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding Utrustningsbokningar}" SelectedItem="{Binding SelectedUtrustningsbokning}" 
        CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="100" Canvas.Top="320" HorizontalAlignment="Left" VerticalAlignment="Top" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="UTRUSTNING" Width="*" Binding="{Binding Utrustning.UtrustningsBenämning}"/>
-                <DataGridTextColumn Header="STORLEK" Width="*" Binding="{Binding Utrustning.Storlek}"/>
-                <DataGridTextColumn Header="FRÅN" Width="*" Binding="{Binding Hämtasut}"/>
-                <DataGridTextColumn Header="TILL" Width="*" Binding="{Binding Lämnasin}"/>
-                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Utrustning.Pris}"/>
+                <DataGridTextColumn Header="UTRUSTNING" Width="*" Binding="{Binding Utrustning.UtrustningsBenämning}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="STORLEK" Width="*" Binding="{Binding Utrustning.Storlek}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="FRÅN" Width="*" Binding="{Binding Hämtasut}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="TILL" Width="*" Binding="{Binding Lämnasin}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Utrustning.Pris}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}" IsReadOnly="False"/>
 
             </DataGrid.Columns>
         </DataGrid>

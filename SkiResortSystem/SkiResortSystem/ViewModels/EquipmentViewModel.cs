@@ -324,12 +324,19 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 reportDate = value;
+                CurrentEquipment = SearchPickupReturn(reportDate);
                 OnPropertyChanged();
             }
         }
 
-        private IList<Utrustning> currentEquipment;
-        public IList<Utrustning> CurrentEquipment
+        public IList<Utrustningsbokning> SearchPickupReturn(DateTime? reportDate)
+        {
+            EquipmentController equipmentController = new EquipmentController();
+            return equipmentController.FindUtrustningsbokningar(reportDate, reportDate);
+        }
+
+        private IList<Utrustningsbokning> currentEquipment;
+        public IList<Utrustningsbokning> CurrentEquipment
         {
             get { return currentEquipment; }
             set
@@ -370,6 +377,18 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 selectedEquipmentbooking = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool pickupReturn;
+        public bool PickupReturn
+        {
+            get { return pickupReturn; }
+            set
+            {
+                pickupReturn = value;
+                ReportDate = DateTime.Today;
                 OnPropertyChanged();
             }
         }
@@ -472,7 +491,7 @@ namespace SkiResortSystem.ViewModels
                             {
                                 foreach (Utrustningsbokning utr in b.UtrustningRef)
                                 {
-                                    if ((FetchDate == null || utr.Hämtasut >= FetchDate) && (ReturnDate == null || utr.Lämnasin <= ReturnDate) && (TypeOfEquipment == null || utr.Utrustning.UtrustningsBenämning.Equals(TypeOfEquipment)))
+                                    if ((FetchDate == null || utr.Hämtasut == FetchDate) && (ReturnDate == null || utr.Lämnasin == ReturnDate) && (TypeOfEquipment == null || utr.Utrustning.UtrustningsBenämning.Equals(TypeOfEquipment)))
                                     {
                                         Utrustningsbokningar.Add(utr);
                                     }

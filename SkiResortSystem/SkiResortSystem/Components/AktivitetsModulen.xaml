@@ -153,7 +153,7 @@
                 <Button Content="➕" Command="{Binding AddEquipmentRow}" Canvas.Left="774" Canvas.Top="583"/>
                 <Button Content="➖" Command="{Binding RemoveEquipmentRow}" Canvas.Left="808" Canvas.Top="583"/>
                 <DataGrid Width="120" Height="414" ItemsSource="{Binding SizeList}" HorizontalContentAlignment="Center" IsReadOnly="True"
-                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="868" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" SelectedItem="{Binding SizeItem}" SelectedIndex="{Binding SizeIndex}">
+                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="868" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" SelectedItem="{Binding SizeItem}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Storlek" Width="*" Binding="{Binding Storlek}"/>
                         <DataGridTextColumn Header="Antal" Width="*" Binding="{Binding Antal}"/>
@@ -176,9 +176,9 @@
                 <TextBox Background="White"  Text="{Binding SearchEquipmentCustomer, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding EquipmentCustomerError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <TextBlock Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="sv-se" Text="Återlämnings"/><Run Text="datum"/></TextBlock>
-                <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding FetchDate}"/>
+                <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding ReturnDate}"/>
                 <TextBlock Canvas.Left="449" Canvas.Top="76"><Run Language="sv-se" Text="Utlämnings"/><Run Text="datum"/></TextBlock>
-                <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding ReturnDate}"/>
+                <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding FetchDate}"/>
 
                 <Button Content="Sök" Height="40" Canvas.Left="868" Canvas.Top="155" Command="{Binding SearchEquipment}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
                 <TextBlock Text="Typ av utrustning" Canvas.Left="614" Canvas.Top="77"/>
@@ -201,7 +201,7 @@
             </Canvas>
         </TabItem>
 
-        <TabItem Header="LÄMNA UT &amp;&#10;RAPPORTERA IN UTRUSTNING">
+        <TabItem Header="LÄMNA UT &amp;&#10;RAPPORTERA IN UTRUSTNING" IsSelected="{Binding PickupReturn}">
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="LÄMNA UT &amp; RAPPORTERA IN UTRUSTNING" Foreground="Black" FontSize="15" Canvas.Left="80" Canvas.Top="76"/>
@@ -209,11 +209,11 @@
 
                 <DataGrid  Width="908" Height="379"  ItemsSource="{Binding CurrentEquipment, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="STARTDATUM" Width="*" Binding="{Binding}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="SLUTDATUM" Width="*" Binding="{Binding}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding}"/>
+                        <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=Bokning.KundID.Namn}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="STARTDATUM" Width="*" Binding="{Binding Hämtasut}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="SLUTDATUM" Width="*" Binding="{Binding Lämnasin}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding Path=Bokning.BokningsID}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}" IsReadOnly="False"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Content="Rapportera in utrustning" Height="40" Canvas.Left="784" Canvas.Top="568" Command="{Binding RecieveEquipment}" RenderTransformOrigin="1.311,2.576" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>

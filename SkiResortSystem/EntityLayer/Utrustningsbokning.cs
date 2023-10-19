@@ -32,6 +32,7 @@ namespace EntityLayer
         public DateTime Lämnasin { get; set; }
         public Bokning Bokning { get; set; }
         public Utrustning Utrustning { get; set; }
+        public string? Hylla {  get; set; }
 
         public Utrustningsbokning()
         {

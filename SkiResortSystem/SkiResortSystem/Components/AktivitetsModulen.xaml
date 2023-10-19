@@ -144,15 +144,15 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="ANTAL" Width="*" Binding="{Binding Path=Antal}"/>
-                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Path=Pris}"/>
+                        <DataGridTextColumn Header="ANTAL" Width="*" IsReadOnly="True" Binding="{Binding Path=Antal}"/>
+                        <DataGridTextColumn Header="PRIS" Width="*" IsReadOnly="True" Binding="{Binding Path=Pris}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="678" Canvas.Top="455" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
                 <Button Content="➕" Command="{Binding AddEquipmentRow}" Canvas.Left="774" Canvas.Top="583"/>
                 <Button Content="➖" Command="{Binding RemoveEquipmentRow}" Canvas.Left="808" Canvas.Top="583"/>
-                <DataGrid Width="120" Height="414" ItemsSource="{Binding SizeList}" HorizontalContentAlignment="Center"
+                <DataGrid Width="120" Height="414" ItemsSource="{Binding SizeList}" HorizontalContentAlignment="Center" IsReadOnly="True"
                           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="868" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" SelectedItem="{Binding SizeItem}" SelectedIndex="{Binding SizeIndex}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Storlek" Width="*" Binding="{Binding Storlek}"/>
@@ -184,7 +184,7 @@
                 <TextBlock Text="Typ av utrustning" Canvas.Left="614" Canvas.Top="77"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding TypeOfEquipment, UpdateSourceTrigger=PropertyChanged}" />
 
-                <DataGrid  Width="908" Height="390" ItemsSource="{Binding Utrustningsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" IsReadOnly="True">
+                <DataGrid  Width="908" Height="390" ItemsSource="{Binding Path=Utrustningsbokningar, Mode=TwoWay}" SelectedItem="{Binding SelectedEquipmentbooking}"  CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" IsReadOnly="True">
                     <DataGrid.InputBindings>
                         <MouseBinding
                         MouseAction="LeftDoubleClick"

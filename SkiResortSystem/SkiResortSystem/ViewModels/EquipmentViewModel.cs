@@ -15,9 +15,9 @@ using System.Windows.Input;
 
 namespace SkiResortSystem.ViewModels
 {
-    public partial class MainViewModel:ObservableObject
+    public partial class MainViewModel : ObservableObject
     {
-        
+
         private string searchEquipmentOrder;
         public string SearchEquipmentOrder
         {
@@ -26,12 +26,12 @@ namespace SkiResortSystem.ViewModels
             {
                 searchEquipmentOrder = value;
                 EquipmentOrderError = string.Empty;
-                
+
                 SearchEquipmentOrderResults = SearchBookings(searchEquipmentOrder, null, null);
                 if (searchEquipmentOrder == string.Empty)
                 {
                     Utrustningsbokningsrader = new ObservableCollection<Utrustningsbokningsrad>();
-                    OnPropertyChanged(nameof(Utrustningsbokningsrader)); 
+                    OnPropertyChanged(nameof(Utrustningsbokningsrader));
                     SelectedEquipmentOrder = null;
                     SearchEquipmentOrderResults = new List<Bokning>();
                 }
@@ -92,13 +92,13 @@ namespace SkiResortSystem.ViewModels
                     Utrustningsbokningsrader = new ObservableCollection<Utrustningsbokningsrad>() { new Utrustningsbokningsrad() { TypAvUtrustning = EquipmentType[0], TypAvUtrustningar = EquipmentType, FrånDatum = selectedEquipmentOrder.Ankomsttid, TillDatum = selectedEquipmentOrder.Avresetid } };
                     OnPropertyChanged(nameof(Utrustningsbokningsrader));
                     SearchEquipmentOrder = selectedEquipmentOrder.ToString().Split(" (")[0];
-                    
+
                 }
                 OnPropertyChanged();
             }
         }
 
-        private IList<Utrustning> equipmentlist; 
+        private IList<Utrustning> equipmentlist;
         public IList<Utrustning> Equipmentlist
         {
             get { return equipmentlist; }
@@ -156,7 +156,7 @@ namespace SkiResortSystem.ViewModels
         }
 
         public ObservableCollection<Size> SizeList { get; set; } = new ObservableCollection<Size>();
-        
+
         private DateTime fromDate;
         public DateTime FromDate
         {
@@ -298,7 +298,7 @@ namespace SkiResortSystem.ViewModels
         private string typeOfEquipment;
         public string TypeOfEquipment
         {
-            get { return  typeOfEquipment; }
+            get { return typeOfEquipment; }
             set
             {
                 typeOfEquipment = value;
@@ -361,7 +361,18 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        public ObservableCollection<Utrustningsbokning> Utrustningsbokningar = new ObservableCollection<Utrustningsbokning>();
+        public ObservableCollection<Utrustningsbokning> Utrustningsbokningar { get; set; } = new ObservableCollection<Utrustningsbokning>();
+
+        private Utrustningsbokning selectedEquipmentbooking;
+        public Utrustningsbokning SelectedEquipmentbooking 
+        { 
+            get { return selectedEquipmentbooking; }
+            set
+            {
+                selectedEquipmentbooking = value;
+                OnPropertyChanged();
+            }
+        }
 
         private ICommand addEquipmentRow;
         public ICommand AddEquipmentRow =>
@@ -400,9 +411,10 @@ namespace SkiResortSystem.ViewModels
                 if (SizeItem != null && SelectedEquipment != null)
                 {
                     SizeItem.Antal += 1;
-                    if (SelectedEquipment.Storlekar == null) SelectedEquipment.Storlekar = new List<string>(); 
+                    if (SelectedEquipment.Storlekar == null) SelectedEquipment.Storlekar = new List<string>();
                     SelectedEquipment.Storlekar.Add(SizeItem.Storlek);
                     SelectedEquipment.Antal += 1;
+                    SelectedEquipment.Pris += Equipmentlist.FirstOrDefault(e => e.UtrustningsBenämning.Equals(SelectedEquipment.TypAvUtrustning)).Pris;
                     OnPropertyChanged(nameof(SelectedEquipment));
                     OnPropertyChanged(nameof(Utrustningsbokningsrader));
                 }
@@ -412,11 +424,12 @@ namespace SkiResortSystem.ViewModels
         public ICommand RemoveSizeSelection =>
             removeSizeSelection ??= removeSizeSelection = new RelayCommand(() =>
             {
-                if (SizeItem != null && SelectedEquipment != null && SelectedEquipment.Storlekar != null)
+                if (SizeItem != null && SelectedEquipment != null && SelectedEquipment.Storlekar.Contains(SizeItem.Storlek))
                 {
                     SizeItem.Antal -= 1;
                     SelectedEquipment.Storlekar.Remove(SizeItem.Storlek);
                     SelectedEquipment.Antal -= 1;
+                    SelectedEquipment.Pris -= Equipmentlist.FirstOrDefault(e => e.UtrustningsBenämning.Equals(SelectedEquipment.TypAvUtrustning)).Pris;
                     OnPropertyChanged(nameof(SelectedEquipment));
                     OnPropertyChanged(nameof(Utrustningsbokningsrader));
                 }
@@ -451,11 +464,11 @@ namespace SkiResortSystem.ViewModels
                     EquipmentController equipmentController = new EquipmentController();
                     EquipmentCustomerError = string.Empty;
                     Utrustningsbokningar = new ObservableCollection<Utrustningsbokning>();
-                    if (SelectedEquipmentCustomer != null)
+                    if (SelectedEquipmentCustomer != null && SelectedEquipmentCustomer.BokningsRef != null)
                     {
                         foreach (Bokning b in SelectedEquipmentCustomer.BokningsRef)
                         {
-                            if ((FetchDate == null || b.Ankomsttid >= FetchDate) && (ReturnDate == null || b.Avresetid <= ReturnDate))
+                            if ((FetchDate == null || b.Ankomsttid >= FetchDate) && (ReturnDate == null || b.Avresetid <= ReturnDate) && b.UtrustningRef != null)
                             {
                                 foreach (Utrustningsbokning utr in b.UtrustningRef)
                                 {
@@ -484,8 +497,16 @@ namespace SkiResortSystem.ViewModels
                 {
                     EquipmentCustomerError = "Hittade ingen bokad utrustning";
                 }
-            }); 
-        
+            });
+
+        private ICommand doubleClickEquipmentCommand;
+        public ICommand DoubleClickEquipmentCommand =>
+            doubleClickEquipmentCommand ??= doubleClickEquipmentCommand = new RelayCommand(() =>
+                {
+                    EquipmentOverviewViewModel equipmentOverview = new EquipmentOverviewViewModel(SelectedEquipmentbooking.Bokning.UtrustningRef.Where(u => u.Bokning.Equals(SelectedEquipmentbooking.Bokning)).ToList(), SelectedEquipmentbooking.Bokning);
+                    windowService.Show(equipmentOverview);
+                });
+
         private ICommand handOutEquipment;
         public ICommand HandOutEquipment =>
             handOutEquipment ??= handOutEquipment = new RelayCommand(() =>

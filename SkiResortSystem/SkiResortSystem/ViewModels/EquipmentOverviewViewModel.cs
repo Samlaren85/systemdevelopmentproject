@@ -6,6 +6,7 @@ using SkiResortSystem.Models;
 using SkiResortSystem.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace SkiResortSystem.ViewModels
     public class EquipmentOverviewViewModel : ObservableObject
     {
 
-        public List<Utrustningsbokning> Utrustningsbokningar { get; set; }
+        public ObservableCollection<Utrustningsbokning> Utrustningsbokningar { get; set; }
         public Bokning Bokning { get; set; }
         public EquipmentOverviewViewModel()
         {
@@ -24,7 +25,7 @@ namespace SkiResortSystem.ViewModels
         }
         public EquipmentOverviewViewModel(List<Utrustningsbokning> utrustningsbokningar, Bokning bokning)
         {
-            Utrustningsbokningar = utrustningsbokningar;
+            Utrustningsbokningar = new ObservableCollection<Utrustningsbokning>(utrustningsbokningar);
             Bokning = bokning;
 
         }
@@ -45,7 +46,8 @@ namespace SkiResortSystem.ViewModels
             saveEquipment ??= saveEquipment = new RelayCommand<ICloseable>((closeable) =>
             {
                 EquipmentController controller = new EquipmentController();
-                controller.SaveEquipmentBooking(Utrustningsbokningar);
+                controller.SaveEquipmentBooking(Utrustningsbokningar.ToList());
+                CloseCommand.Execute(closeable);
             });
         private ICommand removeEquipment = null;
         public ICommand RemoveEquipment =>

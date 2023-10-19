@@ -109,22 +109,46 @@ namespace SkiResortSystem.ViewModels
             {
                 PrivFöre = "Personnummer";
             }
-            //foreach(Facilitet f in Bokning.FacilitetID)
-            //{
-            //    Artikel.Add(f.Typ);
-            //    Pris.Add(f.Facilitetspris.ToString());
-            //}
-            //foreach(Utrustningsbokning u in Bokning.UtrustningRef)
-            //{
-            //    Artikel.Add(u.Utrustning.UtrustningsBenämning);
-            //    Pris.Add(u.Utrustning.Pris.ToString());
-            //}
-            //foreach(Aktivitetsbokning a in Bokning.AktivitetRef)
-            //{
-            //    Artikel.Add(a.Aktivitetsref.Typ);
-            //    Pris.Add(a.TotalPris.ToString());
-            //}
-            
+            foreach (Facilitet f in Bokning.FacilitetID)
+            {
+                if(f.Typ != null)
+                {
+                    Artikel.Add(f.Typ);
+
+                }
+                if(f.Facilitetspris != null)
+                {
+                    Pris.Add(f.Facilitetspris.ToString());
+
+                }
+            }
+            foreach (Utrustningsbokning u in Bokning.UtrustningRef)
+            {
+                if(u.Utrustning.UtrustningsBenämning != null)
+                {
+                    Artikel.Add(u.Utrustning.UtrustningsBenämning);
+
+                }
+                if(u.Utrustning.Pris != null)
+                {
+                    Pris.Add(u.Utrustning.Pris.ToString());
+
+                }
+            }
+            foreach(Aktivitetsbokning a in Bokning.AktivitetRef)
+            {
+                if(a.Aktivitetsref.Typ != null)
+                {
+                    Artikel.Add(a.Aktivitetsref.Typ);
+
+                }
+                if(a.TotalPris != null)
+                {
+                    Pris.Add(a.TotalPris.ToString());
+
+                }
+            }
+
         }
     }
 }

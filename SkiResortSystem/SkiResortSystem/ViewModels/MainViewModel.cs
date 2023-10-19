@@ -64,6 +64,7 @@ namespace SkiResortSystem.ViewModels
             windowService.ShowDialog(logIn);
             if (SessionController.LoggedIn != null)
             {
+                
                 LoggedInUser = $"{SessionController.LoggedIn.UserID}";
                 MainVisibility = Visibility.Visible;
             }

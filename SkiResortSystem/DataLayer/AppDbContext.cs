@@ -73,11 +73,12 @@ namespace DataLayer
             {
                 Roller.Add(new Roll("Admin", new List<Behörighet>()));
                 Roller.Add(new Roll("Receptionist", new List<Behörighet>()));
+                SaveChanges();
             }
             if (!Användare.Any()) 
             {
-                Användare.Add(new Användare("1",1, Roller.FirstOrDefault(r => r.RollID == "R001")));
-                Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID == "R002")));
+                Användare.Add(new Användare("1",1, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL001"))));
+                Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL002"))));
                 SaveChanges();
             }
           

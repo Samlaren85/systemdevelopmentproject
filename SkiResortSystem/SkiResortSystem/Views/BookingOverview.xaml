@@ -43,7 +43,9 @@
 
         <TextBlock Text="Avresedatum" Canvas.Left="550" Canvas.Top="300" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" />
 
-        <TextBlock Text="Antal nätter:" Canvas.Left="696" Canvas.Top="300"/>
+        <TextBlock Text="Antal nätter:" Visibility="{Binding GömNätter}" Canvas.Left="696" Canvas.Top="300"/>
+        <TextBlock Text="Antal Timmar:" Visibility="{Binding VisaTid}" Canvas.Left="696" Canvas.Top="300"/>
+
 
         <TextBlock Text="Facilitetstyp" Canvas.Left="383" Canvas.Top="394" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
@@ -57,9 +59,11 @@
         <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="888" Canvas.Top="166" Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" >
             <TextBox Text="{Binding UtnyttjadKredit}" Height="Auto" TextAlignment="Center" Background="Transparent" Margin="2,8,-2,-8" IsReadOnly="True"/>
         </Border>
-        <TextBox Text="{Binding AntalNätter}" Canvas.Left="696" IsReadOnly="True" Canvas.Top="330" Width="54" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding AntalNätter}" Visibility="{Binding GömNätter}" Canvas.Left="696" IsReadOnly="True" Canvas.Top="330" Width="54" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding AntalTimmar}" Visibility="{Binding VisaTid}" Canvas.Left="696" IsReadOnly="True" Canvas.Top="330" Width="54" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
         <TextBox Text="{Binding Facilitetstyp}" Canvas.Left="383" IsReadOnly="True" Canvas.Top="429" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <TextBox Text="{Binding AntalPersoner}" IsEnabled="{Binding AnkomstReadOnly}" HorizontalAlignment="Left" Canvas.Left="550" Canvas.Top="429" VerticalAlignment="Top" Width="130"/>
+        <TextBox Text="{Binding AntalPersoner}" IsReadOnly="{Binding AntalPersonerReadOnly}" HorizontalAlignment="Left" Canvas.Left="550" Canvas.Top="429" VerticalAlignment="Top" Width="130"/>
         <TextBox Text="{Binding PrisPerNatt}" Canvas.Left="383" Canvas.Top="519" Width="150" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Totalpris}" Canvas.Left="550" IsReadOnly="True" Canvas.Top="519" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
@@ -70,14 +74,16 @@
         <Button Content="Checka Ut" Height="50" Width="130" FontSize="20" BorderBrush="White" 
                 Background="#FF5E8EC2" Foreground="White" Command="{Binding CheckaUt}" IsEnabled="{Binding CheckaUtReadOnly}" Visibility="{Binding CheckaUtVisibility}" CommandParameter="{Binding ElementName=View}" Canvas.Left="953" Canvas.Top="298" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <Button Content="SPARA" Height="50" Width="130" FontSize="20" BorderBrush="White" 
+        <Button Content="Spara" Height="50" Width="130" FontSize="20" BorderBrush="White" 
         Background="#FF5e8ec2" Foreground="White" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="953" Canvas.Top="439" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White"
+        <Button Content="Stäng" Height="50" Width="130" FontSize="20" BorderBrush="White"
          Background="#FF5e8ec2" Foreground="White" Command="{Binding StängTabort}" CommandParameter="{Binding ElementName=View}" Visibility="{Binding TaBortVisability}" Canvas.Left="953" Canvas.Top="499" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button Content="TA BORT" Height="50" Width="130" FontSize="20" BorderBrush="White"
+        <Button Content="Ta bort" Height="50" Width="130" FontSize="20" BorderBrush="White"
         Background="#FF5e8ec2" Foreground="White" Command="{Binding StängTabortÄndra}" Visibility="{Binding TaBortÄndraVisability}" CommandParameter="{Binding ElementName=View}"  Canvas.Left="953" Canvas.Top="499" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="Stäng" Height="50" Width="130" FontSize="20" BorderBrush="White"
+        Background="#FF5e8ec2" Foreground="White" Command="{Binding CloseCommand}" Visibility="{Binding TaBortÄndraVisability}" CommandParameter="{Binding ElementName=View}"  Canvas.Left="953" Canvas.Top="559" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-        
+
         <DatePicker Canvas.Left="383" Canvas.Top="336" HorizontalAlignment="Left"  VerticalAlignment="Top" SelectedDate="{Binding Ankomst}" IsEnabled="{Binding AnkomstReadOnly}"/>
         <DatePicker Canvas.Left="550" Canvas.Top="335" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.673,0.667" SelectedDate="{Binding Avresa}" IsEnabled="{Binding AvresaReadOnly}" Height="27"/>
         <TextBlock Text="Avbeställningsskydd" Canvas.Left="383"  Canvas.Top="568" HorizontalAlignment="Left" VerticalAlignment="Top"/>

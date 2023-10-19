@@ -85,8 +85,37 @@
         <TextBox Text="{Binding Epost}" Canvas.Left="128" Canvas.Top="475" Width="430" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Telefonnummer}" Canvas.Left="128" Canvas.Top="555" Width="263" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-        <TextBox  Text="{Binding Rabatt}" Canvas.Left="946" Canvas.Top="165" Width="129" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="{Binding RabattReadOnly}"/>
-        <TextBox Text="{Binding Kreditgräns}" Canvas.Left="946" Canvas.Top="243" Width="128" IsReadOnly="{Binding KreditReadOnly}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox  Text="{Binding Rabatt}" Canvas.Left="946" Canvas.Top="165" Width="129" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="{Binding RabattReadOnly}">
+            <TextBox.Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding MarketingManager}">
+                            <Setter Property="IsReadOnly" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                   
+                    
+                </Style>
+                
+            </TextBox.Style>
+            
+        </TextBox>
+
+        <TextBox Text="{Binding Kreditgräns}" Canvas.Left="946" Canvas.Top="243" Width="128" IsReadOnly="{Binding KreditReadOnly}" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBox.Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding MarketingManager}" >
+                            <Setter Property="IsReadOnly" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+
+                </Style>
+
+            </TextBox.Style>
+
+        </TextBox>
 
 
 

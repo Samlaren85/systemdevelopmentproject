@@ -19,7 +19,7 @@ namespace EntityLayer
             get { return fakturastatus; }
             set
             {
-                if (value == Status.Obetald || value == Status.Arkiverad)
+                if (value == Status.Obetald || value == Status.Makulerad)
                 {
                     fakturastatus = value;
                 }
@@ -29,34 +29,8 @@ namespace EntityLayer
                 }
             }
         }
-        private DateTime förfallodatum;
-        public DateTime Förfallodatum 
-        {
-            get { return Förfallodatum; }
-            set
-            {
-                    if (Förfallodatum == Fakturadatum.AddDays(20))
-                {
-                    förfallodatum = value;
-                }
-                else if (Förfallodatum != Fakturadatum.AddDays(20))
-                {
-                    foreach (Bokning b in BokningsID)
-                    {
-                        if (Förfallodatum != b.Avresetid.AddDays(30))
-                        {
-                            förfallodatum = b.Avresetid.AddDays(30);
-                        }
-                        
-                    }
-                }
-                else
-                {
-                    throw new ArgumentException("Felaktigt förfallodatum");
-                }
-            } 
-        }
-        public ICollection<Bokning> BokningsID { get; set; }
+        public DateTime Förfallodatum {  get; set; }
+        public Bokning Bokningsref { get; set; }
 
         public DateTime Fakturadatum { get; set; }
         public float Totalpris { get; set; }
@@ -65,13 +39,16 @@ namespace EntityLayer
         {
             
         }
-        public Faktura(DateTime fakturadatum, float totalpris, float moms)
+        public Faktura(DateTime fakturadatum, float totalpris, float moms, Bokning bokning)
         {
             _antalFakturor++;
             FakturaID = "FAKT" + _antalFakturor.ToString("000000");
-            Fakturadatum = fakturadatum; 
+            Fakturadatum = fakturadatum;
+            Förfallodatum = Fakturadatum.AddDays(30);
             Totalpris = totalpris; 
             Moms = moms;
+            Bokningsref = bokning;
+            Fakturastatus = Status.Obetald;
         }
     }
 }

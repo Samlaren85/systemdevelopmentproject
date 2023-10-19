@@ -64,6 +64,7 @@ namespace SkiResortSystem.ViewModels
             windowService.ShowDialog(logIn);
             if (SessionController.LoggedIn != null)
             {
+                
                 LoggedInUser = $"{SessionController.LoggedIn.UserID}";
                 MainVisibility = Visibility.Visible;
             }
@@ -222,6 +223,105 @@ namespace SkiResortSystem.ViewModels
             exitCommand ??= exitCommand = new RelayCommand(() =>
                 {
                     Application.Current.Shutdown();
-                });   
+                });
+
+        private bool admin = false;
+        public bool Admin
+        {
+            get { return admin; }
+            set
+            {
+                if (admin != value)
+                {
+                    admin = value;
+                    OnPropertyChanged(nameof(Admin));
+                }
+            }
+        }
+
+        private bool reception = false;
+        public bool Reception
+        {
+            get { return reception; }
+            set
+            {
+                if (reception != value)
+                {
+                    reception = value;
+                    OnPropertyChanged(nameof(Reception));
+                }
+            }
+        }
+
+        private bool shop = false;
+        public bool Shop
+        {
+            get { return shop; }
+            set
+            {
+                if (shop != value)
+                {
+                    shop = value;
+                    OnPropertyChanged(nameof(Shop));
+                }
+            }
+        }
+
+        private bool economy = false;
+        public bool Economy
+        {
+            get { return economy; }
+            set
+            {
+                if (economy != value)
+                {
+                    economy = value;
+                    OnPropertyChanged(nameof(Economy));
+                }
+            }
+        }
+
+        private bool marketingManager = false;
+        public bool MarketingManager
+        {
+            get { return marketingManager; }
+            set
+            {
+                if (marketingManager != value)
+                {
+                    marketingManager = value;
+                    OnPropertyChanged(nameof(MarketingManager));
+                }
+            }
+        }
+
+        private bool governance  = false;
+        public bool Governance 
+        {
+            get { return governance; }
+            set
+            {
+                if (governance != value)
+                {
+                    governance = value;
+                    OnPropertyChanged(nameof(Governance));
+                }
+            }
+        }
+
+
+        private bool ceo = false;
+        public bool CEO
+        {
+            get { return ceo; }
+            set
+            {
+                if (ceo != value)
+                {
+                    ceo = value;
+                    OnPropertyChanged(nameof(CEO));
+                }
+            }
+        }
     }
 }

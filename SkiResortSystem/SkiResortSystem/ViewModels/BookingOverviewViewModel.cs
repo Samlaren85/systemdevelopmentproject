@@ -46,6 +46,12 @@ namespace SkiResortSystem.ViewModels
             get { return antalNätter; }
             set { antalNätter = value; OnPropertyChanged(); }
         }
+        private int antalTimmar;
+        public int AntalTimmar
+        {
+            get { return antalTimmar; }
+            set { antalTimmar = value; OnPropertyChanged(); }
+        }
 
         private float utnyttjadKredit;
         public float UtnyttjadKredit
@@ -68,8 +74,8 @@ namespace SkiResortSystem.ViewModels
             set { bokningsnummer = value; OnPropertyChanged(); }
         }
 
-        private Bokning bokning;
-        public Bokning Bokning
+        private Bokning? bokning;
+        public Bokning? Bokning
         {
             get { return bokning; }
             set { bokning = value; OnPropertyChanged(); }
@@ -90,7 +96,7 @@ namespace SkiResortSystem.ViewModels
             set { antalPersoner = value; OnPropertyChanged(); }
         }
 
-        private bool antalPersonerReadOnly = false;
+        private bool antalPersonerReadOnly = true;
         public bool AntalPersonerReadOnly
         {
             get { return antalPersonerReadOnly; }
@@ -125,6 +131,28 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        private Visibility visaTid = Visibility.Collapsed;
+        public Visibility VisaTid
+        {
+            get { return visaTid; }
+            set
+            {
+                visaTid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Visibility gömNätter = Visibility.Visible;
+        public Visibility GömNätter
+        {
+            get { return gömNätter; }
+            set
+            {
+                gömNätter = value;
+                OnPropertyChanged();
+            }
+        }
+        
         private bool ankomstReadOnly = false;
         public bool AnkomstReadOnly
         {
@@ -274,70 +302,36 @@ namespace SkiResortSystem.ViewModels
             BookingController bc = new BookingController();
             TimeSpan bokningsLängd = Avresa - Ankomst;
 
-            if ((Ankomst.DayOfWeek != DayOfWeek.Friday && Ankomst.DayOfWeek != DayOfWeek.Sunday) &&
-                (Avresa.DayOfWeek != DayOfWeek.Friday && Avresa.DayOfWeek != DayOfWeek.Sunday))
+            
+            if (uppdateraBokning)
             {
-                ErrorMessage = "Ankomst- och avresetid måste vara en fredag eller en söndag";
-            }
-            else if (Ankomst.DayOfWeek == DayOfWeek.Friday && Avresa.DayOfWeek != DayOfWeek.Sunday)
-            {
-                ErrorMessage = "För vald ankomsttid måste avresetid vara en söndag";
-            }
-            else if (Ankomst.DayOfWeek == DayOfWeek.Sunday && Avresa.DayOfWeek != DayOfWeek.Friday && Avresa.DayOfWeek != DayOfWeek.Sunday)
-            {
-                ErrorMessage = "För vald ankomsttid måste avresetid vara en fredag eller en söndag";
-            }
-            else if (Avresa.DayOfWeek == DayOfWeek.Friday && Ankomst.DayOfWeek != DayOfWeek.Sunday)
-            {
-                ErrorMessage = "För vald avresetid måste ankomsttid vara en söndag";
-            }
-            else if (Avresa.DayOfWeek == DayOfWeek.Sunday && Ankomst.DayOfWeek != DayOfWeek.Friday && Ankomst.DayOfWeek != DayOfWeek.Sunday)
-            {
-                ErrorMessage = "För vald avresetid måste ankomst vara en fredag eller en söndag";
-            }
-            else if (bokningsLängd.Days > 6 && Ankomst.DayOfWeek == DayOfWeek.Sunday && Avresa.DayOfWeek == DayOfWeek.Friday)
-            {
-                ErrorMessage = "Bokning Kortvecka får vara högst 6 dagar / 5 nätter";
-            }
-            else if (bokningsLängd.Days > 2 && Ankomst.DayOfWeek == DayOfWeek.Friday && Avresa.DayOfWeek == DayOfWeek.Sunday)
-            {
-                ErrorMessage = "Bokning Weekend får vara högst 3 dagar / 2 nätter";
-            }
-            else if (bokningsLängd.Days > 7 && Ankomst.DayOfWeek == DayOfWeek.Sunday && Avresa.DayOfWeek == DayOfWeek.Sunday)
-            {
-                ErrorMessage = "Bokning Vecka får vara högst 8 dagar / 7 nätter";
+                Bokning.Återbetalningsskydd = Avbetalningsskydd;
+                Bokning.Ankomsttid = Ankomst;
+                Bokning.Avresetid = Avresa;
+                Bokning.AntalPersoner = AntalPersoner;
+                bc.UppdateraBokning(Bokning);
+                MessageBoxResult respons = MessageBox.Show($"Ändringar för bokning {Bokning.BokningsID} är nu sparad i systemet!");
+                CloseCommand.Execute(view);
             }
             else
             {
-                if (uppdateraBokning)
-                {
-                    Bokning.Återbetalningsskydd = Avbetalningsskydd;
-                    Bokning.Ankomsttid = Ankomst;
-                    Bokning.Avresetid = Avresa;
-                    Bokning.AntalPersoner = AntalPersoner;
-                    bc.UppdateraBokning(Bokning);
-                    MessageBoxResult respons = MessageBox.Show($"Ändringar för bokning {Bokning.BokningsID} är nu sparad i systemet!");
-                    CloseCommand.Execute(view);
-                }
-                else
-                {
-                    Bokning.Återbetalningsskydd = Avbetalningsskydd;
-                    Bokning.Bokningsstatus = Status.Kommande;
-                    bc.SparaBokning(Bokning);
-                    MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
-                    //CreatePDF.Run(Bokning);
-                    //DETTA OCH konfigurera pdf i create
-                    CloseCommand.Execute(view);
-                }
+                    
+                Bokning.Återbetalningsskydd = Avbetalningsskydd;
+                Bokning.Bokningsstatus = Status.Kommande;
+                bc.SparaBokning(Bokning);
+                MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
+                CreatePDF.Run(Bokning);
+                //DETTA OCH konfigurera pdf i create
+                CloseCommand.Execute(view);
             }
+            
         });
 
         private ICommand stängTabort = null!;
 
         public ICommand StängTabort => stängTabort ??= stängTabort = new RelayCommand<ICloseable>((view) =>
         {
-            BookingController bc = new BookingController();
-            bc.RemoveBokning(Bokning);
+            Bokning = null;
             CloseCommand.Execute(view);
 
         });
@@ -349,6 +343,13 @@ namespace SkiResortSystem.ViewModels
             BookingController bc = new BookingController();
             Bokning.Bokningsstatus = Status.Makulerad;
             bc.UppdateraBokning(Bokning);
+            if(Bokning.Fakturaref != null)
+            {
+                foreach(Faktura f in Bokning.Fakturaref)
+                {
+                    f.Fakturastatus = Status.Makulerad;
+                }
+            }
             CloseCommand.Execute(view);
 
         });
@@ -462,7 +463,7 @@ namespace SkiResortSystem.ViewModels
             CheckaUtVisibility = Visibility.Visible;
             AnkomstReadOnly = true;
             AvresaReadOnly = true;
-            AntalPersonerReadOnly = true;
+            AntalPersonerReadOnly = false;
             uppdateraBokning = true;
             taBortÄndraVisability = Visibility.Visible;
             taBortVisability = Visibility.Collapsed;
@@ -485,9 +486,10 @@ namespace SkiResortSystem.ViewModels
             Avresa = Valdavresetid;
             TimeSpan tidsspann = Avresa - Ankomst;
             AntalNätter = tidsspann.Days;
+            AntalTimmar = tidsspann.Hours;
             Totalpris = (float)Math.Round(Facilitetspris, 2);
             uppdateraBokning = false; 
-            if (AntalNätter == 0)
+            if (AntalNätter == 0 || AntalTimmar == 0)
             {
                 PrisPerNatt = 0;
             }
@@ -509,6 +511,10 @@ namespace SkiResortSystem.ViewModels
             if (Valdfacilitet.KonferensID != null)
             {
                 Facilitetstyp = "Konferenssal, " + Valdfacilitet.KonferensID.KonferensBenämning;
+                GömNätter = Visibility.Collapsed;
+                VisaTid = Visibility.Visible;
+                
+
             }
             List<Facilitet> BokadFacilitet = new List<Facilitet>
             {

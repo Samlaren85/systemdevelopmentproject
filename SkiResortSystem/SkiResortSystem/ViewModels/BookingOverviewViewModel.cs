@@ -325,7 +325,7 @@ namespace SkiResortSystem.ViewModels
                     Bokning.Bokningsstatus = Status.Kommande;
                     bc.SparaBokning(Bokning);
                     MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
-                    CreatePDF.Run(Bokning);
+                    //CreatePDF.Run(Bokning);
                     //DETTA OCH konfigurera pdf i create
                     CloseCommand.Execute(view);
                 }

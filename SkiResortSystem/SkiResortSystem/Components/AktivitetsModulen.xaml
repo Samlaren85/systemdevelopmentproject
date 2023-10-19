@@ -22,7 +22,7 @@
 
             <Canvas Height="auto" Width="1760">
 
-                <TextBlock Text="Sök bokning" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBlock Text="Sök BOKNING" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox TabIndex="1" ItemsSource="{Binding ActivityBookingResults}" SelectedItem="{Binding SelectedActivityBooking}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox TabIndex="0" Background="White"  Text="{Binding SearchActivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -111,48 +111,58 @@
 
             <Canvas Height="auto" Width="1760">
 
-                <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
-                <ComboBox ItemsSource="{Binding SearchEquipmentOrderResult}" SelectedItem="{Binding SelectedEquipmentOrder}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <TextBlock Text="SÖK BOKNING" Canvas.Left="80" Canvas.Top="76"/>
+                <ComboBox ItemsSource="{Binding SearchEquipmentOrderResults}" SelectedItem="{Binding SelectedEquipmentOrder}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchEquipmentOrder, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <TextBlock Text="{Binding EquipmentOrderError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-                <DataGrid  Width="908" Height="296" ItemsSource="{Binding Equipmentlist, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
+                <DataGrid  Width="759" Height="414" ItemsSource="{Binding Path=Utrustningsbokningsrader, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedEquipment}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" >
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn Header="UTRUSTNING" Width="*" Binding="{Binding EquipmentTyp}"/>
+                        <DataGridTemplateColumn Header="UTRUSTNING" Width="*" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=TypAvUtrustning}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding Path=TypAvUtrustningar}" SelectedItem="{Binding Path=TypAvUtrustning}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="FRÅN" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding FromDate}"/>
+                                    <DatePicker SelectedDate="{Binding Path=FrånDatum}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="TILL" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding ToDate}"/>
+                                    <DatePicker SelectedDate="{Binding Path=TillDatum}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="ANTAL" Width="*" Binding="{Binding Amount}"/>
-                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Price}"/>
+                        <DataGridTextColumn Header="ANTAL" Width="*" Binding="{Binding Path=Antal}"/>
+                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Path=Pris}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <DataGrid Width="908" Height="90" ItemsSource="{Binding SizeList, Mode=TwoWay}" 
-                          CanUserAddRows="False" AutoGenerateColumns="True" Canvas.Left="80" Canvas.Top="489">
+                <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="678" Canvas.Top="455" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+                <Button Content="➕" Command="{Binding AddEquipmentRow}" Canvas.Left="774" Canvas.Top="583"/>
+                <Button Content="➖" Command="{Binding RemoveEquipmentRow}" Canvas.Left="808" Canvas.Top="583"/>
+                <DataGrid Width="120" Height="414" ItemsSource="{Binding SizeList}" HorizontalContentAlignment="Center"
+                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="868" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" SelectedItem="{Binding SizeItem}" SelectedIndex="{Binding SizeIndex}">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.Header>
-                                <TextBlock Text="{Binding Size}"/>
-                            </DataGridTemplateColumn.Header>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox Text="{Binding OrderAount}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Storlek" Width="*" Binding="{Binding Storlek}"/>
+                        <DataGridTextColumn Header="Antal" Width="*" Binding="{Binding Antal}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Boka" Canvas.Left="868" Canvas.Top="596" Height="40" Command="{Binding BookEquipment}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                <Button Content="Boka" Canvas.Left="868" Canvas.Top="626" Height="40" Command="{Binding BookEquipment}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Button Content="➕" Command="{Binding AddSizeSelection}" Canvas.Left="925" Canvas.Top="583" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Content="➖" Command="{Binding RemoveSizeSelection}" Canvas.Left="959" Canvas.Top="583" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
 
         </TabItem>
@@ -162,30 +172,30 @@
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="76"/>
-                <ComboBox ItemsSource="{Binding SearchEquipmentCustomerResult}" SelectedItem="{Binding SelectedEquipmentCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
+                <ComboBox ItemsSource="{Binding SearchEquipmentCustomerResults}" SelectedItem="{Binding SelectedEquipmentCustomer}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchEquipmentCustomer, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding EquipmentCustomerError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                <TextBlock Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="sv-se" Text="Återlämnings"/><Run Text="datum"/></TextBlock>
+                <TextBlock Canvas.Left="449" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="sv-se" Text="Återlämnings"/><Run Text="datum"/></TextBlock>
                 <DatePicker Canvas.Left="449" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding FetchDate}"/>
-                <TextBlock Foreground="Black" FontSize="15" Canvas.Left="449" Canvas.Top="76"><Run Language="sv-se" Text="Utlämnings"/><Run Text="datum"/></TextBlock>
+                <TextBlock Canvas.Left="449" Canvas.Top="76"><Run Language="sv-se" Text="Utlämnings"/><Run Text="datum"/></TextBlock>
                 <DatePicker Canvas.Left="449" Canvas.Top="104" BorderBrush="{x:Null}" SelectedDate="{Binding ReturnDate}"/>
 
                 <Button Content="Sök" Height="40" Canvas.Left="868" Canvas.Top="155" Command="{Binding SearchEquipment}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
                 <TextBlock Text="Typ av utrustning" Canvas.Left="614" Canvas.Top="77"/>
                 <TextBox Canvas.Left="614" TextWrapping="Wrap" Canvas.Top="106" Width="120" Text="{Binding TypeOfEquipment, UpdateSourceTrigger=PropertyChanged}" />
 
-                <DataGrid  Width="908" Height="390" ItemsSource="{Binding FoundEquipment, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" IsReadOnly="True">
+                <DataGrid  Width="908" Height="390" ItemsSource="{Binding Utrustningsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" IsReadOnly="True">
                     <DataGrid.InputBindings>
                         <MouseBinding
                         MouseAction="LeftDoubleClick"
                         Command="{Binding DoubleClickEquipmentCommand}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding}"/>
-                        <DataGridTextColumn Header="STARTDATUM" Width="*" Binding="{Binding}"/>
-                        <DataGridTextColumn Header="SLUTDATUM" Width="*" Binding="{Binding}"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding}"/>
-                        <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding}"/>
+                        <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=Bokning.KundID.Namn}"/>
+                        <DataGridTextColumn Header="STARTDATUM" Width="*" Binding="{Binding Hämtasut}"/>
+                        <DataGridTextColumn Header="SLUTDATUM" Width="*" Binding="{Binding Lämnasin}"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding Path=Bokning.BokningsID}"/>
+                        <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding Path=Utrustning.UtrustningsBenämning}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Canvas>

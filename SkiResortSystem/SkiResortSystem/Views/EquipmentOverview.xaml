@@ -19,47 +19,44 @@
             <Setter Property="FontSize" Value="18"/>
         </Style>
 
-        
+
 
     </Window.Resources>
 
     <Canvas Background="#FFA6C3E4" Height="1000">
         <TextBlock Text="Bokningsnummer: " Canvas.Left="180" Canvas.Top="100" FontWeight="Bold" />
+        <TextBlock Text="{Binding Bokning}" Canvas.Left="331" Canvas.Top="100" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBlock Text="Namn:" Canvas.Left="180" Canvas.Top="200"/>
+        <TextBlock Text="{Binding Path=Bokning.KundID.Namn}" Canvas.Left="240" Canvas.Top="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-        <TextBlock Text="Namn" Canvas.Left="180" Canvas.Top="200"/>
-        <TextBox Background="White"  Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="180" Canvas.Top="235" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
 
-
-        <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding }"  IsReadOnly="True"
+        <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding Utrustningsbokningar}" SelectedItem="{Binding SelectedUtrustningsbokning}" IsReadOnly="True"
        CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="100" Canvas.Top="320" HorizontalAlignment="Left" VerticalAlignment="Top" >
-            <DataGrid.InputBindings>
-                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding }"/>
-            </DataGrid.InputBindings>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="UTRUSTNING" Width="*" Binding="{Binding}"/>
-                <DataGridTextColumn Header="STORLEK" Width="*" Binding="{Binding }"/>
-                <DataGridTextColumn Header="FRÅN" Width="*" Binding="{Binding }"/>
-                <DataGridTextColumn Header="TILL" Width="*" Binding="{Binding }"/>
-                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding }"/>
+                <DataGridTextColumn Header="UTRUSTNING" Width="*" Binding="{Binding Utrustning.UtrustningsBenämning}"/>
+                <DataGridTextColumn Header="STORLEK" Width="*" Binding="{Binding Utrustning.Storlek}"/>
+                <DataGridTextColumn Header="FRÅN" Width="*" Binding="{Binding Hämtasut}"/>
+                <DataGridTextColumn Header="TILL" Width="*" Binding="{Binding Lämnasin}"/>
+                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Utrustning.Pris}"/>
 
             </DataGrid.Columns>
         </DataGrid>
-        
-        
 
 
-        <Button Content="SPARA" Height="50" Width="130" Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="520" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="610" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+
+        <Button Content="SPARA" Height="50" Width="130" Command="{Binding SaveEquipment}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="520" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Content="TA BORT" Height="50" Width="130" Command="{Binding RemoveEquipment}" Canvas.Left="1050" Canvas.Top="610" HorizontalAlignment="Center" VerticalAlignment="Top" />
         <Button Content="STÄNG" Height="50" Width="130" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1050" Canvas.Top="700" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
 
         <TextBlock Text="Uttnyttnjad kredit" Canvas.Left="1050" Canvas.Top="40" FontWeight="Bold"/>
         <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="1050" Canvas.Top="80" Width="200" Height="50" >
-            <TextBox Height="Auto" TextAlignment="Center" Background="Transparent" />
+            <TextBlock Text="{Binding Path=Bokning.UtnyttjadKredit}" Height="Auto" TextAlignment="Center" Background="Transparent" />
 
         </Border>
-
+        
 
     </Canvas>
 

@@ -45,7 +45,20 @@
 
 
                     </DataGrid>
-                    <Button Content="LÄGG TILL FÖRETAGSKUND" Height="50" Width="240" HorizontalAlignment="Left"  Margin="933,86,0,0" VerticalAlignment="Top" Command="{Binding CustomerCompanyOverview}" Click="Button_Click"/>
+                <Button Content="LÄGG TILL FÖRETAGSKUND" Visibility="Hidden" Height="50" Width="240" HorizontalAlignment="Left"  Margin="933,86,0,0" VerticalAlignment="Top" Command="{Binding CustomerCompanyOverview}" Click="Button_Click">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn ="{StaticResource {x:Type Button}}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MarketingManager}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                
+                            </Style.Triggers>
+                            
+                        </Style>
+
+                    </Button.Style>
+                </Button>
                     <Button Content="LÄGG TILL PRIVATKUND" Height="50" Width="240" HorizontalAlignment="Left" Margin="678,86,0,0" VerticalAlignment="Top" Command="{Binding CustomerPrivateOverview}" RenderTransformOrigin="-0.071,0.828"/>
                 </Grid>
             </TabItem>

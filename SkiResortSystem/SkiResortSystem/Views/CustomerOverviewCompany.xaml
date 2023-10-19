@@ -108,8 +108,40 @@
         <TextBox Text="{Binding Kontakt}" Canvas.Left="154" Canvas.Top="395" Width="400"/>
         <TextBox Text="{Binding Epost}" Canvas.Left="627" Canvas.Top="395" Width="293"/>
         <TextBox Text="{Binding Telefonnummer}" HorizontalAlignment="Left" Canvas.Left="154" Canvas.Top="485" VerticalAlignment="Center" Width="166"/>
-        <TextBox Text="{Binding Rabatt}" Canvas.Left="154" Canvas.Top="566" Width="166" IsReadOnly="{Binding RabattReadOnly}"/>
-        <TextBox Text="{Binding Kreditgräns}" Canvas.Left="375" Canvas.Top="566" Width="179" IsReadOnly="{Binding KreditReadOnly}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <TextBox Text="{Binding Rabatt}" Canvas.Left="154" Canvas.Top="566" Width="166" IsReadOnly="{Binding RabattReadOnly}">
+
+            <TextBox.Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding MarketingManager}">
+                            <Setter Property="IsReadOnly" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+
+                </Style>
+
+            </TextBox.Style>
+
+        </TextBox>
+        
+
+        <TextBox Text="{Binding Kreditgräns}" Canvas.Left="375" Canvas.Top="566" Width="179" IsReadOnly="{Binding KreditReadOnly}" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBox.Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding MarketingManager}">
+                            <Setter Property="IsReadOnly" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+
+                </Style>
+
+            </TextBox.Style>
+
+        </TextBox>
 
 
         <Button Content="SPARA" Height="50" Width="130"  Command="{Binding SaveCustomer}" CommandParameter="{Binding ElementName=View}" Canvas.Left="790" Canvas.Top="485" HorizontalAlignment="Left" VerticalAlignment="Top"/>

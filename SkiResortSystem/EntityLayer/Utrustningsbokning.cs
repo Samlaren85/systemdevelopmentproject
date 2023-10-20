@@ -10,6 +10,7 @@ namespace EntityLayer
 {
     public class Utrustningsbokning
     {
+        private static int _antalUtrustningsbokningar = 0;
         [Key]
         public string UtrustningsbokningsID { get; set; }
         private Status utrustningsstatus;
@@ -31,6 +32,20 @@ namespace EntityLayer
         public DateTime Lämnasin { get; set; }
         public Bokning Bokning { get; set; }
         public Utrustning Utrustning { get; set; }
-        public Utrustningsbokning() { }
+        public string? Hylla {  get; set; }
+
+        public Utrustningsbokning()
+        {
+        }
+        public Utrustningsbokning(Status status, DateTime hämta, DateTime lämna, Bokning bokning, Utrustning utrustning) 
+        {
+            _antalUtrustningsbokningar++;
+            UtrustningsbokningsID = "UTR" + _antalUtrustningsbokningar.ToString("000000");
+            Utrustningsstatus = status;
+            Hämtasut = hämta;
+            Lämnasin = lämna;
+            Bokning = bokning;
+            Utrustning = utrustning;
+        }
     }
 }

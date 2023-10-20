@@ -265,7 +265,7 @@ namespace SkiResortSystem.ViewModels
                         {
                             foreach (Bokning b in SelectedActivityCustomer.BokningsRef)
                             {
-                                if ((ActivityDate == null || b.Ankomsttid >= ActivityDate) && (ActivityEndDate == null || b.Avresetid <= ActivityEndDate))
+                                if ((ActivityDate == null || b.Ankomsttid <= ActivityDate) && (ActivityEndDate == null || b.Avresetid >= ActivityEndDate))
                                 {
                                     Aktivitetsbokningar = new ObservableCollection<Aktivitetsbokning>(SearchBookedActivities(b));
                                 }

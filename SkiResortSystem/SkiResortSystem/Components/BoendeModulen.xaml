@@ -115,7 +115,7 @@
         </TabItem>
 
 
-        <TabItem Header="HANTERA BOKNINGAR">
+        <TabItem Header="HANTERA BOKNINGAR" IsSelected="{Binding CheckinCheckoutSelected}">
 
             <Canvas Height="auto" Width="1760" Margin="0,25,0,0">
                 <DataGrid  Width="918" Height="410"  AutoGenerateColumns="False"  Canvas.Left="80" Canvas.Top="149" SelectedItem="{Binding ÄndraBokning}" ItemsSource="{Binding BookingResults, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" >

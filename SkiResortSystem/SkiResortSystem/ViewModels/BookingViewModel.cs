@@ -216,7 +216,7 @@ namespace SkiResortSystem.ViewModels
         {
             BookingController bc = new BookingController();
             IList<Bokning> results = new List<Bokning>();
-            if ((from != null && to != null) && !(from == DateTime.Today && to == DateTime.Today && searchstring != null))
+            if ((from != null && to != null) && !(searchstring != null))
             {
                 NoBookingResult = string.Empty;
 
@@ -298,7 +298,18 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        
+        private bool checkinCheckoutSelected;
+        public bool CheckinCheckoutSelected
+        {
+            get { return  checkinCheckoutSelected; } 
+            set
+            {
+                checkinCheckoutSelected = value;
+                if (value) BookingResults = SearchBookings(searchBooking, AnkomsttidÄndra, AvresetidÄndra);
+                OnPropertyChanged(nameof(BookingResults));
+                OnPropertyChanged();
+            }
+        }
 
         private DateTime avresetid = DateTime.Today;
         public DateTime Avresetid
@@ -318,6 +329,7 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 ankomsttidÄndra = value;
+                if (value != null) BookingResults = SearchBookings(searchBooking, AnkomsttidÄndra, AvresetidÄndra);
                 if (ankomsttidÄndra > avresetidÄndra) AvresetidÄndra = ankomsttidÄndra;
                 OnPropertyChanged();
             }
@@ -330,6 +342,7 @@ namespace SkiResortSystem.ViewModels
             {
                 if (value < ankomsttidÄndra) avresetidÄndra = AnkomsttidÄndra;
                 else avresetidÄndra = value;
+                if (value != null) BookingResults = SearchBookings(searchBooking, AnkomsttidÄndra, AvresetidÄndra);
                 OnPropertyChanged();
             }
         }

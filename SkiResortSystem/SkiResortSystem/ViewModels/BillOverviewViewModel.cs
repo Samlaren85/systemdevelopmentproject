@@ -8,6 +8,7 @@ using SkiResortSystem.Models;
 using SkiResortSystem.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,8 +37,8 @@ namespace SkiResortSystem.ViewModels
             set { privFöre = value; }
         }
 
-        private List<string> artikel;
-        public List<string> Artikel
+        private ObservableCollection<string> artikel;
+        public ObservableCollection<string> Artikel
         {
             get { return artikel; }
             set
@@ -46,8 +47,8 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        private List<string> pris;
-        public List<string> Pris
+        private ObservableCollection<string> pris;
+        public ObservableCollection<string> Pris
         {
             get { return pris; }
             set
@@ -98,6 +99,8 @@ namespace SkiResortSystem.ViewModels
         }
         public BillOverviewViewModel(Faktura faktura)
         {
+            Artikel = new ObservableCollection<string>();
+            Pris = new ObservableCollection<string>();
 
             Faktura = faktura;
             Bokning = faktura.Bokningsref;
@@ -109,45 +112,58 @@ namespace SkiResortSystem.ViewModels
             {
                 PrivFöre = "Personnummer";
             }
-            foreach (Facilitet f in Bokning.FacilitetID)
+            if(Bokning.FacilitetID != null)
             {
-                if(f.Typ != null)
+                foreach (Facilitet f in Bokning.FacilitetID)
                 {
-                    Artikel.Add(f.Typ);
+                    if (f.Typ != null)
+                    {
+                        Artikel.Add(f.Typ);
 
-                }
-                if(f.Facilitetspris != null)
-                {
-                    Pris.Add(f.Facilitetspris.ToString());
+                    }
+                    if (f.Facilitetspris != null)
+                    {
+                        Pris.Add(f.Facilitetspris.ToString());
 
+                    }
                 }
             }
-            foreach (Utrustningsbokning u in Bokning.UtrustningRef)
+           
+            if(Bokning.UtrustningRef != null)
             {
-                if(u.Utrustning.UtrustningsBenämning != null)
+                foreach (Utrustningsbokning u in Bokning.UtrustningRef)
                 {
-                    Artikel.Add(u.Utrustning.UtrustningsBenämning);
+                    if (u.Utrustning.UtrustningsBenämning != null)
+                    {
+                        Artikel.Add(u.Utrustning.UtrustningsBenämning);
 
-                }
-                if(u.Utrustning.Pris != null)
-                {
-                    Pris.Add(u.Utrustning.Pris.ToString());
+                    }
+                    if (u.Utrustning.Pris != null)
+                    {
+                        Pris.Add(u.Utrustning.Pris.ToString());
 
+                    }
                 }
             }
-            foreach(Aktivitetsbokning a in Bokning.AktivitetRef)
+            if(Bokning.AktivitetRef != null)
             {
-                if(a.Aktivitetsref.Typ != null)
+                foreach (Aktivitetsbokning a in Bokning.AktivitetRef)
                 {
-                    Artikel.Add(a.Aktivitetsref.Typ);
+                    if (a.Aktivitetsref.Typ != null)
+                    {
+                        Artikel.Add(a.Aktivitetsref.Typ);
 
-                }
-                if(a.TotalPris != null)
-                {
-                    Pris.Add(a.TotalPris.ToString());
+                    }
+                    if (a.TotalPris != null)
+                    {
+                        Pris.Add(a.TotalPris.ToString());
 
+                    }
                 }
             }
+            OnPropertyChanged(nameof(Artikel));
+            OnPropertyChanged(nameof(Pris));
+
 
         }
     }

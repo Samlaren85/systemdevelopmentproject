@@ -44,8 +44,8 @@
 
         <TextBlock Text="FAKTURAÖVERSIKT" Canvas.Left="1020" Canvas.Top="79" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <DataGrid Width="308" Height="330" IsReadOnly="True"
-          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="950" Canvas.Top="130">
+        <DataGrid Width="706" Height="330" IsReadOnly="True"
+          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="552" Canvas.Top="130" HorizontalAlignment="Left" VerticalAlignment="Center">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Artikel" Width="2*" Binding="{Binding Artikel}"/>

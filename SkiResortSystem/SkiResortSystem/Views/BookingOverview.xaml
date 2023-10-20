@@ -43,7 +43,9 @@
 
         <TextBlock Text="Avresedatum" Canvas.Left="550" Canvas.Top="300" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" />
 
-        <TextBlock Text="Antal nätter:" Canvas.Left="696" Canvas.Top="300"/>
+        <TextBlock Text="Antal nätter:" Visibility="{Binding GömNätter}" Canvas.Left="696" Canvas.Top="300"/>
+        <TextBlock Text="Antal Timmar:" Visibility="{Binding VisaTid}" Canvas.Left="696" Canvas.Top="300"/>
+
 
         <TextBlock Text="Facilitetstyp" Canvas.Left="383" Canvas.Top="394" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
@@ -57,9 +59,11 @@
         <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="888" Canvas.Top="166" Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" >
             <TextBox Text="{Binding UtnyttjadKredit}" Height="Auto" TextAlignment="Center" Background="Transparent" Margin="2,8,-2,-8" IsReadOnly="True"/>
         </Border>
-        <TextBox Text="{Binding AntalNätter}" Canvas.Left="696" IsReadOnly="True" Canvas.Top="330" Width="54" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding AntalNätter}" Visibility="{Binding GömNätter}" Canvas.Left="696" IsReadOnly="True" Canvas.Top="330" Width="54" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding AntalTimmar}" Visibility="{Binding VisaTid}" Canvas.Left="696" IsReadOnly="True" Canvas.Top="330" Width="54" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
         <TextBox Text="{Binding Facilitetstyp}" Canvas.Left="383" IsReadOnly="True" Canvas.Top="429" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <TextBox Text="{Binding AntalPersoner}" IsReadOnly="{Binding AnkomstReadOnly}" HorizontalAlignment="Left" Canvas.Left="550" Canvas.Top="429" VerticalAlignment="Top" Width="130"/>
+        <TextBox Text="{Binding AntalPersoner}" IsReadOnly="{Binding AntalPersonerReadOnly}" HorizontalAlignment="Left" Canvas.Left="550" Canvas.Top="429" VerticalAlignment="Top" Width="130"/>
         <TextBox Text="{Binding PrisPerNatt}" Canvas.Left="383" Canvas.Top="519" Width="150" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Totalpris}" Canvas.Left="550" IsReadOnly="True" Canvas.Top="519" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 

@@ -29,7 +29,9 @@ namespace EntityLayer
 
         public List<Bokning>? BokningsRef { get; set; }
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT
-        public float Facilitetspris { get; set; }
+        public int? FacilitetsPrisID { get; set; }
+
+        public virtual FacilitetsPris? FacilitetsPris { get; set; }
         public Konferenssal? KonferensID { get; set; }
         public Lägenhet? LägenhetsID { get; set; }
         public Campingplats? CampingID { get; set; }
@@ -37,11 +39,10 @@ namespace EntityLayer
         {
             
         }
-        public Facilitet(float facilitetspris, Konferenssal? konferansID, Lägenhet? lägenhetsID, Campingplats? campingID)
+        public Facilitet( Konferenssal? konferansID, Lägenhet? lägenhetsID, Campingplats? campingID)
         {
             _antalFaciliteter++;
             FacilitetID = "F" + _antalFaciliteter.ToString("000000");
-            Facilitetspris = facilitetspris;
             KonferensID = konferansID;
             LägenhetsID = lägenhetsID;
             CampingID = campingID;

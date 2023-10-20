@@ -69,7 +69,7 @@ namespace BusinessLayer
                     {
                         foreach (Facilitet f in kundensBokning.FacilitetID)
                         {
-                                pris += f.Facilitetspris;
+                                pris += f.FacilitetsPris.Pris;
                         };
                     }
 

@@ -39,14 +39,14 @@
                 <Button Content="Sök" Height="40" Canvas.Left="697" Canvas.Top="154" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
                 <TextBox Canvas.Left="697" TextWrapping="Wrap" Canvas.Top="107" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-                <TextBlock Visibility="{Binding KonferensReadOnly}" Canvas.Left="583" TextWrapping="Wrap" Text="Tid, Från" Canvas.Top="76"/>
-                <TextBlock Visibility="{Binding KonferensReadOnly}" Canvas.Left="583" TextWrapping="Wrap" Text="Tid, TIll" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock Visibility="{Binding KonferensReadOnly}" Canvas.Left="583" TextWrapping="Wrap" Text="Tid" Canvas.Top="76"/>
+                <TextBlock Visibility="{Binding KonferensReadOnly}" Canvas.Left="583" TextWrapping="Wrap" Text="Tid" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-                <xctk:TimePicker x:Name="timePicker" Visibility="{Binding KonferensReadOnly}" Value="{Binding SelectedTimeFrån}" Height="20" Width="78" Canvas.Left="583" Canvas.Top="104" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <xctk:TimePicker x:Name="timePicker2" Value="{Binding SelectedTimeTill}" Visibility="{Binding KonferensReadOnly}" Height="20" Width="78" Canvas.Left="583" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <xctk:TimePicker x:Name="timePicker" Visibility="{Binding KonferensReadOnly}" Value="{Binding SelectedTimeFrån}" Height="20" Width="78" Canvas.Left="583" Canvas.Top="107" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <xctk:TimePicker x:Name="timePicker2" Value="{Binding SelectedTimeTill}" Visibility="{Binding KonferensReadOnly}" Height="20" Width="78" Canvas.Left="583" Canvas.Top="172" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <DataGrid  Width="908" Height="430"  ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
-                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" SelectedItem="{Binding Path=SelectedFacility}">
+                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" SelectedItem="{Binding Path=SelectedFacility}" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommand}"/>
                     </DataGrid.InputBindings>
@@ -85,7 +85,7 @@
 
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="Pris" Width="*" Binding="{Binding Facilitetspris}"/>
+                        <DataGridTextColumn Header="Pris" Width="*" Binding="{Binding FacilitetsPris.Pris}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="Antal personer" Canvas.Left="697" Canvas.Top="76" HorizontalAlignment="Left" VerticalAlignment="Center"/>

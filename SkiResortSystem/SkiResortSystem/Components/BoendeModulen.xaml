@@ -47,7 +47,7 @@
                 <xctk:TimePicker x:Name="timePicker2" Value="{Binding SelectedTimeTill}" Visibility="{Binding KonferensReadOnly}" Height="20" Width="78" Canvas.Left="752" Canvas.Top="209" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <DataGrid  Width="908" Height="430"  ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
-                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" SelectedItem="{Binding Path=SelectedFacility}">
+                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" SelectedItem="{Binding Path=SelectedFacility}" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommand}"/>
                     </DataGrid.InputBindings>
@@ -86,7 +86,7 @@
 
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Facilitetspris}"/>
+                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding FacilitetsPris.Pris}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="Antal personer" Canvas.Left="866" Canvas.Top="114" HorizontalAlignment="Left" VerticalAlignment="Center"/>

@@ -24,7 +24,9 @@ namespace DataLayer
         public Repository<Skidskola> SkidskolaRepository { get; private set; }
         public Repository<Utrustning> UtrustningRepository { get; private set; }
         public Repository<Utrustningsbokning> UtrustningsbokningsRepository { get; private set; }
-       
+        public Repository<FacilitetsPris> FacilitetsprisRepository { get; private set; }
+
+
         public UnitOfWork()
         {
             appDbContext = AppDbContext.Instantiate();
@@ -47,6 +49,7 @@ namespace DataLayer
             SkidskolaRepository = new Repository<Skidskola>(appDbContext);
             UtrustningRepository = new Repository<Utrustning>(appDbContext);
             UtrustningsbokningsRepository = new Repository<Utrustningsbokning>(appDbContext);
+            FacilitetsprisRepository = new Repository<FacilitetsPris> (appDbContext);
         }
         public void Save()
         {

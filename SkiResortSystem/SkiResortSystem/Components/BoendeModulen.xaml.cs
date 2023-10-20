@@ -66,5 +66,10 @@ namespace SkiResortSystem.Components
             Column5.Header = "GRUPP SVART";
             Column5.Visibility = Visibility.Visible;
         }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
     }

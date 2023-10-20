@@ -121,9 +121,9 @@ namespace SkiResortSystem.ViewModels
                         Artikel.Add(f.Typ);
 
                     }
-                    if (f.Facilitetspris != null)
+                    if (f.FacilitetsPris != null)
                     {
-                        Pris.Add(f.Facilitetspris.ToString());
+                        Pris.Add(f.FacilitetsPris.Pris.ToString());
 
                     }
                 }

@@ -3,6 +3,7 @@ using EntityLayer;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Transactions;
 
 namespace BusinessLayer
 {
@@ -30,48 +32,48 @@ namespace BusinessLayer
         #region Metoder för att lägga till logiobjekt
 
 
-        /// <summary>
-        /// AddKonferenssal-metoden används för att lägga till en ny bokningsbar konferenssal i systemet. 
-        /// </summary>
-        public Facilitet AddKonferenssal(string konferensBenämning, float facilitetspris, int antalPersoner)
-        {
-            Konferenssal konferenssal = new Konferenssal(konferensBenämning, antalPersoner);
-            unitOfWork.KonferenssalRepository.Add(konferenssal);
-            Facilitet facilitet = new Facilitet(facilitetspris, konferenssal, null, null);
-            unitOfWork.Save();
-            return facilitet;
-        }
+        ///// <summary>
+        ///// AddKonferenssal-metoden används för att lägga till en ny bokningsbar konferenssal i systemet. 
+        ///// </summary>
+        //public Facilitet AddKonferenssal(string konferensBenämning, float facilitetspris, int antalPersoner)
+        //{
+        //    Konferenssal konferenssal = new Konferenssal(konferensBenämning, antalPersoner);
+        //    unitOfWork.KonferenssalRepository.Add(konferenssal);
+        //    Facilitet facilitet = new Facilitet(facilitetspris, konferenssal, null, null);
+        //    unitOfWork.Save();
+        //    return facilitet;
+        //}
 
-        /// <summary>
-        /// AddCampingPlats-metoden används för att lägga till en ny bokningsbar campingplats i systemet. 
-        /// </summary>
-        public Facilitet AddCampingPlats(string campingBenämning, string campingStorlek, float facilitetspris)
-        {
-            Campingplats campingplats = new Campingplats() { CampingBenämning = campingBenämning, CampingStorlek = campingStorlek };
-            unitOfWork.CampingplatsRepository.Add(campingplats);
-            Facilitet facilitet = new Facilitet() { Facilitetspris = facilitetspris, CampingID = campingplats };
-            unitOfWork.FacilitetRepository.Add(facilitet);
-            unitOfWork.Save();
-            return facilitet;
-        }
+        ///// <summary>
+        ///// AddCampingPlats-metoden används för att lägga till en ny bokningsbar campingplats i systemet. 
+        ///// </summary>
+        //public Facilitet AddCampingPlats(string campingBenämning, string campingStorlek, float facilitetspris)
+        //{
+        //    Campingplats campingplats = new Campingplats() { CampingBenämning = campingBenämning, CampingStorlek = campingStorlek };
+        //    unitOfWork.CampingplatsRepository.Add(campingplats);
+        //    Facilitet facilitet = new Facilitet() { Facilitetspris = facilitetspris, CampingID = campingplats };
+        //    unitOfWork.FacilitetRepository.Add(facilitet);
+        //    unitOfWork.Save();
+        //    return facilitet;
+        //}
         
-        /// <summary>
-        /// AddLägenhet-metoden används för att lägga till en ny bokningsbar lägenhet i systemet. 
-        /// </summary>
-        /// <param name="facilitetspris"></param>
-        /// <param name="lägenhetsbenämning"></param>
-        /// <param name="bäddar"></param>
-        /// <param name="lägenhetsstorlek"></param>
-        /// <returns></returns>
-        public Facilitet AddLägenhet(float facilitetspris, string lägenhetsbenämning, int bäddar, string lägenhetsstorlek)
-        {
-            Lägenhet lägenhet = new Lägenhet() {LägenhetBenämning = lägenhetsbenämning, Bäddar = bäddar, Lägenhetstorlek = lägenhetsstorlek };
-            unitOfWork.LägenhetRepository.Add(lägenhet);
-            Facilitet facilitet = new Facilitet() {Facilitetspris = facilitetspris, LägenhetsID = lägenhet };
-            unitOfWork.FacilitetRepository.Add(facilitet);
-            unitOfWork.Save();
-            return facilitet;
-        }
+        ///// <summary>
+        ///// AddLägenhet-metoden används för att lägga till en ny bokningsbar lägenhet i systemet. 
+        ///// </summary>
+        ///// <param name="facilitetspris"></param>
+        ///// <param name="lägenhetsbenämning"></param>
+        ///// <param name="bäddar"></param>
+        ///// <param name="lägenhetsstorlek"></param>
+        ///// <returns></returns>
+        //public Facilitet AddLägenhet(float facilitetspris, string lägenhetsbenämning, int bäddar, string lägenhetsstorlek)
+        //{
+        //    Lägenhet lägenhet = new Lägenhet() {LägenhetBenämning = lägenhetsbenämning, Bäddar = bäddar, Lägenhetstorlek = lägenhetsstorlek };
+        //    unitOfWork.LägenhetRepository.Add(lägenhet);
+        //    Facilitet facilitet = new Facilitet() {Facilitetspris = facilitetspris, LägenhetsID = lägenhet };
+        //    unitOfWork.FacilitetRepository.Add(facilitet);
+        //    unitOfWork.Save();
+        //    return facilitet;
+        //}
         #endregion
         #region Metoder för sök
         /// <summary>
@@ -363,18 +365,115 @@ namespace BusinessLayer
         }
 
         public List<Facilitet> FindLedigaLägenheter(int antalpersoner, DateTime ankomst, DateTime avrese)
-        {      
-                return FindLedigaFaciliteterFörBokning("LGH", antalpersoner,  ankomst,  avrese);          
+        {
+            List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("LGH", antalpersoner, ankomst, avrese);
+            DateTime date = ankomst;
+            int weekNumber = GetIso8601WeekOfYear(date);
+            string bokningstyp;
+            TimeSpan tidsspann = avrese - ankomst;
+            if (tidsspann.Days == 2)
+            {
+                bokningstyp = "Weekend";
+            }
+            else if (tidsspann.Days == 5)
+            {
+                bokningstyp = "Kortvecka";
+            }
+            else
+            {
+                bokningstyp = "Vecka";
+            }
+            if(weekNumber >= 14 && weekNumber <= 22)
+            {
+                weekNumber = 14;
+            }
+            if (weekNumber >= 23 && weekNumber <= 50)
+            {
+                weekNumber = 23;
+            }
+            foreach (Facilitet f in Faciliteter)
+            {
+                f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("LGH") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka); 
+                unitOfWork.Save();
+            }
+            return Faciliteter;
         }
         public List<Facilitet> FindLedigaCamping(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
-            return FindLedigaFaciliteterFörBokning("CAMP", antalpersoner,  ankomst,  avrese);
+            List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("CAMP", antalpersoner, ankomst, avrese);
+            DateTime date = ankomst;
+            int weekNumber = GetIso8601WeekOfYear(date);
+            string bokningstyp;
+            TimeSpan tidsspann = avrese - ankomst;
+            if(tidsspann.Days == 1)
+            {
+                bokningstyp = "Dygn";
+            }
+            else
+            {
+                bokningstyp = "Vecka";
+            }
+            if (weekNumber >= 14 && weekNumber <= 22)
+            {
+                weekNumber = 14;
+            }
+            if (weekNumber >= 23 && weekNumber <= 50)
+            {
+                weekNumber = 23;
+            }
+            foreach (Facilitet f in Faciliteter)
+            {
+                f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("CAMP") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                unitOfWork.Save();
+            }
+            return Faciliteter;
         }
         public List<Facilitet> FindLedigaKonferens(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
-            return FindLedigaFaciliteterFörBokning("KONF", antalpersoner,  ankomst,  avrese);
+            List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("KONF", antalpersoner, ankomst, avrese);
+            DateTime date = ankomst;
+            int weekNumber = GetIso8601WeekOfYear(date);
+            string bokningstyp;
+            TimeSpan tidsspann = avrese - ankomst;
+            if (tidsspann.Days == 1)
+            {
+                bokningstyp = "Dygn";
+            }
+            else if(tidsspann.Hours <= 5)
+            {
+                bokningstyp = "Tim";
+            }
+            else
+            {
+                bokningstyp = "Vecka";
+            }
+            if (weekNumber >= 14 && weekNumber <= 22)
+            {
+                weekNumber = 14;
+            }
+            if (weekNumber >= 23 && weekNumber <= 50)
+            {
+                weekNumber = 23;
+            }
+            foreach (Facilitet f in Faciliteter)
+            {
+                f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("pers") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                unitOfWork.Save();
+            }
+            return Faciliteter;
         }
 
+        /// <summary>
+        /// Returnerar veckonummer
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        static int GetIso8601WeekOfYear(DateTime time)
+        {
+            // Returnerar veckonumret enligt ISO 8601 standarden.
+            Calendar calendar = CultureInfo.InvariantCulture.Calendar;
+            return calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        }
         #endregion
 
         /// <summary>

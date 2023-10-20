@@ -207,13 +207,14 @@
                 <TextBlock Text="LÄMNA UT &amp; RAPPORTERA IN UTRUSTNING" Foreground="Black" FontSize="15" Canvas.Left="80" Canvas.Top="76"/>
                 <DatePicker SelectedDate="{Binding ReportDate}" Canvas.Left="80" Canvas.Top="111" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" />
 
-                <DataGrid  Width="908" Height="379"  ItemsSource="{Binding CurrentEquipment, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
+                <DataGrid  Width="908" Height="379"  ItemsSource="{Binding CurrentEquipment, Mode=TwoWay}" SelectedItem="{Binding SelectedPickupReturn}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=Bokning.KundID.Namn}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="STARTDATUM" Width="*" Binding="{Binding Hämtasut}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="SLUTDATUM" Width="*" Binding="{Binding Lämnasin}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding Path=Bokning.BokningsID}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}" IsReadOnly="False"/>
+                        <DataGridTextColumn Header="STATUS " Width="*" Binding="{Binding Utrustningsstatus}" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Content="Rapportera in utrustning" Height="40" Canvas.Left="784" Canvas.Top="568" Command="{Binding RecieveEquipment}" RenderTransformOrigin="1.311,2.576" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>

@@ -48,8 +48,8 @@
           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="552" Canvas.Top="130" HorizontalAlignment="Left" VerticalAlignment="Center">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Artikel" Width="2*" Binding="{Binding Artikel}"/>
-                <DataGridTextColumn Header="Pris" Width="*" Binding="{Binding Pris}"/>
+                <DataGridTextColumn Header="ARTIKEL" Width="2*" Binding="{Binding Artikel}"/>
+                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Pris}"/>
             </DataGrid.Columns>
         </DataGrid>
 

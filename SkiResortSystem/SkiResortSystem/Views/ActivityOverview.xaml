@@ -37,7 +37,7 @@
 
 
 
-        <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding Activities}" SelectedItem="{Binding Path=Aktivitetsbokning}"
+        <DataGrid Width="908" Height="430" ItemsSource="{Binding Activities}" SelectedItem="{Binding Path=Aktivitetsbokning}"
            CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="100" Canvas.Top="320" HorizontalAlignment="Left" VerticalAlignment="Top" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ANTAL" Width="*" IsReadOnly="False" Binding="{Binding Antal}"/>

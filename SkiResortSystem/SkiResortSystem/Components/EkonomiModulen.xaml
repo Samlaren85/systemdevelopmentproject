@@ -21,7 +21,8 @@
         <TabItem Header="HANTERA FAKTUROR">
             <Canvas>
 
-                <TextBlock  Text="SÖK FAKTURA" Canvas.Top="70" Canvas.Left="80"/>
+                <TextBlock  Text="SÖK FAKTURA" Canvas.Top="35" Canvas.Left="80"/>
+                <TextBlock  Text="Sök på: Förnamn/Efternamn/Fakturanummer/Företagsnamn/Bokningsnummer" Canvas.Left="80" Canvas.Top="69" FontStyle="Italic" />
 
                 <TextBox x:Name="myTextbox"  Width="300" Canvas.Top="105" Canvas.Left="80" Text="{Binding SökFaktureradeFakturor, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -31,11 +32,11 @@
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBillingCommand}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Namn" Width="2*" Binding="{Binding Path=Bokningsref.KundID}"/>
-                        <DataGridTextColumn Header="Bokningsnummer" Width="2*" Binding="{Binding Path=Bokningsref.BokningsID}"/>
-                        <DataGridTextColumn Header="Fakturanummer" Width="2*" Binding="{Binding FakturaID}"/>
-                        <DataGridTextColumn Header="Förfallodatum" Width="2*" Binding="{Binding Förfallodatum}"/>
-                        <DataGridTextColumn Header="Betald" Width="*" Binding="{Binding Fakturastatus}"/>
+                        <DataGridTextColumn Header="NAMN" Width="Auto" Binding="{Binding Path=Bokningsref.KundID}"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="2*" Binding="{Binding Path=Bokningsref.BokningsID}"/>
+                        <DataGridTextColumn Header="FAKTURANUMMER" Width="2*" Binding="{Binding FakturaID}"/>
+                        <DataGridTextColumn Header="FÖRFALLODATUM" Width="2*" Binding="{Binding Förfallodatum}"/>
+                        <DataGridTextColumn Header="BETALD" Width="*" Binding="{Binding Fakturastatus}"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -45,13 +46,13 @@
         <TabItem Header="SKAPA FAKTURA">
 
             <Canvas>
-                <TextBlock Text="BOKNINGAR ATT FAKTURERA" FontSize="22" Canvas.Top="100" Canvas.Left="80"/>
+                <TextBlock Text="BOKNINGAR ATT FAKTURERA" Canvas.Top="100" Canvas.Left="80"/>
                 <DataGrid  Width="908" Height="430" ItemsSource="{Binding HämtadeBokningarAttFakturera}" SelectedItem="{Binding Path=SkapandeAvFakturor}" IsReadOnly="True"
                 CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170">
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Namn" Width="*" Binding="{Binding Path=KundID.Namn }"/>
-                        <DataGridTextColumn Header="Bokningsnummer" Width="*" Binding="{Binding BokningsID }"/>
+                        <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=KundID.Namn }"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding BokningsID }"/>
                     </DataGrid.Columns>
                 </DataGrid>
 

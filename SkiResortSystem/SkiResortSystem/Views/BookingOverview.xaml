@@ -17,7 +17,7 @@
 
             <Setter Property="Height" Value="Auto"/>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
 
     </Window.Resources>
@@ -28,14 +28,14 @@
 
     <Canvas  Background="#FFA6C3E4" Height="1000" >
 
-        <TextBlock Text="Skapa Bokning:" FontWeight="Bold" FontSize="25" Visibility="{Binding SkapabokningVisibility}" Canvas.Left="383" Canvas.Top="81" HorizontalAlignment="Center" VerticalAlignment="Top" Width="162"/>
-        <TextBlock Text="Ändra Bokning:" FontWeight="Bold" FontSize="25" Visibility="{Binding CheckaInVisibility}" Canvas.Left="383" Canvas.Top="81" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Text="Skapa Bokning:" FontWeight="Bold"  Visibility="{Binding SkapabokningVisibility}" Canvas.Left="383" Canvas.Top="81" HorizontalAlignment="Center" VerticalAlignment="Top" Width="162"/>
+        <TextBlock Text="Ändra Bokning:" FontWeight="Bold" Visibility="{Binding CheckaInVisibility}" Canvas.Left="383" Canvas.Top="81" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
         <TextBlock Text="Bokningsnummer:" FontWeight="Bold" Canvas.Left="383" Canvas.Top="133"/>
 
         <TextBlock Text="{Binding Bokningsnummer}" FontWeight="Bold" Canvas.Left="550" Canvas.Top="133"/>
 
-        <TextBlock Text="Utnyttjad kredit:" FontWeight="Bold" Canvas.Left="889" Canvas.Top="133" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Text="Utnyttjad kredit:"  Canvas.Left="889" Canvas.Top="133" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <TextBlock Text="Namn" Canvas.Left="383" Canvas.Top="203" HorizontalAlignment="Left" VerticalAlignment="Top"  />
 
@@ -56,8 +56,9 @@
         <TextBlock Text="Totalpris" Canvas.Left="559" Canvas.Top="489" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <TextBox Text="{Binding KundPresentation}" Canvas.Left="383" IsReadOnly="True" Canvas.Top="238" Width="297" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        
         <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="888" Canvas.Top="166" Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" >
-            <TextBox Text="{Binding UtnyttjadKredit}" Height="Auto" TextAlignment="Center" Background="Transparent" Margin="2,8,-2,-8" IsReadOnly="True"/>
+            <TextBox Text="{Binding UtnyttjadKredit}" Height="Auto" TextAlignment="Center" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Margin="0,12,0,0" IsReadOnly="True"/>
         </Border>
         <TextBox Text="{Binding AntalNätter}" Visibility="{Binding GömNätter}" Canvas.Left="696" IsReadOnly="True" Canvas.Top="330" Width="54" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBox Text="{Binding AntalTimmar}" Visibility="{Binding VisaTid}" Canvas.Left="696" IsReadOnly="True" Canvas.Top="330" Width="54" HorizontalAlignment="Left" VerticalAlignment="Top"/>

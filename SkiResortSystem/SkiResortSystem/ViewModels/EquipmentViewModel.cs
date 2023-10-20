@@ -346,6 +346,17 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+        private Utrustningsbokning selectedPickupReturn;
+        public Utrustningsbokning SelectedPickupReturn
+        {
+            get { return selectedPickupReturn; }
+            set
+            {
+                selectedPickupReturn = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string selectionError;
         public string SelectionError
         {
@@ -530,14 +541,16 @@ namespace SkiResortSystem.ViewModels
         public ICommand HandOutEquipment =>
             handOutEquipment ??= handOutEquipment = new RelayCommand(() =>
             {
-
+                SelectedPickupReturn.Utrustningsstatus = Status.Utlämnad;
+                OnPropertyChanged(nameof(CurrentEquipment));
             });
         
         private ICommand recieveEquipment;
         public ICommand RecieveEquipment =>
             recieveEquipment ??= recieveEquipment = new RelayCommand(() =>
             {
-
+                SelectedPickupReturn.Utrustningsstatus = Status.Inrapporterad;
+                OnPropertyChanged(nameof(CurrentEquipment));
             });
     }
 }

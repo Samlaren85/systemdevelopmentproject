@@ -30,7 +30,7 @@
 
                 <DataGrid Width="908" Height="345"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="AKTIVITET" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="ANTAL LEDIGA PLATSER" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="ANTAL DELTAGARE " Width="*" Binding="{Binding Antal}"  IsReadOnly="False">
@@ -67,7 +67,7 @@
 
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Boka" Canvas.Left="868" Canvas.Top="537" Height="40" Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Button Content="Boka" Canvas.Left="868" Canvas.Top="537" Height="50"  Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" />
             </Canvas>
 
         </TabItem>
@@ -87,7 +87,7 @@
                 <TextBlock Text="Avresedatum" Foreground="Black" Canvas.Left="680" Canvas.Top="144" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <DatePicker Canvas.Left="680" Canvas.Top="169" BorderBrush="{x:Null}" SelectedDate="{Binding ActivityEndDate}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                <Button Content="SÖK" Height="40" Canvas.Left="868" Canvas.Top="158" Command="{Binding SearchActivitiesCommand}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
+                <Button Content="SÖK" Height="50" Canvas.Left="868" Canvas.Top="150" Command="{Binding SearchActivitiesCommand}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
                 <TextBlock Text="Typ av aktivitet" Canvas.Left="377" Canvas.Top="144" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBox TextWrapping="Wrap" Canvas.Left="377" Canvas.Top="172" Width="120" Text="{Binding TypeOfActivity}" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
@@ -98,7 +98,7 @@
                         Command="{Binding DoubleClickActivityCommand}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=Bokningsref.KundID.Namn}"/>
+                        <DataGridTextColumn Header="NAMN" Width="230" Binding="{Binding Path=Bokningsref.KundID.Namn}"/>
                         <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
                         <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding Path=Bokningsref.BokningsID}"/>
                         <DataGridTextColumn Header="AKTIVITET" Width="*" Binding="{Binding Path=Aktivitetsref.Typ }"/>
@@ -121,7 +121,7 @@
 
                 <DataGrid  Width="759" Height="414" ItemsSource="{Binding Path=Utrustningsbokningsrader, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedEquipment}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" >
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="UTRUSTNING" Width="*" >
+                        <DataGridTemplateColumn Header="UTRUSTNING" Width="2*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=TypAvUtrustning}"/>
@@ -132,6 +132,11 @@
                                     <ComboBox ItemsSource="{Binding Path=TypAvUtrustningar}" SelectedItem="{Binding Path=TypAvUtrustning}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
+                            <DataGridTemplateColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="White"/>
+                                </Style>
+                            </DataGridTemplateColumn.CellStyle>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="FRÅN" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -139,6 +144,11 @@
                                     <DatePicker SelectedDate="{Binding Path=FrånDatum}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="White"/>
+                                </Style>
+                            </DataGridTemplateColumn.CellStyle>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="TILL" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -146,6 +156,11 @@
                                     <DatePicker SelectedDate="{Binding Path=TillDatum}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="White"/>
+                                </Style>
+                            </DataGridTemplateColumn.CellStyle>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="ANTAL" Width="*" IsReadOnly="True" Binding="{Binding Path=Antal}"/>
                         <DataGridTextColumn Header="PRIS" Width="*" IsReadOnly="True" Binding="{Binding Path=Pris}"/>
@@ -163,7 +178,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Button Content="Boka" Canvas.Left="868" Canvas.Top="626" Height="40" Command="{Binding BookEquipment}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Button Content="Boka" Canvas.Left="868" Canvas.Top="626" Height="50"  Command="{Binding BookEquipment}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" />
                 <Button Content="➕" Command="{Binding AddSizeSelection}" Canvas.Left="925" Canvas.Top="583" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Button Content="➖" Command="{Binding RemoveSizeSelection}" Canvas.Left="959" Canvas.Top="583" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
@@ -179,14 +194,14 @@
                 <ComboBox ItemsSource="{Binding SearchEquipmentCustomerResults}" SelectedItem="{Binding SelectedEquipmentCustomer}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchEquipmentCustomer, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding EquipmentCustomerError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                <TextBlock Canvas.Left="618" Canvas.Top="145" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="sv-se" Text="Återlämnings"/><Run Text="datum"/></TextBlock>
-                <DatePicker Canvas.Left="618" Canvas.Top="170" BorderBrush="{x:Null}" SelectedDate="{Binding ReturnDate}"/>
-                <TextBlock Canvas.Left="457" Canvas.Top="145" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="sv-se" Text="Utlämnings" /><Run Text="datum"/></TextBlock>
-                <DatePicker Canvas.Left="457" Canvas.Top="170" BorderBrush="{x:Null}" SelectedDate="{Binding FetchDate}"/>
+                <TextBlock Canvas.Left="665" Canvas.Top="145" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="sv-se" Text="Återlämnings"/><Run Text="datum"/></TextBlock>
+                <DatePicker Canvas.Left="665" Canvas.Top="170" BorderBrush="{x:Null}" SelectedDate="{Binding ReturnDate}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Canvas.Left="504" Canvas.Top="145" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="sv-se" Text="Utlämnings" /><Run Text="datum"/></TextBlock>
+                <DatePicker Canvas.Left="504" Canvas.Top="170" BorderBrush="{x:Null}" SelectedDate="{Binding FetchDate}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                <Button Content="SÖK" Height="40" Canvas.Left="868" Canvas.Top="155" Command="{Binding SearchEquipment}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-                <TextBlock Text="Typ av utrustning" Canvas.Left="280" Canvas.Top="147" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <TextBox Canvas.Left="280" TextWrapping="Wrap" Canvas.Top="174" Width="120" Text="{Binding TypeOfEquipment, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Button Content="SÖK" Height="50" Canvas.Left="868" Canvas.Top="145" Command="{Binding SearchEquipment}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
+                <TextBlock Text="Typ av utrustning" Canvas.Left="327" Canvas.Top="147" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox Canvas.Left="327" TextWrapping="Wrap" Canvas.Top="174" Width="120" Text="{Binding TypeOfEquipment, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
                 <DataGrid  Width="908" Height="390" ItemsSource="{Binding Path=Utrustningsbokningar, Mode=TwoWay}" SelectedItem="{Binding SelectedEquipmentbooking}"  CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="207" IsReadOnly="True">
                     <DataGrid.InputBindings>
@@ -195,10 +210,10 @@
                         Command="{Binding DoubleClickEquipmentCommand}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="NAMN" Width="auto" Binding="{Binding Path=Bokning.KundID.Namn}"/>
-                        <DataGridTextColumn Header="STARTDATUM" Width="*" Binding="{Binding Hämtasut}"/>
-                        <DataGridTextColumn Header="SLUTDATUM" Width="*" Binding="{Binding Lämnasin}"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding Path=Bokning.BokningsID}"/>
+                        <DataGridTextColumn Header="NAMN" Width="230" Binding="{Binding Path=Bokning.KundID.Namn}"/>
+                        <DataGridTextColumn Header="STARTDATUM" Width="2*" Binding="{Binding Hämtasut}"/>
+                        <DataGridTextColumn Header="SLUTDATUM" Width="2*" Binding="{Binding Lämnasin}"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="Auto" Binding="{Binding Path=Bokning.BokningsID}"/>
                         <DataGridTextColumn Header="UTRUSTNING" Width="*" Binding="{Binding Path=Utrustning.UtrustningsBenämning}"/>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -213,16 +228,23 @@
 
                 <DataGrid  Width="908" Height="379"  ItemsSource="{Binding CurrentEquipment, Mode=TwoWay}" SelectedItem="{Binding SelectedPickupReturn}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=Bokning.KundID.Namn}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="STARTDATUM" Width="*" Binding="{Binding Hämtasut}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="SLUTDATUM" Width="*" Binding="{Binding Lämnasin}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding Path=Bokning.BokningsID}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}" IsReadOnly="False"/>
-                        <DataGridTextColumn Header="STATUS " Width="*" Binding="{Binding Utrustningsstatus}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="NAMN" Width="230" Binding="{Binding Path=Bokning.KundID.Namn}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="STARTDATUM" Width="2*" Binding="{Binding Hämtasut}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="SLUTDATUM" Width="2*" Binding="{Binding Lämnasin}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="Auto" Binding="{Binding Path=Bokning.BokningsID}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}" IsReadOnly="False">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="White"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="STATUS " Width="110" Binding="{Binding Utrustningsstatus}" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Rapportera in utrustning" Height="40" Canvas.Left="784" Canvas.Top="568" Command="{Binding RecieveEquipment}" RenderTransformOrigin="1.311,2.576" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Button Content="Lämna ut utrustning" Height="40" Canvas.Left="573" Canvas.Top="568" Command="{Binding HandOutEquipment}" RenderTransformOrigin="1.311,2.576" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Content="RAPPORTERA IN UTRUSTNING" Height="50" Canvas.Left="738" Canvas.Top="568" Command="{Binding RecieveEquipment}" RenderTransformOrigin="1.311,2.576" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Content="LÄMNA UT UTRUSTNING" Height="50" Canvas.Left="465" Canvas.Top="568" Command="{Binding HandOutEquipment}" RenderTransformOrigin="1.311,2.576" Width="250" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
         </TabItem>
 
@@ -232,6 +254,17 @@
 
 
                 <DataGrid Name="BeläggningsData" Width="856" Height="321"  IsReadOnly="True" AutoGenerateColumns="False" ItemsSource ="{Binding ÖverfördVisaBeläggning, Mode=TwoWay}"  Canvas.Left="80" Canvas.Top="149" >
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+
+                    </DataGrid.CellStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="DATUM" Width="*" Binding="{Binding [0] }" ></DataGridTextColumn>
                         <DataGridTextColumn x:Name="Column1" Header="LGH1"  Width="*" Binding="{Binding [1] }" ></DataGridTextColumn>

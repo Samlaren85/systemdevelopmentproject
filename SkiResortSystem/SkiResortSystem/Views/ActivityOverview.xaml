@@ -40,7 +40,14 @@
         <DataGrid Width="908" Height="430" ItemsSource="{Binding Activities}" SelectedItem="{Binding Path=Aktivitetsbokning}"
            CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="100" Canvas.Top="320" HorizontalAlignment="Left" VerticalAlignment="Top" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ANTAL" Width="*" IsReadOnly="False" Binding="{Binding Antal}"/>
+                <DataGridTextColumn Header="ANTAL" Width="*" IsReadOnly="False" Binding="{Binding Antal}">
+                    <DataGridTextColumn.CellStyle>
+                    <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                    </DataGridTextColumn.CellStyle>
+
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="TYP" Width="*" IsReadOnly="True" Binding="{Binding Path=Aktivitetsref.Typ}"/>
                 <DataGridTextColumn Header="START" Width="*" IsReadOnly="True" Binding="{Binding Path=Aktivitetsref.Skidskola.VaraktighetFrån}"/>
                 <DataGridTextColumn Header="SLUT" Width="*" IsReadOnly="True" Binding="{Binding Path=Aktivitetsref.Skidskola.VaraktighetTill}"/>
@@ -57,7 +64,7 @@
 
         <TextBlock Text="Utnyttjad kredit" Canvas.Left="1050" Canvas.Top="40" FontWeight="Bold"/>
         <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="1050" Canvas.Top="80" Width="200" Height="50" >
-            <TextBox Height="Auto" Background="Transparent" Text="{Binding Path=Bokningsref.UtnyttjadKredit}" />
+            <TextBox Text="{Binding Path=Bokningsref.UtnyttjadKredit}" Height="Auto" TextAlignment="Center" Background="Transparent"  Margin="0,12,0,0" BorderThickness="0"  BorderBrush="Transparent" IsReadOnly="True" />
 
         </Border>
 

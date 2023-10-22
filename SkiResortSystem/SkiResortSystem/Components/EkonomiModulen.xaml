@@ -57,7 +57,7 @@
                 </DataGrid>
 
                 <Button Content="SKAPA FAKTURA" Command="{Binding CreateFaktura}" Canvas.Top="640" Canvas.Left="828" HorizontalAlignment="Center" Height="50" Width="160" VerticalAlignment="Top" />
-                <Button Content="HÄMTA" Command="{Binding FetchFaktura}" Canvas.Top="99" Canvas.Left="854" HorizontalAlignment="Center" VerticalAlignment="Top" Width="134" Height="45" />
+                <Button Content="HÄMTA" Command="{Binding FetchFaktura}" Canvas.Top="99" Canvas.Left="854" HorizontalAlignment="Center" VerticalAlignment="Top" Width="134" Height="50"  />
                 <TextBlock Canvas.Left="484"  Text="{Binding Fakturaerrormsg}" Canvas.Top="648" Foreground="Red"/>
             </Canvas>
 

@@ -37,7 +37,7 @@
                 <DatePicker Canvas.Left="606" Canvas.Top="207" BorderBrush="{x:Null}" SelectedDate="{Binding Avresetid}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Text="Ankomstdatum" Canvas.Left="606" Canvas.Top="114" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <DatePicker Canvas.Left="606" Canvas.Top="142" BorderBrush="{x:Null}" SelectedDate="{Binding Ankomsttid}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Button Content="SÖK" Height="40" Canvas.Left="866" Canvas.Top="192" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
+                <Button Content="SÖK" Height="50"  Canvas.Left="866" Canvas.Top="188" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
                 <TextBox Canvas.Left="866" TextWrapping="Wrap" Canvas.Top="145" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
                 <TextBlock Visibility="{Binding KonferensReadOnly}" Canvas.Left="752" TextWrapping="Wrap" Text="Tid" Canvas.Top="114" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -72,7 +72,7 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="DataGridCell" >
                                                 <Border Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                                    <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                                 </Border>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -119,12 +119,12 @@
         <TabItem Header="HANTERA BOKNINGAR" IsSelected="{Binding CheckinCheckoutSelected}">
 
             <Canvas Height="auto" Width="1760" Margin="0,25,0,0">
-                <DataGrid  Width="918" Height="410"  AutoGenerateColumns="False"  Canvas.Left="80" Canvas.Top="149" SelectedItem="{Binding ÄndraBokning}" ItemsSource="{Binding BookingResults, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" >
+                <DataGrid   Width="918" Height="410"  AutoGenerateColumns="False"  Canvas.Left="80" Canvas.Top="149" SelectedItem="{Binding ÄndraBokning}" ItemsSource="{Binding BookingResults, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" >
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBookingCommandÄndra}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="NAMN" Width="Auto"  Binding="{Binding KundID}" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="NAMN" Width="230"  Binding="{Binding KundID}" ></DataGridTextColumn>
                         <DataGridTextColumn Header="ANKOMSTDATUM" Binding="{Binding Ankomsttid}" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="AVRESEDATUM" Binding="{Binding Avresetid}" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="BOKNINGSNUMMER" Binding="{Binding BokningsID}" Width="*"></DataGridTextColumn>
@@ -151,7 +151,18 @@
             <Canvas Height="auto" Width="1760">
 
 
-                <DataGrid Name="BeläggningsData" IsEnabled="False" Width="856" Height="321" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource ="{Binding ÖverfördVisaBeläggning, Mode=TwoWay}"  Canvas.Left="80" Canvas.Top="149"  >
+                <DataGrid Name="BeläggningsData" Width="856" Height="321" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource ="{Binding ÖverfördVisaBeläggning, Mode=TwoWay}"  Canvas.Left="80" Canvas.Top="149"  >
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+
+                    </DataGrid.CellStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="DATUM" Width="*" Binding="{Binding [0] }"  IsReadOnly="True"/>
                         <DataGridTextColumn x:Name="Column1" Header="LGH1"  Width="*" Binding="{Binding [1] }" IsReadOnly="True" ></DataGridTextColumn>

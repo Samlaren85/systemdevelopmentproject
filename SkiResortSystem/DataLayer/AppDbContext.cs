@@ -74,12 +74,24 @@ namespace DataLayer
             {
                 Roller.Add(new Roll("Admin", new List<Behörighet>()));
                 Roller.Add(new Roll("Receptionist", new List<Behörighet>()));
+                Roller.Add(new Roll("Skidshopspersonal", new List<Behörighet>()));
+                Roller.Add(new Roll("Ekonomianställd", new List<Behörighet>()));
+                Roller.Add(new Roll("Avdelningschef", new List<Behörighet>()));
+                Roller.Add(new Roll("Ekonomichef", new List<Behörighet>()));
+                Roller.Add(new Roll("Marknadschef", new List<Behörighet>()));
+                Roller.Add(new Roll("VD", new List<Behörighet>()));
                 SaveChanges();
             }
             if (!Användare.Any()) 
             {
                 Användare.Add(new Användare("1", 1, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL001"))));
                 Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL002"))));
+                Användare.Add(new Användare("3", 3, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL003"))));
+                Användare.Add(new Användare("4", 4, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL004"))));
+                Användare.Add(new Användare("5", 5, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL005"))));
+                Användare.Add(new Användare("6", 6, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL006"))));
+                Användare.Add(new Användare("7", 7, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL007"))));
+                Användare.Add(new Användare("8", 8, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL008"))));
                 SaveChanges();
             }
 

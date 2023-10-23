@@ -26,7 +26,7 @@
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                <TextBlock Text="{Binding ErrorMessage2}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="100" Canvas.Top="220" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <TextBlock Text="{Binding ErrorMessage2}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="590" Canvas.Top="210" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBlock Text="{Binding ErrorMessage3}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="195" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <RadioButton Content="Lägenhet" Canvas.Left="80" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding Lägenhetradiobutton}"/>

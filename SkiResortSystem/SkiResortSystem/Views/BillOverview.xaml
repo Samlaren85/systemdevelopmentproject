@@ -43,15 +43,33 @@
 
         <TextBlock Text="FAKTURAÖVERSIKT" Canvas.Left="1020" Canvas.Top="79" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <DataGrid Width="706" Height="330" IsReadOnly="True"
+        <!--<DataGrid Width="706" Height="330" IsReadOnly="True"
           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="552" Canvas.Top="130" HorizontalAlignment="Left" VerticalAlignment="Center">
-
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ARTIKEL" Width="2*" Binding="{Binding Artikel}"/>
                 <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Pris}"/>
             </DataGrid.Columns>
-        </DataGrid>
+        </DataGrid>-->
 
+
+        <Grid  Width="498" Height="330" 
+              Canvas.Left="760" Canvas.Top="125" 
+              HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <Border BorderBrush="#FFD3D3D3" BorderThickness="1" Margin="0,10,249,0" Padding="0" Background="#FFD3D3D3">
+                <StackPanel Margin="-1,0,-1,0" Background="#FFD3D3D3" >
+                    <TextBlock Text="Artiklar"  Foreground="White" FontWeight="Bold" Background="#FF5E8EC2" Width="249" Height="23" ></TextBlock>
+                    <ListBox Background="#FFD3D3D3" ItemsSource="{Binding Artikel}" Height="295" Width="249" />
+                </StackPanel>
+            </Border>
+
+            <Border BorderBrush="#FFD3D3D3" BorderThickness="1" Margin="249,10,0,0" Padding="0" Background="LightGray">
+                <StackPanel Margin="-1,0,-1,0" Background="#FFD3D3D3">
+                    <TextBlock Text="Pris" Foreground="White" FontWeight="Bold" Background="#FF5E8EC2" Width="249" Height="23" ></TextBlock>
+                    <ListBox Background="#FFD3D3D3" ItemsSource="{Binding Pris}" Height="295" Width="249" />
+                </StackPanel>
+            </Border>
+        </Grid>
 
 
     </Canvas>

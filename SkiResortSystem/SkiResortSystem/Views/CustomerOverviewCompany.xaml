@@ -13,7 +13,7 @@
     </Window.DataContext>
 
     <Window.Resources>
-
+        <comp:AccessConverter x:Key="AccessConverter" />
         <Style TargetType="TextBlock">
 
             <Setter Property="Height" Value="Auto"/>
@@ -21,6 +21,7 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="18"/>
         </Style>
+        
 
 
 
@@ -109,7 +110,7 @@
         <TextBox Text="{Binding Epost}" Canvas.Left="627" Canvas.Top="395" Width="293"/>
         <TextBox Text="{Binding Telefonnummer}" HorizontalAlignment="Left" Canvas.Left="154" Canvas.Top="485" VerticalAlignment="Center" Width="166"/>
 
-        <TextBox Text="{Binding Rabatt}" Canvas.Left="154" Canvas.Top="566" Width="166" IsReadOnly="{Binding RabattReadOnly}">
+        <TextBox Text="{Binding Rabatt}" Canvas.Left="154" Canvas.Top="566" Width="166" IsReadOnly="{Binding IsCurrentUserMarketingManager, Converter={StaticResource AccessConverter}}">
 
         <TextBox.Style>
             <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
@@ -128,9 +129,9 @@
 
 
 
-        <TextBox Text="{Binding Kreditgräns}" Canvas.Left="375" Canvas.Top="566" Width="179" IsReadOnly="{Binding KreditReadOnly}">
+        <TextBox Text="{Binding Kreditgräns}" Canvas.Left="375" Canvas.Top="566" Width="179" IsReadOnly="{Binding IsCurrentUserMarketingManager, Converter={StaticResource AccessConverter}}">
             
-            <TextBox.Style>
+            <!--<TextBox.Style>
                 <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding MarketingManager}">
@@ -141,7 +142,7 @@
 
                 </Style>
 
-            </TextBox.Style>
+            </TextBox.Style>-->
 
         </TextBox>
 

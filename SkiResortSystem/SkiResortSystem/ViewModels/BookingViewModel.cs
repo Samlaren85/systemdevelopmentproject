@@ -411,14 +411,18 @@ namespace SkiResortSystem.ViewModels
                 {
                     ErrorMessage2 = "Ankomst- och avresedatum måste vara en fredag eller en söndag";
                 }
-                else if (Ankomsttid < DateTime.Now || Avresetid < DateTime.Now)
+                else if (Ankomsttid < DateTime.Today || Avresetid < DateTime.Today)
                 {
                     ErrorMessage2 = "Ankomst- och avresedatum måst vara senare än dagens datum";
                 }
-                else if (Ankomsttid.DayOfWeek != DayOfWeek.Sunday &&
+                else if (Ankomsttid.DayOfWeek == DayOfWeek.Sunday &&
                     Avresetid.DayOfWeek != DayOfWeek.Sunday && Campingradiobutton)
                 {
                     ErrorMessage2 = "För veckobokning måste Ankomst- och avresedatum måste vara en söndag";
+                }
+                else if (bokningsLängd.Days > 2 && bokningsLängd.Days < 7 && Campingradiobutton)
+                {
+                    ErrorMessage2 = "Campingbokning får vara dygn eller veckobokning";
                 }
                 else if (Ankomsttid.DayOfWeek == DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday && Lägenhetradiobutton)
                 {
@@ -545,46 +549,48 @@ namespace SkiResortSystem.ViewModels
                     {
                         ErrorMessage2 = "Konferensbokning får vara högst 1 vecka";
                     }
-                
-                    if (success)
-                    {
-                        FacilitetsSökning = ac.FindLedigaKonferens(x, AnkomsttidMedTid, AvresetidMedTid);
-                        if (FacilitetsSökning.Count() < 1)
+                    else{
+                        if (success)
                         {
-                            ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
-                        }
-                        else
-                        {
-                            TimeSpan t = Avresetid - Ankomsttid;
-                            TimeSpan h = SelectedTimeTill - SelectedTimeFrån;
-                            if (t.Days == 0 && h.Hours <= 5)
+                            FacilitetsSökning = ac.FindLedigaKonferens(x, AnkomsttidMedTid, AvresetidMedTid);
+                            if (FacilitetsSökning.Count() < 1)
                             {
-                                foreach (Facilitet f in FacilitetsSökning)
-                                {
-                                    f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * h.Hours;
-                                }
-                            }
-                            else if (t.Days == 0 && h.Hours > 6)
-                            {
-                                foreach (Facilitet f in FacilitetsSökning)
-                                {
-                                    f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris;
-                                }
+                                ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
                             }
                             else
                             {
-                                foreach (Facilitet f in FacilitetsSökning)
+                                TimeSpan t = Avresetid - Ankomsttid;
+                                TimeSpan h = SelectedTimeTill - SelectedTimeFrån;
+                                if (t.Days == 0 && h.Hours <= 5)
                                 {
-                                    f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
+                                    foreach (Facilitet f in FacilitetsSökning)
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * h.Hours;
+                                    }
+                                }
+                                else if (t.Days == 0 && h.Hours > 6)
+                                {
+                                    foreach (Facilitet f in FacilitetsSökning)
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris;
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (Facilitet f in FacilitetsSökning)
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
+                                    }
                                 }
                             }
                         }
+                        else
+                        {
+                            ErrorMessage2 = string.Empty;
+                            ErrorMessage2 = "Du behöver lägga till antal kunder";
+                        }
                     }
-                    else
-                    {
-                        ErrorMessage2 = string.Empty;
-                        ErrorMessage2 = "Du behöver lägga till antal kunder";
-                    }
+                    
                 }
                 //if (Campingradiobutton)
                 //{
@@ -610,5 +616,48 @@ namespace SkiResortSystem.ViewModels
                 ErrorMessage3 = "Du behöver välja facilitetstyp";
             }
         });
+
+        #region Prislist tabben
+
+        private int prislistIndex;
+        public int PrislistIndex
+        {
+            get { return prislistIndex; }
+            set
+            {
+                prislistIndex = value;
+                switch (prislistIndex)
+                {
+                    case 1:
+                        PriceImgSource = "/Views/Images/Prislista boende.png";
+                        break;
+                    case 2:
+                        PriceImgSource = "/Views/Images/Prislista konferens.png";
+                        break;
+                    case 3:
+                        PriceImgSource = "/Views/Images/Priser aktivitet.png";
+                        break;
+                    case 4:
+                        PriceImgSource = "/Views/Images/Prislista utrustning.png";
+                        break;
+                     default:
+                        PriceImgSource = "/Views/Images/Logo.png";
+                        break;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        private string priceImgSource;
+        public string PriceImgSource
+        {
+            get { return priceImgSource; }
+            set
+            {
+                priceImgSource = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
     }
 }

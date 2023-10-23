@@ -46,6 +46,20 @@ namespace SkiResortSystem.ViewModels
             get { return removeEnabled; }
             set { removeEnabled = value; OnPropertyChanged(); }
         }
+        private bool _isCurrentUserMarketingManager;
+        public bool IsCurrentUserMarketingManager
+        {
+            get { return _isCurrentUserMarketingManager; }
+            set
+            {
+                if (_isCurrentUserMarketingManager != value)
+                {
+                    _isCurrentUserMarketingManager = value;
+                    OnPropertyChanged(nameof(IsCurrentUserMarketingManager));
+                }
+            }
+        }
+
         private Kund kund;
         public Kund Kund
         {
@@ -207,7 +221,7 @@ namespace SkiResortSystem.ViewModels
             KundIDReadOnly = false;
             Rubrik = "LÄGG TILL NY FÖRETAGSKUND";
         }
-        public CustomerOverviewCompanyViewModel(Kund laddadKund)
+        public CustomerOverviewCompanyViewModel(Kund laddadKund, bool marketingmanager)
         {
             customerController = new CustomerController();
             Kund = laddadKund;
@@ -224,6 +238,7 @@ namespace SkiResortSystem.ViewModels
             Epost = laddadKund.Epost;
             Rabatt = laddadKund.Rabatt;
             Kreditgräns = laddadKund.Kreditgräns;
+            IsCurrentUserMarketingManager = marketingmanager;
         }
         private ICommand saveCustomer = null!;
         public ICommand SaveCustomer =>

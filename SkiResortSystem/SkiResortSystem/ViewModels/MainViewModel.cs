@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using BusinessLayer;
@@ -44,8 +46,8 @@ namespace SkiResortSystem.ViewModels
             get { return menuChoise; }
             set
             {
-                if (value.Contains("Logga ut")) LogOut.Execute(true);
-                else if (value.Contains("Avsluta")) ExitCommand.Execute(true);
+                if (value.Contains("Logga ut", StringComparison.OrdinalIgnoreCase)) LogOut.Execute(true);
+                else if (value.Contains("Avsluta", StringComparison.OrdinalIgnoreCase)) ExitCommand.Execute(true);
             }
         }
 
@@ -56,7 +58,7 @@ namespace SkiResortSystem.ViewModels
         {
             LogIn();
         }
-       
+
         public void LogIn()
         {
             MainVisibility = Visibility.Hidden;
@@ -64,10 +66,10 @@ namespace SkiResortSystem.ViewModels
             windowService.ShowDialog(logIn);
             if (SessionController.LoggedIn != null)
             {
-                
+
                 LoggedInUser = $"{SessionController.LoggedIn.UserID}";
                 MainVisibility = Visibility.Visible;
-                
+
             }
             else ExitCommand.Execute(null);
         }
@@ -149,7 +151,7 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        
+
         private bool boendekonferensbeläggningradiobutton;
         public bool BoendeKonferensbeläggningradiobutton
         {
@@ -174,7 +176,7 @@ namespace SkiResortSystem.ViewModels
         private ICommand visaBeläggningen = null!;
         public ICommand VisaBeläggningen => visaBeläggningen ??= visaBeläggningen = new RelayCommand(() =>
         {
-            
+
             if (BoendeKonferensbeläggningradiobutton)
             {
                 AccommodationController ac = new AccommodationController();
@@ -206,18 +208,18 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-       
+
         /// <summary>
         /// Logga ut och stänga ner nedan 
         /// </summary>
         private ICommand logOut = null!;
-        
+
         public ICommand LogOut =>
             logOut ??= logOut = new RelayCommand(() =>
                 {
                     SessionController.Terminate();
                     LogIn();
-                });   
+                });
 
         private ICommand exitCommand = null!;
         public ICommand ExitCommand =>
@@ -231,102 +233,110 @@ namespace SkiResortSystem.ViewModels
         private ICommand behörighetskontroll = null!;
         public ICommand Behörighetskontroll => behörighetskontroll ??= behörighetskontroll = new RelayCommand(() =>
         {
-            
-                foreach (Behörighet bh in SessionController.LoggedIn.RollID.BehörighetID)
+
+            foreach (Behörighet bh in SessionController.LoggedIn.RollID.BehörighetID)
             {
                 switch (bh.Behörighetstyp)
                 {
-                    case "1 - Systemadministratör":
-                            Admin = Visibility.Visible;
-                            //UseShopOrReception = true;
-                            Economy = Visibility.Visible;
-                            MarketingManager = Visibility.Visible;
-                            Customer = Visibility.Visible;
+                    case "1 - Systemadministratör": // ta bort all acces förutom Admin innan inlämning OBS! även boolen till false
+                        Admin = Visibility.Visible;
+                        //UseShopOrReception = true;
+                        Economy = Visibility.Visible;
+                        MarketingManager = Visibility.Visible;
+                        Customer = Visibility.Visible;
                         Governance = Visibility.Visible;
                         CEO = Visibility.Visible;
                         Reception = Visibility.Visible;
                         Shop = Visibility.Visible;
+                        IsCurrentUserMarketingManager = true;
                         break;
                     case "2 - Reception":
-                            Admin = Visibility.Collapsed;
-                            //UseShopOrReception = true;
-                            Economy = Visibility.Collapsed;
-                            MarketingManager = Visibility.Collapsed;
-                            Customer = Visibility.Visible;
+                        Admin = Visibility.Collapsed;
+                        //UseShopOrReception = true;
+                        Economy = Visibility.Collapsed;
+                        MarketingManager = Visibility.Collapsed;
+                        Customer = Visibility.Visible;
                         Governance = Visibility.Collapsed;
                         CEO = Visibility.Collapsed;
                         Shop = Visibility.Visible;
                         Reception = Visibility.Visible;
+                        IsCurrentUserMarketingManager = false;
                         break;
                     case "3 - Skidshop":
-                            Admin = Visibility.Collapsed;
-                            //UseShopOrReception = true;
-                            Economy = Visibility.Collapsed;
-                            MarketingManager = Visibility.Collapsed;
-                            Customer = Visibility.Visible;
+                        Admin = Visibility.Collapsed;
+                        //UseShopOrReception = true;
+                        Economy = Visibility.Collapsed;
+                        MarketingManager = Visibility.Collapsed;
+                        Customer = Visibility.Visible;
                         Governance = Visibility.Collapsed;
                         CEO = Visibility.Collapsed;
                         Shop = Visibility.Visible;
                         Reception = Visibility.Collapsed;
+                        IsCurrentUserMarketingManager = false;
                         break;
                     case "4 - Ekonomi":
-                            Admin = Visibility.Collapsed;
-                            //UseShopOrReception = true;
-                            Economy = Visibility.Visible;
-                            MarketingManager = Visibility.Collapsed;
-                            Customer = Visibility.Visible;
+                        Admin = Visibility.Collapsed;
+                        //UseShopOrReception = true;
+                        Economy = Visibility.Visible;
+                        MarketingManager = Visibility.Collapsed;
+                        Customer = Visibility.Visible;
                         Governance = Visibility.Collapsed;
                         CEO = Visibility.Collapsed;
                         Shop = Visibility.Collapsed;
                         Reception = Visibility.Collapsed;
+                        IsCurrentUserMarketingManager = false;
                         break;
                     case "5 - Avdelningschef skidshop":
-                            Admin = Visibility.Collapsed;
-                            //UseShopOrReception= true;
-                            Economy = Visibility.Collapsed;
-                            MarketingManager = Visibility.Collapsed;
-                            Customer = Visibility.Visible;
+                        Admin = Visibility.Collapsed;
+                        //UseShopOrReception= true;
+                        Economy = Visibility.Collapsed;
+                        MarketingManager = Visibility.Collapsed;
+                        Customer = Visibility.Visible;
                         Governance = Visibility.Visible;
                         CEO = Visibility.Collapsed;
                         Reception = Visibility.Collapsed;
                         Shop = Visibility.Visible;
+                        IsCurrentUserMarketingManager = false;
                         break;
                     case "6 - Ekonomichef":
-                            Admin = Visibility.Collapsed;
-                            //UseShopOrReception = true;
-                            Economy = Visibility.Visible;
-                            MarketingManager = Visibility.Collapsed;
-                            Customer = Visibility.Visible;
+                        Admin = Visibility.Collapsed;
+                        //UseShopOrReception = true;
+                        Economy = Visibility.Visible;
+                        MarketingManager = Visibility.Collapsed;
+                        Customer = Visibility.Visible;
                         Governance = Visibility.Visible;
                         CEO = Visibility.Collapsed;
                         Reception = Visibility.Collapsed;
                         Shop = Visibility.Collapsed;
+                        IsCurrentUserMarketingManager = false;
                         break;
                     case "7 - Marknadschef":
-                            Admin = Visibility.Collapsed;
-                            //UseShopOrReception = true;
-                            Economy = Visibility.Collapsed;
-                            MarketingManager = Visibility.Visible;
-                            Customer = Visibility.Visible;
+                        Admin = Visibility.Collapsed;
+                        //UseShopOrReception = true;
+                        Economy = Visibility.Collapsed;
+                        MarketingManager = Visibility.Visible;
+                        Customer = Visibility.Visible;
                         Governance = Visibility.Visible;
                         CEO = Visibility.Collapsed;
                         Reception = Visibility.Visible;
                         Shop = Visibility.Visible;
+                        IsCurrentUserMarketingManager = true;
                         break;
                     case "8 - Verkställande Direktör":
-                            Admin = Visibility.Collapsed;
-                            //UseShopOrReception = true;
-                            Economy=Visibility.Collapsed;
-                            MarketingManager = Visibility.Collapsed;
-                            Customer = Visibility.Visible;
+                        Admin = Visibility.Collapsed;
+                        //UseShopOrReception = true;
+                        Economy = Visibility.Collapsed;
+                        MarketingManager = Visibility.Collapsed;
+                        Customer = Visibility.Visible;
                         Governance = Visibility.Visible;
                         CEO = Visibility.Visible;
                         Reception = Visibility.Collapsed;
                         Shop = Visibility.Collapsed;
+                        IsCurrentUserMarketingManager = false;
                         break;
                 }
             }
-               
+
         }
         );
 
@@ -498,7 +508,7 @@ namespace SkiResortSystem.ViewModels
         }
 
         private Visibility governance = Visibility.Collapsed;
-        public Visibility Governance 
+        public Visibility Governance
         {
             get { return governance; }
             set
@@ -525,5 +535,22 @@ namespace SkiResortSystem.ViewModels
                 }
             }
         }
+        /// <summary>
+        /// Används för att kontrollera om inloggad användare är marknadschef med behörighet att lägga till företagskunder.
+        /// </summary>
+        private bool _isCurrentUserMarketingManager;
+        public bool IsCurrentUserMarketingManager
+        {
+            get { return _isCurrentUserMarketingManager; }
+            set
+            {
+                if (_isCurrentUserMarketingManager != value)
+                {
+                    _isCurrentUserMarketingManager = value;
+                    OnPropertyChanged(nameof(IsCurrentUserMarketingManager));
+                }
+            }
+        }
+
     }
 }

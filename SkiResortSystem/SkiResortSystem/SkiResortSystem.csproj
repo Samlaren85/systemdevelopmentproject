@@ -10,6 +10,10 @@
   <ItemGroup>
     <None Remove="Views\Images\Logga.png" />
     <None Remove="Views\Images\Logo.png" />
+    <None Remove="Views\Images\Priser aktivitet.png" />
+    <None Remove="Views\Images\Prislista boende.png" />
+    <None Remove="Views\Images\Prislista konferens.png" />
+    <None Remove="Views\Images\Prislista utrustning.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +30,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Views\Images\Logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\Priser aktivitet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\Prislista boende.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\Prislista konferens.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Images\Prislista utrustning.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -50,8 +50,8 @@
             </TabControl>
         </TabItem>
 
-        <TabItem Header="BOENDE &amp; KONFERENS">
-            <TabItem.Style>
+        <TabItem Header="BOENDE &amp; KONFERENS" Visibility="{Binding Reception}">
+            <!--<TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Receptionist}" Value="True">
@@ -62,14 +62,14 @@
                 </Style>
 
 
-            </TabItem.Style>
+            </TabItem.Style>-->
 
             <comp:BoendeModulen/>
 
         </TabItem>
 
-        <TabItem Header="AKTIVITET &amp; UTRUSTNING">
-            <TabItem.Style>
+        <TabItem Header="AKTIVITET &amp; UTRUSTNING" Visibility="{Binding Shop}">
+            <!--<TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
                        
@@ -83,14 +83,14 @@
                 </Style>
 
 
-            </TabItem.Style>
+            </TabItem.Style>-->
 
             <comp:AktivitetsModulen/>
 
         </TabItem>
 
-        <TabItem Header="KUND">
-            <TabItem.Style>
+        <TabItem Header="KUND" Visibility="{Binding Customer }">
+            <!--<TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Reception}" Value="True">
@@ -105,14 +105,14 @@
                 </Style>
 
 
-            </TabItem.Style>
+            </TabItem.Style>-->
 
             <comp:KundModulen/>
 
         </TabItem>
 
-        <TabItem Header="EKONOMI">
-            <TabItem.Style>
+        <TabItem Header="EKONOMI" Visibility="{Binding Economy}">
+            <!--<TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Economy}" Value="True">
@@ -123,14 +123,14 @@
                 </Style>
                 
                 
-            </TabItem.Style>
+            </TabItem.Style>-->
 
             <comp:EkonomiModulen/>
 
         </TabItem>
 
-        <TabItem Header="STYRNING" >
-            <TabItem.Style>
+        <TabItem Header="STYRNING" Visibility="{Binding CEO}" >
+            <!--<TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Governance}" Value="True">
@@ -141,15 +141,15 @@
                 </Style>
 
 
-            </TabItem.Style>
+            </TabItem.Style>-->
 
             <comp:StyrningsModulen/>
 
         </TabItem>
 
-        <TabItem Header="ADMIN" >
+        <TabItem Header="ADMIN" Visibility="{Binding Admin}" >
             
-            <TabItem.Style>
+            <!--<TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Admin}" Value="True">
@@ -164,7 +164,7 @@
                 </Style>
 
 
-            </TabItem.Style>
+            </TabItem.Style>-->
 
             <comp:AdminModulen/>
 

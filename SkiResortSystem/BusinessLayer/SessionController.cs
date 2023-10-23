@@ -55,7 +55,7 @@ namespace BusinessLayer
                 if (credentials != null && credentials.Password.Equals(password))
                 {
                     _instance = new SessionController(credentials);
-                    Behörighetskontroll(credentials);
+                    Behörighetstilldelning(credentials);
                     return _instance;
                 }
                 else
@@ -67,8 +67,11 @@ namespace BusinessLayer
             { throw new ApplicationException("Inloggning misslyckad!\nEn användare är redan inloggad i systemet"); }
 
         }
-
-        public static void Behörighetskontroll(Användare användare)
+        /// <summary>
+        /// Metoden lägger till behörighetsnivå/typ och roll för inloggande användare.
+        /// </summary>
+        /// <param name="användare"></param>
+        public static void Behörighetstilldelning(Användare användare)
         {
             UnitOfWork unitOfWork = new UnitOfWork();
             if (användare != null)
@@ -83,15 +86,18 @@ namespace BusinessLayer
                     }
                     
                     användare.RollID.BehörighetID.Add(användarBehörighet);
+                    unitOfWork.Save();
                 }
                 else if (användare.UserType == 2) //Inloggad som receptionist
                 {
-                    Behörighet användarBehörighet = new Behörighet("2 - Receptionist");
+                    Behörighet användarBehörighet = new Behörighet("2 - Reception");
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Receptionist";
+                        unitOfWork.AnvändarRepository.Update(användare);
                     }
                     användare.RollID.BehörighetID.Add(användarBehörighet);
+                    unitOfWork.Save();
                 }
                 else if (användare.UserType == 3) //Inloggad som Skidshop
                 {
@@ -99,17 +105,21 @@ namespace BusinessLayer
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Skidshopspersonal";
+                        unitOfWork.AnvändarRepository.Update(användare);
                     }
                     användare.RollID.BehörighetID.Add(användarBehörighet);
+                    unitOfWork.Save();
                 }
                 else if (användare.UserType == 4) //Inloggad som avdelningschef reception
                 {
-                    Behörighet användarBehörighet = new Behörighet("4 - Avdelningschef reception");
+                    Behörighet användarBehörighet = new Behörighet("4 - Ekonomi");
                     if (användare.RollID != null)
                     {
-                        användare.RollID.Rolltyp = "Avdelningschef";
+                        användare.RollID.Rolltyp = "Ekonomianställd";
+                        unitOfWork.AnvändarRepository.Update(användare);
                     }
                     användare.RollID.BehörighetID.Add(användarBehörighet);
+                    unitOfWork.Save();
                 }
                 else if (användare.UserType == 5) //Inloggad som avdelningschef skidshop
                 {
@@ -117,8 +127,10 @@ namespace BusinessLayer
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Avdelningschef";
+                        unitOfWork.AnvändarRepository.Update(användare);
                     }
                     användare.RollID.BehörighetID.Add(användarBehörighet);
+                    unitOfWork.Save();
                 }
                 else if (användare.UserType == 6) //Inloggad som ekonomichef
                 {
@@ -126,8 +138,10 @@ namespace BusinessLayer
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Ekonomichef";
+                        unitOfWork.AnvändarRepository.Update(användare);
                     }
                     användare.RollID.BehörighetID.Add(användarBehörighet);
+                    unitOfWork.Save();
                 }
                 else if (användare.UserType == 7) //Inloggad som marknadschef
                 {
@@ -135,8 +149,10 @@ namespace BusinessLayer
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Marknadschef";
+                        unitOfWork.AnvändarRepository.Update(användare);
                     }
                     användare.RollID.BehörighetID.Add(användarBehörighet);
+                    unitOfWork.Save();
                 }
                 else if (användare.UserType == 8) //Inloggad som VD
                 {
@@ -144,8 +160,10 @@ namespace BusinessLayer
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "VD";
+                        unitOfWork.AnvändarRepository.Update(användare);
                     }
                     användare.RollID.BehörighetID.Add(användarBehörighet);
+                    unitOfWork.Save();
                 }
             }
         }

@@ -92,7 +92,12 @@ namespace BusinessLayer
 
             
             float moms = (float)(0.2 * pris);
-            float totalpris = (pris+moms);//ska hämta priset för allt som tillhör fakturan
+            int avbeställningsskydd = 0;
+            if (kundensBokning.Återbetalningsskydd.Equals(true))
+            {
+                avbeställningsskydd = 300;
+            }
+            float totalpris = (pris+moms+avbeställningsskydd);//ska hämta priset för allt som tillhör fakturan
             Faktura faktura= new Faktura(fakturadatum, totalpris, moms, kundensBokning);
             
             unitOfWork.FakturaRepository.Add(faktura);

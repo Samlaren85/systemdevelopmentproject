@@ -20,7 +20,9 @@ namespace SkiResortSystem
     {
         public App()
         {
-            
+            CultureInfo.CurrentCulture = new CultureInfo("sv-SE", false);
+            CultureInfo.CurrentUICulture = new CultureInfo("sv-SE", false);
+            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(System.Windows.Markup.XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
             Startup += (s, e) => //ta bort denna sen
             {
                 WindowService.RegisterWindow<LoginViewModel, LoginWindow>();
@@ -30,8 +32,6 @@ namespace SkiResortSystem
                 WindowService.RegisterWindow<ActivityOverviewViewModel, ActivityOverview>();
                 WindowService.RegisterWindow<EquipmentOverviewViewModel, EquipmentOverview>();
                 WindowService.RegisterWindow<BillOverviewViewModel, BillOverview>();
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("sv-SE");
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo("sv-SE");
             };
         }
     }

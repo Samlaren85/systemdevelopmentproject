@@ -199,23 +199,23 @@ namespace DataLayer
 
             if (!Aktiviteter.Any())
             {
-                Grupplektion grönMO = new Grupplektion("Grön", 400, 10);
+                Grupplektion grönMO = new Grupplektion("Grön", 400, 15);
                 Grupplektioner.Add(grönMO);
-                Grupplektion blåMO = new Grupplektion("Blå", 415, 10);
+                Grupplektion blåMO = new Grupplektion("Blå", 415, 15);
                 Grupplektioner.Add(blåMO);
-                Grupplektion rödMO = new Grupplektion("Röd", 425, 10);
+                Grupplektion rödMO = new Grupplektion("Röd", 425, 15);
                 Grupplektioner.Add(rödMO);
-                Grupplektion svartMO = new Grupplektion("Svart", 455, 10);
+                Grupplektion svartMO = new Grupplektion("Svart", 455, 15);
                 Grupplektioner.Add(svartMO);
-                Grupplektion grönTF = new Grupplektion("Grön", 500, 10);
+                Grupplektion grönTF = new Grupplektion("Grön", 500, 15);
                 Grupplektioner.Add(grönTF);
-                Grupplektion blåTF = new Grupplektion("Blå", 515, 10);
+                Grupplektion blåTF = new Grupplektion("Blå", 515, 15);
                 Grupplektioner.Add(blåTF);
-                Grupplektion rödTF = new Grupplektion("Röd", 525, 10);
+                Grupplektion rödTF = new Grupplektion("Röd", 525, 15);
                 Grupplektioner.Add(rödTF);
-                Grupplektion svartTF = new Grupplektion("Svart", 555, 10);
+                Grupplektion svartTF = new Grupplektion("Svart", 555, 15);
                 Grupplektioner.Add(svartTF);
-                Privatlektion priv = new Privatlektion(5, 375);
+                Privatlektion priv = new Privatlektion(2, 375);
                 Privatlektioner.Add(priv);
                 Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 27, 23, 59, 59)));
                 Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 28, 00, 00, 00), new DateTime(2023, 11, 28, 23, 59, 59)));

@@ -107,11 +107,11 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private float prisPerNatt;
-        public float PrisPerNatt
+        private float varavMoms;
+        public float VaravMoms
         {
-            get { return prisPerNatt; }
-            set { prisPerNatt = value; OnPropertyChanged(); }
+            get { return varavMoms; }
+            set { varavMoms = value; OnPropertyChanged(); }
         }
 
         private float totalpris;
@@ -422,15 +422,7 @@ namespace SkiResortSystem.ViewModels
                 Totalpris += ((float)Math.Round(f.FacilitetsPris.Pris, 2) * AntalNätter);
             }
             Totalpris = (float)Math.Round(Totalpris, 2);
-            if (AntalNätter == 0)
-            {
-                PrisPerNatt = 0;
-            }
-            else
-            {
-                PrisPerNatt = Totalpris / AntalNätter;
-                PrisPerNatt = (float)Math.Round(PrisPerNatt, 2);
-            }
+            VaravMoms = (float)Math.Round(Totalpris*0.2, 2);
             string Benämning = string.Empty;
             foreach(Facilitet f in  bokning.FacilitetID)
             {
@@ -504,8 +496,8 @@ namespace SkiResortSystem.ViewModels
             }
             uppdateraBokning = false;
             Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2) * AntalNätter;
-            PrisPerNatt = Valdfacilitet.FacilitetsPris.Pris;
-            PrisPerNatt = (float)Math.Round(PrisPerNatt, 2);
+            VaravMoms = Valdfacilitet.FacilitetsPris.Pris;
+            VaravMoms = (float)Math.Round(VaravMoms, 2);
             
 
 

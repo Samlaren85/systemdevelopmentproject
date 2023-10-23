@@ -51,9 +51,9 @@
 
         <TextBlock Text="Antal personer" Canvas.Left="550" Canvas.Top="394"/>
 
-        <TextBlock Text="Pris/natt" Canvas.Left="383" Canvas.Top="489" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Canvas.Left="550" Canvas.Top="494" HorizontalAlignment="Left" VerticalAlignment="Top"><Run Language="sv-se" Text="V"/><Run Text="arav "/><Run Language="sv-se" Text="m"/><Run Text="oms"/></TextBlock>
 
-        <TextBlock Text="Totalpris" Canvas.Left="559" Canvas.Top="489" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Text="Totalpris" Canvas.Left="386" Canvas.Top="494" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
         <TextBox Text="{Binding KundPresentation}" Canvas.Left="383" IsReadOnly="True" Canvas.Top="238" Width="297" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
@@ -65,8 +65,8 @@
 
         <TextBox Text="{Binding Facilitetstyp}" Canvas.Left="383" IsReadOnly="True" Canvas.Top="429" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" />
         <TextBox Text="{Binding AntalPersoner}" IsReadOnly="{Binding AntalPersonerReadOnly}" HorizontalAlignment="Left" Canvas.Left="550" Canvas.Top="429" VerticalAlignment="Top" Width="130"/>
-        <TextBox Text="{Binding PrisPerNatt}" Canvas.Left="383" Canvas.Top="519" Width="150" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding Totalpris}" Canvas.Left="550" IsReadOnly="True" Canvas.Top="519" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding VaravMoms}" Canvas.Left="550" Canvas.Top="524" Width="150" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Totalpris}" Canvas.Left="383" IsReadOnly="True" Canvas.Top="524" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 
 

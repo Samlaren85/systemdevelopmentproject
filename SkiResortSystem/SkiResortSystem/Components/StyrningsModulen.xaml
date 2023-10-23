@@ -30,7 +30,7 @@
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
- 
+
             </TabItem.Style>
             <Canvas>
                 <TextBlock Text="STATISTIK" Canvas.Left="80" Canvas.Top="70" FontWeight="Bold"/>

@@ -62,7 +62,7 @@ namespace SkiResortSystem.ViewModels
             {
                 foreach (Aktivitetsbokning ab in booking.AktivitetRef)
                 {
-                    if (TypeOfActivity == null || ab.Aktivitetsref.Typ.Contains(TypeOfActivity))
+                    if (TypeOfActivity == null || ab.Aktivitetsref.Typ.Contains(TypeOfActivity) && ((ActivityDate == null || ab.Aktivitetsref.Skidskola.VaraktighetFrån.Equals(ActivityDate)) && (ActivityEndDate == null || ab.Aktivitetsref.Skidskola.VaraktighetTill.Equals(ActivityEndDate))))
                         searchActivities.Add(ab);
                 }
             }
@@ -141,12 +141,9 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 if (selectedActivityCustomer == value) return;
-
-
+                selectedActivityCustomer = value;
                 if (value != null)
                 {
-                    selectedActivityCustomer = value;
-
                     SearchActivityCustomer = selectedActivityCustomer.ToString().Split(" (")[0];
                 }
                 OnPropertyChanged();
@@ -265,7 +262,7 @@ namespace SkiResortSystem.ViewModels
                         {
                             foreach (Bokning b in SelectedActivityCustomer.BokningsRef)
                             {
-                                if ((ActivityDate == null || b.Ankomsttid == ActivityDate) && (ActivityEndDate == null || b.Avresetid == ActivityEndDate))
+                                if ((ActivityDate == null || b.Ankomsttid <= ActivityDate) && (ActivityEndDate == null || b.Avresetid >= ActivityEndDate))
                                 {
                                     Aktivitetsbokningar = new ObservableCollection<Aktivitetsbokning>(SearchBookedActivities(b));
                                 }

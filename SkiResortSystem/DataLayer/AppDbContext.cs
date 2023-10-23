@@ -74,12 +74,24 @@ namespace DataLayer
             {
                 Roller.Add(new Roll("Admin", new List<Behörighet>()));
                 Roller.Add(new Roll("Receptionist", new List<Behörighet>()));
+                Roller.Add(new Roll("Skidshopspersonal", new List<Behörighet>()));
+                Roller.Add(new Roll("Ekonomianställd", new List<Behörighet>()));
+                Roller.Add(new Roll("Avdelningschef", new List<Behörighet>()));
+                Roller.Add(new Roll("Ekonomichef", new List<Behörighet>()));
+                Roller.Add(new Roll("Marknadschef", new List<Behörighet>()));
+                Roller.Add(new Roll("VD", new List<Behörighet>()));
                 SaveChanges();
             }
             if (!Användare.Any()) 
             {
                 Användare.Add(new Användare("1", 1, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL001"))));
                 Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL002"))));
+                Användare.Add(new Användare("3", 3, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL003"))));
+                Användare.Add(new Användare("4", 4, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL004"))));
+                Användare.Add(new Användare("5", 5, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL005"))));
+                Användare.Add(new Användare("6", 6, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL006"))));
+                Användare.Add(new Användare("7", 7, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL007"))));
+                Användare.Add(new Användare("8", 8, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL008"))));
                 SaveChanges();
             }
 
@@ -217,19 +229,19 @@ namespace DataLayer
                 Grupplektioner.Add(svartTF);
                 Privatlektion priv = new Privatlektion(2, 375);
                 Privatlektioner.Add(priv);
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 27, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 28, 00, 00, 00), new DateTime(2023, 11, 28, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 29, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 11, 30, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 12, 01, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 27), new DateTime(2023, 11, 27)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 28), new DateTime(2023, 11, 28)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 29), new DateTime(2023, 11, 29)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 30), new DateTime(2023, 11, 30)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 12, 01), new DateTime(2023, 12, 01)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
                 SaveChanges();
                 foreach (Skidskola skola in Skidskolor)
                 {

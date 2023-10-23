@@ -186,8 +186,8 @@ namespace SkiResortSystem.ViewModels
 
             else if (UtrustningBeläggningradiobutton)
             {
-                //EquipmentController ec = new EquipmentController();
-                //VisaBeläggning = ec.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod);
+                EquipmentController ec = new EquipmentController();
+                VisaBeläggning = ec.VisaBeläggningen(BeläggningAnkomsttid, BeläggningDatumperiod);
             }
 
             else if (Aktivitetbeläggningradiobutton)

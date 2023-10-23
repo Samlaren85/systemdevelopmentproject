@@ -287,7 +287,16 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// skapar bokning 
+        /// </summary>
+        /// <param name="ankomsttid"></param>
+        /// <param name="avresetid"></param>
+        /// <param name="användareID"></param>
+        /// <param name="kundID"></param>
+        /// <param name="facilitetID"></param>
+        /// <param name="antalPersoner"></param>
+        /// <returns></returns>
         public Bokning SkapaBokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, string antalPersoner)
         {
             BookingController bc = new BookingController();
@@ -295,6 +304,9 @@ namespace SkiResortSystem.ViewModels
             return b;
         }
 
+        /// <summary>
+        /// spara bpkning till databasen, antingen sparas för första gången eller uppdateras vid ändring i bokning
+        /// </summary>
         private ICommand saveCustomer = null!;
 
         public ICommand SaveCustomer => saveCustomer ??= saveCustomer = new RelayCommand<ICloseable>((view) =>
@@ -338,7 +350,9 @@ namespace SkiResortSystem.ViewModels
             }
             
         });
-
+        /// <summary>
+        /// Tar bort bokning som skapats men inte sparats i databasen
+        /// </summary>
         private ICommand stängTabort = null!;
 
         public ICommand StängTabort => stängTabort ??= stängTabort = new RelayCommand<ICloseable>((view) =>
@@ -348,6 +362,9 @@ namespace SkiResortSystem.ViewModels
 
         });
 
+        /// <summary>
+        /// Makiulerar bokning 
+        /// </summary>
         private ICommand stängTabortÄndra = null!;
 
         public ICommand StängTabortÄndra => stängTabortÄndra ??= stängTabortÄndra = new RelayCommand<ICloseable>((view) =>
@@ -366,14 +383,17 @@ namespace SkiResortSystem.ViewModels
 
         });
 
+        /// <summary>
+        /// checkar in bokning
+        /// </summary>
         private ICommand checkaIn = null!;
         public ICommand CheckaIn => checkaIn ??= checkaIn = new RelayCommand<ICloseable>((view) =>
         {
-            if(CheckaUtReadOnly == false)
-            {
-                MessageBoxResult responsif = MessageBox.Show($"Du måste ha checkat in eller vara {Bokning.Avresetid} för att kunna CHECKA UT");
+            //if(CheckaUtReadOnly == false)
+            //{
+            //    MessageBoxResult responsif = MessageBox.Show($"Du måste ha checkat in eller vara {Bokning.Avresetid} för att kunna CHECKA UT");
 
-            }
+            //}
             BookingController bc = new BookingController();
             Bokning.Bokningsstatus = Status.Incheckad;
             bc.UppdateraBokning(Bokning);
@@ -381,6 +401,9 @@ namespace SkiResortSystem.ViewModels
             CloseCommand.Execute(view);
         });
 
+        /// <summary>
+        /// checkar ut bokning
+        /// </summary>
         private ICommand checkaUt = null!;
         public ICommand CheckaUt => checkaUt ??= checkaUt = new RelayCommand<ICloseable>((view) =>
         {
@@ -392,7 +415,9 @@ namespace SkiResortSystem.ViewModels
 
         });
 
-
+        /// <summary>
+        /// stänger fönster
+        /// </summary>
         private ICommand closeCommand = null!;
 
         public ICommand CloseCommand => closeCommand ??= closeCommand = new RelayCommand<ICloseable>((view) =>
@@ -406,6 +431,10 @@ namespace SkiResortSystem.ViewModels
         {
 
         }
+        /// <summary>
+        /// konstruktor som kör vid hantering/ändring av bokning
+        /// </summary>
+        /// <param name="bokning"></param>
         public BookingOverviewViewModel(Bokning bokning)
         {
             Bokningsnummer = bokning.BokningsID;
@@ -419,12 +448,25 @@ namespace SkiResortSystem.ViewModels
             Avbetalningsskydd = bokning.Återbetalningsskydd;
             foreach(Facilitet f in bokning.FacilitetID)
             {
-                Totalpris += ((float)Math.Round(f.FacilitetsPris.Pris, 2) * AntalNätter);
+                if (AntalNätter == 0 && f.FacilitetsPris.BokningTyp == "Tim")
+                {
+                    AntalTimmar = tidsspann.Hours;
+                    Totalpris = (float)Math.Round(f.FacilitetsPris.Pris, 2) * AntalTimmar;
+
+                }
+                else if (AntalNätter == 0)
+                {
+                    Totalpris = (float)Math.Round(f.FacilitetsPris.Pris, 2);
+
+                }
+                else
+                {
+                    Totalpris = (float)Math.Round(f.FacilitetsPris.Pris, 2) * AntalNätter;
+                }
             }
-            Totalpris = (float)Math.Round(Totalpris, 2);
             VaravMoms = (float)Math.Round(Totalpris*0.2, 2);
             string Benämning = string.Empty;
-            foreach(Facilitet f in  bokning.FacilitetID)
+            foreach (Facilitet f in  bokning.FacilitetID)
             {
 
                 if(f.LägenhetsID != null)
@@ -482,6 +524,14 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+        /// <summary>
+        /// Kundstruktor som körs när en bokning skapas, sparas först till databasen när man klickar på sparaknappen
+        /// </summary>
+        /// <param name="ValdKund"></param>
+        /// <param name="Valdfacilitet"></param>
+        /// <param name="Valdavresetid"></param>
+        /// <param name="Valdankomsttid"></param>
+        /// <param name="ValdaAntalPersoner"></param>
         public BookingOverviewViewModel(Kund ValdKund, Facilitet Valdfacilitet, DateTime Valdavresetid, DateTime Valdankomsttid, string ValdaAntalPersoner)
         { 
             Kund = ValdKund;
@@ -490,13 +540,23 @@ namespace SkiResortSystem.ViewModels
             Avresa = Valdavresetid;
             TimeSpan tidsspann = Avresa - Ankomst;
             AntalNätter = tidsspann.Days;
-            if(AntalNätter == 0)
+            uppdateraBokning = false;
+            if (AntalNätter == 0 && Valdfacilitet.FacilitetsPris.BokningTyp == "Tim")
             {
                 AntalTimmar = tidsspann.Hours;
+                Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2) * AntalTimmar;
+
             }
-            uppdateraBokning = false;
-            Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2) * AntalNätter;
-            VaravMoms = Valdfacilitet.FacilitetsPris.Pris;
+            else if(AntalNätter == 0)
+            {
+                Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2);
+
+            }
+            else
+            {
+                Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2) * AntalNätter;
+            }
+            VaravMoms = (float)(Totalpris * 0.2);
             VaravMoms = (float)Math.Round(VaravMoms, 2);
             
 
@@ -509,13 +569,15 @@ namespace SkiResortSystem.ViewModels
             {
                 Facilitetstyp = "Campingplats, " + Valdfacilitet.CampingID.CampingBenämning;
             }
-            if (Valdfacilitet.KonferensID != null)
+            if (Valdfacilitet.KonferensID != null && Valdfacilitet.FacilitetsPris.BokningTyp != "Tim")
+            {
+                Facilitetstyp = "Konferenssal, " + Valdfacilitet.KonferensID.KonferensBenämning;
+            }
+            if (Valdfacilitet.KonferensID != null && Valdfacilitet.FacilitetsPris.BokningTyp == "Tim")
             {
                 Facilitetstyp = "Konferenssal, " + Valdfacilitet.KonferensID.KonferensBenämning;
                 GömNätter = Visibility.Collapsed;
                 VisaTid = Visibility.Visible;
-                
-
             }
             List<Facilitet> BokadFacilitet = new List<Facilitet>
             {

@@ -185,6 +185,7 @@ namespace SkiResortSystem.ViewModels
                     ActivityBookingResults = SearchBookings(searchActivityBooking, null, null);
                     if (searchActivityBooking == string.Empty)
                     {
+                        SelectedActivityBooking = null;
                         ActivityBookingResults = new List<Bokning>();
                     }
                     if (ActivityBookingResults.Count > 0)

@@ -20,9 +20,13 @@ namespace SkiResortSystem
     {
         public App()
         {
+            
+            //Sätter CurrentCulture så att datum visas på svenska i appikationen
             CultureInfo.CurrentCulture = new CultureInfo("sv-SE", false);
             CultureInfo.CurrentUICulture = new CultureInfo("sv-SE", false);
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(System.Windows.Markup.XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+            
+            // Laddar ett uppslagsverk med fönster och dras ViewModeler så att programmet kan hantera öppning och stängning av fönster
             Startup += (s, e) => //ta bort denna sen
             {
                 WindowService.RegisterWindow<LoginViewModel, LoginWindow>();

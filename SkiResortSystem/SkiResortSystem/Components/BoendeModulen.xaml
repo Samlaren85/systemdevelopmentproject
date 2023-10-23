@@ -105,8 +105,8 @@
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="NAMN" Width="230"  Binding="{Binding KundID}" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="ANKOMSTDATUM" Binding="{Binding Ankomsttid}" Width="*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="AVRESEDATUM" Binding="{Binding Avresetid}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="ANKOMSTDATUM" Binding="{Binding Ankomsttid, StringFormat=yyyy-MM-dd}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="AVRESEDATUM" Binding="{Binding Avresetid, StringFormat=yyyy-MM-dd}" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="BOKNINGSNUMMER" Binding="{Binding BokningsID}" Width="*"></DataGridTextColumn>
                         <DataGridTextColumn Header="STATUS" Binding="{Binding Bokningsstatus}" Width="*"></DataGridTextColumn>
                     </DataGrid.Columns>

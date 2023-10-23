@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              mc:Ignorable="d" Height="1026" Width="2127" FontFamily="Candara" >
-
+    
     <TabControl Width="auto" TabStripPlacement="Left" Background="#FFA6C3E4" >
 
         <TabControl.Resources>
@@ -17,7 +17,9 @@
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontSize" Value="18"/>
             </Style>
-
+            
+            <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            
 
         </TabControl.Resources>
 
@@ -46,11 +48,11 @@
 
 
                 </DataGrid>
-                <Button Content="LÄGG TILL FÖRETAGSKUND" Height="50" Width="240" HorizontalAlignment="Left"  Margin="933,108,0,0" VerticalAlignment="Top" Command="{Binding CustomerCompanyOverview}" Click="Button_Click">
+                <Button Visibility="{Binding IsCurrentUserMarketingManager, Converter={StaticResource BooleanToVisibilityConverter}}" Content="LÄGG TILL FÖRETAGSKUND" Height="50" Width="240" HorizontalAlignment="Left"  Margin="933,108,0,0" VerticalAlignment="Top" Command="{Binding CustomerCompanyOverview}" Click="Button_Click">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn ="{StaticResource {x:Type Button}}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding MarketingManager}">
+                                <DataTrigger Binding="{Binding MarketingManager}" Value="true">
                                     <Setter Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
 

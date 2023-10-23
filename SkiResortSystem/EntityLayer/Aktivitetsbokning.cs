@@ -11,6 +11,7 @@ namespace EntityLayer
     {
         [Key]
         public int AktivitetsbokningsID { get; set; }
+        public Status AktivitetsStatus { get; set; }
         public Bokning Bokningsref { get; set; }
         public Aktivitet Aktivitetsref { get; set; }
         public float TotalPris => Aktivitetsref.Skidskola.Pris * Antal;
@@ -24,6 +25,7 @@ namespace EntityLayer
             Bokningsref = bokning;
             Aktivitetsref = aktivitet;
             Antal = antal;
+            AktivitetsStatus = Status.Kommande;
         }
     }
 }

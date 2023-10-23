@@ -541,16 +541,24 @@ namespace SkiResortSystem.ViewModels
         public ICommand HandOutEquipment =>
             handOutEquipment ??= handOutEquipment = new RelayCommand(() =>
             {
-                SelectedPickupReturn.Utrustningsstatus = Status.Utlämnad;
-                OnPropertyChanged(nameof(CurrentEquipment));
+                if (SelectedPickupReturn != null && SelectedPickupReturn.Utrustningsstatus == Status.Kommande && SelectedPickupReturn.Hämtasut == DateTime.Today)
+                {
+                    SelectedPickupReturn.Utrustningsstatus = Status.Utlämnad;
+                    OnPropertyChanged(nameof(CurrentEquipment));
+                    CurrentEquipment = SearchPickupReturn(reportDate);
+                }
             });
         
         private ICommand recieveEquipment;
         public ICommand RecieveEquipment =>
             recieveEquipment ??= recieveEquipment = new RelayCommand(() =>
             {
-                SelectedPickupReturn.Utrustningsstatus = Status.Inrapporterad;
-                OnPropertyChanged(nameof(CurrentEquipment));
+                if (SelectedPickupReturn != null && SelectedPickupReturn.Utrustningsstatus == Status.Utlämnad && SelectedPickupReturn.Lämnasin == DateTime.Today)
+                {
+                    SelectedPickupReturn.Utrustningsstatus = Status.Inrapporterad;
+                    OnPropertyChanged(nameof(CurrentEquipment));
+                    CurrentEquipment = SearchPickupReturn(reportDate);
+                }
             });
     }
 }

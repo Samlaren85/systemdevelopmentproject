@@ -32,6 +32,18 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+        private bool createBillSelected;
+        public bool CreateBillSelected
+        {
+            get { return createBillSelected; }
+            set
+            {
+                createBillSelected = value;
+                if (createBillSelected) FetchFaktura.Execute(true);
+                OnPropertyChanged();
+            }
+        }
+
         private Bokning skapandeAvFakturor { get; set; }
         public Bokning SkapandeAvFakturor 
         {
@@ -155,7 +167,7 @@ namespace SkiResortSystem.ViewModels
                 {
                     ec.CreateFaktura(SkapandeAvFakturor);
                     HämtadeBokningarAttFakturera = new List<Bokning>();
-
+                    FetchFaktura.Execute(true);
                 }
             }
             );

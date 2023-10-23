@@ -22,17 +22,17 @@
 
             <Canvas Height="auto" Width="1760">
 
-                <TextBlock Text="Sök BOKNING" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBlock Text="SÖK BOENDEBOKNING" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox TabIndex="1" ItemsSource="{Binding ActivityBookingResults}" SelectedItem="{Binding SelectedActivityBooking}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox TabIndex="0" Background="White"  Text="{Binding SearchActivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <DataGrid Width="908" Height="345"  ItemsSource="{Binding Aktivitetsbokningar, Mode=TwoWay}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="TYP" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="AKTIVITET" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="ANTAL LEDIGA PLATSER" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="BOKAT ANTAL" Width="*" Binding="{Binding Antal}"  IsReadOnly="False">
+                        <DataGridTextColumn Header="ANTAL DELTAGARE" Width="*" Binding="{Binding Antal}"  IsReadOnly="False">
 
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
@@ -111,7 +111,7 @@
 
             <Canvas Height="auto" Width="1760">
 
-                <TextBlock Text="SÖK BOKNING" Canvas.Left="80" Canvas.Top="76"/>
+                <TextBlock Text="SÖK BOENDEBOKNING" Canvas.Left="80" Canvas.Top="76"/>
                 <ComboBox ItemsSource="{Binding SearchEquipmentOrderResults}" SelectedItem="{Binding SelectedEquipmentOrder}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchEquipmentOrder, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -217,8 +217,8 @@
                         <DataGridTextColumn Header="STATUS " Width="*" Binding="{Binding Utrustningsstatus}" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="Rapportera in utrustning" Height="40" Canvas.Left="784" Canvas.Top="568" Command="{Binding RecieveEquipment}" RenderTransformOrigin="1.311,2.576" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Button Content="Lämna ut utrustning" Height="40" Canvas.Left="573" Canvas.Top="568" Command="{Binding HandOutEquipment}" RenderTransformOrigin="1.311,2.576" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Content="RAPPORTERA IN UTRUSTNING" Height="40" Canvas.Left="784" Canvas.Top="568" Command="{Binding RecieveEquipment}" RenderTransformOrigin="1.311,2.576" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Content="LÄMNA UT UTRUSTNING" Height="40" Canvas.Left="573" Canvas.Top="568" Command="{Binding HandOutEquipment}" RenderTransformOrigin="1.311,2.576" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
         </TabItem>
 

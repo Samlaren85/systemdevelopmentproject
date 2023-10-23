@@ -532,13 +532,15 @@ namespace SkiResortSystem.ViewModels
             {
                 Facilitetstyp = "Campingplats, " + Valdfacilitet.CampingID.CampingBenämning;
             }
+            if (Valdfacilitet.KonferensID != null && Valdfacilitet.FacilitetsPris.BokningTyp != "Tim")
+            {
+                Facilitetstyp = "Konferenssal, " + Valdfacilitet.KonferensID.KonferensBenämning;
+            }
             if (Valdfacilitet.KonferensID != null && Valdfacilitet.FacilitetsPris.BokningTyp == "Tim")
             {
                 Facilitetstyp = "Konferenssal, " + Valdfacilitet.KonferensID.KonferensBenämning;
                 GömNätter = Visibility.Collapsed;
                 VisaTid = Visibility.Visible;
-                
-
             }
             List<Facilitet> BokadFacilitet = new List<Facilitet>
             {

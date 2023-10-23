@@ -382,6 +382,7 @@ namespace SkiResortSystem.ViewModels
             get { return facilitetsSökning; }
             set { facilitetsSökning = value; OnPropertyChanged(); }
         }
+      
 
         private ICommand sökLedigaFaciliteter = null!;
 
@@ -404,10 +405,15 @@ namespace SkiResortSystem.ViewModels
             }
             else if (Konferensradiobutton == false)
             {
+                
                 if ((Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday) &&
                     (Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday))
                 {
                     ErrorMessage2 = "Ankomst- och avresedatum måste vara en fredag eller en söndag";
+                }
+                else if (Ankomsttid < DateTime.Now || Avresetid < DateTime.Now)
+                {
+                    ErrorMessage2 = "Ankomst- och avresedatum måst vara senare än dagens datum";
                 }
                 else if (Ankomsttid.DayOfWeek == DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday)
                 {
@@ -449,6 +455,14 @@ namespace SkiResortSystem.ViewModels
                             {
                                 ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
                             }
+                            else
+                            {
+                                TimeSpan t = Avresetid - Ankomsttid;
+                                foreach (Facilitet f in FacilitetsSökning)
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
+                                    }
+                            }
                         }
                         else
                         {
@@ -467,6 +481,32 @@ namespace SkiResortSystem.ViewModels
                             {
                                 ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
                             }
+                            else
+                            {
+                                TimeSpan t = Avresetid - Ankomsttid;
+                                TimeSpan h = SelectedTimeTill - SelectedTimeFrån;
+                                if (t.Days == 0 && h.Hours <= 5)
+                                {
+                                    foreach (Facilitet f in FacilitetsSökning)
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * h.Hours;
+                                    }
+                                }
+                                else if (t.Days == 1)
+                                {
+                                    foreach (Facilitet f in FacilitetsSökning)
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris;
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (Facilitet f in FacilitetsSökning)
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
+                                    }
+                                }
+                            }
                         }
                         else
                         {
@@ -483,6 +523,32 @@ namespace SkiResortSystem.ViewModels
                             if (FacilitetsSökning.Count() < 1)
                             {
                                 ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
+                            }
+                            else
+                            {
+                                TimeSpan t = Avresetid - Ankomsttid;
+                                TimeSpan h = SelectedTimeTill - SelectedTimeFrån;
+                                if (t.Days == 0 && h.Hours <= 5)
+                                {
+                                    foreach (Facilitet f in FacilitetsSökning)
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * h.Hours;
+                                    }
+                                }
+                                else if (t.Days == 1)
+                                {
+                                    foreach (Facilitet f in FacilitetsSökning)
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris;
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (Facilitet f in FacilitetsSökning)
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
+                                    }
+                                }
                             }
 
                         }

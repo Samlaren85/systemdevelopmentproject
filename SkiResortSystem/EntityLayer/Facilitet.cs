@@ -25,7 +25,8 @@ namespace EntityLayer
             { facilitetID = value; }
         }
 
-
+        [NotMapped]
+        public float TotalprisFörPresentationIBoendeModul { get; set; }
 
         public List<Bokning>? BokningsRef { get; set; }
         //FACILITETSPRIS SKA GÖRAS TIDSBESTÄMT

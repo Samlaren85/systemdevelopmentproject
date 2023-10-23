@@ -85,33 +85,13 @@
 
 
                         </DataGridTextColumn>
-
-                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding FacilitetsPris.Pris}"/>
+                        <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding TotalprisFörPresentationIBoendeModul}"/>
+                        <!--<DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding FacilitetsPris.Pris}"/>-->
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="Antal personer" Canvas.Left="866" Canvas.Top="114" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
-            <!--<DataGrid Background="#FFA6C3E4" Width="800" Height="400" Margin="67,223,893,371" BorderBrush="Black" BorderThickness="2"
-                    ItemsSource="{Binding SearchResults}" SelectedItem="{Binding Path=SelectCustomer}" 
-                    IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False">
-                        <DataGrid.InputBindings>
-                            <MouseBinding
-                    MouseAction="LeftDoubleClick"
-                    Command="{Binding DoubleClickCustomerCommand}"/>
-                        </DataGrid.InputBindings>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Person-/Org.nummer" Width="*" Binding="{Binding KundID}"/>
-                            <DataGridTextColumn Header="Namn" Width="*" Binding="{Binding}"/>
-                            <DataGridTextColumn Header="Telefonnummer" Width="*" Binding="{Binding Telefonnummer}"/>
-                            <DataGridTextColumn Header="E-post" Width="*" Binding="{Binding Epost}"/>
-                        </DataGrid.Columns>
-            </DataGrid>
-            <Button Content="Lägg till företagskund" Height="50" Width="220" HorizontalAlignment="Left" Margin="647,36,0,0" VerticalAlignment="Top" Command="{Binding CustomerCompanyOverview}"/>
-            <Button Content="Lägg till privatkund" Height="50" Width="220" HorizontalAlignment="Left" Margin="647,128,0,0" VerticalAlignment="Top" Command="{Binding CustomerPrivateOverview}"/>-->
-
-
-
-
+           
 
         </TabItem>
 

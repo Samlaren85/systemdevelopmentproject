@@ -243,12 +243,12 @@ namespace SkiResortSystem.ViewModels
             {
                 if (selectCustomer.Privatkund != null)
                 {
-                    CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel(SelectCustomer);
+                    CustomerOverviewPrivateViewModel kundöversikt = new CustomerOverviewPrivateViewModel(SelectCustomer, IsCurrentUserMarketingManager);
                     windowService.ShowDialog(kundöversikt);
                 }
                 else if (selectCustomer.Företagskund != null)
                 {
-                    CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel(SelectCustomer);
+                    CustomerOverviewCompanyViewModel kundöversikt = new CustomerOverviewCompanyViewModel(SelectCustomer, IsCurrentUserMarketingManager);
                     windowService.ShowDialog(kundöversikt);
                 }
             });

@@ -9,7 +9,23 @@ namespace EntityLayer
     {
         [Key]
         public string UserID { get; set; }
-        public string Password { get; set; }
+        private string password;
+        public string Password
+        {
+            get { return password; }
+            set
+            {
+                if (value != null)
+                {
+                    if (value.Any(ch => char.IsLetterOrDigit(ch) && value.Any(ch => char.IsAsciiLetterUpper(ch)) && value.Any(ch => char.IsAsciiLetterLower(ch)) && value.Any(ch => char.IsAsciiDigit(ch))))
+                    {
+                        password = value;
+                    }
+                    else throw new InvalidOperationException("Lösenordet måste innehålla minst ett specialtecken, en stor bokstav, en liten bokstav och en siffra!");
+                }
+                else throw new InvalidOperationException("Lösenordet måste vara satt på användaren!");
+            }
+        }
 
         private int _userTypeValue;
         public Roll RollID { get; set; }

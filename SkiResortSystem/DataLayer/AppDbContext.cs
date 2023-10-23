@@ -84,14 +84,14 @@ namespace DataLayer
             }
             if (!Användare.Any()) 
             {
-                Användare.Add(new Användare("1", 1, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL001"))));
+                Användare.Add(new Användare("@dm1n1stratoR", 1, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL001"))));
                 Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL002"))));
-                Användare.Add(new Användare("3", 3, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL003"))));
-                Användare.Add(new Användare("4", 4, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL004"))));
-                Användare.Add(new Användare("5", 5, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL005"))));
-                Användare.Add(new Användare("6", 6, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL006"))));
-                Användare.Add(new Användare("7", 7, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL007"))));
-                Användare.Add(new Användare("8", 8, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL008"))));
+                Användare.Add(new Användare("P@ssword1234", 3, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL003"))));
+                Användare.Add(new Användare("P@ssword1234", 4, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL004"))));
+                Användare.Add(new Användare("P@ssword1234", 5, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL005"))));
+                Användare.Add(new Användare("P@ssword1234", 6, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL006"))));
+                Användare.Add(new Användare("P@ssword1234", 7, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL007"))));
+                Användare.Add(new Användare("P@ssword1234", 8, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL008"))));
                 SaveChanges();
             }
 
@@ -252,7 +252,7 @@ namespace DataLayer
             //FUNGERAR INTE ATT SEEDA UTRUSTNING ÄNNU!!!!
             if (!Utrustningar.Any())
             {
-                for (int i = 0; i < 176; i++)
+                for (int i = 0; i < 175; i++)
                 {
                     if (i < 6) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "90"));
                     else if (i < 15) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "100"));
@@ -293,7 +293,7 @@ namespace DataLayer
                     else if (i < 249) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "46"));
                     else Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "47"));
                 }
-                for (int i = 0; i < 176; i++)
+                for (int i = 0; i < 175; i++)
                 {
                     if (i < 6) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "90"));
                     else if (i < 15) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "100"));
@@ -334,7 +334,7 @@ namespace DataLayer
                     else if (i < 249) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "46"));
                     else Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "47"));
                 }
-                for (int i = 0; i < 86; i++)
+                for (int i = 0; i < 85; i++)
                 {
                     if (i < 8) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "120"));
                     else if (i < 18) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "130"));

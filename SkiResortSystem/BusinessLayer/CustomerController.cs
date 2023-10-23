@@ -37,14 +37,6 @@ namespace BusinessLayer
             unitOfWork.Save();
             return customer;
         }
-        public Kund AddPrivateCustomer(Kund newCustomer)
-        {
-
-            unitOfWork.PrivatkundRepository.Add(newCustomer.Privatkund);
-            unitOfWork.KundRepository.Add(newCustomer);
-            unitOfWork.Save();
-            return newCustomer;
-        }
 
         /// <summary>
         /// Lägger till en företagskund i databasen
@@ -66,14 +58,7 @@ namespace BusinessLayer
             unitOfWork.Save();
             return customer;
         }
-        public Kund AddCompanyCustomer(Kund newCustomer)
-        {
-
-            unitOfWork.FöretagskundRepository.Add(newCustomer.Företagskund);
-            unitOfWork.KundRepository.Add(newCustomer);
-            unitOfWork.Save();
-            return newCustomer;
-        }
+ 
         /// <summary>
         /// Ändrar en vald kund i databasen om den hittas
         /// </summary>
@@ -86,19 +71,54 @@ namespace BusinessLayer
             return done;
         }
         /// <summary>
-        /// Tar bort en kund ur databasen
+        /// Tar bort en kund ur databasen om kunden inte har obetalda fakturor eller kommande bokningar.
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
         public bool RemoveCustomer(Kund customer)
         {
-            bool done = unitOfWork.KundRepository.Remove(customer);
-            if (done) unitOfWork.Save();
+            bool go = true;
+            bool done = false;
+            if (customer.BokningsRef != null)
+            {
+                foreach (Bokning b in customer.BokningsRef)
+                {
+                    if (b.Bokningsstatus != Status.Makulerad)
+                    {
+                        foreach (Faktura f in b.Fakturaref)
+                        {
+                            if (f.Fakturastatus == Status.Obetald)
+                            {
+                                go = false;
+                                throw new Exception("Kunden har obetalda fakturor,\nkontrollera med ekonomi innan kunden kan tas bort!");
+                            }
+                        }
+                        if (b.Bokningsstatus == Status.Kommande)
+                        {
+                            go = false;
+                            throw new Exception("Kunden har kommande bokningar,\n makulera dessa innan kunden kan tas bort");
+                        }
+                    }
+                }
+            }
+            if (go)
+            { 
+                foreach (Bokning b in customer.BokningsRef)
+                {
+                    b.KundID = unitOfWork.KundRepository.FirstOrDefault(k => k.KundID == "00000000-0000");
+                }
+                done = unitOfWork.KundRepository.Remove(customer);
+                if (done) unitOfWork.Save();
+            }
             return done;
         }
 
 
-        //TEST IFALL SÖKNING AV KUND FUNGERAR 
+        /// <summary>
+        /// Söker kund i databasen
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
         public List<Kund> SearchCustomers(string searchTerm)
         {
 

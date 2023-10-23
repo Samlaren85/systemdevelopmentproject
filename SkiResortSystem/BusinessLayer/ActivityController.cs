@@ -1,11 +1,6 @@
 ﻿using DataLayer;
 using EntityLayer;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLayer
 {
@@ -17,11 +12,22 @@ namespace BusinessLayer
             unitOfWork = new UnitOfWork();
         }
 
+        /// <summary>
+        /// Söker efter Skidskolor som ligger inom ett datumspann
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
         public IList<Aktivitet> FindSkiSchool(DateTime? from, DateTime? to)
         {
-            return unitOfWork.AktivitetRepository.Find(a => a.Skidskola.VaraktighetFrån >= from && a.Skidskola.VaraktighetTill <= to, x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);
+            return unitOfWork.AktivitetRepository.Find(a => (from == null || a.Skidskola.VaraktighetFrån >= from) && (to == null || a.Skidskola.VaraktighetTill <= to), x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);
         }
 
+        /// <summary>
+        /// Sparar ändringar på existerande objekt eller lägger till saknade objekt i databasen.
+        /// </summary>
+        /// <param name="ab"></param>
+        /// <exception cref="Exception"></exception>
         public void SaveAktivityBooking(Aktivitetsbokning ab)
         {
            
@@ -60,6 +66,11 @@ namespace BusinessLayer
             }
         }
 
+        /// <summary>
+        /// Tilldelar statusen makulerad till aktivitetsbokningen.
+        /// </summary>
+        /// <param name="ab"></param>
+        /// <returns></returns>
         public bool RemoveAktivityBooking(Aktivitetsbokning ab)
         {
             bool done;
@@ -67,7 +78,8 @@ namespace BusinessLayer
             {
                 ab.Aktivitetsref.Skidskola.AntalDeltagare -= ab.Antal;
                 ab.Bokningsref.UtnyttjadKredit -= ab.TotalPris;
-                done = unitOfWork.AktivitetsbokningsRepository.Remove(ab);
+                ab.AktivitetsStatus = Status.Makulerad;
+                done = true;
             } catch (Exception ex)
             {
                 done = false;
@@ -76,19 +88,39 @@ namespace BusinessLayer
             return done;
         }
 
+        /// <summary>
+        /// Söker alla aktivitetsbokningar som inte är makulerade med de angivna parametrarna.
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="typ"></param>
+        /// <returns></returns>
         public IList<Aktivitetsbokning> FindBookedActivities (DateTime? from, DateTime? to, string typ)
         {
             return unitOfWork.AktivitetsbokningsRepository.Find(ab => ((from == null || ab.Aktivitetsref.Skidskola.VaraktighetFrån.Equals(from)) &&
                                                                       (to == null || ab.Aktivitetsref.Skidskola.VaraktighetTill.Equals(to)) &&
                                                                       (typ == null || typ == string.Empty || ab.Aktivitetsref.Typ.Equals(typ))) &&
-                                                                      !ab.Bokningsref.Bokningsstatus.Equals(Status.Makulerad), x => x.Aktivitetsref, x => x.Aktivitetsref.Skidskola);
+                                                                      ab.AktivitetsStatus != Status.Makulerad, x => x.Aktivitetsref, x => x.Aktivitetsref.Skidskola);
         }
 
+        /// <summary>
+        /// Söker efter Skidskolor som ligger inom ett datumspann och av en viss typ
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="typ"></param>
+        /// <returns></returns>
         public IList<Aktivitet> FindSkiSchool(DateTime from, DateTime to, string typ)
         {
             return unitOfWork.AktivitetRepository.Find(a => a.Skidskola.VaraktighetFrån >= from && a.Skidskola.VaraktighetTill <= to && a.Typ.Contains(typ), x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);
         }
 
+        /// <summary>
+        /// Visar beläggningsstatistik för aktiviteter.
+        /// </summary>
+        /// <param name="franDatum"></param>
+        /// <param name="tillDatum"></param>
+        /// <returns></returns>
         public IList<List<string>> VisaBeläggningen(DateTime franDatum, DateTime tillDatum)
         {
             List<Aktivitet> inaktuellaFaciliteter = new List<Aktivitet>(); // Används som hjälp för filtrering
@@ -154,7 +186,6 @@ namespace BusinessLayer
         }
         /// <summary>
         /// Om BokningsRef == null VID datum så läggs objektet till på samtliga platser(uppräkningen sker alltså) annars tas inte uppräkning med på de platser där värdet är annat än NULL
-        /// 
         /// </summary>
         /// <param name="Lista"></param>
         /// <param name="datum"></param>

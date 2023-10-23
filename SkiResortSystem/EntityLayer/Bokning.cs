@@ -55,7 +55,7 @@ namespace EntityLayer
         public Kund KundID { get; set; }
 
         public ICollection<Facilitet> FacilitetID { get; set; }
-        
+
         public ICollection<Utrustningsbokning>? UtrustningRef { get; set; }
 
         public ICollection<Aktivitetsbokning>? AktivitetRef{ get; set; }

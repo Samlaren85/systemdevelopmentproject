@@ -107,11 +107,11 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private float prisPerNatt;
-        public float PrisPerNatt
+        private float varavMoms;
+        public float VaravMoms
         {
-            get { return prisPerNatt; }
-            set { prisPerNatt = value; OnPropertyChanged(); }
+            get { return varavMoms; }
+            set { varavMoms = value; OnPropertyChanged(); }
         }
 
         private float totalpris;
@@ -317,6 +317,18 @@ namespace SkiResortSystem.ViewModels
             {
                     
                 Bokning.Återbetalningsskydd = Avbetalningsskydd;
+                //
+
+                //FRÅGA BOBBAN OM DETTA SKA EJ LÄGGAS TILL FÖR VARJE UTAN BARA + 300 i bokningen totalt.
+
+                //
+                //if(Avbetalningsskydd == true)
+                //{
+                //    foreach(Facilitet f in Bokning.FacilitetID)
+                //    {
+                //        f.FacilitetsPris.Pris = f.FacilitetsPris.Pris + 300;
+                //    }
+                //}
                 Bokning.Bokningsstatus = Status.Kommande;
                 bc.SparaBokning(Bokning);
                 MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
@@ -407,18 +419,10 @@ namespace SkiResortSystem.ViewModels
             Avbetalningsskydd = bokning.Återbetalningsskydd;
             foreach(Facilitet f in bokning.FacilitetID)
             {
-                Totalpris += (float)Math.Round(f.Facilitetspris, 2);
+                Totalpris += ((float)Math.Round(f.FacilitetsPris.Pris, 2) * AntalNätter);
             }
             Totalpris = (float)Math.Round(Totalpris, 2);
-            if (AntalNätter == 0)
-            {
-                PrisPerNatt = 0;
-            }
-            else
-            {
-                PrisPerNatt = Totalpris / AntalNätter;
-                PrisPerNatt = (float)Math.Round(PrisPerNatt, 2);
-            }
+            VaravMoms = (float)Math.Round(Totalpris*0.2, 2);
             string Benämning = string.Empty;
             foreach(Facilitet f in  bokning.FacilitetID)
             {
@@ -478,7 +482,7 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        public BookingOverviewViewModel(Kund ValdKund, Facilitet Valdfacilitet, DateTime Valdavresetid, DateTime Valdankomsttid, string ValdaAntalPersoner,float Facilitetspris)
+        public BookingOverviewViewModel(Kund ValdKund, Facilitet Valdfacilitet, DateTime Valdavresetid, DateTime Valdankomsttid, string ValdaAntalPersoner)
         { 
             Kund = ValdKund;
             AntalPersoner = ValdaAntalPersoner;
@@ -486,18 +490,15 @@ namespace SkiResortSystem.ViewModels
             Avresa = Valdavresetid;
             TimeSpan tidsspann = Avresa - Ankomst;
             AntalNätter = tidsspann.Days;
-            AntalTimmar = tidsspann.Hours;
-            Totalpris = (float)Math.Round(Facilitetspris, 2);
-            uppdateraBokning = false; 
-            if (AntalNätter == 0 || AntalTimmar == 0)
+            if(AntalNätter == 0)
             {
-                PrisPerNatt = 0;
+                AntalTimmar = tidsspann.Hours;
             }
-            else
-            {
-                PrisPerNatt = Totalpris / AntalNätter;
-                PrisPerNatt = (float)Math.Round(PrisPerNatt, 2);
-            }
+            uppdateraBokning = false;
+            Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2) * AntalNätter;
+            VaravMoms = Valdfacilitet.FacilitetsPris.Pris;
+            VaravMoms = (float)Math.Round(VaravMoms, 2);
+            
 
 
             if (Valdfacilitet.LägenhetsID != null)

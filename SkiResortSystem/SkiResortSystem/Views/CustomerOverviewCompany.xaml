@@ -111,23 +111,25 @@
 
         <TextBox Text="{Binding Rabatt}" Canvas.Left="154" Canvas.Top="566" Width="166" IsReadOnly="{Binding RabattReadOnly}">
 
-            <TextBox.Style>
-                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding MarketingManager}">
-                            <Setter Property="IsReadOnly" Value="False"/>
-                        </DataTrigger>
-                    </Style.Triggers>
+        <TextBox.Style>
+            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding MarketingManager}">
+                        <Setter Property="IsReadOnly" Value="False"/>
+                    </DataTrigger>
+                </Style.Triggers>
 
 
-                </Style>
+            </Style>
 
-            </TextBox.Style>
+        </TextBox.Style>
 
         </TextBox>
-        
 
-        <TextBox Text="{Binding Kreditgräns}" Canvas.Left="375" Canvas.Top="566" Width="179" IsReadOnly="{Binding KreditReadOnly}" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+
+        <TextBox Text="{Binding Kreditgräns}" Canvas.Left="375" Canvas.Top="566" Width="179" IsReadOnly="{Binding KreditReadOnly}">
+            
             <TextBox.Style>
                 <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                     <Style.Triggers>

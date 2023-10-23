@@ -1,17 +1,211 @@
-﻿using EntityLayer;
+﻿using BusinessLayer;
+using EntityLayer;
+using Microsoft.VisualBasic;
 using SkiResortSystem.Commands;
+using SkiResortSystem.Components;
 using SkiResortSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace SkiResortSystem.ViewModels
 {
-    public partial class MainViewModel:ObservableObject
+    public partial class MainViewModel : ObservableObject
     {
+
+        private string searchEquipmentOrder;
+        public string SearchEquipmentOrder
+        {
+            get { return searchEquipmentOrder; }
+            set
+            {
+                searchEquipmentOrder = value;
+                EquipmentOrderError = string.Empty;
+
+                SearchEquipmentOrderResults = SearchBookings(searchEquipmentOrder, null, null);
+                if (searchEquipmentOrder == string.Empty)
+                {
+                    Utrustningsbokningsrader = new ObservableCollection<Utrustningsbokningsrad>();
+                    OnPropertyChanged(nameof(Utrustningsbokningsrader));
+                    SelectedEquipmentOrder = null;
+                    SearchEquipmentOrderResults = new List<Bokning>();
+                }
+                if (SearchEquipmentOrderResults.Count > 0)
+                {
+                    ÖppnaDropDown = true;
+                }
+                if (SearchEquipmentOrderResults.Count <= 0 || SearchEquipmentOrder == "")
+                {
+                    SelectedEquipmentOrder = null;
+                    ÖppnaDropDown = false;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        private string equipmentOrderError;
+        public string EquipmentOrderError
+        {
+            get { return equipmentOrderError; }
+            set
+            {
+                equipmentOrderError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private IList<Bokning> searchEquipmentOrderResults = new List<Bokning>();
+        public IList<Bokning> SearchEquipmentOrderResults
+        {
+            get { return searchEquipmentOrderResults; }
+            set
+            {
+                searchEquipmentOrderResults = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Bokning? selectedEquipmentOrder;
+        public Bokning? SelectedEquipmentOrder
+        {
+            get { return selectedEquipmentOrder; }
+            set
+            {
+                if (selectedEquipmentOrder == value) return;
+
+
+                if (value != null)
+                {
+                    EquipmentController equipmentController = new EquipmentController();
+                    selectedEquipmentOrder = value;
+                    Equipmentlist = equipmentController.FindTillgängligUtrustning(selectedEquipmentOrder.Ankomsttid, selectedEquipmentOrder.Avresetid, null);
+                    List<string> EquipmentType = new List<string>();
+                    foreach (IGrouping<string, Utrustning> group in Equipmentlist.GroupBy(e => e.UtrustningsBenämning))
+                    {
+                        EquipmentType.Add(group.Key);
+                    }
+                    Utrustningsbokningsrader = new ObservableCollection<Utrustningsbokningsrad>() { new Utrustningsbokningsrad() { TypAvUtrustning = EquipmentType[0], TypAvUtrustningar = EquipmentType, FrånDatum = selectedEquipmentOrder.Ankomsttid, TillDatum = selectedEquipmentOrder.Avresetid } };
+                    OnPropertyChanged(nameof(Utrustningsbokningsrader));
+                    SearchEquipmentOrder = selectedEquipmentOrder.ToString().Split(" (")[0];
+
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        private IList<Utrustning> equipmentlist;
+        public IList<Utrustning> Equipmentlist
+        {
+            get { return equipmentlist; }
+            set
+            {
+                equipmentlist = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Utrustningsbokningsrad> Utrustningsbokningsrader { get; set; }
+
+        public void PopulateSizeList()
+        {
+            SizeList.Clear();
+            if (selectedEquipment.TypAvUtrustning != string.Empty)
+            {
+                foreach (IGrouping<string, string> group in Equipmentlist.GroupBy(e => e.UtrustningsBenämning, e => e.Storlek))
+                {
+                    if (group.Key.Equals(selectedEquipment.TypAvUtrustning))
+                    {
+                        foreach (string stl in group)
+                        {
+                            bool found = false;
+                            foreach (Size size in SizeList)
+                            {
+                                if (size.Storlek.Equals(stl))
+                                {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (!found || !SizeList.Any()) SizeList.Add(new Size(stl));
+                        }
+                    }
+                }
+                OnPropertyChanged(nameof(SizeList));
+            }
+        }
+
+        private Utrustningsbokningsrad selectedEquipment;
+        public Utrustningsbokningsrad SelectedEquipment
+        {
+            get { return selectedEquipment; }
+            set
+            {
+                selectedEquipment = value;
+                SelectionError = string.Empty;
+                if (selectedEquipment != null)
+                {
+                    PopulateSizeList();
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public ObservableCollection<Size> SizeList { get; set; } = new ObservableCollection<Size>();
+
+        private DateTime fromDate;
+        public DateTime FromDate
+        {
+            get { return fromDate; }
+            set
+            {
+                if (value >= SelectedEquipmentOrder.Avresetid || value < SelectedEquipmentOrder.Ankomsttid)
+                {
+                    ErrorDate = "Fråndatumet måste ligga inom tidsspannet för bokningen";
+                    fromDate = SelectedEquipmentOrder.Ankomsttid;
+                }
+                else
+                {
+                    fromDate = value;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime toDate;
+        public DateTime ToDate
+        {
+            get { return toDate; }
+            set
+            {
+                if (value >= SelectedEquipmentOrder.Avresetid || value < SelectedEquipmentOrder.Ankomsttid)
+                {
+                    ErrorDate = "Tilldatumet måste ligga inom tidsspannet för bokningen";
+                    toDate = SelectedEquipmentOrder.Avresetid;
+                }
+                else
+                {
+                    toDate = value;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        private string errorDate;
+        public string ErrorDate
+        {
+            get { return errorDate; }
+            set
+            {
+                errorDate = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string searchEquipmentCustomer;
         public string SearchEquipmentCustomer
         {
@@ -80,92 +274,34 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        private IList<Utrustning> equipmentlist;
-        public IList<Utrustning> Equipmentlist
+        private DateTime? fetchDate;
+        public DateTime? FetchDate
         {
-            get { return equipmentlist; }
+            get { return fetchDate; }
             set
             {
-                equipmentlist = value;
+                fetchDate = value;
+                OnPropertyChanged();
+            }
+        }
+        private DateTime? returnDate;
+        public DateTime? ReturnDate
+        {
+            get { return returnDate; }
+            set
+            {
+                returnDate = value;
                 OnPropertyChanged();
             }
         }
 
-        private IList<Utrustning> sizeList;
-        public IList<Utrustning> SizeList
+        private string typeOfEquipment;
+        public string TypeOfEquipment
         {
-            get { return sizeList; }
+            get { return typeOfEquipment; }
             set
             {
-                sizeList = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string searchEquipmentOrder;
-        public string SearchEquipmentOrder
-        {
-            get { return searchEquipmentOrder; }
-            set
-            {
-                searchEquipmentOrder = value;
-                EquipmentOrderError = string.Empty;
-                SearchEquipmentOrderResults = SearchBookings(searchEquipmentOrder,null,null);
-                if (searchEquipmentOrder == string.Empty)
-                {
-                    SelectedEquipmentOrder = null;
-                    SearchEquipmentOrderResults = new List<Bokning>();
-                }
-                if (SearchEquipmentOrderResults.Count > 0)
-                {
-                    ÖppnaDropDown = true;
-                }
-                if (SearchEquipmentOrderResults.Count <= 0 || SearchEquipmentOrder == "")
-                {
-                    SelectedEquipmentOrder = null;
-                    ÖppnaDropDown = false;
-                }
-                OnPropertyChanged();
-            }
-        }
-
-        private string equipmentOrderError;
-        public string EquipmentOrderError
-        {
-            get { return equipmentOrderError; }
-            set
-            {
-                equipmentOrderError = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private IList<Bokning> searchEquipmentOrderResults = new List<Bokning>();
-        public IList<Bokning> SearchEquipmentOrderResults
-        {
-            get { return searchEquipmentOrderResults; }
-            set
-            {
-                searchEquipmentOrderResults = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private Bokning? selectedEquipmentOrder;
-        public Bokning? SelectedEquipmentOrder
-        {
-            get { return selectedEquipmentOrder; }
-            set
-            {
-                if (selectedEquipmentOrder == value) return;
-
-
-                if (value != null)
-                {
-                    selectedEquipmentOrder = value;
-
-                    SearchEquipmentOrder = selectedEquipmentOrder.ToString().Split(" (")[0];
-                }
+                typeOfEquipment = value;
                 OnPropertyChanged();
             }
         }
@@ -188,12 +324,19 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 reportDate = value;
+                CurrentEquipment = SearchPickupReturn(reportDate);
                 OnPropertyChanged();
             }
         }
 
-        private IList<Utrustning> currentEquipment;
-        public IList<Utrustning> CurrentEquipment
+        public IList<Utrustningsbokning> SearchPickupReturn(DateTime? reportDate)
+        {
+            EquipmentController equipmentController = new EquipmentController();
+            return equipmentController.FindUtrustningsbokningar(reportDate, reportDate);
+        }
+
+        private IList<Utrustningsbokning> currentEquipment;
+        public IList<Utrustningsbokning> CurrentEquipment
         {
             get { return currentEquipment; }
             set
@@ -203,32 +346,219 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+        private Utrustningsbokning selectedPickupReturn;
+        public Utrustningsbokning SelectedPickupReturn
+        {
+            get { return selectedPickupReturn; }
+            set
+            {
+                selectedPickupReturn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string selectionError;
+        public string SelectionError
+        {
+            get { return selectionError; }
+            set
+            {
+                selectionError = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Size sizeItem;
+        public Size SizeItem
+        {
+            get { return sizeItem; }
+            set
+            {
+                sizeItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Utrustningsbokning> Utrustningsbokningar { get; set; } = new ObservableCollection<Utrustningsbokning>();
+
+        private Utrustningsbokning selectedEquipmentbooking;
+        public Utrustningsbokning SelectedEquipmentbooking 
+        { 
+            get { return selectedEquipmentbooking; }
+            set
+            {
+                selectedEquipmentbooking = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool pickupReturn;
+        public bool PickupReturn
+        {
+            get { return pickupReturn; }
+            set
+            {
+                pickupReturn = value;
+                ReportDate = DateTime.Today;
+                OnPropertyChanged();
+            }
+        }
+
+        private ICommand addEquipmentRow;
+        public ICommand AddEquipmentRow =>
+            addEquipmentRow ??= addEquipmentRow = new RelayCommand(() =>
+            {
+                List<string> EquipmentType = new List<string>();
+                foreach (IGrouping<string, Utrustning> group in Equipmentlist.GroupBy(e => e.UtrustningsBenämning))
+                {
+                    EquipmentType.Add(group.Key);
+                }
+                if (SelectedEquipment != null)
+                {
+                    Utrustningsbokningsrader.Insert(Utrustningsbokningsrader.IndexOf(SelectedEquipment) + 1, new Utrustningsbokningsrad() { TypAvUtrustning = EquipmentType[0], TypAvUtrustningar = EquipmentType, FrånDatum = selectedEquipmentOrder.Ankomsttid, TillDatum = selectedEquipmentOrder.Avresetid });
+                }
+                else
+                {
+                    Utrustningsbokningsrader.Add(new Utrustningsbokningsrad() { TypAvUtrustning = EquipmentType[0], TypAvUtrustningar = EquipmentType, FrånDatum = selectedEquipmentOrder.Ankomsttid, TillDatum = selectedEquipmentOrder.Avresetid });
+                }
+                OnPropertyChanged(nameof(Utrustningsbokningsrader));
+            });
+
+        private ICommand removeEquipmentRow;
+        public ICommand RemoveEquipmentRow =>
+            removeEquipmentRow ??= removeEquipmentRow = new RelayCommand(() =>
+            {
+                if (SelectedEquipment != null)
+                    Utrustningsbokningsrader.Remove(SelectedEquipment);
+                else SelectionError = "Du måste markera en rad i listan först";
+                OnPropertyChanged(nameof(Utrustningsbokningsrader));
+            });
+
+        private ICommand addSizeSelection;
+        public ICommand AddSizeSelection =>
+            addSizeSelection ??= addSizeSelection = new RelayCommand(() =>
+            {
+                if (SizeItem != null && SelectedEquipment != null)
+                {
+                    SizeItem.Antal += 1;
+                    if (SelectedEquipment.Storlekar == null) SelectedEquipment.Storlekar = new List<string>();
+                    SelectedEquipment.Storlekar.Add(SizeItem.Storlek);
+                    SelectedEquipment.Antal += 1;
+                    SelectedEquipment.Pris += Equipmentlist.FirstOrDefault(e => e.UtrustningsBenämning.Equals(SelectedEquipment.TypAvUtrustning)).Pris;
+                    OnPropertyChanged(nameof(SelectedEquipment));
+                    OnPropertyChanged(nameof(Utrustningsbokningsrader));
+                }
+            });
+
+        private ICommand removeSizeSelection;
+        public ICommand RemoveSizeSelection =>
+            removeSizeSelection ??= removeSizeSelection = new RelayCommand(() =>
+            {
+                if (SizeItem != null && SelectedEquipment != null && SelectedEquipment.Storlekar.Contains(SizeItem.Storlek))
+                {
+                    SizeItem.Antal -= 1;
+                    SelectedEquipment.Storlekar.Remove(SizeItem.Storlek);
+                    SelectedEquipment.Antal -= 1;
+                    SelectedEquipment.Pris -= Equipmentlist.FirstOrDefault(e => e.UtrustningsBenämning.Equals(SelectedEquipment.TypAvUtrustning)).Pris;
+                    OnPropertyChanged(nameof(SelectedEquipment));
+                    OnPropertyChanged(nameof(Utrustningsbokningsrader));
+                }
+            });
+
         private ICommand bookEquipment;
         public ICommand BookEquipment =>
             bookEquipment ??= bookEquipment = new RelayCommand(() =>
             {
-
+                EquipmentController controller = new EquipmentController();
+                List<Utrustningsbokning> bokningar = new List<Utrustningsbokning>();
+                foreach (Utrustningsbokningsrad ur in Utrustningsbokningsrader)
+                {
+                    foreach (string stl in ur.Storlekar)
+                    {
+                        Utrustning utrustning = controller.FindUtrustning(ur.TypAvUtrustning, stl);
+                        bokningar.Add(controller.CreateUtrustningsbokning(utrustning, ur.FrånDatum, ur.TillDatum, SelectedEquipmentOrder));
+                    }
+                }
+                EquipmentOverviewViewModel equipmentOverviewViewModel = new EquipmentOverviewViewModel(bokningar, SelectedEquipmentOrder);
+                windowService.Show(equipmentOverviewViewModel);
+                SelectedEquipmentOrder = null;
+                SearchEquipmentOrder = string.Empty;
             });
 
         private ICommand searchEquipment;
         public ICommand SearchEquipment =>
             searchEquipment ??= searchEquipment = new RelayCommand(() =>
             {
+                try
+                {
+                    EquipmentController equipmentController = new EquipmentController();
+                    EquipmentCustomerError = string.Empty;
+                    Utrustningsbokningar = new ObservableCollection<Utrustningsbokning>();
+                    if (SelectedEquipmentCustomer != null && SelectedEquipmentCustomer.BokningsRef != null)
+                    {
+                        foreach (Bokning b in SelectedEquipmentCustomer.BokningsRef)
+                        {
+                            if ((FetchDate == null || b.Ankomsttid >= FetchDate) && (ReturnDate == null || b.Avresetid <= ReturnDate) && b.UtrustningRef != null)
+                            {
+                                foreach (Utrustningsbokning utr in b.UtrustningRef)
+                                {
+                                    if ((FetchDate == null || utr.Hämtasut == FetchDate) && (ReturnDate == null || utr.Lämnasin == ReturnDate) && (TypeOfEquipment == null || utr.Utrustning.UtrustningsBenämning.Equals(TypeOfEquipment)))
+                                    {
+                                        Utrustningsbokningar.Add(utr);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (FetchDate != null || ReturnDate != null)
+                        {
+                            Utrustningsbokningar = new ObservableCollection<Utrustningsbokning>(equipmentController.FindUtrustningsbokningar(FetchDate, ReturnDate, TypeOfActivity));
+                        }
+                        else
+                        {
+                            EquipmentCustomerError = "Någon parameter måste vara angiven innan sökning";
+                        }
+                    }
+                    OnPropertyChanged(nameof(Utrustningsbokningar));
+                }
+                catch
+                {
+                    EquipmentCustomerError = "Hittade ingen bokad utrustning";
+                }
+            });
 
-            }); 
-        
+        private ICommand doubleClickEquipmentCommand;
+        public ICommand DoubleClickEquipmentCommand =>
+            doubleClickEquipmentCommand ??= doubleClickEquipmentCommand = new RelayCommand(() =>
+                {
+                    EquipmentOverviewViewModel equipmentOverview = new EquipmentOverviewViewModel(SelectedEquipmentbooking.Bokning.UtrustningRef.Where(u => u.Bokning.Equals(SelectedEquipmentbooking.Bokning)).ToList(), SelectedEquipmentbooking.Bokning);
+                    windowService.Show(equipmentOverview);
+                });
+
         private ICommand handOutEquipment;
         public ICommand HandOutEquipment =>
             handOutEquipment ??= handOutEquipment = new RelayCommand(() =>
             {
-
+                if (SelectedPickupReturn != null && SelectedPickupReturn.Utrustningsstatus == Status.Kommande && SelectedPickupReturn.Hämtasut == DateTime.Today)
+                {
+                    SelectedPickupReturn.Utrustningsstatus = Status.Utlämnad;
+                    OnPropertyChanged(nameof(CurrentEquipment));
+                    CurrentEquipment = SearchPickupReturn(reportDate);
+                }
             });
         
         private ICommand recieveEquipment;
         public ICommand RecieveEquipment =>
             recieveEquipment ??= recieveEquipment = new RelayCommand(() =>
             {
-
+                if (SelectedPickupReturn != null && SelectedPickupReturn.Utrustningsstatus == Status.Utlämnad && SelectedPickupReturn.Lämnasin == DateTime.Today)
+                {
+                    SelectedPickupReturn.Utrustningsstatus = Status.Inrapporterad;
+                    OnPropertyChanged(nameof(CurrentEquipment));
+                    CurrentEquipment = SearchPickupReturn(reportDate);
+                }
             });
     }
 }

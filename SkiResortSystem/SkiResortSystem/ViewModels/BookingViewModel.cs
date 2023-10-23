@@ -407,7 +407,7 @@ namespace SkiResortSystem.ViewModels
                 if ((Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday) &&
                     (Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday))
                 {
-                    ErrorMessage2 = "Ankomst- och avrese´datum måste vara en fredag eller en söndag";
+                    ErrorMessage2 = "Ankomst- och avresedatum måste vara en fredag eller en söndag";
                 }
                 else if (Ankomsttid.DayOfWeek == DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday)
                 {

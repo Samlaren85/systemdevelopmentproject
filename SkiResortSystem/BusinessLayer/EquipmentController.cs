@@ -73,7 +73,7 @@ namespace BusinessLayer
         /// <returns></returns>
         public IList<Utrustningsbokning> FindUtrustningsbokningar(DateTime? fetchDate, DateTime? returnDate, string typAvUtrustning = null!)
         {
-            return unitOfWork.UtrustningsbokningsRepository.Find(u => ((fetchDate == null || u.Lämnasin <= fetchDate) && (returnDate == null || u.Hämtasut >= returnDate) || (typAvUtrustning == null || typAvUtrustning == string.Empty || u.Utrustning.UtrustningsBenämning.Contains(typAvUtrustning))) && u.Utrustningsstatus != Status.Makulerad);
+            return unitOfWork.UtrustningsbokningsRepository.Find(u => ((fetchDate == null || u.Hämtasut == fetchDate) && (returnDate == null || u.Lämnasin == returnDate) && (typAvUtrustning == null || typAvUtrustning == string.Empty || u.Utrustning.UtrustningsBenämning.Contains(typAvUtrustning))) && u.Utrustningsstatus != Status.Makulerad);
         }
        
         /// <summary>

@@ -329,10 +329,25 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+        private int selectedFetchOrReturn;
+        public int SelectedFetchOrReturn
+        {
+            get { return selectedFetchOrReturn; }
+            set
+            {
+                selectedFetchOrReturn = value;
+                CurrentEquipment = SearchPickupReturn(reportDate);
+                OnPropertyChanged();
+            }
+        }
+
         public IList<Utrustningsbokning> SearchPickupReturn(DateTime? reportDate)
         {
             EquipmentController equipmentController = new EquipmentController();
-            return equipmentController.FindUtrustningsbokningar(reportDate, reportDate);
+            IList<Utrustningsbokning> utr;
+            if (SelectedFetchOrReturn == 0) utr = equipmentController.FindUtrustningsbokningar(reportDate, null);
+            else utr = equipmentController.FindUtrustningsbokningar(null, reportDate);
+            return utr;
         }
 
         private IList<Utrustningsbokning> currentEquipment;
@@ -529,6 +544,9 @@ namespace SkiResortSystem.ViewModels
                 }
             });
 
+        /// <summary>
+        /// När man dubbelklickar på Utrustningstabellen öppnas översikten så man kan redigera sin order
+        /// </summary>
         private ICommand doubleClickEquipmentCommand;
         public ICommand DoubleClickEquipmentCommand =>
             doubleClickEquipmentCommand ??= doubleClickEquipmentCommand = new RelayCommand(() =>

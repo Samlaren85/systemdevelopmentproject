@@ -217,19 +217,19 @@ namespace DataLayer
                 Grupplektioner.Add(svartTF);
                 Privatlektion priv = new Privatlektion(2, 375);
                 Privatlektioner.Add(priv);
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 27, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 28, 00, 00, 00), new DateTime(2023, 11, 28, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 29, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 11, 30, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 12, 01, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartMO, new DateTime(2023, 11, 27, 00, 00, 00), new DateTime(2023, 11, 29, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartTF, new DateTime(2023, 11, 30, 00, 00, 00), new DateTime(2023, 12, 01, 23, 59, 59)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 27), new DateTime(2023, 11, 27)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 28), new DateTime(2023, 11, 28)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 29), new DateTime(2023, 11, 29)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 30), new DateTime(2023, 11, 30)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 12, 01), new DateTime(2023, 12, 01)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
+                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
                 SaveChanges();
                 foreach (Skidskola skola in Skidskolor)
                 {

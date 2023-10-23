@@ -616,5 +616,48 @@ namespace SkiResortSystem.ViewModels
                 ErrorMessage3 = "Du behöver välja facilitetstyp";
             }
         });
+
+        #region Prislist tabben
+
+        private int prislistIndex;
+        public int PrislistIndex
+        {
+            get { return prislistIndex; }
+            set
+            {
+                prislistIndex = value;
+                switch (prislistIndex)
+                {
+                    case 1:
+                        PriceImgSource = "/Views/Images/Prislista boende.png";
+                        break;
+                    case 2:
+                        PriceImgSource = "/Views/Images/Prislista konferens.png";
+                        break;
+                    case 3:
+                        PriceImgSource = "/Views/Images/Priser aktivitet.png";
+                        break;
+                    case 4:
+                        PriceImgSource = "/Views/Images/Prislista utrustning.png";
+                        break;
+                     default:
+                        PriceImgSource = "/Views/Images/Logo.png";
+                        break;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        private string priceImgSource;
+        public string PriceImgSource
+        {
+            get { return priceImgSource; }
+            set
+            {
+                priceImgSource = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
     }
 }

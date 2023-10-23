@@ -286,6 +286,19 @@
             </Canvas>
 
         </TabItem>
+        <TabItem Header="PRISLISTA" Height="50" VerticalAlignment="Bottom">
+            <Canvas Margin="0,-3,0,3">
+                <TextBlock Text="VÄLJ PRISLISTA" Canvas.Left="93" Canvas.Top="70" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <ComboBox Width="149" Canvas.Left="93" Canvas.Top="97" SelectedIndex="{Binding PrislistIndex}">
+                    <ComboBoxItem Content="&lt;Välj prislista&gt;"/>
+                    <ComboBoxItem Content="Boende"/>
+                    <ComboBoxItem Content="Konferens"/>
+                    <ComboBoxItem Content="Aktivitet"/>
+                    <ComboBoxItem Content="Utrustning"/>
+                </ComboBox>
+                <Image Source="{Binding PriceImgSource}" Canvas.Left="93" Canvas.Top="137"/>
+            </Canvas>
+        </TabItem>
 
     </TabControl>
 </UserControl>

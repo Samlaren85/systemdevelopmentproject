@@ -504,7 +504,7 @@ namespace SkiResortSystem.ViewModels
             {
                 CheckaInReadOnly = true;
             }
-            if(Avresa == DateTime.Today && bokning.Bokningsstatus == Status.Incheckad && bokning.Bokningsstatus != Status.Utcheckad) 
+            if(Avresa.Date == DateTime.Today && bokning.Bokningsstatus == Status.Incheckad && bokning.Bokningsstatus != Status.Utcheckad) 
             {
                 CheckaUtReadOnly = true;
                 CheckaInReadOnly = false;

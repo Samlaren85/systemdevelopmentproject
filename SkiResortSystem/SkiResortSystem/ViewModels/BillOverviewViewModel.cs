@@ -79,14 +79,6 @@ namespace SkiResortSystem.ViewModels
                 CloseCommand.Execute(view);
             });
 
-
-        private ICommand skrivUtFaktura = null!;
-        public ICommand SkrivUtFaktura =>
-            skrivUtFaktura ??= skrivUtFaktura = new RelayCommand(() =>
-            {
-                CreatePDF.Run(Faktura);
-            });
-
         private ICommand closeCommand = null!;
         public ICommand CloseCommand =>
             closeCommand ??= closeCommand = new RelayCommand<ICloseable>((view) =>

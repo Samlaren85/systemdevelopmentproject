@@ -59,7 +59,7 @@
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="420" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="420" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                <Button Content="SKAPA" Canvas.Left="304" Canvas.Top="401" HorizontalAlignment="Left" VerticalAlignment="Top" Width="129" Height="46" />
+                <Button Content="SKAPA" Canvas.Left="304" Canvas.Top="401" HorizontalAlignment="Left" VerticalAlignment="Top" Width="129" Height="50"  />
 
             </Canvas>
 
@@ -74,7 +74,7 @@
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="195" Width="230" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="195" Width="205" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                <Button Content="Skapa" Canvas.Top="250" Canvas.Left="95" HorizontalAlignment="Center" VerticalAlignment="Top" Width="188" Height="45"/>
+                <Button Content="Skapa" Canvas.Top="250" Canvas.Left="95" HorizontalAlignment="Center" VerticalAlignment="Top" Width="188" Height="50" />
 
             </Canvas>
 

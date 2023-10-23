@@ -21,7 +21,7 @@
 
     </Window.Resources>
     <Canvas  Background="#FFA6C3E4" Height="1000" >
-        <TextBlock Text="Faktura" FontWeight="Bold" Canvas.Left="128" Canvas.Top="30" />
+        <TextBlock Text="Faktura" FontWeight="Bold" FontSize="20" Canvas.Left="128" Canvas.Top="30" />
         <TextBlock Text="{Binding PrivFöre}" Canvas.Left="128" Canvas.Top="125" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBlock Text="Namn" Canvas.Left="128" Canvas.Top="205" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBlock Text="Gatuadress" Canvas.Left="128" Canvas.Top="285" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -38,9 +38,9 @@
         <TextBox Text ="{Binding Path=Faktura.Förfallodatum}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="475" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox Text ="{Binding Path=Faktura.Totalpris}" IsReadOnly="True" Canvas.Left="128" Canvas.Top="555" Width="165" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-        <Button Content="Stäng" Height="50" Width="130" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555"/>
-        <Button Content="Makulera" Height="50" Width="130" Command="{Binding ArkiveraFaktura}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" />
-        <Button Content="Skriv ut" Height="50" Width="130" Command="{Binding SkrivUtFaktura}" Canvas.Left="990" Canvas.Top="555" />
+        <Button Content="STÄNG" Height="50" Width="130" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}" Canvas.Left="1145" Canvas.Top="555"/>
+        <Button Content="MAKULERA" Height="50" Width="130" Command="{Binding ArkiveraFaktura}" CommandParameter="{Binding ElementName=View}" Canvas.Left="835" Canvas.Top="555" />
+        <Button Content="SKRIV UT" Height="50" Width="130" Command="{Binding SkrivUtFaktura}" Canvas.Left="990" Canvas.Top="555" />
 
         <TextBlock Text="FAKTURAÖVERSIKT" Canvas.Left="1020" Canvas.Top="79" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
@@ -48,8 +48,8 @@
           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="552" Canvas.Top="130" HorizontalAlignment="Left" VerticalAlignment="Center">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Artikel" Width="2*" Binding="{Binding Artikel}"/>
-                <DataGridTextColumn Header="Pris" Width="*" Binding="{Binding Pris}"/>
+                <DataGridTextColumn Header="ARTIKEL" Width="2*" Binding="{Binding Artikel}"/>
+                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Pris}"/>
             </DataGrid.Columns>
         </DataGrid>
 

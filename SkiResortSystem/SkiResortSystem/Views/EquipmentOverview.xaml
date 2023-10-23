@@ -31,15 +31,23 @@
 
 
 
-        <DataGrid Background="White" Width="908" Height="430" BorderBrush="Black" BorderThickness="2" ItemsSource="{Binding Utrustningsbokningar}" SelectedItem="{Binding SelectedUtrustningsbokning}" 
+        <DataGrid Width="908" Height="430" ItemsSource="{Binding Utrustningsbokningar}" SelectedItem="{Binding SelectedUtrustningsbokning}" 
        CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="100" Canvas.Top="320" HorizontalAlignment="Left" VerticalAlignment="Top" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="UTRUSTNING" Width="*" Binding="{Binding Utrustning.UtrustningsBenämning}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="STORLEK" Width="*" Binding="{Binding Utrustning.Storlek}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="FRÅN" Width="*" Binding="{Binding Hämtasut}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="TILL" Width="*" Binding="{Binding Lämnasin}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="STORLEK" Width="80" Binding="{Binding Utrustning.Storlek}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="FRÅN" Width="200" Binding="{Binding Hämtasut}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="TILL" Width="Auto" Binding="{Binding Lämnasin}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Utrustning.Pris}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}" IsReadOnly="False">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                            <Setter Property="Background" Value="White"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                    
+                    
+                </DataGridTextColumn>
 
             </DataGrid.Columns>
         </DataGrid>
@@ -53,9 +61,9 @@
 
 
         <TextBlock Text="Uttnyttnjad kredit" Canvas.Left="1050" Canvas.Top="40" FontWeight="Bold"/>
-        <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="1050" Canvas.Top="80" Width="200" Height="50" >
-            <TextBlock Text="{Binding Path=Bokning.UtnyttjadKredit}" Height="Auto" TextAlignment="Center" Background="Transparent" />
-
+        
+        <Border BorderThickness="2" BorderBrush="Black" Canvas.Left="1050" Canvas.Top="80" Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" >
+            <TextBox Text="{Binding Path=Bokning.UtnyttjadKredit}" Height="Auto" TextAlignment="Center" Background="Transparent"  Margin="0,12,0,0" BorderThickness="0"  BorderBrush="Transparent" IsReadOnly="True" />
         </Border>
         
 

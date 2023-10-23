@@ -94,7 +94,7 @@ namespace SkiResortSystem.ViewModels
                     TimeSpan tid2 = SelectedTimeTill.TimeOfDay;
                     DateTime AvresetidMedTid = datum2 + tid2;
                     FacilitetsSökning = new List<Facilitet>();
-                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, AvresetidMedTid, AnkomsttidMedTid, antalPersonerTillBoende, Facilitetspriset);
+                    BookingOverviewViewModel bokningsöversikt = new BookingOverviewViewModel(SelectedCustomer, SelectedFacility, AvresetidMedTid, AnkomsttidMedTid, antalPersonerTillBoende);
                     windowService.ShowDialog(bokningsöversikt);
                 }
             });
@@ -270,7 +270,7 @@ namespace SkiResortSystem.ViewModels
             {
                 if (value != null)
                 {
-                    selectedFacility = value; Facilitetspriset = value.Facilitetspris * ((100 - SelectedCustomer.Rabatt) / 100);
+                    selectedFacility = value; Facilitetspriset = value.FacilitetsPris.Pris * ((100 - SelectedCustomer.Rabatt) / 100);
                     OnPropertyChanged();
                 }
             }
@@ -398,44 +398,44 @@ namespace SkiResortSystem.ViewModels
             {
                 ErrorMessage = "Du behöver välja kund!";
             }
-            if (Konferensradiobutton == true && SelectedTimeFrån > SelectedTimeTill)
+            if (Konferensradiobutton == true && SelectedTimeFrån > SelectedTimeTill && Ankomsttid !> Avresetid)
             {
-                ErrorMessage2 = "Tiden från måste varje tidigare än tiden till!";
+                ErrorMessage2 = "Tiden från måste vara tidigare än tiden till!";
             }
             else if (Konferensradiobutton == false)
             {
                 if ((Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday) &&
                     (Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday))
                 {
-                    ErrorMessage2 = "Ankomst- och avresetid måste vara en fredag eller en söndag";
+                    ErrorMessage2 = "Ankomst- och avrese´datum måste vara en fredag eller en söndag";
                 }
                 else if (Ankomsttid.DayOfWeek == DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday)
                 {
-                    ErrorMessage2 = "För vald ankomsttid måste avresetid vara en söndag";
+                    ErrorMessage2 = "För vald ankomstdatum måste avresedatum vara en söndag";
                 }
                 else if (Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday)
                 {
-                    ErrorMessage2 = "För vald ankomsttid måste avresetid vara en fredag eller en söndag";
+                    ErrorMessage2 = "För vald ankomstdatum måste avresedatum vara en fredag eller en söndag";
                 }
                 else if (Avresetid.DayOfWeek == DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday)
                 {
-                    ErrorMessage2 = "För vald avresetid måste ankomsttid vara en söndag";
+                    ErrorMessage2 = "För vald avresedatum måste ankomstdatum vara en söndag";
                 }
                 else if (Avresetid.DayOfWeek == DayOfWeek.Sunday && Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday)
                 {
-                    ErrorMessage2 = "För vald avresetid måste ankomst vara en fredag eller en söndag";
+                    ErrorMessage2 = "För vald avresedatum måste ankomst vara en fredag eller en söndag";
                 }
                 else if(bokningsLängd.Days > 6 && Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek == DayOfWeek.Friday)
                 {
-                    ErrorMessage2 = "Bokning Kortvecka får vara högst 6 dagar / 5 nätter";
+                    ErrorMessage2 = "Bokning Kortvecka får vara högst 5 nätter";
                 }
                 else if (bokningsLängd.Days > 2 && Ankomsttid.DayOfWeek == DayOfWeek.Friday && Avresetid.DayOfWeek == DayOfWeek.Sunday)
                 {
-                    ErrorMessage2 = "Bokning Weekend får vara högst 3 dagar / 2 nätter";
+                    ErrorMessage2 = "Bokning Weekend får vara högst 2 nätter";
                 }
                 else if (bokningsLängd.Days > 7 && Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek == DayOfWeek.Sunday)
                 {
-                    ErrorMessage2 = "Bokning Vecka får vara högst 8 dagar / 7 nätter";
+                    ErrorMessage2 = "Bokning Vecka får vara högst 7 nätter";
                 }
                 else
                 {

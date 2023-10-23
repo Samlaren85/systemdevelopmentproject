@@ -33,7 +33,7 @@
                         <DataGridTextColumn Header="FACILITETSNAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="LÄGG TILL " Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button Content="LÄGG TILL " Height="50"  Canvas.Left="856" Canvas.Top="101"  Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Canvas>
 
         </TabItem>
@@ -52,7 +52,7 @@
                         <DataGridTextColumn Header="AKTIVITETSNAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="LÄGG TILL" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button Content="LÄGG TILL" Canvas.Left="856" Height="50"  Canvas.Top="101"  Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Canvas>
 
 
@@ -73,7 +73,7 @@
                         
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="LÄGG TILL" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button Content="LÄGG TILL" Canvas.Left="856" Height="50"  Canvas.Top="101"  Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Canvas>
 
 
@@ -93,7 +93,7 @@
                         <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="LÄGG TILL" Canvas.Left="856" Canvas.Top="101" Height='45' Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button Content="LÄGG TILL" Height="50" Canvas.Left="856" Canvas.Top="101"  Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="130" HorizontalAlignment="Left" VerticalAlignment="Center" />
             </Canvas>
             
         </TabItem>

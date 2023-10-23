@@ -399,7 +399,7 @@ namespace SkiResortSystem.ViewModels
             {
                 ErrorMessage = "Du behöver välja kund!";
             }
-            if (Konferensradiobutton == true && SelectedTimeFrån > SelectedTimeTill && Ankomsttid !> Avresetid)
+            if (Konferensradiobutton == true && (SelectedTimeFrån > SelectedTimeTill && Ankomsttid == Avresetid))
             {
                 ErrorMessage2 = "Tiden från måste vara tidigare än tiden till!";
             }
@@ -407,7 +407,7 @@ namespace SkiResortSystem.ViewModels
             {
                 
                 if ((Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday) &&
-                    (Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday))
+                    (Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday) && Lägenhetradiobutton)
                 {
                     ErrorMessage2 = "Ankomst- och avresedatum måste vara en fredag eller en söndag";
                 }
@@ -415,27 +415,24 @@ namespace SkiResortSystem.ViewModels
                 {
                     ErrorMessage2 = "Ankomst- och avresedatum måst vara senare än dagens datum";
                 }
-                else if (Ankomsttid.DayOfWeek == DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday)
+                else if (Ankomsttid.DayOfWeek != DayOfWeek.Sunday &&
+                    Avresetid.DayOfWeek != DayOfWeek.Sunday && Campingradiobutton)
+                {
+                    ErrorMessage2 = "För veckobokning måste Ankomst- och avresedatum måste vara en söndag";
+                }
+                else if (Ankomsttid.DayOfWeek == DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday && Lägenhetradiobutton)
                 {
                     ErrorMessage2 = "För vald ankomstdatum måste avresedatum vara en söndag";
                 }
-                else if (Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday)
+                else if ((Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday ) && Lägenhetradiobutton)
                 {
                     ErrorMessage2 = "För vald ankomstdatum måste avresedatum vara en fredag eller en söndag";
                 }
-                else if (Avresetid.DayOfWeek == DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday)
-                {
-                    ErrorMessage2 = "För vald avresedatum måste ankomstdatum vara en söndag";
-                }
-                else if (Avresetid.DayOfWeek == DayOfWeek.Sunday && Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday)
-                {
-                    ErrorMessage2 = "För vald avresedatum måste ankomst vara en fredag eller en söndag";
-                }
-                else if(bokningsLängd.Days > 6 && Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek == DayOfWeek.Friday)
+                else if((bokningsLängd.Days > 6 && Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek == DayOfWeek.Friday) && Lägenhetradiobutton)
                 {
                     ErrorMessage2 = "Bokning Kortvecka får vara högst 5 nätter";
                 }
-                else if (bokningsLängd.Days > 2 && Ankomsttid.DayOfWeek == DayOfWeek.Friday && Avresetid.DayOfWeek == DayOfWeek.Sunday)
+                else if ((bokningsLängd.Days > 2 && Ankomsttid.DayOfWeek == DayOfWeek.Friday && Avresetid.DayOfWeek == DayOfWeek.Sunday) && Lägenhetradiobutton)
                 {
                     ErrorMessage2 = "Bokning Weekend får vara högst 2 nätter";
                 }
@@ -459,52 +456,8 @@ namespace SkiResortSystem.ViewModels
                             {
                                 TimeSpan t = Avresetid - Ankomsttid;
                                 foreach (Facilitet f in FacilitetsSökning)
-                                    {
-                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
-                                    }
-                            }
-                        }
-                        else
-                        {
-                            ErrorMessage2 = string.Empty;
-                            ErrorMessage2 = "Du behöver lägga till antal kunder";
-                        }
-                    }
-                    if (Konferensradiobutton)
-                    {
-                        bool success = int.TryParse(antalPersonerTillBoende, out int x);
-                        
-                        if (success)
-                        {
-                            FacilitetsSökning = ac.FindLedigaKonferens(x, Ankomsttid, Avresetid);
-                            if (FacilitetsSökning.Count() < 1)
-                            {
-                                ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
-                            }
-                            else
-                            {
-                                TimeSpan t = Avresetid - Ankomsttid;
-                                TimeSpan h = SelectedTimeTill - SelectedTimeFrån;
-                                if (t.Days == 0 && h.Hours <= 5)
                                 {
-                                    foreach (Facilitet f in FacilitetsSökning)
-                                    {
-                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * h.Hours;
-                                    }
-                                }
-                                else if (t.Days == 1)
-                                {
-                                    foreach (Facilitet f in FacilitetsSökning)
-                                    {
-                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris;
-                                    }
-                                }
-                                else
-                                {
-                                    foreach (Facilitet f in FacilitetsSökning)
-                                    {
-                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
-                                    }
+                                    f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
                                 }
                             }
                         }
@@ -514,6 +467,7 @@ namespace SkiResortSystem.ViewModels
                             ErrorMessage2 = "Du behöver lägga till antal kunder";
                         }
                     }
+                   
                     if (Campingradiobutton)
                     {
                         bool success = int.TryParse(antalPersonerTillBoende, out int x);
@@ -550,7 +504,6 @@ namespace SkiResortSystem.ViewModels
                                     }
                                 }
                             }
-
                         }
                         else
                         {
@@ -562,23 +515,23 @@ namespace SkiResortSystem.ViewModels
             }
             else
             {
-                if (Lägenhetradiobutton)
-                {
-                    bool success = int.TryParse(antalPersonerTillBoende, out int x);
-                    if (success)
-                    {
-                        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
-                        if (FacilitetsSökning.Count() < 1)
-                        {
-                            ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
-                        }
-                    }
-                    else
-                    {
-                        ErrorMessage2 = string.Empty;
-                        ErrorMessage2 = "Du behöver lägga till antal kunder";
-                    }
-                }
+                //if (Lägenhetradiobutton)
+                //{
+                //    bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                //    if (success)
+                //    {
+                //        FacilitetsSökning = ac.FindLedigaLägenheter(x, Ankomsttid, Avresetid);
+                //        if (FacilitetsSökning.Count() < 1)
+                //        {
+                //            ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
+                //        }
+                //    }
+                //    else
+                //    {
+                //        ErrorMessage2 = string.Empty;
+                //        ErrorMessage2 = "Du behöver lägga till antal kunder";
+                //    }
+                //}
                 if (Konferensradiobutton)
                 {
                     bool success = int.TryParse(antalPersonerTillBoende, out int x);
@@ -588,6 +541,11 @@ namespace SkiResortSystem.ViewModels
                     DateTime datum2 = Avresetid.Date;
                     TimeSpan tid2 = SelectedTimeTill.TimeOfDay;
                     DateTime AvresetidMedTid = datum2 + tid2;
+                    if (bokningsLängd.Days > 7)
+                    {
+                        ErrorMessage2 = "Konferensbokning får vara högst 1 vecka";
+                    }
+                
                     if (success)
                     {
                         FacilitetsSökning = ac.FindLedigaKonferens(x, AnkomsttidMedTid, AvresetidMedTid);
@@ -595,24 +553,32 @@ namespace SkiResortSystem.ViewModels
                         {
                             ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
                         }
-                    }
-                    else
-                    {
-                        ErrorMessage2 = string.Empty;
-                        ErrorMessage2 = "Du behöver lägga till antal kunder";
-                    }
-                }
-                if (Campingradiobutton)
-                {
-                    bool success = int.TryParse(antalPersonerTillBoende, out int x);
-                    if (success)
-                    {
-                        FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
-                        if (FacilitetsSökning.Count() < 1)
+                        else
                         {
-                            ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
+                            TimeSpan t = Avresetid - Ankomsttid;
+                            TimeSpan h = SelectedTimeTill - SelectedTimeFrån;
+                            if (t.Days == 0 && h.Hours <= 5)
+                            {
+                                foreach (Facilitet f in FacilitetsSökning)
+                                {
+                                    f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * h.Hours;
+                                }
+                            }
+                            else if (t.Days == 0 && h.Hours > 6)
+                            {
+                                foreach (Facilitet f in FacilitetsSökning)
+                                {
+                                    f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris;
+                                }
+                            }
+                            else
+                            {
+                                foreach (Facilitet f in FacilitetsSökning)
+                                {
+                                    f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
+                                }
+                            }
                         }
-
                     }
                     else
                     {
@@ -620,6 +586,24 @@ namespace SkiResortSystem.ViewModels
                         ErrorMessage2 = "Du behöver lägga till antal kunder";
                     }
                 }
+                //if (Campingradiobutton)
+                //{
+                //    bool success = int.TryParse(antalPersonerTillBoende, out int x);
+                //    if (success)
+                //    {
+                //        FacilitetsSökning = ac.FindLedigaCamping(x, Ankomsttid, Avresetid);
+                //        if (FacilitetsSökning.Count() < 1)
+                //        {
+                //            ErrorMessage2 = "Hittade inga tillgängliga faciliteter på din sökning";
+                //        }
+
+                //    }
+                //    else
+                //    {
+                //        ErrorMessage2 = string.Empty;
+                //        ErrorMessage2 = "Du behöver lägga till antal kunder";
+                //    }
+                //}
             }
             if (Campingradiobutton == false && Konferensradiobutton == false && Lägenhetradiobutton == false)
             {

@@ -22,7 +22,7 @@
 
             <Canvas Height="auto" Width="1760" Margin="0,0,0,41">
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="38" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <TextBlock  Text="Sök på: Personnummer/Förnamn/Efternamn/Org-nummer/Företagsnamn" Canvas.Left="80" Canvas.Top="69" FontStyle="Italic" />
+                <TextBlock  Text="Sök på: Personnummer/Förnamn/Efternamn/Org-nummer/Företagsnamn" Canvas.Left="80" Canvas.Top="69" FontStyle="Italic" FontSize="12"/>
                 <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -33,18 +33,18 @@
                 <RadioButton Content="Camping" Canvas.Left="190" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Center"  IsChecked="{Binding Campingradiobutton}"/>
                 <RadioButton Content="Konferens" Canvas.Left="300" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="{Binding Konferensradiobutton}"/>
 
-                <TextBlock Text="Avresedatum"  Canvas.Left="606" Canvas.Top="182" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <DatePicker Canvas.Left="606" Canvas.Top="207" BorderBrush="{x:Null}" SelectedDate="{Binding Avresetid}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Text="Ankomstdatum" Canvas.Left="606" Canvas.Top="114" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <DatePicker Canvas.Left="606" Canvas.Top="142" BorderBrush="{x:Null}" SelectedDate="{Binding Ankomsttid}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Button Content="SÖK" Height="50"  Canvas.Left="866" Canvas.Top="188" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
-                <TextBox Canvas.Left="866" TextWrapping="Wrap" Canvas.Top="145" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="Avresedatum"  Canvas.Left="590" Canvas.Top="142" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <DatePicker Canvas.Left="590" Canvas.Top="167" BorderBrush="{x:Null}" SelectedDate="{Binding Avresetid}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Text="Ankomstdatum" Canvas.Left="590" Canvas.Top="74" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <DatePicker Canvas.Left="590" Canvas.Top="102" BorderBrush="{x:Null}" SelectedDate="{Binding Ankomsttid}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button Content="SÖK" Height="50"  Canvas.Left="850" Canvas.Top="148" Command="{Binding SökLedigaFaciliteter}" RenderTransformOrigin="1.311,2.576" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                <TextBox Canvas.Left="850" TextWrapping="Wrap" Canvas.Top="105" Width="120" Text="{Binding AntalPersonerTillBoende, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
-                <TextBlock Visibility="{Binding KonferensReadOnly}" Canvas.Left="752" TextWrapping="Wrap" Text="Tid" Canvas.Top="114" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Visibility="{Binding KonferensReadOnly}" Canvas.Left="752" TextWrapping="Wrap" Text="Tid" Canvas.Top="182" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Visibility="{Binding KonferensReadOnly}" Canvas.Left="736" TextWrapping="Wrap" Text="Tid" Canvas.Top="74" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Visibility="{Binding KonferensReadOnly}" Canvas.Left="736" TextWrapping="Wrap" Text="Tid" Canvas.Top="142" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-                <xctk:TimePicker x:Name="timePicker" Visibility="{Binding KonferensReadOnly}" Value="{Binding SelectedTimeFrån}" Height="20" Width="78" Canvas.Left="752" Canvas.Top="144" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                <xctk:TimePicker x:Name="timePicker2" Value="{Binding SelectedTimeTill}" Visibility="{Binding KonferensReadOnly}" Height="20" Width="78" Canvas.Left="752" Canvas.Top="209" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <xctk:TimePicker x:Name="timePicker" Visibility="{Binding KonferensReadOnly}" Value="{Binding SelectedTimeFrån}" Height="20" Width="78" Canvas.Left="736" Canvas.Top="104" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <xctk:TimePicker x:Name="timePicker2" Value="{Binding SelectedTimeTill}" Visibility="{Binding KonferensReadOnly}" Height="20" Width="78" Canvas.Left="736" Canvas.Top="169" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
                 <DataGrid  Width="908" Height="430"  ItemsSource="{Binding FacilitetsSökning}"  IsReadOnly="True"
                           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="250" SelectedItem="{Binding Path=SelectedFacility}" SelectionChanged="DataGrid_SelectionChanged">
@@ -89,9 +89,9 @@
                         <!--<DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding FacilitetsPris.Pris}"/>-->
                     </DataGrid.Columns>
                 </DataGrid>
-                <TextBlock Text="Antal personer" Canvas.Left="866" Canvas.Top="114" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Text="Antal personer" Canvas.Left="850" Canvas.Top="74" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Canvas>
-           
+
 
         </TabItem>
 

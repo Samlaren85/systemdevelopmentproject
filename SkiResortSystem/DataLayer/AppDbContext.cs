@@ -84,7 +84,7 @@ namespace DataLayer
             }
             if (!Användare.Any()) 
             {
-                Användare.Add(new Användare("@dm1n1stratoR", 1, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL001"))));
+                Användare.Add(new Användare("1", 1, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL001"))));
                 Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL002"))));
                 Användare.Add(new Användare("P@ssword1234", 3, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL003"))));
                 Användare.Add(new Användare("P@ssword1234", 4, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL004"))));

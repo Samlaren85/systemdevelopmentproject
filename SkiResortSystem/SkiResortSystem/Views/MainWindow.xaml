@@ -129,7 +129,7 @@
 
         </TabItem>
 
-        <TabItem Header="STYRNING" Visibility="{Binding CEO}" >
+        <TabItem Header="STYRNING" Visibility="{Binding Governance}" >
             <!--<TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>

@@ -38,7 +38,7 @@ namespace DynamicPDFCoreSuite.Examples
                 Label label = new Label(labelText, 0, 0, 704, 800, Font.Helvetica, 12, TextAlign.Left);
                 page.Elements.Add(label);
                 string uniqueFileName = $"Faktura_{f.FakturaID}.pdf";
-                document.Draw(Util.GetPath($"Fakturor/{uniqueFileName}"));
+                document.Draw(Util.GetPath($"PDFGenerator/Fakturor/{uniqueFileName}"));
             }
            
         }

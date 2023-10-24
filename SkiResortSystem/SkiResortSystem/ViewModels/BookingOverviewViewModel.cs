@@ -327,16 +327,14 @@ namespace SkiResortSystem.ViewModels
             }
             else
             {
-                    
                 Bokning.Återbetalningsskydd = Avbetalningsskydd;
                 Bokning.Bokningsstatus = Status.Kommande;
-                
+                Bokning.Totalpris = Totalpris;
                 bc.SparaBokning(Bokning);
                 MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
                 CreatePDF.Run(Bokning);
                 CloseCommand.Execute(view);
             }
-            
         });
         /// <summary>
         /// Tar bort bokning som skapats men inte sparats i databasen
@@ -534,16 +532,32 @@ namespace SkiResortSystem.ViewModels
             {
                 AntalTimmar = tidsspann.Hours;
                 Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2) * AntalTimmar;
+                if(ValdKund.Rabatt != 0)
+                {
+                    Totalpris = totalpris * (1 - (ValdKund.Rabatt/ 100));
+                }
+
 
             }
             else if(AntalNätter == 0)
             {
                 Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2);
+                Totalpris = totalpris * (1 - (Bokning.KundID.Rabatt / 100));
+                if (ValdKund.Rabatt != 0)
+                {
+                    Totalpris = totalpris * (1 - (ValdKund.Rabatt / 100));
+                }
 
             }
             else
             {
                 Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2) * AntalNätter;
+                Totalpris = totalpris * (1 - (Bokning.KundID.Rabatt / 100));
+                if (ValdKund.Rabatt != 0)
+                {
+                    Totalpris = totalpris * (1 - (ValdKund.Rabatt / 100));
+                }
+
             }
             VaravMoms = (float)(Totalpris * 0.2);
             VaravMoms = (float)Math.Round(VaravMoms, 2);

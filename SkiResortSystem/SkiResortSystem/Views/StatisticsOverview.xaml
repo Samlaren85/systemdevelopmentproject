@@ -1,0 +1,70 @@
+﻿<Window x:Class="SkiResortSystem.Views.StatisticsOverview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SkiResortSystem.Views"
+        xmlns:vm="clr-namespace:SkiResortSystem.ViewModels" 
+        mc:Ignorable="d"
+        Title="StatisticsOverview" Height="450" Width="800" x:Name="View" WindowState="Maximized">
+    <Window.DataContext>
+        <vm:StatisticsOverviewViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Width" Value="Auto" ></Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+
+    </Window.Resources>
+    <DockPanel  Background="#FFA6C3E4" Height="auto" Width="auto" LastChildFill="True" >
+        <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+            <Button Margin="10,10,10,10" Content="Stäng" Canvas.Left="706" Canvas.Top="412" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=View}"/>
+        </StackPanel>
+
+        <Grid>
+            <DataGrid Margin="10,10,10,10" Width="auto" Height="auto" ItemsSource="{Binding _data}" 
+                CanUserAddRows="False" AutoGenerateColumns="false" Canvas.Left="45" Canvas.Top="45" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" Visibility="{Binding Facilitetsrapport}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=FacilitetID}" Width="*"/>
+                <DataGridTextColumn Header="Benämning" Binding="{Binding Path=Typ}" Width="*"/>
+            </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Margin="10,10,10,10" Width="auto" Height="auto" ItemsSource="{Binding _data}" 
+                CanUserAddRows="False" AutoGenerateColumns="false" Canvas.Left="45" Canvas.Top="45" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" Visibility="{Binding Aktivitetsrapport}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=AktivitetsID}" Width="*"/>
+                <DataGridTextColumn Header="Aktivitet" Binding="{Binding Path=Typ}" Width="*"/>
+                <DataGridTextColumn Header="Varaktighet" Binding="{Binding Path=Varaktighet}" Width="*"/>
+                <DataGridTextColumn Header="Antal Platser Kvar" Binding="{Binding Path=AntalPlatserKvar}" Width="*"/>
+                <DataGridTextColumn Header="Vintersäsong" Binding="{Binding Path=Vintersäsong}" Width="*"/>
+            </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Margin="10,10,10,10" Width="auto" Height="auto" ItemsSource="{Binding _data}" 
+                CanUserAddRows="False" AutoGenerateColumns="false" Canvas.Left="45" Canvas.Top="45" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" Visibility="{Binding Utrustningsrapport}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=UtrustningsID}" Width="*"/>
+                    <DataGridTextColumn Header="Benämning" Binding="{Binding Path=UtrustningsBenämning}" Width="*"/>
+                    <DataGridTextColumn Header="Storlek" Binding="{Binding Path=Storlek}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Margin="10,10,10,10" Width="auto" Height="auto" ItemsSource="{Binding _data}" 
+                CanUserAddRows="False" AutoGenerateColumns="false" Canvas.Left="45" Canvas.Top="45" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" Visibility="{Binding Kundrapport}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=KundID}" Width="*"/>
+                <DataGridTextColumn Header="Namn" Binding="{Binding Path=Namn}" Width="*"/>
+                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=Gatuadress}" Width="*"/>
+                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=Postnummer}" Width="*"/>
+                <DataGridTextColumn Header="Ort" Binding="{Binding Path=Ort}" Width="*"/>
+                <DataGridTextColumn Header="Telefonnummer" Binding="{Binding Path=Telefonnummer}" Width="*"/>
+                <DataGridTextColumn Header="Epost" Binding="{Binding Path=Epost}" Width="*"/>
+                <DataGridTextColumn Header="Kreditgräns" Binding="{Binding Path=Kreditgräns}" Width="*"/>
+                <DataGridTextColumn Header="Rabatt" Binding="{Binding Path=Rabatt}" Width="*"/>
+            </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</Window>

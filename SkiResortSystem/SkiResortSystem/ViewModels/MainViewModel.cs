@@ -57,6 +57,12 @@ namespace SkiResortSystem.ViewModels
         public MainViewModel()
         {
             LogIn();
+            List <int> years = new List<int>();
+            for (int i = 2023; i <= DateTime.Now.Year; i++) 
+            {
+                years.Add(i);
+            }
+            StatisticYear = years;
         }
 
         public void LogIn()

@@ -67,12 +67,10 @@ namespace BusinessLayer
                 
                     if (kundensBokning.FacilitetID != null)
                     {
-                        foreach (Facilitet f in kundensBokning.FacilitetID)
                         {
-                                pris += f.FacilitetsPris.Pris;
+                                pris += kundensBokning.Totalpris;
                         };
                     }
-
 
                     if (kundensBokning.AktivitetRef != null)
                     {
@@ -91,13 +89,12 @@ namespace BusinessLayer
                     }
 
             
-            float moms = (float)(0.2 * pris);
             float avbeställningsskydd = 0;
             if (kundensBokning.Återbetalningsskydd.Equals(true))
             {
                 avbeställningsskydd = 300;
             }
-            float totalpris = (pris+moms);
+            float totalpris = (pris);
             float prisFaktura1 = (float)(totalpris*0.2) + avbeställningsskydd;
             float momsFaktura1 = (float)(prisFaktura1 * 0.2);
 

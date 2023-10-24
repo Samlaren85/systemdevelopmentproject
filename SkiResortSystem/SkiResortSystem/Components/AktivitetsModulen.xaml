@@ -68,6 +68,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Content="Boka" Canvas.Left="868" Canvas.Top="537" Height="50"  Command="{Binding BookActivity}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
             </Canvas>
 
         </TabItem>
@@ -168,19 +169,21 @@
                 </DataGrid>
                
 
-                <Button Content="➕" Command="{Binding AddEquipmentRow}" Canvas.Left="774" Canvas.Top="583"/>
-                <Button Content="➖" Command="{Binding RemoveEquipmentRow}" Canvas.Left="808" Canvas.Top="583"/>
-                <DataGrid Width="140" Height="414" ItemsSource="{Binding SizeList}" HorizontalContentAlignment="Center" IsReadOnly="True"
-                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="868" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" SelectedItem="{Binding SizeItem}">
+                <Button Content="➕" Command="{Binding AddEquipmentRow}" Canvas.Left="808" Canvas.Top="583"/>
+                <Button Content="➖" Command="{Binding RemoveEquipmentRow}" Canvas.Left="775" Canvas.Top="583"/>
+                <DataGrid Width="169" Height="414" ItemsSource="{Binding SizeList}" HorizontalContentAlignment="Center" IsReadOnly="True"
+                          CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="868" Canvas.Top="158" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedItem="{Binding SizeItem}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="STORLEK" Width="AUTO" Binding="{Binding Storlek}"/>
                         <DataGridTextColumn Header="ANTAL" Width="*" Binding="{Binding Antal}"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Button Content="Boka" Canvas.Left="868" Canvas.Top="626" Height="50"  Command="{Binding BookEquipment}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                <Button Content="➕" Command="{Binding AddSizeSelection}" Canvas.Left="925" Canvas.Top="583" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Button Content="➖" Command="{Binding RemoveSizeSelection}" Canvas.Left="959" Canvas.Top="583" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Content="Boka" Canvas.Left="917" Canvas.Top="622" Height="50"  Command="{Binding BookEquipment}" CommandParameter="{Binding ElementName=BokadePlatser}" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Button Content="➕" Command="{Binding AddSizeSelection}" Canvas.Left="1009" Canvas.Top="583" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Content="➖" Command="{Binding RemoveSizeSelection}" Canvas.Left="975" Canvas.Top="583" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Canvas.Left="558" TextWrapping="Wrap" Canvas.Top="585" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Text="Lägg till"/><Run Language="sv-se" Text=" / ta bort"/><Run Text=" utrustning:"/></TextBlock>
+                <TextBlock Canvas.Left="880" TextWrapping="Wrap" Canvas.Top="585" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Language="sv-se" Text="Ändra antal:"/></TextBlock>
             </Canvas>
 
         </TabItem>
@@ -224,15 +227,20 @@
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="LÄMNA UT &amp; RAPPORTERA IN UTRUSTNING" Foreground="Black"  Canvas.Left="80" Canvas.Top="76"/>
-                <DatePicker SelectedDate="{Binding ReportDate}" Canvas.Left="80" Canvas.Top="111" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" />
+                <DatePicker SelectedDate="{Binding ReportDate, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="111" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" />
 
-                <DataGrid  Width="908" Height="379"  ItemsSource="{Binding CurrentEquipment, Mode=TwoWay}" SelectedItem="{Binding SelectedPickupReturn}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
+                <ComboBox TabIndex="2" SelectedIndex="{Binding SelectedFetchOrReturn, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" Background="White" Canvas.Left="344" Canvas.Top="113" Width="143" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <ComboBoxItem Content="Fetch"/>
+                    <ComboBoxItem Content="Return"/>
+                </ComboBox>
+
+                <DataGrid  Width="908" Height="379"  ItemsSource="{Binding CurrentEquipment, Mode=TwoWay}" SelectedItem="{Binding SelectedPickupReturn}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="NAMN" Width="230" Binding="{Binding Path=Bokning.KundID.Namn}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="STARTDATUM" Width="2*" Binding="{Binding Hämtasut}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="SLUTDATUM" Width="2*" Binding="{Binding Lämnasin}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="Auto" Binding="{Binding Path=Bokning.BokningsID}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}" IsReadOnly="False">
+                        <DataGridTextColumn Header="NAMN" Width="230" Binding="{Binding Path=Bokning.KundID.Namn}"/>
+                        <DataGridTextColumn Header="STARTDATUM" Width="2*" Binding="{Binding Hämtasut}"/>
+                        <DataGridTextColumn Header="SLUTDATUM" Width="2*" Binding="{Binding Lämnasin}"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="Auto" Binding="{Binding Path=Bokning.BokningsID}"/>
+                        <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}">
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                                     <Setter Property="Background" Value="White"/>
@@ -285,6 +293,19 @@
 
             </Canvas>
 
+        </TabItem>
+        <TabItem Header="PRISLISTA" Height="50" VerticalAlignment="Bottom">
+            <Canvas Margin="0,-3,0,3">
+                <TextBlock Text="VÄLJ PRISLISTA" Canvas.Left="93" Canvas.Top="70" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <ComboBox Width="149" Canvas.Left="93" Canvas.Top="97" SelectedIndex="{Binding PrislistIndex}">
+                    <ComboBoxItem Content="&lt;Välj prislista&gt;"/>
+                    <ComboBoxItem Content="Boende"/>
+                    <ComboBoxItem Content="Konferens"/>
+                    <ComboBoxItem Content="Aktivitet"/>
+                    <ComboBoxItem Content="Utrustning"/>
+                </ComboBox>
+                <Image Source="{Binding PriceImgSource}" Canvas.Left="93" Canvas.Top="137" MaxWidth="800" MaxHeight="400"/>
+            </Canvas>
         </TabItem>
 
     </TabControl>

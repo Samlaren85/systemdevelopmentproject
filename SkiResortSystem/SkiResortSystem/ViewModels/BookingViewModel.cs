@@ -470,7 +470,19 @@ namespace SkiResortSystem.ViewModels
                                 TimeSpan t = Avresetid - Ankomsttid;
                                 foreach (Facilitet f in FacilitetsSökning)
                                 {
-                                    f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
+
+                                    if (f.FacilitetsPris.BokningTyp == "Vecka")
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris;
+                                    }
+                                    if (f.FacilitetsPris.BokningTyp == "Kortvecka")
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul =  f.FacilitetsPris.Pris * t.Days;
+                                    }
+                                    if (f.FacilitetsPris.BokningTyp == "Weekend")
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
+                                    }
                                 }
                             }
                         }
@@ -493,28 +505,18 @@ namespace SkiResortSystem.ViewModels
                             }
                             else
                             {
-                                TimeSpan t = Avresetid - Ankomsttid;
-                                TimeSpan h = SelectedTimeTill - SelectedTimeFrån;
-                                if (t.Days == 0 && h.Hours <= 5)
+                                
+                                foreach (Facilitet f in FacilitetsSökning)
                                 {
-                                    foreach (Facilitet f in FacilitetsSökning)
-                                    {
-                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * h.Hours;
-                                    }
-                                }
-                                else if (t.Days == 1)
-                                {
-                                    foreach (Facilitet f in FacilitetsSökning)
+                                    if (f.FacilitetsPris.BokningTyp == "Vecka")
                                     {
                                         f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris;
                                     }
-                                }
-                                else
-                                {
-                                    foreach (Facilitet f in FacilitetsSökning)
+                                    if (f.FacilitetsPris.BokningTyp == "Dygn")
                                     {
-                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris;
                                     }
+                                   
                                 }
                             }
                         }
@@ -570,29 +572,24 @@ namespace SkiResortSystem.ViewModels
                             {
                                 TimeSpan t = Avresetid - Ankomsttid;
                                 TimeSpan h = SelectedTimeTill - SelectedTimeFrån;
-                                if (t.Days == 0 && h.Hours <= 5)
+
+                                foreach (Facilitet f in FacilitetsSökning)
                                 {
-                                    foreach (Facilitet f in FacilitetsSökning)
-                                    {
-                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * h.Hours;
-                                    }
-                                }
-                                else if (t.Days == 0 && h.Hours > 6)
-                                {
-                                    foreach (Facilitet f in FacilitetsSökning)
+                                    if (f.FacilitetsPris.BokningTyp == "Vecka")
                                     {
                                         f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris;
                                     }
-                                }
-                                else
-                                {
-                                    foreach (Facilitet f in FacilitetsSökning)
+                                    if (f.FacilitetsPris.BokningTyp == "Tim")
+                                    {
+                                        f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * h.Hours;
+                                    }
+                                    if (f.FacilitetsPris.BokningTyp == "Dygn")
                                     {
                                         f.TotalprisFörPresentationIBoendeModul = f.FacilitetsPris.Pris * t.Days;
                                     }
                                 }
                             }
-                        }
+                        } 
                         else
                         {
                             ErrorMessage2 = string.Empty;

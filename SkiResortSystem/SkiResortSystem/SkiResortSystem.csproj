@@ -46,4 +46,9 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PDFGenerator\Bokningsbekräftelser\" />
+    <Folder Include="PDFGenerator\Fakturor\" />
+  </ItemGroup>
+
 </Project>

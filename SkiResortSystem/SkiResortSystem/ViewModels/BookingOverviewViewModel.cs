@@ -330,6 +330,7 @@ namespace SkiResortSystem.ViewModels
                     
                 Bokning.Återbetalningsskydd = Avbetalningsskydd;
                 Bokning.Bokningsstatus = Status.Kommande;
+                
                 bc.SparaBokning(Bokning);
                 MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
                 CreatePDF.Run(Bokning);

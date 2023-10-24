@@ -22,7 +22,7 @@ namespace DynamicPDFCoreSuite.Examples
             Label label = new Label(labelText, 0, 0, 504, 700, Font.Helvetica, 18, TextAlign.Center);
             page.Elements.Add(label);
             string uniqueFileName = $"Bokningsbekräftelse_{bokning.BokningsID}.pdf";
-            document.Draw(Util.GetPath($"Bokningsbekräftelser/{uniqueFileName}"));
+            document.Draw(Util.GetPath($"PDFGenerator/Bokningsbekräftelser/{uniqueFileName}"));
         }
         public static void Run(Faktura faktura, Faktura faktura2)
         {   List<Faktura> fakturorförutskrift = new List<Faktura>();

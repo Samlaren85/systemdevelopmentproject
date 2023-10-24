@@ -57,6 +57,12 @@ namespace SkiResortSystem.ViewModels
         public MainViewModel()
         {
             LogIn();
+            List <int> years = new List<int>();
+            for (int i = 2023; i <= DateTime.Now.Year; i++) 
+            {
+                years.Add(i);
+            }
+            StatisticYear = years;
         }
 
         public void LogIn()
@@ -74,6 +80,9 @@ namespace SkiResortSystem.ViewModels
             else ExitCommand.Execute(null);
         }
 
+        /// <summary>
+        /// Används för att populera datagriden/tabellen under visa beläggning. Sker genom en transponering av den inre listan.(se metoden Överförd)
+        /// </summary>
         private IList<List<string>> visaBeläggning;
         public IList<List<string>> VisaBeläggning
         {
@@ -83,6 +92,7 @@ namespace SkiResortSystem.ViewModels
                 if (value != visaBeläggning)
                 {
                     visaBeläggning = value;
+
                     // Överför listan för att skapa rader i tabellen av de inre listorna.
                     ÖverfördVisaBeläggning = Överförd(visaBeläggning);
                     OnPropertyChanged(nameof(VisaBeläggning));
@@ -106,6 +116,11 @@ namespace SkiResortSystem.ViewModels
                 }
             }
         }
+        /// <summary>
+        /// Transponerar den inre listan som används för att visa beläggning i boendemodulen/visa beläggning.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         private IList<List<string>> Överförd(IList<List<string>> source)
         {
             if (source == null || source.Count == 0)
@@ -240,7 +255,6 @@ namespace SkiResortSystem.ViewModels
                 {
                     case "1 - Systemadministratör": // ta bort all acces förutom Admin innan inlämning OBS! även boolen till false
                         Admin = Visibility.Visible;
-                        //UseShopOrReception = true;
                         Economy = Visibility.Visible;
                         MarketingManager = Visibility.Visible;
                         Customer = Visibility.Visible;
@@ -252,7 +266,6 @@ namespace SkiResortSystem.ViewModels
                         break;
                     case "2 - Reception":
                         Admin = Visibility.Collapsed;
-                        //UseShopOrReception = true;
                         Economy = Visibility.Collapsed;
                         MarketingManager = Visibility.Collapsed;
                         Customer = Visibility.Visible;
@@ -264,7 +277,6 @@ namespace SkiResortSystem.ViewModels
                         break;
                     case "3 - Skidshop":
                         Admin = Visibility.Collapsed;
-                        //UseShopOrReception = true;
                         Economy = Visibility.Collapsed;
                         MarketingManager = Visibility.Collapsed;
                         Customer = Visibility.Visible;
@@ -276,7 +288,6 @@ namespace SkiResortSystem.ViewModels
                         break;
                     case "4 - Ekonomi":
                         Admin = Visibility.Collapsed;
-                        //UseShopOrReception = true;
                         Economy = Visibility.Visible;
                         MarketingManager = Visibility.Collapsed;
                         Customer = Visibility.Collapsed;
@@ -288,7 +299,6 @@ namespace SkiResortSystem.ViewModels
                         break;
                     case "5 - Avdelningschef skidshop":
                         Admin = Visibility.Collapsed;
-                        //UseShopOrReception= true;
                         Economy = Visibility.Collapsed;
                         MarketingManager = Visibility.Collapsed;
                         Customer = Visibility.Visible;
@@ -300,7 +310,6 @@ namespace SkiResortSystem.ViewModels
                         break;
                     case "6 - Ekonomichef":
                         Admin = Visibility.Collapsed;
-                        //UseShopOrReception = true;
                         Economy = Visibility.Visible;
                         MarketingManager = Visibility.Collapsed;
                         Customer = Visibility.Collapsed;
@@ -366,91 +375,7 @@ namespace SkiResortSystem.ViewModels
                 }
             }
         }
-        /// <summary>
-        /// Detta fungerar inte eftersom vi har 2 bools mot KUND exakt samma problem finns mot modulen Styrning (governance)
-        /// </summary>
-       /* private bool use_ShopOrReception = false;
-        public bool UseShopOrReception
-        {
-            get { return use_ShopOrReception; }
-            set
-            {
-                if (UseShopOrReception != value)
-                    
-
-                foreach (Behörighet bh in SessionController.LoggedIn.RollID.BehörighetID)
-                    {
-                        if (bh.Behörighetstyp.Equals("1 - Systemadministratör"))
-                        {
-                            Governance = Visibility.Visible;
-                            CEO = Visibility.Visible;
-                            Reception = Visibility.Visible;
-                            Shop = Visibility.Visible;
-                            OnPropertyChanged(nameof(UseShopOrReception));
-                        }
-                        else if (bh.Behörighetstyp.Equals("2 - Reception"))
-                        {
-                            Governance = Visibility.Collapsed;
-                            CEO = Visibility.Collapsed;
-                            Shop = Visibility.Visible;
-                            Reception = Visibility.Visible;
-                            OnPropertyChanged(nameof(UseShopOrReception));
-                        }
-                        else if (bh.Behörighetstyp.Equals("3 - Skidshop"))
-                        {
-                            Governance = Visibility.Collapsed;
-                            CEO = Visibility.Collapsed;
-                            Shop = Visibility.Visible;
-                            Reception = Visibility.Collapsed;
-                            OnPropertyChanged(nameof(UseShopOrReception));
-                        }
-                        else if (bh.Behörighetstyp.Equals("4 - Ekonomi"))
-                        {
-                            Governance = Visibility.Collapsed;
-                            CEO = Visibility.Collapsed;
-                            Shop = Visibility.Collapsed;
-                            Reception = Visibility.Collapsed;
-                            OnPropertyChanged(nameof(UseShopOrReception));
-                        }
-                        else if (bh.Behörighetstyp.Equals("5 - Avdelningschef skidshop"))
-                        {
-                            Governance = Visibility.Visible;
-                            CEO = Visibility.Collapsed;
-                            Reception = Visibility.Collapsed;
-                            Shop = Visibility.Visible;
-                            OnPropertyChanged(nameof(UseShopOrReception));
-                        }
-                        else if (bh.Behörighetstyp.Equals("6 - Ekonomichef"))
-                        {
-                            Governance = Visibility.Visible;
-                            CEO = Visibility.Collapsed;
-                            Reception = Visibility.Collapsed;
-                            Shop = Visibility.Collapsed;
-                            OnPropertyChanged(nameof(UseShopOrReception));
-                        }
-                        else if (bh.Behörighetstyp.Equals("7 - Marknadschef"))
-                        {
-                            Governance = Visibility.Visible;
-                            CEO = Visibility.Collapsed;
-                            Reception = Visibility.Visible;
-                            Shop = Visibility.Visible;
-                            OnPropertyChanged(nameof(UseShopOrReception));
-                        }
-                        else if (bh.Behörighetstyp.Equals("8 - Verkställande Direktör"))
-                        {
-                            Governance = Visibility.Visible;
-                            CEO = Visibility.Visible;
-                            Reception = Visibility.Collapsed;
-                            Shop = Visibility.Collapsed;
-                            OnPropertyChanged(nameof(UseShopOrReception));
-                        }
-                    
-                    }
-                use_ShopOrReception = value;
-                OnPropertyChanged(nameof(UseShopOrReception));
-            }
-        }*/
-
+        
         private Visibility reception = Visibility.Collapsed;
         public Visibility Reception
         {
@@ -493,6 +418,7 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+        
         private Visibility marketingManager = Visibility.Collapsed;
         public Visibility MarketingManager
         {
@@ -536,7 +462,7 @@ namespace SkiResortSystem.ViewModels
             }
         }
         /// <summary>
-        /// Används för att kontrollera om inloggad användare är marknadschef med behörighet att lägga till företagskunder.
+        /// Används för att kontrollera om inloggad användare är marknadschef med behörighet att lägga till företagskunder m.m.
         /// </summary>
         private bool _isCurrentUserMarketingManager;
         public bool IsCurrentUserMarketingManager

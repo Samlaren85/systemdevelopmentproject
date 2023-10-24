@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.DirectoryServices;
-using DynamicPDFCoreSuite.Examples;
 using BusinessLayer.PrintController;
 
 namespace SkiResortSystem.ViewModels
@@ -328,17 +327,15 @@ namespace SkiResortSystem.ViewModels
             }
             else
             {
-                    
                 Bokning.Återbetalningsskydd = Avbetalningsskydd;
                 Bokning.Bokningsstatus = Status.Kommande;
-                
+                Bokning.Totalpris = Totalpris;
                 bc.SparaBokning(Bokning);
                 MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
                 PrintController.Run(Bokning);
                 //DETTA OCH konfigurera pdf i create
                 CloseCommand.Execute(view);
             }
-            
         });
         /// <summary>
         /// Tar bort bokning som skapats men inte sparats i databasen
@@ -369,6 +366,7 @@ namespace SkiResortSystem.ViewModels
                     f.Fakturastatus = Status.Makulerad;
                 }
             }
+            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu makulerad i systemet!");
             CloseCommand.Execute(view);
 
         });
@@ -536,16 +534,30 @@ namespace SkiResortSystem.ViewModels
             {
                 AntalTimmar = tidsspann.Hours;
                 Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2) * AntalTimmar;
+                if(ValdKund.Rabatt != 0)
+                {
+                    Totalpris = totalpris * (1 - (ValdKund.Rabatt/ 100));
+                }
+
 
             }
             else if(AntalNätter == 0)
             {
                 Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2);
+                if (ValdKund.Rabatt != 0)
+                {
+                    Totalpris = totalpris * (1 - (ValdKund.Rabatt / 100));
+                }
 
             }
             else
             {
                 Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2) * AntalNätter;
+                if (ValdKund.Rabatt != 0)
+                {
+                    Totalpris = totalpris * (1 - (ValdKund.Rabatt / 100));
+                }
+
             }
             VaravMoms = (float)(Totalpris * 0.2);
             VaravMoms = (float)Math.Round(VaravMoms, 2);

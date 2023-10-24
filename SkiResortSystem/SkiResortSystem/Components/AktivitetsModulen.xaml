@@ -125,7 +125,7 @@
                         <DataGridTemplateColumn Header="UTRUSTNING" Width="2*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=TypAvUtrustning}"/>
+                                    <TextBlock Text="{Binding Path=TypAvUtrustning, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellEditingTemplate>
@@ -142,7 +142,7 @@
                         <DataGridTemplateColumn Header="FRÅN" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding Path=FrånDatum}"/>
+                                    <DatePicker SelectedDate="{Binding Path=FrånDatum, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellStyle>
@@ -154,7 +154,7 @@
                         <DataGridTemplateColumn Header="TILL" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding Path=TillDatum}"/>
+                                    <DatePicker SelectedDate="{Binding Path=TillDatum, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellStyle>

@@ -1,7 +1,6 @@
 ﻿using BusinessLayer;
 using BusinessLayer.PrintController;
 using ceTe.DynamicPDF.PageElements.BarCoding;
-using DynamicPDFCoreSuite.Examples;
 using EntityLayer;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SkiResortSystem.Commands;
@@ -18,6 +17,9 @@ using System.Windows.Input;
 
 namespace SkiResortSystem.ViewModels
 {
+    /// <summary>
+    /// Vymodell för fakturaöversikten.
+    /// </summary>
     class BillOverviewViewModel : ObservableObject
     {
         private Faktura faktura;
@@ -69,6 +71,9 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+        /// <summary>
+        /// Knapp som arkiverar faktura, sätter fakturastatus till makulerad
+        /// </summary>
         private ICommand arkiveraFaktura = null!;
         public ICommand ArkiveraFaktura =>
             arkiveraFaktura ??= arkiveraFaktura = new RelayCommand<ICloseable>((view) =>
@@ -80,6 +85,9 @@ namespace SkiResortSystem.ViewModels
                 CloseCommand.Execute(view);
             });
 
+        /// <summary>
+        /// Command som stänger fönstret
+        /// </summary>
         private ICommand closeCommand = null!;
         public ICommand CloseCommand =>
             closeCommand ??= closeCommand = new RelayCommand<ICloseable>((view) =>
@@ -90,6 +98,10 @@ namespace SkiResortSystem.ViewModels
         public BillOverviewViewModel()
         {
         }
+        /// <summary>
+        /// Teldelar värdena från fakturan till listorna som presenteras och ger properties sina värden.(Summa summarum: Allt som ska presenteras på översikten)
+        /// </summary>
+        /// <param name="faktura"></param>
         public BillOverviewViewModel(Faktura faktura)
         {
             Artikel = new ObservableCollection<string>();

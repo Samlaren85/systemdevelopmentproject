@@ -80,7 +80,9 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// NÄr man väljer en facilitet så öppnas bokningsöversikten för att skapa upp en ny bokning.
+        /// </summary>
         private ICommand doubleClickBookingCommand = null!;
         public ICommand DoubleClickBookingCommand =>
             doubleClickBookingCommand ??= doubleClickBookingCommand = new RelayCommand(() =>
@@ -98,6 +100,10 @@ namespace SkiResortSystem.ViewModels
                     windowService.ShowDialog(bokningsöversikt);
                 }
             });
+
+        /// <summary>
+        /// Öppnar upp bokningsöversikten för hantering/ändring av befintlig bokning, kan tas bort, 
+        /// </summary>
         private ICommand doubleClickBookingCommandÄndra = null!;
         public ICommand DoubleClickBookingCommandÄndra =>
             doubleClickBookingCommandÄndra ??= doubleClickBookingCommandÄndra = new RelayCommand(() =>
@@ -405,22 +411,21 @@ namespace SkiResortSystem.ViewModels
             }
             else if (Konferensradiobutton == false)
             {
-                
-                if ((Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday) &&
-                    (Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday) && Lägenhetradiobutton)
-                {
-                    ErrorMessage2 = "Ankomst- och avresedatum måste vara en fredag eller en söndag";
-                }
-                else if (Ankomsttid < DateTime.Today || Avresetid < DateTime.Today)
+                if (Ankomsttid < DateTime.Today || Avresetid < DateTime.Today)
                 {
                     ErrorMessage2 = "Ankomst- och avresedatum måst vara senare än dagens datum";
                 }
+                else if (((Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday) ||
+                         (Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday)) && Lägenhetradiobutton)
+                {
+                    ErrorMessage2 = "Ankomst- och avresedatum måste vara en fredag eller en söndag";
+                }
                 else if (Ankomsttid.DayOfWeek == DayOfWeek.Sunday &&
-                    Avresetid.DayOfWeek != DayOfWeek.Sunday && Campingradiobutton)
+                         Avresetid.DayOfWeek != DayOfWeek.Sunday && Campingradiobutton)
                 {
                     ErrorMessage2 = "För veckobokning måste Ankomst- och avresedatum måste vara en söndag";
                 }
-                else if (bokningsLängd.Days > 2 && bokningsLängd.Days < 7 && Campingradiobutton)
+                else if ((bokningsLängd.Days > 1 && bokningsLängd.Days < 7) && Campingradiobutton)
                 {
                     ErrorMessage2 = "Campingbokning får vara dygn eller veckobokning";
                 }
@@ -428,9 +433,13 @@ namespace SkiResortSystem.ViewModels
                 {
                     ErrorMessage2 = "För vald ankomstdatum måste avresedatum vara en söndag";
                 }
-                else if ((Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday ) && Lägenhetradiobutton)
+                else if (Ankomsttid.DayOfWeek == DayOfWeek.Sunday && (Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday) && Lägenhetradiobutton)
                 {
                     ErrorMessage2 = "För vald ankomstdatum måste avresedatum vara en fredag eller en söndag";
+                }
+                else if (Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek == DayOfWeek.Sunday && bokningsLängd.Days != 7 && Lägenhetradiobutton)
+                {
+                    ErrorMessage2 = "Bokning Vecka måste vara exakt 7 nätter (söndag till söndag)";
                 }
                 else if((bokningsLängd.Days > 6 && Ankomsttid.DayOfWeek == DayOfWeek.Sunday && Avresetid.DayOfWeek == DayOfWeek.Friday) && Lägenhetradiobutton)
                 {

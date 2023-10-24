@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.PrintController;
 using EntityLayer;
 using Microsoft.VisualBasic;
 using SkiResortSystem.Commands;
@@ -347,6 +348,7 @@ namespace SkiResortSystem.ViewModels
             IList<Utrustningsbokning> utr;
             if (SelectedFetchOrReturn == 0) utr = equipmentController.FindUtrustningsbokningar(reportDate, null);
             else utr = equipmentController.FindUtrustningsbokningar(null, reportDate);
+            
             return utr;
         }
 
@@ -360,6 +362,10 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        
+        
+
+
 
         private Utrustningsbokning selectedPickupReturn;
         public Utrustningsbokning SelectedPickupReturn
@@ -562,6 +568,7 @@ namespace SkiResortSystem.ViewModels
                 if (SelectedPickupReturn != null && SelectedPickupReturn.Utrustningsstatus == Status.Kommande && SelectedPickupReturn.Hämtasut == DateTime.Today)
                 {
                     SelectedPickupReturn.Utrustningsstatus = Status.Utlämnad;
+                    PrintController.Run(SelectedPickupReturn);
                     OnPropertyChanged(nameof(CurrentEquipment));
                     CurrentEquipment = SearchPickupReturn(reportDate);
                 }

@@ -29,52 +29,7 @@ namespace BusinessLayer
         public string column4 = null;
         public string column5 = null;
         public string column6 = null;
-        #region Metoder för att lägga till logiobjekt
-
-
-        ///// <summary>
-        ///// AddKonferenssal-metoden används för att lägga till en ny bokningsbar konferenssal i systemet. 
-        ///// </summary>
-        //public Facilitet AddKonferenssal(string konferensBenämning, float facilitetspris, int antalPersoner)
-        //{
-        //    Konferenssal konferenssal = new Konferenssal(konferensBenämning, antalPersoner);
-        //    unitOfWork.KonferenssalRepository.Add(konferenssal);
-        //    Facilitet facilitet = new Facilitet(facilitetspris, konferenssal, null, null);
-        //    unitOfWork.Save();
-        //    return facilitet;
-        //}
-
-        ///// <summary>
-        ///// AddCampingPlats-metoden används för att lägga till en ny bokningsbar campingplats i systemet. 
-        ///// </summary>
-        //public Facilitet AddCampingPlats(string campingBenämning, string campingStorlek, float facilitetspris)
-        //{
-        //    Campingplats campingplats = new Campingplats() { CampingBenämning = campingBenämning, CampingStorlek = campingStorlek };
-        //    unitOfWork.CampingplatsRepository.Add(campingplats);
-        //    Facilitet facilitet = new Facilitet() { Facilitetspris = facilitetspris, CampingID = campingplats };
-        //    unitOfWork.FacilitetRepository.Add(facilitet);
-        //    unitOfWork.Save();
-        //    return facilitet;
-        //}
         
-        ///// <summary>
-        ///// AddLägenhet-metoden används för att lägga till en ny bokningsbar lägenhet i systemet. 
-        ///// </summary>
-        ///// <param name="facilitetspris"></param>
-        ///// <param name="lägenhetsbenämning"></param>
-        ///// <param name="bäddar"></param>
-        ///// <param name="lägenhetsstorlek"></param>
-        ///// <returns></returns>
-        //public Facilitet AddLägenhet(float facilitetspris, string lägenhetsbenämning, int bäddar, string lägenhetsstorlek)
-        //{
-        //    Lägenhet lägenhet = new Lägenhet() {LägenhetBenämning = lägenhetsbenämning, Bäddar = bäddar, Lägenhetstorlek = lägenhetsstorlek };
-        //    unitOfWork.LägenhetRepository.Add(lägenhet);
-        //    Facilitet facilitet = new Facilitet() {Facilitetspris = facilitetspris, LägenhetsID = lägenhet };
-        //    unitOfWork.FacilitetRepository.Add(facilitet);
-        //    unitOfWork.Save();
-        //    return facilitet;
-        //}
-        #endregion
         #region Metoder för sök
         /// <summary>
         /// Metoden kan användas för att söka fram ett specifikt boende och presentera detaljer för användaren.
@@ -89,31 +44,7 @@ namespace BusinessLayer
                                                                || b.Ankomsttid.ToShortDateString().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)), x => x.KundID, x => x.KundID.Privatkund, x => x.KundID.Företagskund);
         }
 
-        /// <summary>
-        /// En LINQ-sökning för att söka upp kundens boendebokning.
-        /// Metoden kontrollerar om namnet, datumet eller bokningsnummret som systemanvändaren anger finns med i listan över bokningar
-        /// Metoden hanterar utsökning av namn oberoende av om kunden är privat-/företagskund
-        /// </summary>
-        /// <returns></returns>
-        public IList<Bokning> FindBoenden(string sökTerm, DateTime ankomst, DateTime avresa, string facilitetsTyp) 
-        {
-            IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => ((b.BokningsID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase) || (b.KundID != null &&
-                                                            (b.KundID.Privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase) ||
-                                                            b.KundID.Företagskund.Företagsnamn.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)))) &&
-                                                            (b.Ankomsttid.ToShortDateString == ankomst.ToShortDateString || b.Avresetid.ToShortDateString == avresa.ToShortDateString)
-                                                            ), x => x.KundID, x => x.KundID.Privatkund, x => x.KundID.Företagskund);
-            List<Bokning> inaktuellBokningar = new List<Bokning>();
-            foreach (Bokning bokning in bokningar)
-            {
-                foreach(Facilitet facilitet in bokning.FacilitetID)
-                {
-                    if (facilitet.KonferensID == null && facilitetsTyp.Equals("Konferenssal")) inaktuellBokningar.Add(bokning);
-                    if (facilitet.CampingID == null && facilitetsTyp.Equals("Campingplats")) inaktuellBokningar.Add(bokning);
-                    if (facilitet.LägenhetsID == null && facilitetsTyp.Equals("Lägenhet")) inaktuellBokningar.Add(bokning);
-                }
-            }
-            return bokningar.Except(inaktuellBokningar).ToList();
-        }
+        
 
         /// <summary>
         /// Metoden presenterar lediga faciliteter för användaren baserat på val Konferens, Lägenhet, Camping i fliken "Visa beläggning" i boendemodulen.
@@ -145,6 +76,18 @@ namespace BusinessLayer
             
             return söktaFaciliteter.Except(inaktuellaBokningar).ToList(); //Vad händer om första sökkriteriet blir null?!? ta bort efter testkörning
         }
+        
+        /// <summary>
+        /// Levererar en lista med alla faciliteter i databasen
+        /// </summary>
+        /// <returns></returns>
+        public IList<Facilitet> FindFaciliteter(string searchString)
+        {
+            IList<Facilitet> list;
+            if (searchString.Equals("Boende")) list = unitOfWork.FacilitetRepository.Find(f => f.KonferensID == null, l => l.LägenhetsID, c => c.CampingID);
+            else list = unitOfWork.FacilitetRepository.Find(f => f.KonferensID != null, k => k.KonferensID);
+            return list;
+        }
         public List<Facilitet> FindLedigaFaciliteter(string sökTerm, int antalPersoner)
         {
             List<Facilitet> faciliteter = FindLedigaFaciliteter(sökTerm);
@@ -165,47 +108,7 @@ namespace BusinessLayer
             }
             return faciliteter.Except(inaktuellaFaciliteter).ToList();
         }
-        /// <summary>
-        /// Metoden FindBokadeFaciliteter används i syfte att finna faciliteter av en vald typ, oavsett bokningsstatus.
-        /// </summary>
-        /// <param name="sökTerm"></param>
-        /// <returns></returns>
-        public List<Facilitet> FindBokadeFaciliteter(string sökTerm, DateTime franDatum, DateTime tillDatum)
-        {
-            IList<Facilitet> allaFaciliteter = unitOfWork.FacilitetRepository.Find(f => true);
-            IList<Bokning> allaBokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid >= franDatum);
-
-            IList<Facilitet> inaktuellaFaciliteter = new List<Facilitet>();
-            foreach (Facilitet f in allaFaciliteter)
-            {
-                if (f.KonferensID == null && sökTerm.Equals("Konferenssal")) inaktuellaFaciliteter.Add(f);
-                if (f.CampingID == null && sökTerm.Equals("Campingplats")) inaktuellaFaciliteter.Add(f);
-                if (f.LägenhetsID == null && sökTerm.Equals("Lägenhet")) inaktuellaFaciliteter.Add(f);
-            }
-            List<Facilitet> söktaFaciliteter = allaFaciliteter.Except(inaktuellaFaciliteter).ToList();
-
-            IList<Facilitet> inaktuellaBokningar = new List<Facilitet>();
-            foreach (Bokning b in allaBokningar)
-            {
-                if (b.Avresetid > tillDatum)
-                {
-                    foreach(Facilitet f in b.FacilitetID)
-                    {
-                        inaktuellaBokningar.Add(f);
-                    }
-                }
-                
-            }
-            return söktaFaciliteter.Except(inaktuellaBokningar).ToList(); //Vad händer om första sökkriteriet blir null?!? ta bort efter testkörning
-        }
-        public List<T> KontrolleraBeläggning<T>(string sökTerm) //Starta här nästa stittning!
-        {
-            List<T>myList = new List<T>();
-            FindBoende(sökTerm); // Här ska vi få till i vyn 6-Beläggning så att Lägenheter samt konferenssalar splittas till 4 olika kolummner (2st/typ)
-            /*FindUtrustning(sökTerm);*/ //Här ska varje enskild typ visas på separat rad (vertikalt) KOMMER ATT SKAPAS I Utrustnings BL09/BL20 sprint2-ish
-            /*FindAktiviteter(sökTerm);*/ //Här ska varje aktivitet splittas på enskild rad. Likt Utrustning KOMMER ATT SKAPAS I BL07/BL08 sprint2-ish
-            return myList;
-        }
+ 
  #endregion
         
         public IList<List<string>> VisaBeläggningen(DateTime franDatum, DateTime tillDatum)
@@ -346,6 +249,14 @@ namespace BusinessLayer
             return antal;
         }
         #region Metoder för att söka fram lediga boenden.
+        /// <summary>
+        /// Hämtar faciliteter utan bokning från databasen inom ett visst tidsspann. Får också med söksträng LGH, CAMP; eller KONF för att sortera på facilitetstyp
+        /// </summary>
+        /// <param name="sökTerm"></param>
+        /// <param name="antalPersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)
         {
             IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid < avrese && b.Avresetid > ankomst, X => X.FacilitetID);
@@ -364,6 +275,15 @@ namespace BusinessLayer
             return Faciliteter.Except(inaktuellFaciliteter).ToList();
         }
 
+
+        /// <summary>
+        /// beroende på vilken radiobutton iklickad i bookingviewmodel så anropas en av de 3 nedan metoder som hämtar tillgängliga faciliteter och tilldelar det
+        /// korrekta priset för boende/facilitetstyp och vecka.
+        /// /// </summary>
+        /// <param name="antalpersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaLägenheter(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
             List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("LGH", antalpersoner, ankomst, avrese);
@@ -398,6 +318,13 @@ namespace BusinessLayer
             }
             return Faciliteter;
         }
+        /// <summary>
+        /// Beskrivning i metoden ovan
+        /// </summary>
+        /// <param name="antalpersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaCamping(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
             List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("CAMP", antalpersoner, ankomst, avrese);
@@ -428,6 +355,13 @@ namespace BusinessLayer
             }
             return Faciliteter;
         }
+        /// <summary>
+        /// Beskriving 2 metoder upp. 
+        /// </summary>
+        /// <param name="antalpersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaKonferens(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
             List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("KONF", antalpersoner, ankomst, avrese);

@@ -138,13 +138,13 @@ namespace BusinessLayer
             int periodSlutdatum = (int)dateDifference.TotalDays;
 
             string utrustningsTyp = "Alpinskidor";
-            dataColumn2 = FindUtrustning(utrustningsTyp); // Data för Privatlektioner
+            dataColumn2 = FindUtrustning(utrustningsTyp); 
             utrustningsTyp = "Längdskidor";
-            dataColumn3 = FindUtrustning(utrustningsTyp); // Data för Privatlektioner
+            dataColumn3 = FindUtrustning(utrustningsTyp); 
             utrustningsTyp = "Snowboard";
-            dataColumn4 = FindUtrustning(utrustningsTyp); // Data för Privatlektioner
+            dataColumn4 = FindUtrustning(utrustningsTyp);
             utrustningsTyp = "Skoter";
-            dataColumn5 = FindUtrustning(utrustningsTyp); // Data för Privatlektioner
+            dataColumn5 = FindUtrustning(utrustningsTyp); 
 
             dataColumn4 = dataColumn4.Except(FindUtrustning("Snowboardboots")).ToList();
 

@@ -69,7 +69,7 @@ namespace BusinessLayer
                     (searchString == null || (b.BokningsID.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
                     (b.KundID.Privatkund != null && b.KundID.Privatkund.Namn().Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
                     (b.KundID.Företagskund != null && b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase)))) &&
-                    ((Ankomst == null || b.Ankomsttid == Ankomst) || (Avresa == null || b.Avresetid == Avresa)) &&
+                    ((Ankomst == null || b.Ankomsttid == Ankomst) && (Avresa == null || b.Avresetid == Avresa)) &&
                     (b.Bokningsstatus != Status.Makulerad),
                     x => x.KundID, x => x.KundID.Privatkund, x => x.KundID.Företagskund);
         }

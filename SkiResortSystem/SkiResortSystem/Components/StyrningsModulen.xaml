@@ -20,8 +20,27 @@
 
 
         </TabControl.Resources>
+        
+        <TabItem Header="RAPPORTER">
+            <Canvas>
+                <TextBlock Text="RAPPORTER" Canvas.Left="80" Canvas.Top="70" FontWeight="Bold"/>
 
-        <TabItem Header="STATISTIK">
+                <TextBlock Text="Välj rapport" Canvas.Left="80" Canvas.Top="170"/>
+                <ComboBox SelectedIndex="{Binding SelectedReport}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="195" Width="230" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20">
+                    <ComboBoxItem Content="Boende"/>
+                    <ComboBoxItem Content="Konferens"/>
+                    <ComboBoxItem Content="Aktiviteter"/>
+                    <ComboBoxItem Content="Utrustning"/>
+                    <ComboBoxItem Content="Kunder"/>
+                </ComboBox>
+
+                <Button Content="Skapa" Canvas.Top="250" Canvas.Left="95" HorizontalAlignment="Center" VerticalAlignment="Top" Width="188" Height="50" Command="{Binding CreateReport}"/>
+
+            </Canvas>
+
+
+        </TabItem>
+        <TabItem Header="STATISTIK" Visibility="Collapsed">
             <TabItem.Style>
                 <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                     <Style.Triggers>
@@ -36,50 +55,55 @@
                 <TextBlock Text="STATISTIK" Canvas.Left="80" Canvas.Top="70" FontWeight="Bold"/>
 
                 <TextBlock Text="Statistikuppgift" Canvas.Left="80" Canvas.Top="170"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="195" Width="230" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="195" Width="205" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
+                <ComboBox SelectedIndex="{Binding StatisticsType}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="195" Width="230" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" >
+                    <ComboBoxItem Content="Beläggningsstatistik"/>
+                    <ComboBoxItem Content="Försäljningsstatistik"/>
+                </ComboBox>
+                
 
                 <TextBlock Text="År" Canvas.Left="80" Canvas.Top="245"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="270" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="270" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ComboBox ItemsSource="{Binding StatisticYear}" SelectedItem="{Binding SelectedStatisticYear}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="270" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
 
 
                 <TextBlock Text="Månad/Säsong" Canvas.Left="230" Canvas.Top="245"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="230" Canvas.Top="270" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="230" Canvas.Top="270" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ComboBox SelectedItem="{Binding SelectedPeriod}" BorderBrush="White" Background="White" Canvas.Left="230" Canvas.Top="270" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" >
+                    <ComboBoxItem Content="Januari"/>
+                    <ComboBoxItem Content="Februari"/>
+                    <ComboBoxItem Content="Mars"/>
+                    <ComboBoxItem Content="April"/>
+                    <ComboBoxItem Content="Maj"/>
+                    <ComboBoxItem Content="Juni"/>
+                    <ComboBoxItem Content="Juli"/>
+                    <ComboBoxItem Content="Augusti"/>
+                    <ComboBoxItem Content="September"/>
+                    <ComboBoxItem Content="Oktober"/>
+                    <ComboBoxItem Content="November"/>
+                    <ComboBoxItem Content="December"/>
+                    <ComboBoxItem Content="Sommar"/>
+                    <ComboBoxItem Content="Vinter"/>
+                </ComboBox>
 
 
                 <TextBlock Text="Typ" Canvas.Left="80" Canvas.Top="320"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="345" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="345" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ComboBox SelectedIndex="{Binding SelectedUnitType}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="345" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" >
+                    <ComboBoxItem Content="Boende"/>
+                    <ComboBoxItem Content="Konferens"/>
+                    <ComboBoxItem Content="Aktiviteter"/>
+                    <ComboBoxItem Content="Utrustning"/>
+                </ComboBox>
 
 
                 <TextBlock Text="Summera på" Canvas.Left="80" Canvas.Top="395"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="420" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="420" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ComboBox ItemsSource="{Binding ColumnChoices}" SelectedItem="{Binding SelectedColumnChoices}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="420" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
 
-                <Button Content="SKAPA" Canvas.Left="304" Canvas.Top="401" HorizontalAlignment="Left" VerticalAlignment="Top" Width="129" Height="50"  />
-
-            </Canvas>
-
-
-        </TabItem>
-
-        <TabItem Header="RAPPORTER">
-            <Canvas>
-                <TextBlock Text="RAPPORTER" Canvas.Left="80" Canvas.Top="70" FontWeight="Bold"/>
-
-                <TextBlock Text="Välj rapport" Canvas.Left="80" Canvas.Top="170"/>
-                <ComboBox ItemsSource="{Binding SearchResults}" SelectedItem="{Binding SelectedCustomer}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="195" Width="230" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
-                <TextBox Background="White"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Canvas.Left="80" Canvas.Top="195" Width="205" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
-                <Button Content="Skapa" Canvas.Top="250" Canvas.Left="95" HorizontalAlignment="Center" VerticalAlignment="Top" Width="188" Height="50" />
+                <Button Content="SKAPA" Canvas.Left="304" Canvas.Top="401" HorizontalAlignment="Left" VerticalAlignment="Top" Width="129" Height="50" Command="{Binding CreateStatisticsReport}" />
 
             </Canvas>
 
 
         </TabItem>
+
+       
 
 
     </TabControl>

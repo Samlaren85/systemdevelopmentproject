@@ -124,9 +124,10 @@ namespace BusinessLayer
 
             List<Kund> x = unitOfWork.KundRepository
                 .Find(c =>
+                    !c.KundID.Equals("00000000-0000") && (
                     c.KundID.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
                     (c.Privatkund!= null && c.Privatkund.Namn().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
-                    (c.Företagskund != null && c.Företagskund.Företagsnamn.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)), x => x.Privatkund, x => x.Företagskund)
+                    (c.Företagskund != null && c.Företagskund.Företagsnamn.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))), x => x.Privatkund, x => x.Företagskund)
                 .ToList();
 
             return x;

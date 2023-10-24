@@ -36,6 +36,7 @@ namespace SkiResortSystem
                 WindowService.RegisterWindow<ActivityOverviewViewModel, ActivityOverview>();
                 WindowService.RegisterWindow<EquipmentOverviewViewModel, EquipmentOverview>();
                 WindowService.RegisterWindow<BillOverviewViewModel, BillOverview>();
+                WindowService.RegisterWindow<StatisticsOverviewViewModel, StatisticsOverview>();
             };
         }
     }

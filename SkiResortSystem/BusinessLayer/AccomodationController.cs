@@ -76,6 +76,18 @@ namespace BusinessLayer
             
             return söktaFaciliteter.Except(inaktuellaBokningar).ToList(); //Vad händer om första sökkriteriet blir null?!? ta bort efter testkörning
         }
+        
+        /// <summary>
+        /// Levererar en lista med alla faciliteter i databasen
+        /// </summary>
+        /// <returns></returns>
+        public IList<Facilitet> FindFaciliteter(string searchString)
+        {
+            IList<Facilitet> list;
+            if (searchString.Equals("Boende")) list = unitOfWork.FacilitetRepository.Find(f => f.KonferensID == null, l => l.LägenhetsID, c => c.CampingID);
+            else list = unitOfWork.FacilitetRepository.Find(f => f.KonferensID != null, k => k.KonferensID);
+            return list;
+        }
         public List<Facilitet> FindLedigaFaciliteter(string sökTerm, int antalPersoner)
         {
             List<Facilitet> faciliteter = FindLedigaFaciliteter(sökTerm);

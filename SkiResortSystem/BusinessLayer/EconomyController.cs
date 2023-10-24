@@ -54,7 +54,7 @@ namespace BusinessLayer
         }
 
         /// <summary>
-        /// CreateFaktura: skapar upp en faktura utifrån en befintlig boendebokning.
+        /// CreateFaktura: skapar upp en faktura utifrån en befintlig boendebokning. Hämtar pris data beroende på kundens bokning.
         /// </summary>
         /// <param name="kundensBokning"></param>
         /// <returns></returns>
@@ -67,12 +67,10 @@ namespace BusinessLayer
                 
                     if (kundensBokning.FacilitetID != null)
                     {
-                        foreach (Facilitet f in kundensBokning.FacilitetID)
                         {
-                                pris += f.FacilitetsPris.Pris;
+                                pris += kundensBokning.Totalpris;
                         };
                     }
-
 
                     if (kundensBokning.AktivitetRef != null)
                     {
@@ -91,33 +89,57 @@ namespace BusinessLayer
                     }
 
             
-            float moms = (float)(0.2 * pris);
             float avbeställningsskydd = 0;
             if (kundensBokning.Återbetalningsskydd.Equals(true))
             {
                 avbeställningsskydd = 300;
             }
-            float totalpris = (pris+moms);//ska hämta priset för allt som tillhör fakturan
+            float totalpris = (pris);
             float prisFaktura1 = (float)(totalpris*0.2) + avbeställningsskydd;
             float momsFaktura1 = (float)(prisFaktura1 * 0.2);
 
             float prisFaktura2 = (float)(totalpris * 0.8);
             float momsFaktura2 = (float)(prisFaktura2 * 0.2);
 
-            //Faktura #1 som avser 20% av totalbeloppet och ska betalas senast 30dagar efter bokningsdatum.
+            ///
+            /// Faktura #1 som avser 20% av totalbeloppet och ska betalas senast 30dagar efter bokningsdatum.
+            /// 
             Faktura faktura1 = new Faktura(fakturadatum, prisFaktura1, momsFaktura1, kundensBokning);
 
-            //Faktura #2 som avser 80% av totalbeloppet och ska vara betalt senast 30dagar före ankomst.
+            ///
+            /// Faktura #2 som avser 80% av totalbeloppet och ska vara betalt senast 30dagar före ankomst.
+            /// 
             Faktura faktura2 = new Faktura(fakturadatum, prisFaktura2, momsFaktura2, kundensBokning);
-            faktura2.Förfallodatum = kundensBokning.Avresetid.AddDays(-30);
+
+            /// 
+            /// If-satsen hanterar fakturornas förfallodatum.
+            /// 
+            if (kundensBokning.Avresetid >= DateTime.Today.AddDays(-30) && kundensBokning.Avresetid <= DateTime.Today)
+            {
+                // Bokningstillfället inträffar inom 30dagar och därför sätts förfallodatum till ankomstdagen.
+                faktura1.Förfallodatum = kundensBokning.Ankomsttid;
+                faktura2.Förfallodatum = kundensBokning.Ankomsttid;
+            }
+            else
+            {
+                // Fakturan avser en bokning längre fram i tiden än 30dagar och förfallodatum sätts till 30dagar innan bokningen äger rum.
+                faktura1.Förfallodatum = kundensBokning.Avresetid.AddDays(-30);
+                faktura2.Förfallodatum = kundensBokning.Avresetid.AddDays(-30);
+            }
+            
 
             unitOfWork.FakturaRepository.Add(faktura1);
             unitOfWork.FakturaRepository.Add(faktura2);
             unitOfWork.Save();
             kundensBokning.Betalningsstatus = Status.Obetald;
+
+            /// 
+            /// Fakturorna skrivs ut samt läggs i en mapp på datorns hårddisk för evt. senare utskriftsmöjlighet.
+            /// 
             PrintController.PrintController.Run(faktura1);
             PrintController.PrintController.Run(faktura2);
         }
+
         /// <summary>
         /// Metoden uppdaterar databasen med nytt värde.
         /// </summary>

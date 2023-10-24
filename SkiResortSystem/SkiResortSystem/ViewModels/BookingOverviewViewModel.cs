@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.DirectoryServices;
-//using DynamicPDFCoreSuite.Examples;
 using BusinessLayer.PrintController;
 
 namespace SkiResortSystem.ViewModels

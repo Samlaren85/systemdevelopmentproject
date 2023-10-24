@@ -77,21 +77,6 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-        /*private string searchFaktura;
-        public string SearchFaktura
-        {
-            get { return searchFaktura; }
-            set
-            {
-                if (value != null)
-                {
-                    searchFaktura = value;
-                    SearchBills(); if (searchFaktura == string.Empty) { FakturaResults = new List<Faktura>(); }
-                    OnPropertyChanged(SearchFaktura);
-                }
-            }
-        }*/
-
         private IList<Faktura> fakturaResults;
         public IList<Faktura> FakturaResults
         {
@@ -102,12 +87,6 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-        /*public void SearchBills()
-        {
-            EconomyController ec = new EconomyController();
-            FakturaSökning = ec.FindFaktura(SelectFaktura);
-        }*/
-
 
         private Faktura fakturaSökning;
         public Faktura FakturaSökning
@@ -142,6 +121,9 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// Visar felmeddelande om faktura fliken inte hanteras korrekt av användaren.
+        /// </summary>
         private string fakturaerrormsg { get; set; }
         public string Fakturaerrormsg
         {

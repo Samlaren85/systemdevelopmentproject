@@ -21,18 +21,6 @@ namespace BusinessLayer
         {
             unitOfWork = new UnitOfWork();
         }
-        /*
-        public Faktura FindFaktura(Bokning kundbokning)
-        {
-            return unitOfWork.FakturaRepository.FirstOrDefault(f => (f.Bokningsref.Equals(kundbokning.BokningsID)));
-        }*/ //Den här metoden används inte eller?! Kan i så fall ta bort det utkommenterade
-
-        /// <summary>
-        /// Metoden tar emot en fullständig lista med bokningar som sökts fram och hanterar endast de som i nuläget är ofakturerade.
-        /// Resultatet kommer sedan att användas vid skapande av fakturor för ofakturerade bokningar.
-        /// </summary>
-        /// <param name="Lista"></param>
-        /// <returns></returns>
         
         public List<Faktura> HämtaFaktureradeFakturor(IList<Bokning> Lista)
         {

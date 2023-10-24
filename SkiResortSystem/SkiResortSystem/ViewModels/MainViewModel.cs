@@ -86,6 +86,7 @@ namespace SkiResortSystem.ViewModels
                 if (value != visaBeläggning)
                 {
                     visaBeläggning = value;
+
                     // Överför listan för att skapa rader i tabellen av de inre listorna.
                     ÖverfördVisaBeläggning = Överförd(visaBeläggning);
                     OnPropertyChanged(nameof(VisaBeläggning));
@@ -248,7 +249,6 @@ namespace SkiResortSystem.ViewModels
                 {
                     case "1 - Systemadministratör": // ta bort all acces förutom Admin innan inlämning OBS! även boolen till false
                         Admin = Visibility.Visible;
-                        //UseShopOrReception = true;
                         Economy = Visibility.Visible;
                         MarketingManager = Visibility.Visible;
                         Customer = Visibility.Visible;
@@ -260,7 +260,6 @@ namespace SkiResortSystem.ViewModels
                         break;
                     case "2 - Reception":
                         Admin = Visibility.Collapsed;
-                        //UseShopOrReception = true;
                         Economy = Visibility.Collapsed;
                         MarketingManager = Visibility.Collapsed;
                         Customer = Visibility.Visible;
@@ -272,7 +271,6 @@ namespace SkiResortSystem.ViewModels
                         break;
                     case "3 - Skidshop":
                         Admin = Visibility.Collapsed;
-                        //UseShopOrReception = true;
                         Economy = Visibility.Collapsed;
                         MarketingManager = Visibility.Collapsed;
                         Customer = Visibility.Visible;
@@ -284,7 +282,6 @@ namespace SkiResortSystem.ViewModels
                         break;
                     case "4 - Ekonomi":
                         Admin = Visibility.Collapsed;
-                        //UseShopOrReception = true;
                         Economy = Visibility.Visible;
                         MarketingManager = Visibility.Collapsed;
                         Customer = Visibility.Collapsed;
@@ -296,7 +293,6 @@ namespace SkiResortSystem.ViewModels
                         break;
                     case "5 - Avdelningschef skidshop":
                         Admin = Visibility.Collapsed;
-                        //UseShopOrReception= true;
                         Economy = Visibility.Collapsed;
                         MarketingManager = Visibility.Collapsed;
                         Customer = Visibility.Visible;
@@ -308,7 +304,6 @@ namespace SkiResortSystem.ViewModels
                         break;
                     case "6 - Ekonomichef":
                         Admin = Visibility.Collapsed;
-                        //UseShopOrReception = true;
                         Economy = Visibility.Visible;
                         MarketingManager = Visibility.Collapsed;
                         Customer = Visibility.Visible;

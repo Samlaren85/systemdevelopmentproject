@@ -1,7 +1,6 @@
 ﻿using BusinessLayer;
 using BusinessLayer.PrintController;
 using ceTe.DynamicPDF.PageElements.BarCoding;
-//using DynamicPDFCoreSuite.Examples;
 using EntityLayer;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SkiResortSystem.Commands;
@@ -18,6 +17,9 @@ using System.Windows.Input;
 
 namespace SkiResortSystem.ViewModels
 {
+    /// <summary>
+    /// Vymodell för fakturaöversikten.
+    /// </summary>
     class BillOverviewViewModel : ObservableObject
     {
         private Faktura faktura;

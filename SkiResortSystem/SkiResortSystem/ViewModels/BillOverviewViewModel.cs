@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.PrintController;
 using ceTe.DynamicPDF.PageElements.BarCoding;
 using DynamicPDFCoreSuite.Examples;
 using EntityLayer;
@@ -84,7 +85,7 @@ namespace SkiResortSystem.ViewModels
         public ICommand SkrivUtFaktura =>
             skrivUtFaktura ??= skrivUtFaktura = new RelayCommand(() =>
             {
-                CreatePDF.Run(Faktura);
+                PrintController.Run(Faktura);
             });
 
         private ICommand closeCommand = null!;

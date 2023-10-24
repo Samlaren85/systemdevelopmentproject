@@ -12,6 +12,11 @@ namespace BusinessLayer.PrintController
 {
     public class Util
     {
+        /// <summary>
+        /// Nugetpackage för utskrivning av pdf
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         internal static string GetPath(string filePath)
         {
             var exePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
@@ -23,6 +28,9 @@ namespace BusinessLayer.PrintController
     }
     public class PrintController
     {
+        /// <summary>
+        /// NuGet package för upskrivning till PDF
+        /// </summary>
         public PrintController()
         {
 
@@ -60,8 +68,8 @@ namespace BusinessLayer.PrintController
             Document document = new Document();
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
             document.Pages.Add(page);
-            string labelText = $"Fakturadatum: {utrustningsbokning}\t\t\t\t\t\t\t\t\tFakturanummer: {utrustningsbokning}\n\nFörfallodatum: {utrustningsbokning}\n\n\n" +
-                $"Totalpris:{utrustningsbokning}\n\nStatus: {utrustningsbokning}\n\nKund: {utrustningsbokning}\n\nMoms: {utrustningsbokning}";
+            string labelText = $"Utrustningsbokning: {utrustningsbokning.UtrustningsbokningsID}\t\t\t\t\t\t\t\tUtlämnad: {utrustningsbokning.Hämtasut}\nÅterlämning: {utrustningsbokning.Lämnasin}\n\n\n" +
+                $"Gäller kund:{utrustningsbokning.Bokning.KundID.Namn}\n\nUtrustning: {utrustningsbokning.Utrustning.UtrustningsBenämning}\n\nUtrustningsID: {utrustningsbokning.Utrustning.UtrustningsID}";
             Label label = new Label(labelText, 0, 0, 704, 800, Font.Helvetica, 12, TextAlign.Left);
             page.Elements.Add(label);
             string uniqueFileName = $"Faktura_{utrustningsbokning.UtrustningsbokningsID}.pdf";

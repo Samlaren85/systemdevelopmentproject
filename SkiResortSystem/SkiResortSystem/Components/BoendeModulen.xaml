@@ -86,7 +86,6 @@
 
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding TotalprisFörPresentationIBoendeModul}"/>
-                        <!--<DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding FacilitetsPris.Pris}"/>-->
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="Antal personer" Canvas.Left="850" Canvas.Top="74" HorizontalAlignment="Left" VerticalAlignment="Top"/>

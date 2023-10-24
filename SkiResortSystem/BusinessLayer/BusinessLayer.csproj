@@ -15,9 +15,4 @@
     <ProjectReference Include="..\EntityLayer\EntityLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="PrintController\Bokningsbekräftelser\" />
-    <Folder Include="PrintController\Fakturor\" />
-  </ItemGroup>
-
 </Project>

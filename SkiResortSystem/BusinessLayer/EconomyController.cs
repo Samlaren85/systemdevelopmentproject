@@ -21,18 +21,6 @@ namespace BusinessLayer
         {
             unitOfWork = new UnitOfWork();
         }
-        /*
-        public Faktura FindFaktura(Bokning kundbokning)
-        {
-            return unitOfWork.FakturaRepository.FirstOrDefault(f => (f.Bokningsref.Equals(kundbokning.BokningsID)));
-        }*/ //Den här metoden används inte eller?! Kan i så fall ta bort det utkommenterade
-
-        /// <summary>
-        /// Metoden tar emot en fullständig lista med bokningar som sökts fram och hanterar endast de som i nuläget är ofakturerade.
-        /// Resultatet kommer sedan att användas vid skapande av fakturor för ofakturerade bokningar.
-        /// </summary>
-        /// <param name="Lista"></param>
-        /// <returns></returns>
         
         public List<Faktura> HämtaFaktureradeFakturor(IList<Bokning> Lista)
         {
@@ -96,10 +84,10 @@ namespace BusinessLayer
             }
             float totalpris = (pris);
             float prisFaktura1 = (float)(totalpris*0.2) + avbeställningsskydd;
-            float momsFaktura1 = (float)(prisFaktura1 * 0.2);
+            float momsFaktura1 = (float)(prisFaktura1/1.12);
 
             float prisFaktura2 = (float)(totalpris * 0.8);
-            float momsFaktura2 = (float)(prisFaktura2 * 0.2);
+            float momsFaktura2 = (float)(prisFaktura2 / 1.12);
 
             ///
             /// Faktura #1 som avser 20% av totalbeloppet och ska betalas senast 30dagar efter bokningsdatum.
@@ -114,7 +102,7 @@ namespace BusinessLayer
             /// 
             /// If-satsen hanterar fakturornas förfallodatum.
             /// 
-            if (kundensBokning.Avresetid >= DateTime.Today.AddDays(-30) && kundensBokning.Avresetid <= DateTime.Today)
+            if (kundensBokning.Ankomsttid >= DateTime.Today.AddDays(-30) && kundensBokning.Ankomsttid <= DateTime.Today)
             {
                 // Bokningstillfället inträffar inom 30dagar och därför sätts förfallodatum till ankomstdagen.
                 faktura1.Förfallodatum = kundensBokning.Ankomsttid;
@@ -136,8 +124,7 @@ namespace BusinessLayer
             /// 
             /// Fakturorna skrivs ut samt läggs i en mapp på datorns hårddisk för evt. senare utskriftsmöjlighet.
             /// 
-            PrintController.PrintController.Run(faktura1);
-            PrintController.PrintController.Run(faktura2);
+            PrintController.PrintController.Run(faktura1,faktura2);
         }
 
         /// <summary>

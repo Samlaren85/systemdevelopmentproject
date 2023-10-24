@@ -544,7 +544,6 @@ namespace SkiResortSystem.ViewModels
             else if(AntalNätter == 0)
             {
                 Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2);
-                Totalpris = totalpris * (1 - (Bokning.KundID.Rabatt / 100));
                 if (ValdKund.Rabatt != 0)
                 {
                     Totalpris = totalpris * (1 - (ValdKund.Rabatt / 100));
@@ -554,7 +553,6 @@ namespace SkiResortSystem.ViewModels
             else
             {
                 Totalpris = (float)Math.Round(Valdfacilitet.FacilitetsPris.Pris, 2) * AntalNätter;
-                Totalpris = totalpris * (1 - (Bokning.KundID.Rabatt / 100));
                 if (ValdKund.Rabatt != 0)
                 {
                     Totalpris = totalpris * (1 - (ValdKund.Rabatt / 100));

@@ -55,5 +55,17 @@ namespace BusinessLayer.PrintController
             string uniqueFileName = $"Faktura_{faktura.FakturaID}.pdf";
             document.Draw(Util.GetPath($"PrintController/Fakturor/{uniqueFileName}"));
         }
+        public static void Run(Utrustningsbokning utrustningsbokning)
+        {
+            Document document = new Document();
+            Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
+            document.Pages.Add(page);
+            string labelText = $"Fakturadatum: {utrustningsbokning}\t\t\t\t\t\t\t\t\tFakturanummer: {utrustningsbokning}\n\nFörfallodatum: {utrustningsbokning}\n\n\n" +
+                $"Totalpris:{utrustningsbokning}\n\nStatus: {utrustningsbokning}\n\nKund: {utrustningsbokning}\n\nMoms: {utrustningsbokning}";
+            Label label = new Label(labelText, 0, 0, 704, 800, Font.Helvetica, 12, TextAlign.Left);
+            page.Elements.Add(label);
+            string uniqueFileName = $"Faktura_{utrustningsbokning.UtrustningsbokningsID}.pdf";
+            document.Draw(Util.GetPath($"PrintController/Uthyrningsbokningar/{uniqueFileName}"));
+        }
     }
 }

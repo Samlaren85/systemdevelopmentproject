@@ -562,6 +562,7 @@ namespace SkiResortSystem.ViewModels
                 if (SelectedPickupReturn != null && SelectedPickupReturn.Utrustningsstatus == Status.Kommande && SelectedPickupReturn.Hämtasut == DateTime.Today)
                 {
                     SelectedPickupReturn.Utrustningsstatus = Status.Utlämnad;
+
                     OnPropertyChanged(nameof(CurrentEquipment));
                     CurrentEquipment = SearchPickupReturn(reportDate);
                 }

@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.PrintController;
 using EntityLayer;
 using Microsoft.VisualBasic;
 using SkiResortSystem.Commands;
@@ -562,6 +563,7 @@ namespace SkiResortSystem.ViewModels
                 if (SelectedPickupReturn != null && SelectedPickupReturn.Utrustningsstatus == Status.Kommande && SelectedPickupReturn.Hämtasut == DateTime.Today)
                 {
                     SelectedPickupReturn.Utrustningsstatus = Status.Utlämnad;
+                    PrintController.Run(SelectedPickupReturn);
                     OnPropertyChanged(nameof(CurrentEquipment));
                     CurrentEquipment = SearchPickupReturn(reportDate);
                 }

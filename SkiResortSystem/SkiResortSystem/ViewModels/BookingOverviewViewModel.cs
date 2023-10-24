@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.DirectoryServices;
 using DynamicPDFCoreSuite.Examples;
+using BusinessLayer.PrintController;
 
 namespace SkiResortSystem.ViewModels
 {
@@ -332,7 +333,8 @@ namespace SkiResortSystem.ViewModels
                 Bokning.Totalpris = Totalpris;
                 bc.SparaBokning(Bokning);
                 MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
-                CreatePDF.Run(Bokning);
+                PrintController.Run(Bokning);
+                //DETTA OCH konfigurera pdf i create
                 CloseCommand.Execute(view);
             }
         });

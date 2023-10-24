@@ -58,7 +58,7 @@ namespace BusinessLayer
         /// </summary>
         /// <param name="kundensBokning"></param>
         /// <returns></returns>
-        public Faktura CreateFaktura(Bokning kundensBokning)
+        public void CreateFaktura(Bokning kundensBokning)
         {
             DateTime fakturadatum = DateTime.Today;
             float pris = 0;
@@ -92,18 +92,31 @@ namespace BusinessLayer
 
             
             float moms = (float)(0.2 * pris);
-            int avbeställningsskydd = 0;
+            float avbeställningsskydd = 0;
             if (kundensBokning.Återbetalningsskydd.Equals(true))
             {
                 avbeställningsskydd = 300;
             }
-            float totalpris = (pris+moms+avbeställningsskydd);//ska hämta priset för allt som tillhör fakturan
-            Faktura faktura= new Faktura(fakturadatum, totalpris, moms, kundensBokning);
-            
-            unitOfWork.FakturaRepository.Add(faktura);
+            float totalpris = (pris+moms);//ska hämta priset för allt som tillhör fakturan
+            float prisFaktura1 = (float)(totalpris*0.2) + avbeställningsskydd;
+            float momsFaktura1 = (float)(prisFaktura1 * 0.2);
+
+            float prisFaktura2 = (float)(totalpris * 0.8);
+            float momsFaktura2 = (float)(prisFaktura2 * 0.2);
+
+            //Faktura #1 som avser 20% av totalbeloppet och ska betalas senast 30dagar efter bokningsdatum.
+            Faktura faktura1 = new Faktura(fakturadatum, prisFaktura1, momsFaktura1, kundensBokning);
+
+            //Faktura #2 som avser 80% av totalbeloppet och ska vara betalt senast 30dagar före ankomst.
+            Faktura faktura2 = new Faktura(fakturadatum, prisFaktura2, momsFaktura2, kundensBokning);
+            faktura2.Förfallodatum = kundensBokning.Avresetid.AddDays(-30);
+
+            unitOfWork.FakturaRepository.Add(faktura1);
+            unitOfWork.FakturaRepository.Add(faktura2);
             unitOfWork.Save();
             kundensBokning.Betalningsstatus = Status.Obetald;
-            return faktura;
+            PrintController.PrintController.Run(faktura1);
+            PrintController.PrintController.Run(faktura2);
         }
         /// <summary>
         /// Metoden uppdaterar databasen med nytt värde.

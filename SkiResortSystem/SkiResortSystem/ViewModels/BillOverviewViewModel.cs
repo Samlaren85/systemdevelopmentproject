@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.PrintController;
 using ceTe.DynamicPDF.PageElements.BarCoding;
 using DynamicPDFCoreSuite.Examples;
 using EntityLayer;

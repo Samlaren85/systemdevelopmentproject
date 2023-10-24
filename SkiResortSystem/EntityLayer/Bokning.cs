@@ -51,6 +51,7 @@ namespace EntityLayer
         public DateTime Ankomsttid { get; set; }
         public DateTime Avresetid { get; set; }
         public string AntalPersoner { get; set; }
+        public float Totalpris {  get; set; }
         public Användare AnvändareID { get; set; }
         public Kund KundID { get; set; }
 

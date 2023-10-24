@@ -330,19 +330,8 @@ namespace SkiResortSystem.ViewModels
             {
                     
                 Bokning.Återbetalningsskydd = Avbetalningsskydd;
-                //
-
-                //FRÅGA BOBBAN OM DETTA SKA EJ LÄGGAS TILL FÖR VARJE UTAN BARA + 300 i bokningen totalt.
-
-                //
-                //if(Avbetalningsskydd == true)
-                //{
-                //    foreach(Facilitet f in Bokning.FacilitetID)
-                //    {
-                //        f.FacilitetsPris.Pris = f.FacilitetsPris.Pris + 300;
-                //    }
-                //}
                 Bokning.Bokningsstatus = Status.Kommande;
+                
                 bc.SparaBokning(Bokning);
                 MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu sparad i systemet!");
                 PrintController.Run(Bokning);
@@ -518,10 +507,11 @@ namespace SkiResortSystem.ViewModels
             {
                 CheckaInReadOnly = true;
             }
-            if(Avresa == DateTime.Today && bokning.Bokningsstatus == Status.Incheckad && bokning.Bokningsstatus != Status.Utcheckad) 
+            if(Avresa.Date == DateTime.Today && bokning.Bokningsstatus == Status.Incheckad && bokning.Bokningsstatus != Status.Utcheckad) 
             {
-                CheckaInReadOnly = false;
                 CheckaUtReadOnly = true;
+                CheckaInReadOnly = false;
+
             }
         }
 

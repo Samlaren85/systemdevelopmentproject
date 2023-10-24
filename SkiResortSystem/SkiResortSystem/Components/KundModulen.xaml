@@ -26,7 +26,7 @@
         <TabItem Header="HANTERA KUND"  >
             <Grid>
                 <TextBlock  Text="SÖK KUND" Margin="94,41,1732,919" Width="AUTO" Height="auto"/>
-                <TextBlock  Text="Sök på: Personnummer/Namn/Efternamn/ORG-nummer/Företagsnamn" Width="auto" Height="auto" Margin="94,71,1117,919" FontStyle="Italic" />
+                <TextBlock  Text="Sök på: Personnummer/Namn/Efternamn/ORG-nummer/Företagsnamn" FontSize="12" Width="auto" Height="auto" Margin="94,71,1117,919" FontStyle="Italic" />
                 <TextBox Height="NaN" Margin="94,106,1321,890"  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
 
 

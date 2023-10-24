@@ -1,7 +1,7 @@
 ﻿using BusinessLayer;
 using BusinessLayer.PrintController;
 using ceTe.DynamicPDF.PageElements.BarCoding;
-using DynamicPDFCoreSuite.Examples;
+//using DynamicPDFCoreSuite.Examples;
 using EntityLayer;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SkiResortSystem.Commands;

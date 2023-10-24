@@ -346,6 +346,14 @@ namespace BusinessLayer
             return antal;
         }
         #region Metoder för att söka fram lediga boenden.
+        /// <summary>
+        /// Hämtar faciliteter utan bokning från databasen inom ett visst tidsspann. Får också med söksträng LGH, CAMP; eller KONF för att sortera på facilitetstyp
+        /// </summary>
+        /// <param name="sökTerm"></param>
+        /// <param name="antalPersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)
         {
             IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid < avrese && b.Avresetid > ankomst, X => X.FacilitetID);
@@ -364,6 +372,15 @@ namespace BusinessLayer
             return Faciliteter.Except(inaktuellFaciliteter).ToList();
         }
 
+
+        /// <summary>
+        /// beroende på vilken radiobutton iklickad i bookingviewmodel så anropas en av de 3 nedan metoder som hämtar tillgängliga faciliteter och tilldelar det
+        /// korrekta priset för boende/facilitetstyp och vecka.
+        /// /// </summary>
+        /// <param name="antalpersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaLägenheter(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
             List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("LGH", antalpersoner, ankomst, avrese);
@@ -398,6 +415,13 @@ namespace BusinessLayer
             }
             return Faciliteter;
         }
+        /// <summary>
+        /// Beskrivning i metoden ovan
+        /// </summary>
+        /// <param name="antalpersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaCamping(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
             List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("CAMP", antalpersoner, ankomst, avrese);
@@ -428,6 +452,13 @@ namespace BusinessLayer
             }
             return Faciliteter;
         }
+        /// <summary>
+        /// Beskriving 2 metoder upp. 
+        /// </summary>
+        /// <param name="antalpersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaKonferens(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
             List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("KONF", antalpersoner, ankomst, avrese);

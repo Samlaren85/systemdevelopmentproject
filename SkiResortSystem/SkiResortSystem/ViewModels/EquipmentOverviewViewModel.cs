@@ -27,8 +27,8 @@ namespace SkiResortSystem.ViewModels
         {
             Utrustningsbokningar = new ObservableCollection<Utrustningsbokning>(utrustningsbokningar);
             Bokning = bokning;
-
         }
+       
 
         private Utrustningsbokning selectedUtrustningsbokning;
         public Utrustningsbokning SelectedUtrustningsbokning

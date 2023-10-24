@@ -80,7 +80,9 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// NÄr man väljer en facilitet så öppnas bokningsöversikten för att skapa upp en ny bokning.
+        /// </summary>
         private ICommand doubleClickBookingCommand = null!;
         public ICommand DoubleClickBookingCommand =>
             doubleClickBookingCommand ??= doubleClickBookingCommand = new RelayCommand(() =>
@@ -98,6 +100,10 @@ namespace SkiResortSystem.ViewModels
                     windowService.ShowDialog(bokningsöversikt);
                 }
             });
+
+        /// <summary>
+        /// Öppnar upp bokningsöversikten för hantering/ändring av befintlig bokning, kan tas bort, 
+        /// </summary>
         private ICommand doubleClickBookingCommandÄndra = null!;
         public ICommand DoubleClickBookingCommandÄndra =>
             doubleClickBookingCommandÄndra ??= doubleClickBookingCommandÄndra = new RelayCommand(() =>

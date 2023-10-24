@@ -312,7 +312,7 @@ namespace SkiResortSystem.ViewModels
                         Admin = Visibility.Collapsed;
                         Economy = Visibility.Visible;
                         MarketingManager = Visibility.Collapsed;
-                        Customer = Visibility.Visible;
+                        Customer = Visibility.Collapsed;
                         Governance = Visibility.Visible;
                         CEO = Visibility.Collapsed;
                         Reception = Visibility.Collapsed;
@@ -336,7 +336,7 @@ namespace SkiResortSystem.ViewModels
                         //UseShopOrReception = true;
                         Economy = Visibility.Collapsed;
                         MarketingManager = Visibility.Collapsed;
-                        Customer = Visibility.Visible;
+                        Customer = Visibility.Collapsed;
                         Governance = Visibility.Visible;
                         CEO = Visibility.Visible;
                         Reception = Visibility.Collapsed;

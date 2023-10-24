@@ -6,8 +6,9 @@
     
     
     <Application.Resources>
-        
-        
+
+
+
         <Style TargetType="TabItem">
             
             <Setter Property="Background" Value="#FF5e8ec2" />
@@ -64,6 +65,8 @@
 
         <Style TargetType="DatePicker">
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+
         </Style>
 
 
@@ -148,6 +151,8 @@
             <Setter Property="Background" Value="LightGray"/>
             
         </Style>
+
+  
         
     </Application.Resources>
 </Application>

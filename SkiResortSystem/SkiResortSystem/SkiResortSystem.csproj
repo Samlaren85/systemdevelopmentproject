@@ -46,4 +46,10 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PDFGenerator\Bokningsbekräftelser\" />
+    <Folder Include="PDFGenerator\Fakturor\" />
+    <Folder Include="PrintController\Uthyrningsbokningar\" />
+  </ItemGroup>
+
 </Project>

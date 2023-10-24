@@ -86,7 +86,6 @@
 
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding TotalprisFörPresentationIBoendeModul}"/>
-                        <!--<DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding FacilitetsPris.Pris}"/>-->
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="Antal personer" Canvas.Left="850" Canvas.Top="74" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -115,7 +114,7 @@
                 <TextBox Text="{Binding SearchBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Top="85" Canvas.Left="80" Width="293" HorizontalAlignment="Left" VerticalAlignment="Center"  />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-                <TextBlock  Text="Sök på: Förnamn/Efternamn/Bokningsnummer/ORG-nummer"  Foreground="Black" Canvas.Left="80" Canvas.Top="55" FontStyle="Italic" />
+                <TextBlock  Text="Sök på: Förnamn/Efternamn/Bokningsnummer/ORG-nummer" FontSize="12"  Foreground="Black" Canvas.Left="80" Canvas.Top="55" FontStyle="Italic" />
                 <TextBlock Text="SÖK BOKNING/KONFERENS" Foreground="Black" Canvas.Left="80" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                 <DatePicker Canvas.Top="85" Canvas.Left="576" SelectedDate="{Binding AnkomsttidÄndra}" HorizontalAlignment="Left" VerticalAlignment="Center"/>

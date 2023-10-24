@@ -23,7 +23,7 @@
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="SÖK BOENDEBOKNING" Canvas.Left="80" Canvas.Top="45"/>
-                <TextBlock  Text="Sök på: Namn/Efternamn/Bokningsnummer/Företagsnamn"  Foreground="Black" Canvas.Left="80" Canvas.Top="76" FontStyle="Italic" />
+                <TextBlock  Text="Sök på: Namn/Efternamn/Bokningsnummer/Företagsnamn" FontSize="12" Foreground="Black" Canvas.Left="80" Canvas.Top="76" FontStyle="Italic" />
                 <ComboBox TabIndex="1" ItemsSource="{Binding ActivityBookingResults}" SelectedItem="{Binding SelectedActivityBooking}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox TabIndex="0" Background="White"  Text="{Binding SearchActivityBooking, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -74,12 +74,12 @@
         </TabItem>
 
 
-        <TabItem Header="HANTERA AKTIVITETER" >
+        <TabItem Header="HANTERA &#10; AKTIVITETSBOKNINGAR" >
 
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="45"/>
-                <TextBlock  Text="Sök på: Personnummer/Förnamn/Efternamn/Org-nummer/Företagsnamn"  Foreground="Black" Canvas.Left="80" Canvas.Top="76" FontStyle="Italic" />
+                <TextBlock  Text="Sök på: Personnummer/Förnamn/Efternamn/Org-nummer/Företagsnamn" FontSize="12" Foreground="Black" Canvas.Left="80" Canvas.Top="76" FontStyle="Italic" />
                 <ComboBox ItemsSource="{Binding SearchActivityCustomerResults}" SelectedItem="{Binding SelectedActivityCustomer}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchActivityCustomer, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding ActivityCustomerError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -115,7 +115,7 @@
             <Canvas Height="auto" Width="1760">
 
                 <TextBlock Text="SÖK BOENDEBOKNING" Canvas.Left="80" Canvas.Top="45"/>
-                <TextBlock  Text="Sök på: Namn/Efternamn/Bokningsnummer/Företagsnamn"  Foreground="Black" Canvas.Left="80" Canvas.Top="76" FontStyle="Italic" />
+                <TextBlock  Text="Sök på: Namn/Efternamn/Bokningsnummer/Företagsnamn" FontSize="12"  Foreground="Black" Canvas.Left="80" Canvas.Top="76" FontStyle="Italic" />
                 <ComboBox ItemsSource="{Binding SearchEquipmentOrderResults}" SelectedItem="{Binding SelectedEquipmentOrder}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchEquipmentOrder, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -125,7 +125,7 @@
                         <DataGridTemplateColumn Header="UTRUSTNING" Width="2*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=TypAvUtrustning}"/>
+                                    <TextBlock Text="{Binding Path=TypAvUtrustning, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellEditingTemplate>
@@ -142,7 +142,7 @@
                         <DataGridTemplateColumn Header="FRÅN" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding Path=FrånDatum}"/>
+                                    <DatePicker SelectedDate="{Binding Path=FrånDatum, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellStyle>
@@ -154,7 +154,7 @@
                         <DataGridTemplateColumn Header="TILL" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding Path=TillDatum}"/>
+                                    <DatePicker SelectedDate="{Binding Path=TillDatum, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellStyle>
@@ -167,7 +167,7 @@
                         <DataGridTextColumn Header="PRIS" Width="*" IsReadOnly="True" Binding="{Binding Path=Pris}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="678" Canvas.Top="455" HorizontalAlignment="Left" VerticalAlignment="Top" />
+               
 
                 <Button Content="➕" Command="{Binding AddEquipmentRow}" Canvas.Left="808" Canvas.Top="583"/>
                 <Button Content="➖" Command="{Binding RemoveEquipmentRow}" Canvas.Left="775" Canvas.Top="583"/>
@@ -189,11 +189,11 @@
         </TabItem>
 
 
-        <TabItem Header="HANTERA UTRUSTNING" >
+        <TabItem Header="HANTERA &#10; UTRUSTNINGSBOKNINGAR" >
             <Canvas Height="auto" Width="1760" Margin="0,1,0,-1">
 
                 <TextBlock Text="SÖK KUND" Canvas.Left="80" Canvas.Top="45"/>
-                <TextBlock  Text="Sök på: Personnummer/Förnamn/Efternamn/Org-nummer/Företagsnamn"  Foreground="Black" Canvas.Left="80" Canvas.Top="76" FontStyle="Italic" />
+                <TextBlock  Text="Sök på: Personnummer/Förnamn/Efternamn/Org-nummer/Företagsnamn" FontSize="12"  Foreground="Black" Canvas.Left="80" Canvas.Top="76" FontStyle="Italic" />
                 <ComboBox ItemsSource="{Binding SearchEquipmentCustomerResults}" SelectedItem="{Binding SelectedEquipmentCustomer}" IsDropDownOpen="{Binding ÖppnaDropDown}" BorderBrush="White" Background="White" Canvas.Left="80" Canvas.Top="104" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" />
                 <TextBox Background="White"  Text="{Binding SearchEquipmentCustomer, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding EquipmentCustomerError}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />

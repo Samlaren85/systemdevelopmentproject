@@ -118,9 +118,21 @@ namespace SkiResortSystem.ViewModels
                     }
                     if (f.FacilitetsPris != null)
                     {
-                        Pris.Add(f.FacilitetsPris.Pris.ToString());
+                        Pris.Add(f.TotalprisFörPresentationIBoendeModul.ToString());
 
                     }
+                }
+            }
+            if (Bokning.Fakturaref != null && Bokning.Återbetalningsskydd.Equals(true))
+            {
+                Faktura fakturaFörKontroll = Bokning.Fakturaref.Min();
+                int result = faktura.CompareTo(fakturaFörKontroll);
+                if (result.Equals(1))
+                {
+                    string återbetalningskydd = "Återbetalningskydd";
+                    string prisÅb = "300";
+                    Artikel.Add(återbetalningskydd);
+                    Pris.Add(prisÅb);
                 }
             }
            

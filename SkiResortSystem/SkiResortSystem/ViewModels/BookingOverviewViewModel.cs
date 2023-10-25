@@ -469,7 +469,7 @@ namespace SkiResortSystem.ViewModels
                     Totalpris = (float)Math.Round(f.FacilitetsPris.Pris, 2) * AntalNätter;
                 }
             }
-            VaravMoms = (float)Math.Round(Totalpris*0.2, 2);
+            VaravMoms = (float)Math.Round(Totalpris-(Totalpris/1.12), 2);
             string Benämning = string.Empty;
             foreach (Facilitet f in  bokning.FacilitetID)
             {
@@ -576,10 +576,7 @@ namespace SkiResortSystem.ViewModels
                 }
 
             }
-            VaravMoms = (float)(Totalpris * 0.2);
-            VaravMoms = (float)Math.Round(VaravMoms, 2);
-            
-
+            VaravMoms = (float)Math.Round(Totalpris - (Totalpris / 1.12), 2);
 
             if (Valdfacilitet.LägenhetsID != null)
             {

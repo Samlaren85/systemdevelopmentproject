@@ -22,7 +22,9 @@ namespace SkiResortSystem.ViewModels
             get { return password; }
             set { password = value; OnPropertyChanged(); }
         }
-
+        /// <summary>
+        /// kontroll för inlogg
+        /// </summary>
         private ICommand logInCommand = null!;
         public ICommand LogInCommand =>
             logInCommand ??= logInCommand = new RelayCommand<ICloseable>((view) =>

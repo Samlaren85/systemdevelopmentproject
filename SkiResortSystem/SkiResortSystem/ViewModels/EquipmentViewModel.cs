@@ -341,7 +341,11 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Söker utrustningsbokningar
+        /// </summary>
+        /// <param name="reportDate"></param>
+        /// <returns></returns>
         public IList<Utrustningsbokning> SearchPickupReturn(DateTime? reportDate)
         {
             EquipmentController equipmentController = new EquipmentController();

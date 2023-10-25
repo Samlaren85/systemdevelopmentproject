@@ -38,7 +38,9 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Sparar bokad aktivitet
+        /// </summary>
         private ICommand saveActivityBooking;
         public ICommand SaveActivityBookingCommand =>
             saveActivityBooking ??= saveActivityBooking = new RelayCommand<ICloseable>((view) =>
@@ -54,6 +56,9 @@ namespace SkiResortSystem.ViewModels
                 }
                 closeActivityBooking.Execute(view);
             });
+        /// <summary>
+        /// tar bort bokad aktivitet
+        /// </summary>
         private ICommand removeActivityBooking;
         public ICommand RemoveActivityBookingCommand =>
             removeActivityBooking ??= removeActivityBooking = new RelayCommand(() =>
@@ -62,6 +67,10 @@ namespace SkiResortSystem.ViewModels
                 ac.RemoveAktivityBooking(aktivitetsbokning); 
                 Activities.Remove(aktivitetsbokning);
             });
+
+        /// <summary>
+        /// stänger fönstret
+        /// </summary>
         private ICommand closeActivityBooking;
         public ICommand CloseActivityBookingCommand =>
             closeActivityBooking ??= closeActivityBooking = new RelayCommand<ICloseable>((view) =>

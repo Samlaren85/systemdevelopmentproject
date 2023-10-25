@@ -40,6 +40,9 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         } 
+        /// <summary>
+        /// sparar utrustningsbokning
+        /// </summary>
 
         private ICommand saveEquipment = null;
         public ICommand SaveEquipment =>
@@ -49,6 +52,9 @@ namespace SkiResortSystem.ViewModels
                 controller.SaveEquipmentBooking(Utrustningsbokningar.ToList());
                 CloseCommand.Execute(closeable);
             });
+        /// <summary>
+        /// tar bort utrustningsbokning
+        /// </summary>
         private ICommand removeEquipment = null;
         public ICommand RemoveEquipment =>
             removeEquipment ??= removeEquipment = new RelayCommand<ICloseable>((closeable) =>
@@ -61,6 +67,9 @@ namespace SkiResortSystem.ViewModels
                     OnPropertyChanged(nameof(Utrustningsbokningar));
                 }
             });
+        /// <summary>
+        /// stänger fönster
+        /// </summary>
         private ICommand closeCommand = null;
         public ICommand CloseCommand =>
             closeCommand ??= closeCommand = new RelayCommand<ICloseable>((closeable) =>

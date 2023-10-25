@@ -413,6 +413,10 @@ namespace SkiResortSystem.ViewModels
             {
                 ErrorMessage2 = "Tiden från måste vara tidigare än tiden till!";
             }
+            if(Konferensradiobutton == true && (Avresetid < DateTime.Today || Ankomsttid < DateTime.Today))
+            {
+                ErrorMessage2 = "Ankomst- och avresedatum måst vara senare än dagens datum";
+            }
             else if (Konferensradiobutton == false)
             {
                 if (Ankomsttid < DateTime.Today || Avresetid < DateTime.Today)

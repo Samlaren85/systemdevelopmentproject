@@ -27,7 +27,7 @@
                 <TextBox x:Name="myTextbox"  Width="300" Canvas.Top="105" Canvas.Left="80" Text="{Binding SökFaktureradeFakturor, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <DataGrid Width="908" Height="430" ItemsSource="{Binding FaktureradeFakturor }" SelectedItem="{Binding Path=SelectFaktura}"  IsReadOnly="True"
-           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170" SelectionChanged="DataGrid_SelectionChanged_1">
+           CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="170">
                     <DataGrid.InputBindings>
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBillingCommand}"/>
                     </DataGrid.InputBindings>

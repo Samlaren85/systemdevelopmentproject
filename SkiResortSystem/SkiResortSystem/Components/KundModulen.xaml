@@ -48,7 +48,7 @@
 
 
                 </DataGrid>
-                <Button Visibility="{Binding IsCurrentUserMarketingManager, Converter={StaticResource BooleanToVisibilityConverter}}" Content="LÄGG TILL FÖRETAGSKUND" Height="50" Width="240" HorizontalAlignment="Left"  Margin="933,108,0,0" VerticalAlignment="Top" Command="{Binding CustomerCompanyOverview}" Click="Button_Click">
+                <Button Visibility="{Binding IsCurrentUserMarketingManager, Converter={StaticResource BooleanToVisibilityConverter}}" Content="LÄGG TILL FÖRETAGSKUND" Height="50" Width="240" HorizontalAlignment="Left"  Margin="933,108,0,0" VerticalAlignment="Top" Command="{Binding CustomerCompanyOverview}">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn ="{StaticResource {x:Type Button}}">
                             <Style.Triggers>

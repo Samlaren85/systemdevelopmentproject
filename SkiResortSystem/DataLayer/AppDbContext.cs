@@ -87,6 +87,18 @@ namespace DataLayer
         /// </summary>
         private void Seed()
         {
+            if (!Behörigheter.Any())
+            {
+                Behörigheter.Add(new Behörighet("1 - Systemadministratör"));
+                Behörigheter.Add(new Behörighet("2 - Reception"));
+                Behörigheter.Add(new Behörighet("3 - Skidshop"));
+                Behörigheter.Add(new Behörighet("4 - Ekonomi"));
+                Behörigheter.Add(new Behörighet("5 - Avdelningschef skidshop"));
+                Behörigheter.Add(new Behörighet("6 - Ekonomichef"));
+                Behörigheter.Add(new Behörighet("7 - Marknadschef"));
+                Behörigheter.Add(new Behörighet("8 - Verkställande Direktör"));
+
+            }
             if (!Roller.Any())
             {
                 Roller.Add(new Roll("Admin", new List<Behörighet>()));

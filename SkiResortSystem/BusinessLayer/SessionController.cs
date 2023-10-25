@@ -67,6 +67,12 @@ namespace BusinessLayer
             { throw new ApplicationException("Inloggning misslyckad!\nEn användare är redan inloggad i systemet"); }
 
         }
+
+        private static Behörighet FindBehörighet(string number)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork();
+            return unitOfWork.BehörighetsRepository.FirstOrDefault(b => b.Behörighetstyp.Contains(number));
+        }
         /// <summary>
         /// Metoden lägger till behörighetsnivå/typ och roll för inloggande användare.
         /// </summary>
@@ -78,91 +84,84 @@ namespace BusinessLayer
             {
                 if (användare.UserType == 1) //Inloggad som systemadministratör
                 {
-                    Behörighet användarBehörighet = new Behörighet("1 - Systemadministratör");
+                    
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Systemadministratör";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
                     
-                    användare.RollID.BehörighetID.Add(användarBehörighet);
+                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 2) //Inloggad som receptionist
                 {
-                    Behörighet användarBehörighet = new Behörighet("2 - Reception");
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Receptionist";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(användarBehörighet);
+                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 3) //Inloggad som Skidshop
                 {
-                    Behörighet användarBehörighet = new Behörighet("3 - Skidshop");
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Skidshopspersonal";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(användarBehörighet);
+                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 4) //Inloggad som avdelningschef reception
                 {
-                    Behörighet användarBehörighet = new Behörighet("4 - Ekonomi");
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Ekonomianställd";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(användarBehörighet);
+                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 5) //Inloggad som avdelningschef skidshop
                 {
-                    Behörighet användarBehörighet = new Behörighet("5 - Avdelningschef skidshop");
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Avdelningschef";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(användarBehörighet);
+                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 6) //Inloggad som ekonomichef
                 {
-                    Behörighet användarBehörighet = new Behörighet("6 - Ekonomichef");
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Ekonomichef";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(användarBehörighet);
+                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 7) //Inloggad som marknadschef
                 {
-                    Behörighet användarBehörighet = new Behörighet("7 - Marknadschef");
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "Marknadschef";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(användarBehörighet);
+                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 8) //Inloggad som VD
                 {
-                    Behörighet användarBehörighet = new Behörighet("8 - Verkställande Direktör");
                     if (användare.RollID != null)
                     {
                         användare.RollID.Rolltyp = "VD";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(användarBehörighet);
+                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
             }

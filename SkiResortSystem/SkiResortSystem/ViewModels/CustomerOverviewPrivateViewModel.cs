@@ -209,6 +209,10 @@ namespace SkiResortSystem.ViewModels
             Kreditgräns = laddadKund.Kreditgräns;
             IsCurrentUserMarketingManager = marketingmanager;
         }
+
+        /// <summary>
+        /// sparar kund
+        /// </summary>
         private ICommand saveCustomer = null!;
         public ICommand SaveCustomer =>
             saveCustomer ??= saveCustomer = new RelayCommand<ICloseable>((view) =>
@@ -239,6 +243,9 @@ namespace SkiResortSystem.ViewModels
                     }
                 }
             });
+        /// <summary>
+        /// tar bort kund
+        /// </summary>
         private ICommand removeCustomer = null!;
         public ICommand RemoveCustomer =>
             removeCustomer ??= removeCustomer = new RelayCommand<ICloseable>((view) =>
@@ -269,6 +276,9 @@ namespace SkiResortSystem.ViewModels
                     MessageBoxResult respons = MessageBox.Show($"Ingen kund är vald för att ta bort!", "Borttagen kund");
                 }
             });
+        /// <summary>
+        /// stänger fönstret
+        /// </summary>
         private ICommand closeCommand = null;
         public ICommand CloseCommand =>
             closeCommand ??= closeCommand = new RelayCommand<ICloseable>((closeable) =>

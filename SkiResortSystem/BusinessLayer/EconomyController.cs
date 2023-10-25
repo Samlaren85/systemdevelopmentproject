@@ -91,6 +91,8 @@ namespace BusinessLayer
 
             ///
             /// Faktura #1 som avser 20% av totalbeloppet och ska betalas senast 30dagar efter bokningsdatum.
+            /// Observera att beloppet på faktura1 kan bli högre än faktura2 trots att faktura1 motsvarar 20% av totalbeloppet.
+            /// Detta är avhängt på att kostnaden för avbeställningsskydd ligger på faktura1 (300SEK)
             /// 
             Faktura faktura1 = new Faktura(fakturadatum, prisFaktura1, momsFaktura1, kundensBokning);
 

@@ -313,7 +313,14 @@ namespace BusinessLayer
             }
             foreach (Facilitet f in Faciliteter)
             {
-                f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("LGH") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka); 
+                if(f.LägenhetsID.LägenhetBenämning == "Lägenhet 1")
+                {
+                    f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("LGH1") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                }
+                if (f.LägenhetsID.LägenhetBenämning == "Lägenhet 2")
+                {
+                    f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("LGH2") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                }
                 unitOfWork.Save();
             }
             return Faciliteter;
@@ -369,13 +376,14 @@ namespace BusinessLayer
             int weekNumber = GetIso8601WeekOfYear(date);
             string bokningstyp;
             TimeSpan tidsspann = avrese - ankomst;
-            if (tidsspann.Days == 1)
-            {
-                bokningstyp = "Dygn";
-            }
-            else if(tidsspann.Hours <= 5)
+            
+            if(tidsspann.Hours <= 5 && tidsspann.Days == 0)
             {
                 bokningstyp = "Tim";
+            }
+            else if (tidsspann.Days < 7 || tidsspann.Hours > 5 && tidsspann.Days == 0)
+            {
+                bokningstyp = "Dygn";
             }
             else
             {
@@ -391,7 +399,14 @@ namespace BusinessLayer
             }
             foreach (Facilitet f in Faciliteter)
             {
-                f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("pers") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                if (f.KonferensID.KonferensBenämning == "Stor 50 pers")
+                {
+                    f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("50pers") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                }
+                if (f.KonferensID.KonferensBenämning == "Liten 20 pers")
+                {
+                    f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("20pers") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                }
                 unitOfWork.Save();
             }
             return Faciliteter;

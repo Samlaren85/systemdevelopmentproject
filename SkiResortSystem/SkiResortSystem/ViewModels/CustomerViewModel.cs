@@ -71,6 +71,9 @@ namespace SkiResortSystem.ViewModels
             set { epost = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// skapar privatkund
+        /// </summary>
         private ICommand createPrivateCustomer = null!;
 
         public ICommand CreatePrivateCustomer => createPrivateCustomer ??= new RelayCommand(() =>
@@ -201,7 +204,11 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// söker kund
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         private IList<Kund> SearchCustomers(string searchString)
         {
             List<Kund> results;
@@ -236,7 +243,9 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// väljer kund från listan öppnar upp översikt
+        /// </summary>
         private ICommand doubleClickCustomerCommand = null!;
         public ICommand DoubleClickCustomerCommand =>
             doubleClickCustomerCommand ??= doubleClickCustomerCommand = new RelayCommand(() =>
@@ -252,7 +261,9 @@ namespace SkiResortSystem.ViewModels
                     windowService.ShowDialog(kundöversikt);
                 }
             });
-
+        /// <summary>
+        /// skapar företagskund
+        /// </summary>
         private ICommand createBusinessCustomer = null!;
 
         public ICommand CreateBusinessCustomer => createBusinessCustomer ??= createBusinessCustomer = new RelayCommand(() =>
@@ -268,7 +279,9 @@ namespace SkiResortSystem.ViewModels
                 windowService.ShowDialog(kundöversikt);
             }
             );
-
+        /// <summary>
+        /// Öppnar upp kundöversikt för företagskund
+        /// </summary>
         private ICommand customerCompanyOverview = null!;
         public ICommand CustomerCompanyOverview =>
             customerCompanyOverview ??= customerCompanyOverview = new RelayCommand(() =>

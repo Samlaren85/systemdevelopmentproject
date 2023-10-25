@@ -4,6 +4,9 @@ namespace DataLayer
 {
     public class UnitOfWork
     {
+        /// <summary>
+        /// Hanterar olika databasrepositoriesarna
+        /// </summary>
         protected AppDbContext appDbContext { get; }
         public Repository<Kund> KundRepository { get; private set; }
         public Repository<Aktivitet> AktivitetRepository { get; private set; }

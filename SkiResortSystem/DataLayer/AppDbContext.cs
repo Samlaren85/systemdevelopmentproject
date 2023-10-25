@@ -68,6 +68,10 @@ namespace DataLayer
             }
         }
 
+
+        /// <summary>
+        /// Seedning av all data.
+        /// </summary>
         private void Seed()
         {
             if (!Roller.Any())
@@ -596,7 +600,7 @@ namespace DataLayer
                     new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Vecka", Vecka = 12, Pris = 4500 },
                     new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Vecka", Vecka = 13, Pris = 4500 },
                     new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Vecka", Vecka = 14, Pris = 7500 },
-                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Vecka", Vecka = 23, Pris = 4500 }
+                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Vecka", Vecka = 23, Pris = 3500 }
                 };
                 FacilitetsPriser.AddRange(prisDataKonferens50persVecka);
                 List<FacilitetsPris> prisDataKonferens50persDygn = new List<FacilitetsPris>
@@ -615,9 +619,9 @@ namespace DataLayer
                     new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Dygn", Vecka = 10, Pris = 1200 },
                     new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Dygn", Vecka = 11, Pris = 1200 },
                     new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Dygn", Vecka = 12, Pris = 1200 },
-                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Dygn", Vecka = 13, Pris = 1200 },
-                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Dygn", Vecka = 14, Pris = 1500 },
-                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Dygn", Vecka = 23, Pris = 1200 }
+                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Dygn", Vecka = 13, Pris = 1500 },
+                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Dygn", Vecka = 14, Pris = 1200 },
+                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Dygn", Vecka = 23, Pris = 800 }
                 };
                 FacilitetsPriser.AddRange(prisDataKonferens50persDygn);
                 List<FacilitetsPris> prisDataKonferens50persTim = new List<FacilitetsPris>
@@ -636,9 +640,9 @@ namespace DataLayer
                     new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Tim", Vecka = 10, Pris = 250 },
                     new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Tim", Vecka = 11, Pris = 250 },
                     new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Tim", Vecka = 12, Pris = 250 },
-                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Tim", Vecka = 13, Pris = 250 },
-                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Tim", Vecka = 14, Pris = 300 },
-                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Tim", Vecka = 23, Pris = 250 }
+                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Tim", Vecka = 13, Pris = 300 },
+                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Tim", Vecka = 14, Pris = 250 },
+                    new FacilitetsPris { FacilitetTyp = "50pers", BokningTyp = "Tim", Vecka = 23, Pris = 200 }
                 };
                 FacilitetsPriser.AddRange(prisDataKonferens50persTim);
                 List<FacilitetsPris> prisDataKonferens20persVecka = new List<FacilitetsPris>
@@ -657,9 +661,9 @@ namespace DataLayer
                     new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Vecka", Vecka = 10, Pris = 3500 },
                     new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Vecka", Vecka = 11, Pris = 3500 },
                     new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Vecka", Vecka = 12, Pris = 3500 },
-                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Vecka", Vecka = 13, Pris = 3500 },
-                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Vecka", Vecka = 14, Pris = 6000 },
-                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Vecka", Vecka = 23, Pris = 3500 }
+                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Vecka", Vecka = 13, Pris = 6000 },
+                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Vecka", Vecka = 14, Pris = 3500 },
+                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Vecka", Vecka = 23, Pris = 2500 }
                 };
                 FacilitetsPriser.AddRange(prisDataKonferens20persVecka);
                 List<FacilitetsPris> prisDataKonferens20persDygn = new List<FacilitetsPris>
@@ -678,9 +682,9 @@ namespace DataLayer
                     new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Dygn", Vecka = 10, Pris = 850 },
                     new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Dygn", Vecka = 11, Pris = 850 },
                     new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Dygn", Vecka = 12, Pris = 850 },
-                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Dygn", Vecka = 13, Pris = 850 },
-                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Dygn", Vecka = 14, Pris = 1150 },
-                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Dygn", Vecka = 23, Pris = 850 }
+                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Dygn", Vecka = 13, Pris = 1150 },
+                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Dygn", Vecka = 14, Pris = 850 },
+                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Dygn", Vecka = 23, Pris = 650 }
                 };
                 FacilitetsPriser.AddRange(prisDataKonferens20persDygn);
                 List<FacilitetsPris> prisDataKonferens20persTim = new List<FacilitetsPris>
@@ -699,9 +703,9 @@ namespace DataLayer
                     new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Tim", Vecka = 10, Pris = 155 },
                     new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Tim", Vecka = 11, Pris = 155 },
                     new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Tim", Vecka = 12, Pris = 155 },
-                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Tim", Vecka = 13, Pris = 155 },
-                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Tim", Vecka = 14, Pris = 200 },
-                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Tim", Vecka = 23, Pris = 155 }
+                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Tim", Vecka = 13, Pris = 200 },
+                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Tim", Vecka = 14, Pris = 155 },
+                    new FacilitetsPris { FacilitetTyp = "20pers", BokningTyp = "Tim", Vecka = 23, Pris = 115 }
                 };
 
                 FacilitetsPriser.AddRange(prisDataKonferens20persTim);

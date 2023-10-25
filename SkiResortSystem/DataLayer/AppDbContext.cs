@@ -114,12 +114,11 @@ namespace DataLayer
 
             if (!Kunder.Any())
             {
+                Privatkund pkund = new Privatkund("00000000-0000", "Anonym", "Anonym");
+                Kund kund = new Kund(0, 0, "-", "-", "-", "-", "-", null, pkund);
+                Kunder.Add(kund);
                 if (_test)
                 {
-                    Privatkund pkund = new Privatkund("00000000-0000", "Anonym", "Anonym");
-                    Kund kund = new Kund(0, 0, "-", "-", "-", "-", "-", null, pkund);
-                    Kunder.Add(kund);
-
                     pkund = new Privatkund("990106", "Börje", "Lundin");
                     kund = new Kund(10f, 12000, "Ekliden", "5190", "sandared", "112-1121121", "borje@mail.com", null, pkund);
                     Kunder.Add(kund);

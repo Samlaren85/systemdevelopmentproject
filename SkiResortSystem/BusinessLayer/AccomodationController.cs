@@ -376,13 +376,14 @@ namespace BusinessLayer
             int weekNumber = GetIso8601WeekOfYear(date);
             string bokningstyp;
             TimeSpan tidsspann = avrese - ankomst;
-            if (tidsspann.Days == 1)
-            {
-                bokningstyp = "Dygn";
-            }
-            else if(tidsspann.Hours <= 5)
+            
+            if(tidsspann.Hours <= 5 && tidsspann.Days == 0)
             {
                 bokningstyp = "Tim";
+            }
+            else if (tidsspann.Days < 7 || tidsspann.Hours > 5 && tidsspann.Days == 0)
+            {
+                bokningstyp = "Dygn";
             }
             else
             {

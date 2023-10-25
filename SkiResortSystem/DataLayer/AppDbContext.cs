@@ -215,6 +215,13 @@ namespace DataLayer
 
             if (!Aktiviteter.Any())
             {
+                List<string> personer = new List<string>
+                    {
+                        "Ingemar Stenmark", "Pernilla Wiberg", "Anja Pärson", "André Myhrer", "Fredrik Nyberg",
+                        "Thomas Fogdö", "Ylva Nowén", "Frida Hansdotter", "Sara Hector", "Maria Pietilä Holmner",
+                        "Lars-Börje Eriksson", "Jonas Nilsson", "Stig Strand", "Markus Larsson", "Jens Byggmark"
+                    };
+
                 Grupplektion grönMO = new Grupplektion("Grön", 400, 15);
                 Grupplektioner.Add(grönMO);
                 Grupplektion blåMO = new Grupplektion("Blå", 415, 15);
@@ -233,19 +240,55 @@ namespace DataLayer
                 Grupplektioner.Add(svartTF);
                 Privatlektion priv = new Privatlektion(2, 375);
                 Privatlektioner.Add(priv);
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 27), new DateTime(2023, 11, 27)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 28), new DateTime(2023, 11, 28)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 29), new DateTime(2023, 11, 29)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 11, 30), new DateTime(2023, 11, 30)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", priv, null, new DateTime(2023, 12, 01), new DateTime(2023, 12, 01)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartMO, new DateTime(2023, 11, 27), new DateTime(2023, 11, 29)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, grönTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, blåTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, rödTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
-                Skidskolor.Add(new Skidskola(0, "Ingemar Stenmark", null, svartTF, new DateTime(2023, 11, 30), new DateTime(2023, 12, 01)));
+
+                DateTime startDate = new DateTime(2023, 11, 27);
+                DateTime endDate = new DateTime(2024, 4, 28);
+
+
+                for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                {
+                    // Slumpmässigt välj en person för varje dag
+                    Random random = new Random();
+
+
+                    // Skapa nya skidskolor med den valda personen som instruktör för den dagen
+                    if (date.DayOfWeek != DayOfWeek.Saturday || date.DayOfWeek != DayOfWeek.Sunday)
+                    {
+                        for (int privlek = 0; privlek < 4; privlek++)
+                        {
+                            string valdPerson = personer[random.Next(personer.Count)];
+                            DateTime tid = date;
+                            tid = tid.AddHours(10);
+                            for (int i = 0; i < 4; i++)
+                            {
+                                Skidskolor.Add(new Skidskola(0, valdPerson, priv, null, tid.AddHours(i), tid.AddHours(i + 1)));
+                            }
+                        }
+                        if (date.DayOfWeek == DayOfWeek.Monday)
+                        {
+                            string valdPerson = personer[random.Next(personer.Count)];
+                            Skidskolor.Add(new Skidskola(0, valdPerson, null, grönMO, date, date.AddDays(2)));
+                            valdPerson = personer[random.Next(personer.Count)];
+                            Skidskolor.Add(new Skidskola(0, valdPerson, null, blåMO, date, date.AddDays(2)));
+                            valdPerson = personer[random.Next(personer.Count)];
+                            Skidskolor.Add(new Skidskola(0, valdPerson, null, rödMO, date, date.AddDays(2)));
+                            valdPerson = personer[random.Next(personer.Count)];
+                            Skidskolor.Add(new Skidskola(0, valdPerson, null, svartMO, date, date.AddDays(2)));
+                        }
+                        if (date.DayOfWeek == DayOfWeek.Thursday)
+                        {
+                            string valdPerson = personer[random.Next(personer.Count)];
+                            Skidskolor.Add(new Skidskola(0, valdPerson, null, grönTF, date, date.AddDays(1)));
+                            valdPerson = personer[random.Next(personer.Count)];
+                            Skidskolor.Add(new Skidskola(0, valdPerson, null, blåTF, date, date.AddDays(1)));
+                            valdPerson = personer[random.Next(personer.Count)];
+                            Skidskolor.Add(new Skidskola(0, valdPerson, null, rödTF, date, date.AddDays(1)));
+                            valdPerson = personer[random.Next(personer.Count)];
+                            Skidskolor.Add(new Skidskola(0, valdPerson, null, svartTF, date, date.AddDays(1)));
+                        }
+                    }
+                        
+                }
                 SaveChanges();
                 foreach (Skidskola skola in Skidskolor)
                 {

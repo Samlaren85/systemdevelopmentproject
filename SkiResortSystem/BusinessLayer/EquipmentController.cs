@@ -107,8 +107,16 @@ namespace BusinessLayer
         {
            foreach (Utrustningsbokning utr in utrustningsbokningar)
             {
-                if (unitOfWork.UtrustningsbokningsRepository.FirstOrDefault(ub => ub.Equals(utr)) != null) unitOfWork.UtrustningsbokningsRepository.Update(utr);
-                else unitOfWork.UtrustningsbokningsRepository.Add(utr);
+                if (unitOfWork.UtrustningsbokningsRepository.FirstOrDefault(ub => ub.Equals(utr)) != null)
+                {
+                    if (utr.Bokning.Betalningsstatus != Status.Ofakturerad) utr.Bokning.UtnyttjadKredit += utr.Utrustning.Pris;
+                    unitOfWork.UtrustningsbokningsRepository.Update(utr);
+                }
+                else
+                {
+                    if (utr.Bokning.Betalningsstatus != Status.Ofakturerad) utr.Bokning.UtnyttjadKredit += utr.Utrustning.Pris;
+                    unitOfWork.UtrustningsbokningsRepository.Add(utr);
+                }
             }
             unitOfWork.Save();
         }
@@ -120,6 +128,7 @@ namespace BusinessLayer
         /// <returns></returns>
         public bool RemoveEquipmentBooking(Utrustningsbokning utrustningsbokning)
         {
+            if (utrustningsbokning.Bokning.Betalningsstatus != Status.Ofakturerad && utrustningsbokning.Bokning.UtnyttjadKredit > utrustningsbokning.Utrustning.Pris) utrustningsbokning.Bokning.UtnyttjadKredit -= utrustningsbokning.Utrustning.Pris;
             unitOfWork.UtrustningsbokningsRepository.FirstOrDefault(u => u.Equals(utrustningsbokning)).Utrustningsstatus = Status.Makulerad;
             unitOfWork.Save();
             return true;

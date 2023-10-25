@@ -120,7 +120,7 @@
                 <TextBox Background="White"  Text="{Binding SearchEquipmentOrder, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="104" Width="206" HorizontalAlignment="Left" VerticalAlignment="Center" />
                 <TextBlock Text="{Binding NoBookingResult}" Foreground="Red" RenderTransformOrigin="0.013,0.393" Canvas.Left="80" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-                <DataGrid  Width="759" Height="414" ItemsSource="{Binding Path=Utrustningsbokningsrader, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedEquipment}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                <DataGrid  Width="759" Height="414" ItemsSource="{Binding Path=Utrustningsbokningsrader, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedEquipment, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" HorizontalAlignment="Center" VerticalAlignment="Top" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="UTRUSTNING" Width="2*" >
                             <DataGridTemplateColumn.CellTemplate>
@@ -130,7 +130,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellEditingTemplate>
                                 <DataTemplate>
-                                    <ComboBox ItemsSource="{Binding Path=TypAvUtrustningar}" SelectedItem="{Binding Path=TypAvUtrustning}"/>
+                                    <ComboBox ItemsSource="{Binding Path=TypAvUtrustningar}" SelectedItem="{Binding Path=TypAvUtrustning, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
                             <DataGridTemplateColumn.CellStyle>

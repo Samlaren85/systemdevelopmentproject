@@ -398,7 +398,24 @@ namespace SkiResortSystem.ViewModels
             BookingController bc = new BookingController();
             Bokning.Bokningsstatus = Status.Utcheckad;
             bc.UppdateraBokning(Bokning);
-            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu UTCHECKAD i systemet!");
+            if (Bokning.UtnyttjadKredit > 0)
+            {
+                {
+                    MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu UTCHECKAD ur systemet!\n" +
+                                                                $"Kunden har en kredit på {Bokning.UtnyttjadKredit} att betala.\n" +
+                                                                $"Betalar kunden på plats? (Annars skapas faktura till kunden)", "Slutbetalning", MessageBoxButton.YesNo);
+                    if (respons == MessageBoxResult.No)
+                    {
+                        EconomyController ec = new EconomyController();
+                        ec.CreateRestFaktura(Bokning);
+                    }
+                }
+            }
+            else
+            {
+                MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu UTCHECKAD ur systemet!\n" +
+                                                            $"Kunden har ingenting kvar att betala.", "Utcheckad");
+            }
             CloseCommand.Execute(view);
 
         });

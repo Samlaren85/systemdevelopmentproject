@@ -20,7 +20,7 @@ namespace BusinessLayer
         /// <returns></returns>
         public IList<Aktivitet> FindSkiSchool(DateTime? from, DateTime? to)
         {
-            return unitOfWork.AktivitetRepository.Find(a => (from == null || a.Skidskola.VaraktighetFrån >= from) && (to == null || a.Skidskola.VaraktighetTill <= to), x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);
+            return unitOfWork.AktivitetRepository.Find(a => (from == null || a.Skidskola.VaraktighetFrån.Date >= from) && (to == null || a.Skidskola.VaraktighetTill.Date.AddHours(23).AddMinutes(59) <= to), x => x.Skidskola, x => x.Skidskola.Privatlektion, x => x.Skidskola.Grupplektion);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace BusinessLayer
                     {
                         unitOfWork.AktivitetsbokningsRepository.Add(ab);
                         ab.Aktivitetsref.Skidskola.AntalDeltagare += ab.Antal;
-                        ab.Bokningsref.UtnyttjadKredit += ab.TotalPris;
+                        if (ab.Bokningsref.Betalningsstatus != Status.Ofakturerad) ab.Bokningsref.UtnyttjadKredit += ab.Aktivitetsref.Skidskola.Pris;
                         unitOfWork.Save();
                     }
                     else throw new Exception("Antal personer överskrider kursens Deltagargräns");
@@ -54,9 +54,12 @@ namespace BusinessLayer
                     if (ab.Antal - existerandeAktivitetsbokning.Antal <= ab.Aktivitetsref.AntalPlatserKvar)
                     {
                         ab.Aktivitetsref.Skidskola.AntalDeltagare -= existerandeAktivitetsbokning.Antal;
-                        ab.Bokningsref.UtnyttjadKredit -= existerandeAktivitetsbokning.TotalPris;
                         ab.Aktivitetsref.Skidskola.AntalDeltagare += ab.Antal;
-                        ab.Bokningsref.UtnyttjadKredit += ab.TotalPris;
+                        if (ab.Bokningsref.Betalningsstatus != Status.Ofakturerad)
+                        {
+                            ab.Bokningsref.UtnyttjadKredit -= existerandeAktivitetsbokning.TotalPris;
+                            ab.Bokningsref.UtnyttjadKredit += ab.TotalPris;
+                        }
                         unitOfWork.AktivitetsbokningsRepository.Update(ab);
                         unitOfWork.Save();
                     }
@@ -77,7 +80,9 @@ namespace BusinessLayer
             try
             {
                 ab.Aktivitetsref.Skidskola.AntalDeltagare -= ab.Antal;
-                ab.Bokningsref.UtnyttjadKredit -= ab.TotalPris;
+                if ((ab.Bokningsref.Betalningsstatus == Status.Obetald || ab.Bokningsref.Betalningsstatus == Status.Betald) &&
+                    ab.Bokningsref.UtnyttjadKredit > ab.Aktivitetsref.Skidskola.Pris)
+                    ab.Bokningsref.UtnyttjadKredit -= ab.TotalPris;
                 ab.AktivitetsStatus = Status.Makulerad;
                 done = true;
             } catch (Exception ex)

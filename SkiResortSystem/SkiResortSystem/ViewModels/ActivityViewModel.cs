@@ -252,6 +252,9 @@ namespace SkiResortSystem.ViewModels
         }
 
         private ICommand searchActivitiesCommand;
+        /// <summary>
+        /// Söker efter bokade aktiviteter och populerar listan i fönstret
+        /// </summary>
         public ICommand SearchActivitiesCommand =>
             searchActivitiesCommand ??= searchActivitiesCommand = new RelayCommand(() =>
                 {
@@ -290,6 +293,9 @@ namespace SkiResortSystem.ViewModels
                 });
 
         private ICommand doubleClickActivityCommand;
+        /// <summary>
+        /// Öppnar aktivitetsöversikten för de aktiviteter som är bokade.
+        /// </summary>
         public ICommand DoubleClickActivityCommand =>
             doubleClickActivityCommand ??= doubleClickActivityCommand = new RelayCommand(() =>
             {
@@ -298,6 +304,9 @@ namespace SkiResortSystem.ViewModels
             });
 
         private ICommand bookActivity;
+        /// <summary>
+        /// Skapar upp aktivitetsbokningar och öppnar upp översikten för dessa bokningar
+        /// </summary>
         public ICommand BookActivity =>
             bookActivity ??= bookActivity = new RelayCommand(() =>
             {

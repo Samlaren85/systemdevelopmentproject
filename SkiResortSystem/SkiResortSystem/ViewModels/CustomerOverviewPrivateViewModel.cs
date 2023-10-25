@@ -182,11 +182,16 @@ namespace SkiResortSystem.ViewModels
                 }
             }
         }
-        public CustomerOverviewPrivateViewModel() 
+        public CustomerOverviewPrivateViewModel()
+        {
+            
+        }
+        public CustomerOverviewPrivateViewModel(bool marketingmanager) 
         {
             customerController = new CustomerController();
             KundIDReadOnly = false;
             Rubrik = "LÄGG TILL NY PRIVATKUND";
+            IsCurrentUserMarketingManager = marketingmanager;
         }
         public CustomerOverviewPrivateViewModel(Kund laddadKund, bool marketingmanager)
         {

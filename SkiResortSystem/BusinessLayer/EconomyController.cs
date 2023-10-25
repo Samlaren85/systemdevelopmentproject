@@ -84,10 +84,10 @@ namespace BusinessLayer
             }
             float totalpris = (pris);
             float prisFaktura1 = (float)(totalpris*0.2) + avbeställningsskydd;
-            float momsFaktura1 = (float)(prisFaktura1/1.12);
+            float momsFaktura1 = (float)(prisFaktura1-(prisFaktura1/1.12));
 
             float prisFaktura2 = (float)(totalpris * 0.8);
-            float momsFaktura2 = (float)(prisFaktura2 / 1.12);
+            float momsFaktura2 = (float)(prisFaktura2-(prisFaktura2 / 1.12));
 
             ///
             /// Faktura #1 som avser 20% av totalbeloppet och ska betalas senast 30dagar efter bokningsdatum.
@@ -138,7 +138,7 @@ namespace BusinessLayer
             DateTime fakturadatum = DateTime.Today;
 
             float prisFaktura = bokning.UtnyttjadKredit;
-            float momsFaktura = (float)(prisFaktura / 1.12);
+            float momsFaktura = (float)(prisFaktura-(prisFaktura / 1.12));
 
             Faktura faktura = new Faktura(fakturadatum, prisFaktura, momsFaktura, bokning);
             faktura.Förfallodatum = DateTime.Today.AddDays(15);

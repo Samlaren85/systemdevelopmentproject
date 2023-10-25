@@ -518,7 +518,7 @@ namespace SkiResortSystem.ViewModels
             uppdateraBokning = true;
             taBortÄndraVisability = Visibility.Visible;
             taBortVisability = Visibility.Collapsed;
-            if (Ankomst == DateTime.Today && bokning.Bokningsstatus != Status.Incheckad && bokning.Bokningsstatus != Status.Utcheckad)
+            if (Ankomst.Date == DateTime.Today && bokning.Bokningsstatus != Status.Incheckad && bokning.Bokningsstatus != Status.Utcheckad)
             {
                 CheckaInReadOnly = true;
             }

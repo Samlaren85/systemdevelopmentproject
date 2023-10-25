@@ -40,15 +40,27 @@ namespace SkiResortSystem.ViewModels
             set { mainVisibility = value; OnPropertyChanged(); }
         }
 
+
+
         private string menuChoise;
         public string MenuChoise
         {
             get { return menuChoise; }
             set
             {
-                if (value.Contains("Logga ut", StringComparison.OrdinalIgnoreCase)) LogOut.Execute(true);
+                if (value.Contains("Logga ut", StringComparison.OrdinalIgnoreCase))
+                {
+                    LogOut.Execute(true);
+                }
                 else if (value.Contains("Avsluta", StringComparison.OrdinalIgnoreCase)) ExitCommand.Execute(true);
             }
+        }
+
+        private bool mainMenu;
+        public bool MainMenu
+        {
+            get { return mainMenu; }
+            set { mainMenu = value; OnPropertyChanged();}
         }
 
         /// <summary>
@@ -232,6 +244,7 @@ namespace SkiResortSystem.ViewModels
         public ICommand LogOut =>
             logOut ??= logOut = new RelayCommand(() =>
                 {
+                    MainMenu = true;
                     SessionController.Terminate();
                     LogIn();
                 });

@@ -300,123 +300,123 @@ namespace DataLayer
             {
                 for (int i = 0; i < 175; i++)
                 {
-                    if (i < 6) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "90"));
-                    else if (i < 15) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "100"));
-                    else if (i < 26) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "110"));
-                    else if (i < 39) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "120"));
-                    else if (i < 54) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "130"));
-                    else if (i < 71) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "140"));
-                    else if (i < 91) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "150"));
-                    else if (i < 116) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "160"));
-                    else if (i < 137) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "170"));
-                    else if (i < 158) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "180"));
-                    else if (i < 171) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "190"));
-                    else Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 1000, "200"));
+                    if (i < 6) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "90"));
+                    else if (i < 15) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "100"));
+                    else if (i < 26) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "110"));
+                    else if (i < 39) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "120"));
+                    else if (i < 54) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "130"));
+                    else if (i < 71) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "140"));
+                    else if (i < 91) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "150"));
+                    else if (i < 116) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "160"));
+                    else if (i < 137) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "170"));
+                    else if (i < 158) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "180"));
+                    else if (i < 171) Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "190"));
+                    else Utrustningar.Add(new Utrustning("AS" + (i + 1).ToString("000"), "Alpinskidor", 130, "200"));
                 }
                 for (int i = 0; i < 250; i++)
                 {
-                    if (i < 6) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "25"));
-                    else if (i < 14) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "26"));
-                    else if (i < 20) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "27"));
-                    else if (i < 30) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "28"));
-                    else if (i < 39) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "29"));
-                    else if (i < 49) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "30"));
-                    else if (i < 60) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "31"));
-                    else if (i < 70) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "32"));
-                    else if (i < 79) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "33"));
-                    else if (i < 90) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "34"));
-                    else if (i < 104) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "35"));
-                    else if (i < 119) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "36"));
-                    else if (i < 143) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "37"));
-                    else if (i < 167) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "38"));
-                    else if (i < 181) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "39"));
-                    else if (i < 200) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "40"));
-                    else if (i < 215) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "41"));
-                    else if (i < 226) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "42"));
-                    else if (i < 236) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "43"));
-                    else if (i < 242) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "44"));
-                    else if (i < 247) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "45"));
-                    else if (i < 249) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "46"));
-                    else Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 250, "47"));
+                    if (i < 6) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "25"));
+                    else if (i < 14) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "26"));
+                    else if (i < 20) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "27"));
+                    else if (i < 30) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "28"));
+                    else if (i < 39) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "29"));
+                    else if (i < 49) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "30"));
+                    else if (i < 60) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "31"));
+                    else if (i < 70) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "32"));
+                    else if (i < 79) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "33"));
+                    else if (i < 90) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "34"));
+                    else if (i < 104) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "35"));
+                    else if (i < 119) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "36"));
+                    else if (i < 143) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "37"));
+                    else if (i < 167) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "38"));
+                    else if (i < 181) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "39"));
+                    else if (i < 200) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "40"));
+                    else if (i < 215) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "41"));
+                    else if (i < 226) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "42"));
+                    else if (i < 236) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "43"));
+                    else if (i < 242) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "44"));
+                    else if (i < 247) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "45"));
+                    else if (i < 249) Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "46"));
+                    else Utrustningar.Add(new Utrustning("AP" + (i + 1).ToString("000"), "Alpinpjäxor", 115, "47"));
                 }
                 for (int i = 0; i < 175; i++)
                 {
-                    if (i < 6) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "90"));
-                    else if (i < 15) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "100"));
-                    else if (i < 26) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "110"));
-                    else if (i < 39) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "120"));
-                    else if (i < 54) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "130"));
-                    else if (i < 71) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "140"));
-                    else if (i < 91) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "150"));
-                    else if (i < 116) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "160"));
-                    else if (i < 137) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "170"));
-                    else if (i < 158) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "180"));
-                    else if (i < 171) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "190"));
-                    else Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 1000, "200"));
+                    if (i < 6) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "90"));
+                    else if (i < 15) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "100"));
+                    else if (i < 26) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "110"));
+                    else if (i < 39) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "120"));
+                    else if (i < 54) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "130"));
+                    else if (i < 71) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "140"));
+                    else if (i < 91) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "150"));
+                    else if (i < 116) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "160"));
+                    else if (i < 137) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "170"));
+                    else if (i < 158) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "180"));
+                    else if (i < 171) Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "190"));
+                    else Utrustningar.Add(new Utrustning("LS" + (i + 1).ToString("000"), "Längdskidor", 100, "200"));
                 }
                 for (int i = 0; i < 250; i++)
                 {
-                    if (i < 6) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "25"));
-                    else if (i < 14) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "26"));
-                    else if (i < 20) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "27"));
-                    else if (i < 30) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "28"));
-                    else if (i < 39) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "29"));
-                    else if (i < 49) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "30"));
-                    else if (i < 60) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "31"));
-                    else if (i < 70) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "32"));
-                    else if (i < 79) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "33"));
-                    else if (i < 90) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "34"));
-                    else if (i < 104) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "35"));
-                    else if (i < 119) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "36"));
-                    else if (i < 143) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "37"));
-                    else if (i < 167) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "38"));
-                    else if (i < 181) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "39"));
-                    else if (i < 200) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "40"));
-                    else if (i < 215) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "41"));
-                    else if (i < 226) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "42"));
-                    else if (i < 236) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "43"));
-                    else if (i < 242) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "44"));
-                    else if (i < 247) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "45"));
-                    else if (i < 249) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "46"));
-                    else Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 250, "47"));
+                    if (i < 6) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "25"));
+                    else if (i < 14) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "26"));
+                    else if (i < 20) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "27"));
+                    else if (i < 30) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "28"));
+                    else if (i < 39) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "29"));
+                    else if (i < 49) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "30"));
+                    else if (i < 60) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "31"));
+                    else if (i < 70) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "32"));
+                    else if (i < 79) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "33"));
+                    else if (i < 90) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "34"));
+                    else if (i < 104) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "35"));
+                    else if (i < 119) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "36"));
+                    else if (i < 143) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "37"));
+                    else if (i < 167) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "38"));
+                    else if (i < 181) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "39"));
+                    else if (i < 200) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "40"));
+                    else if (i < 215) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "41"));
+                    else if (i < 226) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "42"));
+                    else if (i < 236) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "43"));
+                    else if (i < 242) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "44"));
+                    else if (i < 247) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "45"));
+                    else if (i < 249) Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "46"));
+                    else Utrustningar.Add(new Utrustning("LP" + (i + 1).ToString("000"), "Längdpjäxor", 80, "47"));
                 }
                 for (int i = 0; i < 85; i++)
                 {
-                    if (i < 8) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "120"));
-                    else if (i < 18) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "130"));
-                    else if (i < 27) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "140"));
-                    else if (i < 52) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "150"));
-                    else if (i < 67) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "160"));
-                    else Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 1000, "170"));
+                    if (i < 8) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 190, "120"));
+                    else if (i < 18) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 190, "130"));
+                    else if (i < 27) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 190, "140"));
+                    else if (i < 52) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 190, "150"));
+                    else if (i < 67) Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 190, "160"));
+                    else Utrustningar.Add(new Utrustning("SB" + (i + 1).ToString("000"), "Snowboard", 190, "170"));
                 }
                 for (int i = 0; i < 90; i++)
                 {
-                    if (i < 1) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "25"));
-                    else if (i < 5) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "26"));
-                    else if (i < 8) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "27"));
-                    else if (i < 11) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "28"));
-                    else if (i < 14) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "29"));
-                    else if (i < 17) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "30"));
-                    else if (i < 20) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "31"));
-                    else if (i < 23) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "32"));
-                    else if (i < 26) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "33"));
-                    else if (i < 30) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "34"));
-                    else if (i < 33) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "35"));
-                    else if (i < 36) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "36"));
-                    else if (i < 43) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "37"));
-                    else if (i < 47) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "38"));
-                    else if (i < 51) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "39"));
-                    else if (i < 56) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "40"));
-                    else if (i < 61) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "41"));
-                    else if (i < 66) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "42"));
-                    else if (i < 79) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "43"));
-                    else if (i < 87) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "44"));
-                    else Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 250, "45"));
+                    if (i < 1) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "25"));
+                    else if (i < 5) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "26"));
+                    else if (i < 8) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "27"));
+                    else if (i < 11) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "28"));
+                    else if (i < 14) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "29"));
+                    else if (i < 17) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "30"));
+                    else if (i < 20) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "31"));
+                    else if (i < 23) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "32"));
+                    else if (i < 26) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "33"));
+                    else if (i < 30) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "34"));
+                    else if (i < 33) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "35"));
+                    else if (i < 36) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "36"));
+                    else if (i < 43) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "37"));
+                    else if (i < 47) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "38"));
+                    else if (i < 51) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "39"));
+                    else if (i < 56) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "40"));
+                    else if (i < 61) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "41"));
+                    else if (i < 66) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "42"));
+                    else if (i < 79) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "43"));
+                    else if (i < 87) Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "44"));
+                    else Utrustningar.Add(new Utrustning("SS" + (i + 1).ToString("000"), "Snowboardboots", 115, "45"));
                 }
                 for (int i = 0; i < 15; i++)
                 {
                     if (i < 10) Utrustningar.Add(new Utrustning("S" + (i + 1).ToString("00"), "Skoter lynx", 1000, "1 pers"));
-                    else Utrustningar.Add(new Utrustning("S" + (i + 1).ToString("00"), "Skoter yamaha viking", 1000, "2 pers"));
+                    else Utrustningar.Add(new Utrustning("S" + (i + 1).ToString("00"), "Skoter yamaha viking", 1300, "2 pers"));
                 }
                 SaveChanges();
             }

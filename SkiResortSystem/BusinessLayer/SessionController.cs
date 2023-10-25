@@ -51,7 +51,7 @@ namespace BusinessLayer
             if (_instance == null)
             {
                 UnitOfWork unitOfWork = new UnitOfWork();
-                Användare credentials = unitOfWork.AnvändarRepository.FirstOrDefault(a => a.UserID == ID);
+                Användare credentials = unitOfWork.AnvändarRepository.FirstOrDefault(a => a.UserID == ID,r => r.RollID, b => b.RollID.BehörighetID);
                 if (credentials != null && credentials.Password.Equals(password))
                 {
                     _instance = new SessionController(credentials);
@@ -93,7 +93,6 @@ namespace BusinessLayer
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
                     
-                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 2) //Inloggad som receptionist
@@ -103,7 +102,6 @@ namespace BusinessLayer
                         användare.RollID.Rolltyp = "Receptionist";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 3) //Inloggad som Skidshop
@@ -113,7 +111,6 @@ namespace BusinessLayer
                         användare.RollID.Rolltyp = "Skidshopspersonal";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 4) //Inloggad som avdelningschef reception
@@ -123,7 +120,6 @@ namespace BusinessLayer
                         användare.RollID.Rolltyp = "Ekonomianställd";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 5) //Inloggad som avdelningschef skidshop
@@ -132,8 +128,7 @@ namespace BusinessLayer
                     {
                         användare.RollID.Rolltyp = "Avdelningschef";
                         unitOfWork.AnvändarRepository.Update(användare);
-                    }
-                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
+                    };
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 6) //Inloggad som ekonomichef
@@ -143,7 +138,6 @@ namespace BusinessLayer
                         användare.RollID.Rolltyp = "Ekonomichef";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 7) //Inloggad som marknadschef
@@ -153,7 +147,6 @@ namespace BusinessLayer
                         användare.RollID.Rolltyp = "Marknadschef";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
                 else if (användare.UserType == 8) //Inloggad som VD
@@ -163,7 +156,6 @@ namespace BusinessLayer
                         användare.RollID.Rolltyp = "VD";
                         unitOfWork.AnvändarRepository.Update(användare);
                     }
-                    användare.RollID.BehörighetID.Add(FindBehörighet(användare.UserType.ToString()));
                     unitOfWork.Save();
                 }
             }

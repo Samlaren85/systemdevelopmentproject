@@ -101,14 +101,14 @@ namespace DataLayer
             }
             if (!Roller.Any())
             {
-                Roller.Add(new Roll("Admin", new List<Behörighet>()));
-                Roller.Add(new Roll("Receptionist", new List<Behörighet>()));
-                Roller.Add(new Roll("Skidshopspersonal", new List<Behörighet>()));
-                Roller.Add(new Roll("Ekonomianställd", new List<Behörighet>()));
-                Roller.Add(new Roll("Avdelningschef", new List<Behörighet>()));
-                Roller.Add(new Roll("Ekonomichef", new List<Behörighet>()));
-                Roller.Add(new Roll("Marknadschef", new List<Behörighet>()));
-                Roller.Add(new Roll("VD", new List<Behörighet>()));
+                Roller.Add(new Roll("Admin", new List<Behörighet>() { Behörigheter.FirstOrDefault(b => b.Behörighetstyp.Contains("1")) }));
+                Roller.Add(new Roll("Receptionist", new List<Behörighet>() { Behörigheter.FirstOrDefault(b => b.Behörighetstyp.Contains("2")) }));
+                Roller.Add(new Roll("Skidshopspersonal", new List<Behörighet>() { Behörigheter.FirstOrDefault(b => b.Behörighetstyp.Contains("3")) }));
+                Roller.Add(new Roll("Ekonomianställd", new List<Behörighet>() { Behörigheter.FirstOrDefault(b => b.Behörighetstyp.Contains("4")) }));
+                Roller.Add(new Roll("Avdelningschef", new List<Behörighet>() { Behörigheter.FirstOrDefault(b => b.Behörighetstyp.Contains("5")) }));
+                Roller.Add(new Roll("Ekonomichef", new List<Behörighet>() { Behörigheter.FirstOrDefault(b => b.Behörighetstyp.Contains("6")) }));
+                Roller.Add(new Roll("Marknadschef", new List<Behörighet>() { Behörigheter.FirstOrDefault(b => b.Behörighetstyp.Contains("7")) }));
+                Roller.Add(new Roll("VD", new List<Behörighet>() { Behörigheter.FirstOrDefault(b => b.Behörighetstyp.Contains("8")) }));
                 SaveChanges();
             }
             if (!Användare.Any()) 

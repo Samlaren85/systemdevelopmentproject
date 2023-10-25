@@ -33,6 +33,16 @@ namespace EntityLayer
         public Bokning Bokning { get; set; }
         public Utrustning Utrustning { get; set; }
         public string? Hylla {  get; set; }
+        private float totalPris;
+        public float TotalPris 
+        { 
+            get { return totalPris; } 
+            set 
+            {
+                TimeSpan bokningstid = Lämnasin - Hämtasut;
+                totalPris = (float)(Utrustning.Pris*bokningstid.TotalDays) ;
+            } 
+        }
 
         public Utrustningsbokning()
         {
@@ -46,6 +56,7 @@ namespace EntityLayer
             Lämnasin = lämna;
             Bokning = bokning;
             Utrustning = utrustning;
+            TotalPris = totalPris;
         }
     }
 }

@@ -104,6 +104,9 @@ namespace SkiResortSystem.ViewModels
             }
         }
 
+        /// <summary>
+        /// Statistikrapport
+        /// </summary>
         private ICommand createStatisticsReport;
         public ICommand CreateStatisticsReport =>
             createStatisticsReport ??= createStatisticsReport = new RelayCommand(() =>
@@ -121,7 +124,9 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Presenterar rappoerten beroende på vilket val
+        /// </summary>
         private ICommand createReport;
         public ICommand CreateReport =>
             createReport ??= createReport = new RelayCommand(() =>

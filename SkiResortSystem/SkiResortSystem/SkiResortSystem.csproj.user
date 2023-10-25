@@ -28,12 +28,6 @@
     <Compile Update="Components\StyrningsModulen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\AdminActivityOverview.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\AdminEquipmentOverview.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\BillOverview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -49,16 +43,10 @@
     <Compile Update="Views\EquipmentOverview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\FacilityOverview.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\StatisticsOverview.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\UserOverview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -84,12 +72,6 @@
     <Page Update="Components\StyrningsModulen.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\AdminActivityOverview.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\AdminEquipmentOverview.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\BillOverview.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -105,9 +87,6 @@
     <Page Update="Views\EquipmentOverview.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\FacilityOverview.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -115,9 +94,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\StatisticsOverview.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\UserOverview.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

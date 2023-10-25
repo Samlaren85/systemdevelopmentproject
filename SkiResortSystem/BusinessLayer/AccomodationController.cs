@@ -1,18 +1,7 @@
 ﻿using DataLayer;
 using EntityLayer;
-using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.Globalization;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.Design;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Transactions;
 
 namespace BusinessLayer
 {

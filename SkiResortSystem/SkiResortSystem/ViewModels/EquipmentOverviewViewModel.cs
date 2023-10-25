@@ -1,15 +1,11 @@
 ﻿using BusinessLayer;
 using EntityLayer;
-using Microsoft.Identity.Client;
 using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using SkiResortSystem.Services;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SkiResortSystem.ViewModels

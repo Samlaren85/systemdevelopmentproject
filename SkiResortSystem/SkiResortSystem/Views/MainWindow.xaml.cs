@@ -1,5 +1,4 @@
-﻿using SkiResortSystem.ViewModels;
-using System.Windows;
+﻿using System.Windows;
 
 namespace SkiResortSystem.Views
 {

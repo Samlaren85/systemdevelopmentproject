@@ -1,24 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using BusinessLayer;
-using DataLayer;
 using EntityLayer;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using SkiResortSystem.Services;
-using SkiResortSystem.Views;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SkiResortSystem.ViewModels
 {

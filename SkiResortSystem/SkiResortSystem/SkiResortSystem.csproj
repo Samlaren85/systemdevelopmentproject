@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="PDFGenerator\**" />
+    <EmbeddedResource Remove="PDFGenerator\**" />
+    <None Remove="PDFGenerator\**" />
+    <Page Remove="PDFGenerator\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Views\Images\Logga.png" />
     <None Remove="Views\Images\Logo.png" />
     <None Remove="Views\Images\Priser aktivitet.png" />
@@ -44,12 +51,6 @@
     <Resource Include="Views\Images\Prislista utrustning.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="PDFGenerator\Bokningsbekräftelser\" />
-    <Folder Include="PDFGenerator\Fakturor\" />
-    <Folder Include="PrintController\Uthyrningsbokningar\" />
   </ItemGroup>
 
 </Project>

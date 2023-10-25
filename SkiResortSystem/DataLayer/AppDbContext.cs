@@ -1,9 +1,5 @@
 ﻿using EntityLayer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using System.Collections.Generic;
-using System.Reflection.Metadata;
 
 namespace DataLayer
 {

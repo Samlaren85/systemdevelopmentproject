@@ -1,17 +1,10 @@
 ﻿using BusinessLayer;
-using BusinessLayer.PrintController;
-using ceTe.DynamicPDF.PageElements.BarCoding;
 using EntityLayer;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SkiResortSystem.Commands;
 using SkiResortSystem.Models;
 using SkiResortSystem.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 

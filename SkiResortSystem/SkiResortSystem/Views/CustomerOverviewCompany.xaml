@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:comp="clr-namespace:SkiResortSystem.Components"
-        xmlns:local="clr-namespace:SkiResortSystem.Views"
         xmlns:vm="clr-namespace:SkiResortSystem.ViewModels"
         mc:Ignorable="d"
         Title="Företagskund" Height="Auto" Width="1920" FontFamily="Candara" x:Name="View" WindowState="Maximized">

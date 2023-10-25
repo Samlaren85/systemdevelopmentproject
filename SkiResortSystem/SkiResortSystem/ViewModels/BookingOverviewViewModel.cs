@@ -5,13 +5,8 @@ using SkiResortSystem.Models;
 using SkiResortSystem.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.DirectoryServices;
 using BusinessLayer.PrintController;
 
 namespace SkiResortSystem.ViewModels

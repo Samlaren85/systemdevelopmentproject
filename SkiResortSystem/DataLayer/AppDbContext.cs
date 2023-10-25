@@ -249,7 +249,6 @@ namespace DataLayer
                 }
                 SaveChanges();
             }
-            //FUNGERAR INTE ATT SEEDA UTRUSTNING ÄNNU!!!!
             if (!Utrustningar.Any())
             {
                 for (int i = 0; i < 175; i++)

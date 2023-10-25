@@ -260,6 +260,9 @@ namespace SkiResortSystem.ViewModels
             return results;
         }
 
+        /// <summary>
+        /// skapar bokning
+        /// </summary>
         private ICommand createBooking = null!;
 
         public ICommand CreateBooking => createBooking ??= createBooking = new RelayCommand(() =>
@@ -303,7 +306,6 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
         private bool checkinCheckoutSelected;
         public bool CheckinCheckoutSelected
         {
@@ -389,7 +391,9 @@ namespace SkiResortSystem.ViewModels
             set { facilitetsSökning = value; OnPropertyChanged(); }
         }
       
-
+        /// <summary>
+        /// knappen för att söka lediga faciliter, mycket logik för korrekt inmatning enligt krav för bokningar.
+        /// </summary>
         private ICommand sökLedigaFaciliteter = null!;
 
         public ICommand SökLedigaFaciliteter => sökLedigaFaciliteter ??= sökLedigaFaciliteter = new RelayCommand(() =>

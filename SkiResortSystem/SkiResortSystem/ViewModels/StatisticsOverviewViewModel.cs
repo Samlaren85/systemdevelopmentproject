@@ -16,6 +16,7 @@ namespace SkiResortSystem.ViewModels
     {
         public IList<object> _data {  get; set; }
         
+      
         public StatisticsOverviewViewModel(List<object> data, string typ)
         {
             _data = data;
@@ -72,7 +73,9 @@ namespace SkiResortSystem.ViewModels
             _data = new List<object>();
         }
 
-
+        /// <summary>
+        /// Stänger programmet
+        /// </summary>
         private ICommand closeCommand;
         public ICommand CloseCommand =>
             closeCommand ??= closeCommand = new RelayCommand<ICloseable>((view) =>

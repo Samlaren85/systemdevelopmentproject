@@ -68,6 +68,10 @@ namespace DataLayer
             }
         }
 
+
+        /// <summary>
+        /// Seedning av all data.
+        /// </summary>
         private void Seed()
         {
             if (!Roller.Any())

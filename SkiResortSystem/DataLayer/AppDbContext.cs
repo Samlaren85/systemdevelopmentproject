@@ -97,7 +97,7 @@ namespace DataLayer
                 Behörigheter.Add(new Behörighet("6 - Ekonomichef"));
                 Behörigheter.Add(new Behörighet("7 - Marknadschef"));
                 Behörigheter.Add(new Behörighet("8 - Verkställande Direktör"));
-
+                SaveChanges();
             }
             if (!Roller.Any())
             {

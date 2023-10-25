@@ -73,6 +73,8 @@ namespace BusinessLayer
             UnitOfWork unitOfWork = new UnitOfWork();
             return unitOfWork.BehörighetsRepository.FirstOrDefault(b => b.Behörighetstyp.Contains(number));
         }
+
+
         /// <summary>
         /// Metoden lägger till behörighetsnivå/typ och roll för inloggande användare.
         /// </summary>

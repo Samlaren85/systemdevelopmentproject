@@ -217,9 +217,14 @@ namespace SkiResortSystem.ViewModels
         }
         public CustomerOverviewCompanyViewModel()
         {
+            
+        }
+        public CustomerOverviewCompanyViewModel(bool marketingmanager)
+        {
             customerController = new CustomerController();
             KundIDReadOnly = false;
             Rubrik = "LÄGG TILL NY FÖRETAGSKUND";
+            IsCurrentUserMarketingManager = marketingmanager;
         }
         public CustomerOverviewCompanyViewModel(Kund laddadKund, bool marketingmanager)
         {

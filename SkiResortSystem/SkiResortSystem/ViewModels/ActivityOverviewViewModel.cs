@@ -46,7 +46,10 @@ namespace SkiResortSystem.ViewModels
                 ActivityController ac = new ActivityController();
                 foreach (Aktivitetsbokning ab in Activities)
                 {
-                    try { ac.SaveAktivityBooking(ab); }
+                    try 
+                    {
+                        ac.SaveAktivityBooking(ab);
+                    }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
                 }
                 closeActivityBooking.Execute(view);

@@ -32,7 +32,7 @@ namespace DataLayer
         public DbSet<FacilitetsPris> FacilitetsPriser { get; set; } = null!;
 
 
-        private static bool _test = true;
+        private static bool _test = false;
         private static bool _reset = false;
 
         private AppDbContext()
@@ -57,13 +57,26 @@ namespace DataLayer
                 if (_test) optionBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SkiResortSystem;Trusted_Connection=True;");
                 else optionBuilder.UseSqlServer("Server=sqlutb2.hb.se,56077;Database=suht2301;User Id=suht2301;Password=bax999;Encrypt=False;");
                 /*
+                if (_test) 
+                {
                 string connectionString = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", true, true)
                     .Build()
                     .GetConnectionString("Test");
 
-                optionBuilder.UseSqlServer(connectionString);*/
+                optionBuilder.UseSqlServer(connectionString);
+                }
+                else
+                {
+                string connectionString = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", true, true)
+                    .Build()
+                    .GetConnectionString("Prod");
+
+                optionBuilder.UseSqlServer(connectionString);
+                }*/
                 base.OnConfiguring(optionBuilder);
             }
         }
@@ -88,59 +101,62 @@ namespace DataLayer
             }
             if (!Användare.Any()) 
             {
-                Användare.Add(new Användare("1", 1, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL001"))));
-                Användare.Add(new Användare("P@ssword1234", 2, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL002"))));
-                Användare.Add(new Användare("P@ssword1234", 3, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL003"))));
-                Användare.Add(new Användare("P@ssword1234", 4, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL004"))));
-                Användare.Add(new Användare("P@ssword1234", 5, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL005"))));
-                Användare.Add(new Användare("P@ssword1234", 6, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL006"))));
-                Användare.Add(new Användare("P@ssword1234", 7, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL007"))));
+                Användare.Add(new Användare("@dm1n1stratoR", 1, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL001"))));
+                Användare.Add(new Användare("Receptionist1!", 2, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL002"))));
+                Användare.Add(new Användare("Skidshopspersonal1!", 3, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL003"))));
+                Användare.Add(new Användare("Ekonomianställd1!", 4, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL004"))));
+                Användare.Add(new Användare("Avdelningschef1!", 5, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL005"))));
+                Användare.Add(new Användare("Ekonomichef1!", 6, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL006"))));
+                Användare.Add(new Användare("Marknadschef1!", 7, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL007"))));
                 Användare.Add(new Användare("P@ssword1234", 8, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL008"))));
                 SaveChanges();
             }
 
             if (!Kunder.Any())
             {
-                Privatkund pkund = new Privatkund("00000000-0000", "Anonym", "Anonym");
-                Kund kund = new Kund(0, 0, "-", "-", "-", "-", "-", null, pkund);
-                Kunder.Add(kund);
+                if (_test)
+                {
+                    Privatkund pkund = new Privatkund("00000000-0000", "Anonym", "Anonym");
+                    Kund kund = new Kund(0, 0, "-", "-", "-", "-", "-", null, pkund);
+                    Kunder.Add(kund);
 
-                pkund = new Privatkund("990106", "Börje", "Lundin");
-                kund = new Kund(10f, 12000, "Ekliden", "5190", "sandared", "112-1121121", "borje@mail.com", null, pkund);
-                Kunder.Add(kund);
+                    pkund = new Privatkund("990106", "Börje", "Lundin");
+                    kund = new Kund(10f, 12000, "Ekliden", "5190", "sandared", "112-1121121", "borje@mail.com", null, pkund);
+                    Kunder.Add(kund);
 
-                pkund = new Privatkund("921215-5678", "Erik", "Johansson");
-                kund = new Kund(0, 12000, "Lillgatan 12", "56789", "Storstaden", "070-9876543", "erik.j@example.com", null, pkund);
-                Kunder.Add(kund);
+                    pkund = new Privatkund("921215-5678", "Erik", "Johansson");
+                    kund = new Kund(0, 12000, "Lillgatan 12", "56789", "Storstaden", "070-9876543", "erik.j@example.com", null, pkund);
+                    Kunder.Add(kund);
 
-                pkund = new Privatkund("890731-2345", "Maria", "Svensson");
-                kund = new Kund(0, 12000, "Mellangatan 5", "34567", "Mellanstaden", "070-2345678", "maria.s@example.com", null, pkund);
-                Kunder.Add(kund);
+                    pkund = new Privatkund("890731-2345", "Maria", "Svensson");
+                    kund = new Kund(0, 12000, "Mellangatan 5", "34567", "Mellanstaden", "070-2345678", "maria.s@example.com", null, pkund);
+                    Kunder.Add(kund);
 
-                pkund = new Privatkund("780829-8765", "Anders", "Nilsson");
-                kund = new Kund(0, 12000, "Långgatan 20", "67890", "Långtuna", "070-8765432", "anders.n@example.com", null, pkund);
-                Kunder.Add(kund);
+                    pkund = new Privatkund("780829-8765", "Anders", "Nilsson");
+                    kund = new Kund(0, 12000, "Långgatan 20", "67890", "Långtuna", "070-8765432", "anders.n@example.com", null, pkund);
+                    Kunder.Add(kund);
 
-                pkund = new Privatkund("950630-3456", "Sara", "Lindgren");
-                kund = new Kund(0, 12000, "Kortgatan 3", "23456", "Kortbyn", "070-3456789", "sara.l@example.com", null, pkund);
-                Kunder.Add(kund);
+                    pkund = new Privatkund("950630-3456", "Sara", "Lindgren");
+                    kund = new Kund(0, 12000, "Kortgatan 3", "23456", "Kortbyn", "070-3456789", "sara.l@example.com", null, pkund);
+                    Kunder.Add(kund);
 
-                Företagskund fkund = new Företagskund("1111111", "Ara AB", "borki", "Hidden Leaf village", "60324", "Köping");
-                kund = new Kund(12f, 100000, "Göreborgsvägen", "51189", "borås", "911-911911", "info@ara.se", fkund, null);
-                Kunder.Add(kund);
+                    Företagskund fkund = new Företagskund("1111111", "Ara AB", "borki", "Hidden Leaf village", "60324", "Köping");
+                    kund = new Kund(12f, 100000, "Göreborgsvägen", "51189", "borås", "911-911911", "info@ara.se", fkund, null);
+                    Kunder.Add(kund);
 
-                Företagskund fkund2 = new Företagskund("2222222", "Tech Solutions AB", "Sara Lindgren", "Innovation Road 42", "12345", "Teknoville");
-                Kund kund2 = new Kund(10f, 800000, "Teknikvägen 10", "54321", "Teknostad", "555-123456", "info@techsolutions.se", fkund2, null);
-                Kunder.Add(kund2);
+                    Företagskund fkund2 = new Företagskund("2222222", "Tech Solutions AB", "Sara Lindgren", "Innovation Road 42", "12345", "Teknoville");
+                    Kund kund2 = new Kund(10f, 800000, "Teknikvägen 10", "54321", "Teknostad", "555-123456", "info@techsolutions.se", fkund2, null);
+                    Kunder.Add(kund2);
 
-                Företagskund fkund3 = new Företagskund("3333333", "Eco Ventures AB", "Niklas Grön", "Green Street 7", "67890", "Miljöby");
-                Kund kund3 = new Kund(6f, 600000, "Återvinningsgatan 3", "98765", "Eco City", "555-987654", "info@ecoventures.se", fkund3, null);
-                Kunder.Add(kund3);
+                    Företagskund fkund3 = new Företagskund("3333333", "Eco Ventures AB", "Niklas Grön", "Green Street 7", "67890", "Miljöby");
+                    Kund kund3 = new Kund(6f, 600000, "Återvinningsgatan 3", "98765", "Eco City", "555-987654", "info@ecoventures.se", fkund3, null);
+                    Kunder.Add(kund3);
 
-                Företagskund fkund4 = new Företagskund("4444444", "Future Innovations Ltd.", "Adam Månsson", "Futuristic Lane 25", "13579", "Techtopia");
-                Kund kund4 = new Kund(0f, 1200000, "Robotvägen 8", "24680", "Innovation City", "555-246810", "info@futureinnovations.com", fkund4, null);
-                Kunder.Add(kund4);
-                SaveChanges();
+                    Företagskund fkund4 = new Företagskund("4444444", "Future Innovations Ltd.", "Adam Månsson", "Futuristic Lane 25", "13579", "Techtopia");
+                    Kund kund4 = new Kund(0f, 1200000, "Robotvägen 8", "24680", "Innovation City", "555-246810", "info@futureinnovations.com", fkund4, null);
+                    Kunder.Add(kund4);
+                    SaveChanges();
+                }
             }
 
             if (!Faciliteter.Any())
@@ -201,16 +217,19 @@ namespace DataLayer
 
             if (!Bokningar.Any())
             {
-                Random r = new Random();
-                Bokning bokning1 = new Bokning(new DateTime(2023, 10, 22), new DateTime(2023, 10, 29), Användare.FirstOrDefault(a => a.UserType == 1), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "2", true);
-                Bokning bokning2 = new Bokning(new DateTime(2023, 10, 22), new DateTime(2023, 10, 27), Användare.FirstOrDefault(a => a.UserType == 1), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "6", false);
-                Bokning bokning3 = new Bokning(new DateTime(2023, 10, 22), new DateTime(2023, 10, 29), Användare.FirstOrDefault(a => a.UserType == 2), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "3", true);
-                Bokning bokning4 = new Bokning(new DateTime(2023, 10, 27), new DateTime(2023, 10, 29), Användare.FirstOrDefault(a => a.UserType == 1), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "2", false);
-                Bokning bokning5 = new Bokning(new DateTime(2023, 11, 26), new DateTime(2023, 12, 01), Användare.FirstOrDefault(a => a.UserType == 2), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "4", true);
-                Bokning bokning6 = new Bokning(new DateTime(2023, 11, 26), new DateTime(2023, 12, 03), Användare.FirstOrDefault(a => a.UserType == 2), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "2", true);
-                Bokning bokning7 = new Bokning(new DateTime(2023, 11, 26), new DateTime(2023, 12, 03), Användare.FirstOrDefault(a => a.UserType == 1), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "3", false);
-                Bokningar.AddRange(bokning1, bokning2, bokning3, bokning4, bokning5, bokning6, bokning7);
-                SaveChanges();
+                if (_test)
+                {
+                    Random r = new Random();
+                    Bokning bokning1 = new Bokning(new DateTime(2023, 10, 22), new DateTime(2023, 10, 29), Användare.FirstOrDefault(a => a.UserType == 1), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "2", true);
+                    Bokning bokning2 = new Bokning(new DateTime(2023, 10, 22), new DateTime(2023, 10, 27), Användare.FirstOrDefault(a => a.UserType == 1), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "6", false);
+                    Bokning bokning3 = new Bokning(new DateTime(2023, 10, 22), new DateTime(2023, 10, 29), Användare.FirstOrDefault(a => a.UserType == 2), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "3", true);
+                    Bokning bokning4 = new Bokning(new DateTime(2023, 10, 27), new DateTime(2023, 10, 29), Användare.FirstOrDefault(a => a.UserType == 1), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "2", false);
+                    Bokning bokning5 = new Bokning(new DateTime(2023, 11, 26), new DateTime(2023, 12, 01), Användare.FirstOrDefault(a => a.UserType == 2), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "4", true);
+                    Bokning bokning6 = new Bokning(new DateTime(2023, 11, 26), new DateTime(2023, 12, 03), Användare.FirstOrDefault(a => a.UserType == 2), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "2", true);
+                    Bokning bokning7 = new Bokning(new DateTime(2023, 11, 26), new DateTime(2023, 12, 03), Användare.FirstOrDefault(a => a.UserType == 1), Kunder.ToList()[r.Next(0, Kunder.Count() - 1)], new List<Facilitet>() { Faciliteter.ToList()[r.Next(1, Faciliteter.Count() - 1)] }, "3", false);
+                    Bokningar.AddRange(bokning1, bokning2, bokning3, bokning4, bokning5, bokning6, bokning7);
+                    SaveChanges();
+                }
             }
 
             if (!Aktiviteter.Any())

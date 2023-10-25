@@ -128,6 +128,24 @@ namespace BusinessLayer
         }
 
         /// <summary>
+        /// Skriver ut en restfaktura för kundens eventuella utnyttjade kredit.
+        /// </summary>
+        /// <param name="bokning"></param>
+        public void CreateRestFaktura(Bokning bokning)
+        {
+            DateTime fakturadatum = DateTime.Today;
+
+            float prisFaktura = bokning.UtnyttjadKredit;
+            float momsFaktura = (float)(prisFaktura / 1.12);
+
+            Faktura faktura = new Faktura(fakturadatum, prisFaktura, momsFaktura, bokning);
+            faktura.Förfallodatum = DateTime.Today.AddDays(15);
+            unitOfWork.FakturaRepository.Add(faktura);
+            unitOfWork.Save();
+
+        }
+
+        /// <summary>
         /// Metoden uppdaterar databasen med nytt värde.
         /// </summary>
         /// <param name="faktura"></param>

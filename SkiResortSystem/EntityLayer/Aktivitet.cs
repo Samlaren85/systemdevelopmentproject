@@ -49,8 +49,8 @@ namespace EntityLayer
                 if (Skidskola != null)
                 {
                     Calendar calender = CultureInfo.CurrentCulture.Calendar;
-                    if (Skidskola.Grupplektion != null) return $"{calender.GetWeekOfYear(Skidskola.VaraktighetFrån, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)} {Skidskola.VaraktighetFrån} {Skidskola.VaraktighetFrån.DayOfWeek}-{Skidskola.VaraktighetTill.DayOfWeek}";
-                    else if (Skidskola.Privatlektion != null) return $"{calender.GetWeekOfYear(Skidskola.VaraktighetFrån, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)} {Skidskola.VaraktighetFrån.DayOfWeek} ({Skidskola.VaraktighetFrån.ToShortDateString()})";
+                    if (Skidskola.Grupplektion != null) return $"v.{calender.GetWeekOfYear(Skidskola.VaraktighetFrån, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)} {Skidskola.VaraktighetFrån.DayOfWeek}-{Skidskola.VaraktighetTill.DayOfWeek}";
+                    else if (Skidskola.Privatlektion != null) return $"v.{calender.GetWeekOfYear(Skidskola.VaraktighetFrån, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)} {Skidskola.VaraktighetFrån.DayOfWeek} ({Skidskola.VaraktighetFrån.TimeOfDay})";
                 }
                 return "Ingen varaktighet hittad av aktiviteten";
             }

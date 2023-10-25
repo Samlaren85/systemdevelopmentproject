@@ -80,7 +80,7 @@
 
         </TabItem>
 
-        <TabItem Header="ADMIN" Visibility="{Binding Admin}" >
+        <TabItem Header="ADMIN" Visibility="Collapsed" >
             
             <comp:AdminModulen/>
 

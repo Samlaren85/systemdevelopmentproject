@@ -426,6 +426,9 @@ namespace SkiResortSystem.ViewModels
         }
 
         private ICommand addEquipmentRow;
+        /// <summary>
+        /// Lägger till en ny rad av utrustningar i bokningen
+        /// </summary>
         public ICommand AddEquipmentRow =>
             addEquipmentRow ??= addEquipmentRow = new RelayCommand(() =>
             {
@@ -446,6 +449,9 @@ namespace SkiResortSystem.ViewModels
             });
 
         private ICommand removeEquipmentRow;
+        /// <summary>
+        /// Tar bort en utrustningsrad i listan
+        /// </summary>
         public ICommand RemoveEquipmentRow =>
             removeEquipmentRow ??= removeEquipmentRow = new RelayCommand(() =>
             {
@@ -456,6 +462,9 @@ namespace SkiResortSystem.ViewModels
             });
 
         private ICommand addSizeSelection;
+        /// <summary>
+        /// Adderar en utrustning av vald storlek i bokningen
+        /// </summary>
         public ICommand AddSizeSelection =>
             addSizeSelection ??= addSizeSelection = new RelayCommand(() =>
             {
@@ -472,6 +481,9 @@ namespace SkiResortSystem.ViewModels
             });
 
         private ICommand removeSizeSelection;
+        /// <summary>
+        /// Tar bort en utrustning av vald storlek i bokningen.
+        /// </summary>
         public ICommand RemoveSizeSelection =>
             removeSizeSelection ??= removeSizeSelection = new RelayCommand(() =>
             {
@@ -487,6 +499,9 @@ namespace SkiResortSystem.ViewModels
             });
 
         private ICommand bookEquipment;
+        /// <summary>
+        /// Skapar en bokning för varje utrustning i listan och öppnar upp en översikt för detta
+        /// </summary>
         public ICommand BookEquipment =>
             bookEquipment ??= bookEquipment = new RelayCommand(() =>
             {
@@ -507,6 +522,9 @@ namespace SkiResortSystem.ViewModels
             });
 
         private ICommand searchEquipment;
+        /// <summary>
+        /// Letar efter utrustning i databasen
+        /// </summary>
         public ICommand SearchEquipment =>
             searchEquipment ??= searchEquipment = new RelayCommand(() =>
             {
@@ -562,6 +580,9 @@ namespace SkiResortSystem.ViewModels
                 });
 
         private ICommand handOutEquipment;
+        /// <summary>
+        /// Tilldelar status utlämnad till bokningen och skriver ut en uthyrningsblankett
+        /// </summary>
         public ICommand HandOutEquipment =>
             handOutEquipment ??= handOutEquipment = new RelayCommand(() =>
             {
@@ -575,6 +596,9 @@ namespace SkiResortSystem.ViewModels
             });
         
         private ICommand recieveEquipment;
+        /// <summary>
+        /// Tilldelar status inrapporterad till bokningen
+        /// </summary>
         public ICommand RecieveEquipment =>
             recieveEquipment ??= recieveEquipment = new RelayCommand(() =>
             {

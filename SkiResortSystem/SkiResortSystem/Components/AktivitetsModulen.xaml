@@ -231,7 +231,7 @@
 
                 <ComboBox TabIndex="2" SelectedIndex="{Binding SelectedFetchOrReturn, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" Background="White" Canvas.Left="344" Canvas.Top="113" Width="143" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <ComboBoxItem Content="Lämna ut"/>
-                    <ComboBoxItem Content="Hämta in"/>
+                    <ComboBoxItem Content="Rapportera in"/>
                 </ComboBox>
 
                 <DataGrid  Width="908" Height="379"  ItemsSource="{Binding CurrentEquipment, Mode=TwoWay}" SelectedItem="{Binding SelectedPickupReturn}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >

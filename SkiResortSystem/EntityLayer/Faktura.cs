@@ -52,7 +52,13 @@ namespace EntityLayer
             Fakturastatus = Status.Obetald;
         }
 
-      
+      /// <summary>
+      /// Metoden används för att jämföra de två fakturor som genereras mot kund i fakturaskeendet, för att lägga återbetalningssyddet
+      /// på rätt faktura av de två (faktura1) här benämnds thisFakturaID.
+      /// </summary>
+      /// <param name="obj"></param>
+      /// <returns></returns>
+      /// <exception cref="ArgumentException"></exception>
         public int CompareTo(Faktura? obj)
         {
             int result = 0;
@@ -78,6 +84,13 @@ namespace EntityLayer
                 throw new ArgumentException("Felaktigt format för FakturaID");
             }
         }
+
+        /// <summary>
+        /// Hämtar ut siffror ur en sträng.
+        /// </summary>
+        /// <param name="fakturaID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         private int ExtractNumericPart(string fakturaID)
         {
             // Tar fram den numeriska delen utav en sträng

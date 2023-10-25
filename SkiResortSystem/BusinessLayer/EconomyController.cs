@@ -72,7 +72,7 @@ namespace BusinessLayer
                     {
                         foreach (Utrustningsbokning u in kundensBokning.UtrustningRef)
                         {
-                                pris += u.Utrustning.Pris;
+                                pris += u.TotalPris;
                         }
                     }
 

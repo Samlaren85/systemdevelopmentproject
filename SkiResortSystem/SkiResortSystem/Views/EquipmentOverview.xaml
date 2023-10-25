@@ -38,7 +38,7 @@
                 <DataGridTextColumn Header="STORLEK" Width="80" Binding="{Binding Utrustning.Storlek}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="FRÅN" Width="200" Binding="{Binding Hämtasut}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="TILL" Width="Auto" Binding="{Binding Lämnasin}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding Utrustning.Pris}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="PRIS" Width="*" Binding="{Binding TotalPris}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}" IsReadOnly="False">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">

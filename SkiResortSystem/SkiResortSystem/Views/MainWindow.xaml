@@ -42,11 +42,11 @@
             </TabItem.Template>
 
             <TabControl SelectedItem="{Binding MenuChoise}" TabStripPlacement="Left" Background="#FFA6C3E4">
-                <TabItem Header="HuvudMeny" Height="0" IsSelected="{Binding MainMenu}">
+                <TabItem Header="HuvudMeny" Height="0" IsSelected="True">
                     <Image Source="./images/Logo.png" Margin="0,0,0,300" Height="500" Width="500" />
                 </TabItem>
-                <TabItem Header="LOGGA UT"/>
-                <TabItem Header="AVSLUTA"/>
+                <TabItem x:Name="logout" Header="LOGGA UT" IsSelected="False"/>
+                <TabItem Header="AVSLUTA" IsSelected="False"/>
             </TabControl>
         </TabItem>
 

@@ -139,7 +139,7 @@ namespace SkiResortSystem.ViewModels
                 int result = faktura.CompareTo(fakturaFörKontroll);
                 if (result.Equals(1))
                 {
-                    string avbeställningsskydd = "Avbeställningskydd";
+                    string avbeställningsskydd = "Avbokningsskydd";
                     string prisÅb = "300";
                     Artikel.Add(avbeställningsskydd);
                     Pris.Add(prisÅb);

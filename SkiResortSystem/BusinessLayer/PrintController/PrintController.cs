@@ -82,7 +82,7 @@ namespace BusinessLayer.PrintController
             Label label = new Label(labelText, 0, 0, 704, 800, Font.Helvetica, 12, TextAlign.Left);
             page.Elements.Add(label);
             string uniqueFileName = $"Utrustningsbokning_{utrustningsbokning.UtrustningsbokningsID}.pdf";
-            document.Draw(Util.GetPath($"PrintController/Uthyrningsbokningar/{uniqueFileName}"));
+            document.Draw(Util.GetPath($"Dokument/Uthyrningsbokningar/{uniqueFileName}"));
         }
     }
 }

@@ -19,7 +19,7 @@ namespace SkiResortSystem.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         /// <summary>
-        /// Lista som ska 
+        /// Lista innehållandes bokningar som ännu inte fakturerats.
         /// </summary>
         private IList<Bokning> hämtadeBokningarAttFakturera { get; set; }
         public IList<Bokning> HämtadeBokningarAttFakturera 
@@ -31,7 +31,9 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Property som hanterar den selekterade fakturan i datagriden vid skapande av faktura.
+        /// </summary>
         private bool createBillSelected;
         public bool CreateBillSelected
         {
@@ -43,7 +45,9 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Property som binds till datagriden i fliken skapa fakturor.
+        /// </summary>
         private Bokning skapandeAvFakturor { get; set; }
         public Bokning SkapandeAvFakturor 
         {
@@ -55,7 +59,9 @@ namespace SkiResortSystem.ViewModels
             }
         }
         
-        
+        /// <summary>
+        /// Property för markerat val i datagriden för fliken hantera fakturor.
+        /// </summary>
         private Faktura selectFaktura;
         public Faktura SelectFaktura
         {
@@ -63,39 +69,6 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 selectFaktura = value;
-            }
-        }
-
-        private Faktura selectedFaktura;
-        public Faktura SelectedFaktura
-        {
-            get { return selectedFaktura; }
-            set
-            {
-                selectedFaktura = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private IList<Faktura> fakturaResults;
-        public IList<Faktura> FakturaResults
-        {
-            get { return fakturaResults; }
-            set
-            {
-                fakturaResults = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private Faktura fakturaSökning;
-        public Faktura FakturaSökning
-        {
-            get { return fakturaSökning; }
-            set
-            {
-                fakturaSökning = value;
-                OnPropertyChanged();
             }
         }
 
@@ -134,7 +107,9 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Skapar fakturor utifrån val i listan i fliken skapafaktura.
+        /// </summary>
         private ICommand createFaktura = null!;
         public ICommand CreateFaktura =>
             createFaktura ??= createFaktura = new RelayCommand(() =>
@@ -153,6 +128,9 @@ namespace SkiResortSystem.ViewModels
                 }
             }
             );
+        /// <summary>
+        /// Hämtar fakturor som ännu inte fakturerats.
+        /// </summary>
         private ICommand fetchFaktura = null!;
         public ICommand FetchFaktura => fetchFaktura ??= fetchFaktura = new RelayCommand(() =>
         {
@@ -160,7 +138,9 @@ namespace SkiResortSystem.ViewModels
             HämtadeBokningarAttFakturera = bc.FindMasterBooking();
         }
         );
-
+        /// <summary>
+        /// Hämtar fakturor som har fakturerats mot kund.
+        /// </summary>
         private ICommand hämtaFaktureradeFakturor = null!;
         public ICommand HämtaFaktureradeFakturor => hämtaFaktureradeFakturor ??= hämtaFaktureradeFakturor = new RelayCommand(() =>
         {
@@ -170,6 +150,7 @@ namespace SkiResortSystem.ViewModels
             FaktureradeFakturor = ec.HämtaFaktureradeFakturor(Lista);
         }
         );
+
         private ICommand doubleClickBillingCommand = null!;
         public ICommand DoubleClickBillingCommand =>
             doubleClickBillingCommand ??= doubleClickBillingCommand = new RelayCommand(() =>

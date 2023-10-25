@@ -125,7 +125,7 @@
                         <DataGridTemplateColumn Header="UTRUSTNING" Width="2*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=TypAvUtrustning}"/>
+                                    <TextBlock Text="{Binding Path=TypAvUtrustning, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellEditingTemplate>
@@ -142,7 +142,7 @@
                         <DataGridTemplateColumn Header="FRÅN" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding Path=FrånDatum}"/>
+                                    <DatePicker SelectedDate="{Binding Path=FrånDatum, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellStyle>
@@ -154,7 +154,7 @@
                         <DataGridTemplateColumn Header="TILL" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DatePicker SelectedDate="{Binding Path=TillDatum}"/>
+                                    <DatePicker SelectedDate="{Binding Path=TillDatum, UpdateSourceTrigger=PropertyChanged}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellStyle>
@@ -230,8 +230,8 @@
                 <DatePicker SelectedDate="{Binding ReportDate, UpdateSourceTrigger=PropertyChanged}" Canvas.Left="80" Canvas.Top="111" Width="229" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" />
 
                 <ComboBox TabIndex="2" SelectedIndex="{Binding SelectedFetchOrReturn, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" Background="White" Canvas.Left="344" Canvas.Top="113" Width="143" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <ComboBoxItem Content="Fetch"/>
-                    <ComboBoxItem Content="Return"/>
+                    <ComboBoxItem Content="Lämna ut"/>
+                    <ComboBoxItem Content="Hämta in"/>
                 </ComboBox>
 
                 <DataGrid  Width="908" Height="379"  ItemsSource="{Binding CurrentEquipment, Mode=TwoWay}" SelectedItem="{Binding SelectedPickupReturn}" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" Canvas.Left="80" Canvas.Top="158" >

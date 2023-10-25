@@ -76,6 +76,18 @@ namespace BusinessLayer
             
             return söktaFaciliteter.Except(inaktuellaBokningar).ToList(); //Vad händer om första sökkriteriet blir null?!? ta bort efter testkörning
         }
+        
+        /// <summary>
+        /// Levererar en lista med alla faciliteter i databasen
+        /// </summary>
+        /// <returns></returns>
+        public IList<Facilitet> FindFaciliteter(string searchString)
+        {
+            IList<Facilitet> list;
+            if (searchString.Equals("Boende")) list = unitOfWork.FacilitetRepository.Find(f => f.KonferensID == null, l => l.LägenhetsID, c => c.CampingID);
+            else list = unitOfWork.FacilitetRepository.Find(f => f.KonferensID != null, k => k.KonferensID);
+            return list;
+        }
         public List<Facilitet> FindLedigaFaciliteter(string sökTerm, int antalPersoner)
         {
             List<Facilitet> faciliteter = FindLedigaFaciliteter(sökTerm);
@@ -237,6 +249,14 @@ namespace BusinessLayer
             return antal;
         }
         #region Metoder för att söka fram lediga boenden.
+        /// <summary>
+        /// Hämtar faciliteter utan bokning från databasen inom ett visst tidsspann. Får också med söksträng LGH, CAMP; eller KONF för att sortera på facilitetstyp
+        /// </summary>
+        /// <param name="sökTerm"></param>
+        /// <param name="antalPersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)
         {
             IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid < avrese && b.Avresetid > ankomst, X => X.FacilitetID);
@@ -255,6 +275,15 @@ namespace BusinessLayer
             return Faciliteter.Except(inaktuellFaciliteter).ToList();
         }
 
+
+        /// <summary>
+        /// beroende på vilken radiobutton iklickad i bookingviewmodel så anropas en av de 3 nedan metoder som hämtar tillgängliga faciliteter och tilldelar det
+        /// korrekta priset för boende/facilitetstyp och vecka.
+        /// /// </summary>
+        /// <param name="antalpersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaLägenheter(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
             List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("LGH", antalpersoner, ankomst, avrese);
@@ -284,11 +313,25 @@ namespace BusinessLayer
             }
             foreach (Facilitet f in Faciliteter)
             {
-                f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("LGH") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka); 
+                if(f.LägenhetsID.LägenhetBenämning == "Lägenhet 1")
+                {
+                    f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("LGH1") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                }
+                if (f.LägenhetsID.LägenhetBenämning == "Lägenhet 2")
+                {
+                    f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("LGH2") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                }
                 unitOfWork.Save();
             }
             return Faciliteter;
         }
+        /// <summary>
+        /// Beskrivning i metoden ovan
+        /// </summary>
+        /// <param name="antalpersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaCamping(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
             List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("CAMP", antalpersoner, ankomst, avrese);
@@ -319,6 +362,13 @@ namespace BusinessLayer
             }
             return Faciliteter;
         }
+        /// <summary>
+        /// Beskriving 2 metoder upp. 
+        /// </summary>
+        /// <param name="antalpersoner"></param>
+        /// <param name="ankomst"></param>
+        /// <param name="avrese"></param>
+        /// <returns></returns>
         public List<Facilitet> FindLedigaKonferens(int antalpersoner, DateTime ankomst, DateTime avrese)
         {
             List<Facilitet> Faciliteter = FindLedigaFaciliteterFörBokning("KONF", antalpersoner, ankomst, avrese);
@@ -326,13 +376,14 @@ namespace BusinessLayer
             int weekNumber = GetIso8601WeekOfYear(date);
             string bokningstyp;
             TimeSpan tidsspann = avrese - ankomst;
-            if (tidsspann.Days == 1)
-            {
-                bokningstyp = "Dygn";
-            }
-            else if(tidsspann.Hours <= 5)
+            
+            if(tidsspann.Hours <= 5 && tidsspann.Days == 0)
             {
                 bokningstyp = "Tim";
+            }
+            else if (tidsspann.Days < 7 || tidsspann.Hours > 5 && tidsspann.Days == 0)
+            {
+                bokningstyp = "Dygn";
             }
             else
             {
@@ -348,7 +399,14 @@ namespace BusinessLayer
             }
             foreach (Facilitet f in Faciliteter)
             {
-                f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("pers") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                if (f.KonferensID.KonferensBenämning == "Stor 50 pers")
+                {
+                    f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("50pers") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                }
+                if (f.KonferensID.KonferensBenämning == "Liten 20 pers")
+                {
+                    f.FacilitetsPris = unitOfWork.FacilitetsprisRepository.FirstOrDefault(b => b.FacilitetTyp.Contains("20pers") && b.BokningTyp == bokningstyp && weekNumber == b.Vecka);
+                }
                 unitOfWork.Save();
             }
             return Faciliteter;

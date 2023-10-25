@@ -87,7 +87,7 @@
 
         <DatePicker Canvas.Left="383" Canvas.Top="336" HorizontalAlignment="Left"  VerticalAlignment="Top" SelectedDate="{Binding Ankomst}" IsEnabled="{Binding AnkomstReadOnly}"/>
         <DatePicker Canvas.Left="550" Canvas.Top="335" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.673,0.667" SelectedDate="{Binding Avresa}" IsEnabled="{Binding AvresaReadOnly}" Height="27"/>
-        <TextBlock Text="Avbeställningsskydd" Canvas.Left="383"  Canvas.Top="568" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Text="Avbeställningsskydd (+300)" Canvas.Left="383"  Canvas.Top="568" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <CheckBox IsChecked="{Binding Avbetalningsskydd}" Canvas.Left="383" Canvas.Top="603">
             <CheckBox.LayoutTransform>
                 <ScaleTransform ScaleX="2" ScaleY="2" />

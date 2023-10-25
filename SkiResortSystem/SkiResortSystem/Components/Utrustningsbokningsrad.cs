@@ -23,8 +23,27 @@ namespace SkiResortSystem.Components
             }
         }
         public List<string> TypAvUtrustningar { get; set; }
-        public DateTime FrånDatum { get; set; }
-        public DateTime TillDatum { get; set; }
+        
+        private DateTime frånDatum;
+        public DateTime FrånDatum
+        {
+            get { return frånDatum; }
+            set
+            {
+                frånDatum = value;
+                OnPropertyChanged();
+            }
+        }
+        private DateTime tillDatum;
+        public DateTime TillDatum
+        {
+            get { return tillDatum; }
+            set
+            {
+                tillDatum = value;
+                OnPropertyChanged();
+            }
+        }
         private int antal;
         public int Antal 
         { 

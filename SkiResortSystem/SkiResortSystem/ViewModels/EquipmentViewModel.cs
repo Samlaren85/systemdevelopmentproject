@@ -348,6 +348,7 @@ namespace SkiResortSystem.ViewModels
             IList<Utrustningsbokning> utr;
             if (SelectedFetchOrReturn == 0) utr = equipmentController.FindUtrustningsbokningar(reportDate, null);
             else utr = equipmentController.FindUtrustningsbokningar(null, reportDate);
+            
             return utr;
         }
 
@@ -361,6 +362,10 @@ namespace SkiResortSystem.ViewModels
                 OnPropertyChanged();
             }
         }
+        
+        
+
+
 
         private Utrustningsbokning selectedPickupReturn;
         public Utrustningsbokning SelectedPickupReturn

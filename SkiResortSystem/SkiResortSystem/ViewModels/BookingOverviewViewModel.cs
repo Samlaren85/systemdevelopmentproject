@@ -366,6 +366,7 @@ namespace SkiResortSystem.ViewModels
                     f.Fakturastatus = Status.Makulerad;
                 }
             }
+            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsID} är nu makulerad i systemet!");
             CloseCommand.Execute(view);
 
         });

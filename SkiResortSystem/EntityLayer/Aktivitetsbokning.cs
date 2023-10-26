@@ -5,7 +5,7 @@ namespace EntityLayer
     public class Aktivitetsbokning
     {
         [Key]
-        public int AktivitetsbokningsID { get; set; }
+        public int AktivitetsbokningsId { get; set; }
         public Status AktivitetsStatus { get; set; }
         public Bokning Bokningsref { get; set; }
         public Aktivitet Aktivitetsref { get; set; }

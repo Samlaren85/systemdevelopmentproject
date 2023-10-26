@@ -1,20 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntityLayer
 {
     public class Kund
     {
-        private static int _kundAntal = 0;
+        private string kundId;
         [Key]
-        private string kundID;
-        public string KundID 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string KundId 
         { 
             get
             {
-                if (Privatkund != null) return Privatkund.PersonnummerID;
-                else return Företagskund.OrganisationsnummerID;
+                if (Privatkund != null) return Privatkund.PersonnummerId;
+                else return Företagskund.OrganisationsnummerId;
             }
-            set { kundID = value; }
+            set { kundId = value; }
         }
         public float Rabatt { get; set; }
         public float Kreditgräns { get; set; }
@@ -40,8 +41,6 @@ namespace EntityLayer
         }
         public Kund(float rabatt, float kreditgräns, string gatuadress, string postnummer, string ort, string telefonnummer, string epost, Företagskund? företagskund, Privatkund? privatkund)
         {
-            _kundAntal++;
-            KundID = "K" + _kundAntal.ToString("000000");
             Rabatt = rabatt;
             Kreditgräns = kreditgräns;
             Gatuadress = gatuadress;
@@ -75,11 +74,11 @@ namespace EntityLayer
             string kundnummer;
             if (Privatkund != null)
             {
-                kundnummer = Privatkund.PersonnummerID;
+                kundnummer = Privatkund.PersonnummerId;
             }
             else
             {
-                kundnummer = Företagskund.OrganisationsnummerID;
+                kundnummer = Företagskund.OrganisationsnummerId;
             }
             return kundnummer.ToString();
         }

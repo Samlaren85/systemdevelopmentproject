@@ -5,7 +5,7 @@ namespace EntityLayer
     public class Företagskund
     {
         [Key]
-        public string OrganisationsnummerID { get; set; }
+        public string OrganisationsnummerId { get; set; }
         public string Företagsnamn { get; set; }
         public string Kontaktperson { get; set; }
         public string Besöksadress { get; set; }
@@ -17,7 +17,7 @@ namespace EntityLayer
         }
         public Företagskund(string organisationsnummerID, string företagsnamn, string kontaktperson, string besöksadress, string besökspostnummer, string besöksort)
         {
-            OrganisationsnummerID = organisationsnummerID;
+            OrganisationsnummerId = organisationsnummerID;
             Företagsnamn = företagsnamn;
             Kontaktperson = kontaktperson;
             Besöksadress = besöksadress;

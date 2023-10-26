@@ -4,9 +4,8 @@ namespace EntityLayer
 {
     public class Bokning
     {
-        private static int _antalBokningar = 0;
         [Key]
-        public string BokningsID { get; set; }
+        public string BokningsId { get; set; }
         private Status bokningsstatus;
         public Status Bokningsstatus
         {
@@ -63,8 +62,6 @@ namespace EntityLayer
         }
         public Bokning(DateTime ankomsttid, DateTime avresetid, Användare användareID, Kund kundID, List<Facilitet> facilitetID, string antalPersoner, bool återbetalningsskydd = false)
         {
-            _antalBokningar++;
-            BokningsID = "B" + _antalBokningar.ToString("000000");
             UtnyttjadKredit = 0;
             Ankomsttid = ankomsttid;
             Avresetid = avresetid;
@@ -85,7 +82,7 @@ namespace EntityLayer
             string customerName = string.Empty;
             if (KundID.Företagskund != null) customerName = KundID.Företagskund.Företagsnamn;
             else if (KundID.Privatkund != null) customerName = KundID.Privatkund.Namn();
-            return $"{BokningsID} ({customerName})";
+            return $"{BokningsId} ({customerName})";
         }
     }
 }

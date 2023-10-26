@@ -100,7 +100,7 @@ namespace BusinessLayer
             { 
                 foreach (Bokning b in customer.BokningsRef)
                 {
-                    b.KundID = unitOfWork.KundRepository.FirstOrDefault(k => k.KundID == "00000000-0000");
+                    b.KundID = unitOfWork.KundRepository.FirstOrDefault(k => k.KundId == "00000000-0000");
                 }
                 done = unitOfWork.KundRepository.Remove(customer);
                 if (done) unitOfWork.Save();
@@ -119,8 +119,8 @@ namespace BusinessLayer
 
             List<Kund> x = unitOfWork.KundRepository
                 .Find(c =>
-                    !c.KundID.Equals("00000000-0000") && (
-                    c.KundID.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                    !c.KundId.Equals("00000000-0000") && (
+                    c.KundId.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
                     (c.Privatkund!= null && c.Privatkund.Namn().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
                     (c.Företagskund != null && c.Företagskund.Företagsnamn.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))), x => x.Privatkund, x => x.Företagskund)
                 .ToList();

@@ -77,6 +77,41 @@ namespace DataLayer
             }
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Aktivitet>()
+                .Property(e => e.AktivitetsId)
+                .HasDefaultValueSql("CONCAT('AKT', NEWID())");
+            modelBuilder.Entity<Bokning>()
+                .Property(e => e.BokningsId)
+                .HasDefaultValueSql("CONCAT('B', NEWID())");
+            modelBuilder.Entity<Campingplats>()
+                .Property(e => e.CampingId)
+                .HasDefaultValueSql("CONCAT('CAMP', NEWID())");
+            modelBuilder.Entity<Faktura>()
+                .Property(e => e.FakturaId)
+                .HasDefaultValueSql("CONCAT('FAKT', NEWID())");
+            modelBuilder.Entity<Grupplektion>()
+                .Property(e => e.GrupplektionId)
+                .HasDefaultValueSql("CONCAT('GRUPP', NEWID())");
+            modelBuilder.Entity<Konferenssal>()
+                .Property(e => e.KonferensId)
+                .HasDefaultValueSql("CONCAT('KONF', NEWID())");
+            modelBuilder.Entity<Lägenhet>()
+                .Property(e => e.LägenhetId)
+                .HasDefaultValueSql("CONCAT('LGH', NEWID())");
+            modelBuilder.Entity<Privatlektion>()
+                .Property(e => e.PrivatlektionId)
+                .HasDefaultValueSql("CONCAT('PRIV', NEWID())");
+            modelBuilder.Entity<Skidskola>()
+                .Property(e => e.SkidskolaId)
+                .HasDefaultValueSql("CONCAT('SKID', NEWID())");
+            modelBuilder.Entity<Utrustning>()
+                .Property(e => e.UtrustningsId)
+                .HasDefaultValueSql("CONCAT('UTR', NEWID())");
+
+            base.OnModelCreating(modelBuilder);
+        }
 
         /// <summary>
         /// Seedning av all data.
@@ -109,14 +144,14 @@ namespace DataLayer
             }
             if (!Användare.Any()) 
             {
-                Användare.Add(new Användare("@dm1n1stratoR", 1, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL001"))));
-                Användare.Add(new Användare("Receptionist1!", 2, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL002"))));
-                Användare.Add(new Användare("Skidshopspersonal1!", 3, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL003"))));
-                Användare.Add(new Användare("Ekonomianställd1!", 4, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL004"))));
-                Användare.Add(new Användare("Avdelningschef1!", 5, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL005"))));
-                Användare.Add(new Användare("Ekonomichef1!", 6, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL006"))));
-                Användare.Add(new Användare("Marknadschef1!", 7, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL007"))));
-                Användare.Add(new Användare("P@ssword1234", 8, Roller.FirstOrDefault(r => r.RollID.Equals("ROLL008"))));
+                Användare.Add(new Användare("A000001", "@dm1n1stratoR", 1, Roller.FirstOrDefault(r => r.Rolltyp.Equals("Admin"))));
+                Användare.Add(new Användare("A000002", "Receptionist1!", 2, Roller.FirstOrDefault(r => r.Rolltyp.Equals("Receptionist"))));
+                Användare.Add(new Användare("A000003", "Skidshopspersonal1!", 3, Roller.FirstOrDefault(r => r.Rolltyp.Equals("Skidshopspersonal"))));
+                Användare.Add(new Användare("A000004", "Ekonomianställd1!", 4, Roller.FirstOrDefault(r => r.Rolltyp.Equals("Ekonomianställd"))));
+                Användare.Add(new Användare("A000005", "Avdelningschef1!", 5, Roller.FirstOrDefault(r => r.Rolltyp.Equals("Avdelningschef"))));
+                Användare.Add(new Användare("A000006", "Ekonomichef1!", 6, Roller.FirstOrDefault(r => r.Rolltyp.Equals("Ekonomichef"))));
+                Användare.Add(new Användare("A000007", "Marknadschef1!", 7, Roller.FirstOrDefault(r => r.Rolltyp.Equals("Marknadschef"))));
+                Användare.Add(new Användare("A000008", "P@ssword1234", 8, Roller.FirstOrDefault(r => r.Rolltyp.Equals("VD"))));
                 SaveChanges();
             }
 

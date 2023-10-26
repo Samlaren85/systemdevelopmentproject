@@ -51,7 +51,7 @@ namespace BusinessLayer
             if (_instance == null)
             {
                 UnitOfWork unitOfWork = new UnitOfWork();
-                Användare credentials = unitOfWork.AnvändarRepository.FirstOrDefault(a => a.UserID == ID,r => r.RollID, b => b.RollID.BehörighetID);
+                Användare credentials = unitOfWork.AnvändarRepository.FirstOrDefault(a => a.AnvändarNamn == ID,r => r.RollID, b => b.RollID.BehörighetID);
                 if (credentials != null && credentials.Password.Equals(password))
                 {
                     _instance = new SessionController(credentials);

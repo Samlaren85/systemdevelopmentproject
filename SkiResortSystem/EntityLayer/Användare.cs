@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntityLayer
 {
@@ -8,7 +9,9 @@ namespace EntityLayer
     public class Användare
     {
         [Key]
-        public string UserID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string UserId { get; set; }
+        public string AnvändarNamn {  get; set; }
         private string password;
         public string Password
         {
@@ -57,10 +60,9 @@ namespace EntityLayer
         /// <param name="password"></param>
         /// <param name="usertype"></param>
         /// <param name="rollID"></param>
-        public Användare(string password, int usertype, Roll rollID)
+        public Användare(string användare, string password, int usertype, Roll rollID)
         {
-            _userCount++;
-            UserID = "A" + _userCount.ToString("000000");
+            AnvändarNamn = användare;
             Password = password;
             UserType = usertype;
             RollID = rollID;

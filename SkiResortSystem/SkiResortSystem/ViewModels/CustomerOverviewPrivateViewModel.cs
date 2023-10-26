@@ -93,7 +93,7 @@ namespace SkiResortSystem.ViewModels
             set 
             { 
                 personnummer = value; if (Kund != null) 
-                Kund.Privatkund.PersonnummerID = value;
+                Kund.Privatkund.PersonnummerId = value;
                 OnPropertyChanged(); 
             }
         }
@@ -194,7 +194,7 @@ namespace SkiResortSystem.ViewModels
             Kund = laddadKund;
             Förnamn = laddadKund.Privatkund.Förnamn;
             Efternamn = laddadKund.Privatkund.Efternamn;
-            Personnummer = laddadKund.Privatkund.PersonnummerID;
+            Personnummer = laddadKund.Privatkund.PersonnummerId;
             Gatuadress = laddadKund.Gatuadress;
             Postnummer = laddadKund.Postnummer;
             Postort = laddadKund.Ort;

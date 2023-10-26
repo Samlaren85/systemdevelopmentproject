@@ -45,10 +45,10 @@ namespace BusinessLayer.PrintController
             {
                 x = "Ja";
             }
-            string labelText = $"Bokningsbekräftelse\n\nBokningsnummer: {bokning.BokningsID}\nKund: {bokning.KundID.Namn}\nAnkomsttid: {bokning.Ankomsttid}\nAvresetid: {bokning.Avresetid}\nÅterbetalningsskydd: {x}";
+            string labelText = $"Bokningsbekräftelse\n\nBokningsnummer: {bokning.BokningsId}\nKund: {bokning.KundID.Namn}\nAnkomsttid: {bokning.Ankomsttid}\nAvresetid: {bokning.Avresetid}\nÅterbetalningsskydd: {x}";
             Label label = new Label(labelText, 0, 0, 504, 700, Font.Helvetica, 18, TextAlign.Center);
             page.Elements.Add(label);
-            string uniqueFileName = $"Bokningsbekräftelse_{bokning.BokningsID}.pdf";
+            string uniqueFileName = $"Bokningsbekräftelse_{bokning.BokningsId}.pdf";
             document.Draw(Util.GetPath($"Dokument/Bokningsbekräftelser/{uniqueFileName}"));
         }
         public static void Run(Faktura faktura, Faktura faktura2)
@@ -63,11 +63,11 @@ namespace BusinessLayer.PrintController
                 Document document = new Document();
                 Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
                 document.Pages.Add(page);
-                string labelText = $"Fakturadatum: {f.Fakturadatum}\t\t\t\t\t\t\t\t\tFakturanummer: {f.FakturaID}\n\nFörfallodatum: {f.Förfallodatum}\n\n\n" +
+                string labelText = $"Fakturadatum: {f.Fakturadatum}\t\t\t\t\t\t\t\t\tFakturanummer: {f.FakturaId}\n\nFörfallodatum: {f.Förfallodatum}\n\n\n" +
                     $"Totalpris:{f.Totalpris}\n\nStatus: {f.Fakturastatus}\n\nKund: {f.Bokningsref.KundID}\n\nMoms: {f.Moms}";
                 Label label = new Label(labelText, 0, 0, 704, 800, Font.Helvetica, 12, TextAlign.Left);
                 page.Elements.Add(label);
-                string uniqueFileName = $"Faktura_{f.FakturaID}.pdf";
+                string uniqueFileName = $"Faktura_{f.FakturaId}.pdf";
                 document.Draw(Util.GetPath($"Dokument/Fakturor/{uniqueFileName}"));
             }
 
@@ -77,11 +77,11 @@ namespace BusinessLayer.PrintController
             Document document = new Document();
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
             document.Pages.Add(page);
-            string labelText = $"Utrustningsbokning: {utrustningsbokning.UtrustningsbokningsID}\nUtlämnad: {utrustningsbokning.Hämtasut}\nÅterlämning: {utrustningsbokning.Lämnasin}\n\n\n" +
-                $"Gäller kund:{utrustningsbokning.Bokning.KundID.Namn}\n\nUtrustning: {utrustningsbokning.Utrustning.UtrustningsBenämning}\n\nUtrustningsID: {utrustningsbokning.Utrustning.UtrustningsID}";
+            string labelText = $"Utrustningsbokning: {utrustningsbokning.UtrustningsbokningsId}\nUtlämnad: {utrustningsbokning.Hämtasut}\nÅterlämning: {utrustningsbokning.Lämnasin}\n\n\n" +
+                $"Gäller kund:{utrustningsbokning.Bokning.KundID.Namn}\n\nUtrustning: {utrustningsbokning.Utrustning.UtrustningsBenämning}\n\nUtrustningsID: {utrustningsbokning.Utrustning.UtrustningsId}";
             Label label = new Label(labelText, 0, 0, 704, 800, Font.Helvetica, 12, TextAlign.Left);
             page.Elements.Add(label);
-            string uniqueFileName = $"Utrustningsbokning_{utrustningsbokning.UtrustningsbokningsID}.pdf";
+            string uniqueFileName = $"Utrustningsbokning_{utrustningsbokning.UtrustningsbokningsId}.pdf";
             document.Draw(Util.GetPath($"Dokument/Uthyrningsbokningar/{uniqueFileName}"));
         }
     }

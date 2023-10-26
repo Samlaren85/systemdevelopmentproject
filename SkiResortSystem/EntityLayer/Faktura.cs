@@ -5,9 +5,8 @@ namespace EntityLayer
 {
     public class Faktura : IComparable<Faktura>
     {
-        private static int _antalFakturor = 0;
         [Key]
-        public string FakturaID { get; set; }
+        public string FakturaId { get; set; }
         private Status fakturastatus;
         public Status Fakturastatus
         {
@@ -36,8 +35,6 @@ namespace EntityLayer
         }
         public Faktura(DateTime fakturadatum, float totalpris, float moms, Bokning bokning)
         {
-            _antalFakturor++;
-            FakturaID = "FAKT" + _antalFakturor.ToString("000000");
             Fakturadatum = fakturadatum;
             Förfallodatum = Fakturadatum.AddDays(30);
             Totalpris = totalpris; 
@@ -56,8 +53,8 @@ namespace EntityLayer
         public int CompareTo(Faktura? obj)
         {
             int result = 0;
-            int thisFakturaID = ExtractNumericPart(obj.FakturaID);
-            int otherFakturaID = ExtractNumericPart(FakturaID);
+            int thisFakturaID = ExtractNumericPart(obj.FakturaId);
+            int otherFakturaID = ExtractNumericPart(FakturaId);
             if (obj != null)
             {
                 if (thisFakturaID > otherFakturaID)

@@ -107,7 +107,7 @@ namespace SkiResortSystem.ViewModels
             set
             {
                 organisationsnummer = value; 
-                if (Kund != null) Kund.Företagskund.OrganisationsnummerID = value;
+                if (Kund != null) Kund.Företagskund.OrganisationsnummerId = value;
                 OnPropertyChanged();
             }
         }
@@ -228,7 +228,7 @@ namespace SkiResortSystem.ViewModels
             Kund = laddadKund;
             Företagsnamn = laddadKund.Företagskund.Företagsnamn;
             Kontakt = laddadKund.Företagskund.Kontaktperson;
-            Organisationsnummer = laddadKund.Företagskund.OrganisationsnummerID;
+            Organisationsnummer = laddadKund.Företagskund.OrganisationsnummerId;
             Besöksadress = laddadKund.Företagskund.Besöksadress;
             Besökspostnummer = laddadKund.Företagskund.Besökspostnummer;
             Besöksort = laddadKund.Företagskund.Besöksort;

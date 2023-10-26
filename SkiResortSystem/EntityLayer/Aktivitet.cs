@@ -5,9 +5,8 @@ namespace EntityLayer
 {
     public class Aktivitet
     {
-        private static int _antalAktiviteter = 0;
         [Key]
-        public string AktivitetsID { get; set; }
+        public string AktivitetsId { get; set; }
         private Status aktivitetsstatus;
         public Status Aktivitetsstatus
         {
@@ -70,8 +69,6 @@ namespace EntityLayer
         }
         public Aktivitet(Skidskola skidskola, bool vintersäsong)
         {
-            _antalAktiviteter++;
-            AktivitetsID = "AKT" + _antalAktiviteter.ToString("000");
             Skidskola = skidskola;
             Vintersäsong = vintersäsong;
         }

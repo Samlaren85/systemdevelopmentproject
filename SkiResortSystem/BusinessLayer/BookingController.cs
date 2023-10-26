@@ -66,7 +66,7 @@ namespace BusinessLayer
         public IList<Bokning> FindMasterBooking(string searchString, DateTime? Ankomst, DateTime? Avresa)
         {
             return unitOfWork.BokningsRepository.Find(b =>
-                    (searchString == null || (b.BokningsID.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    (searchString == null || (b.BokningsId.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
                     (b.KundID.Privatkund != null && b.KundID.Privatkund.Namn().Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
                     (b.KundID.Företagskund != null && b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase)))) &&
                     ((Ankomst == null || b.Ankomsttid == Ankomst) && (Avresa == null || b.Avresetid == Avresa)) &&
@@ -77,7 +77,7 @@ namespace BusinessLayer
         public IList<Bokning> FindMasterBooking(string searchString)
         {
             return unitOfWork.BokningsRepository.Find(b =>
-                    (b.BokningsID.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    (b.BokningsId.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
                     (b.KundID.Privatkund != null && b.KundID.Privatkund.Namn().Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
                     (b.KundID.Företagskund != null && b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase))) &&
                     (b.Bokningsstatus != Status.Makulerad),

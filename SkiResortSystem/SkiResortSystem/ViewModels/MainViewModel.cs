@@ -67,7 +67,7 @@ namespace SkiResortSystem.ViewModels
             if (SessionController.LoggedIn != null)
             {
 
-                LoggedInUser = $"{SessionController.LoggedIn.UserID}";
+                LoggedInUser = $"{SessionController.LoggedIn.AnvändarNamn}";
                 MainVisibility = Visibility.Visible;
 
             }
@@ -249,14 +249,14 @@ namespace SkiResortSystem.ViewModels
                 {
                     case "1 - Systemadministratör": // ta bort all acces förutom Admin innan inlämning OBS! även boolen till false
                         Admin = Visibility.Visible;
-                        Economy = Visibility.Visible;
-                        MarketingManager = Visibility.Visible;
-                        Customer = Visibility.Visible;
-                        Governance = Visibility.Visible;
-                        CEO = Visibility.Visible;
-                        Reception = Visibility.Visible;
-                        Shop = Visibility.Visible;
-                        IsCurrentUserMarketingManager = true;
+                        Economy = Visibility.Collapsed;
+                        MarketingManager = Visibility.Collapsed;
+                        Customer = Visibility.Collapsed;
+                        Governance = Visibility.Collapsed;
+                        CEO = Visibility.Collapsed;
+                        Reception = Visibility.Collapsed;
+                        Shop = Visibility.Collapsed;
+                        IsCurrentUserMarketingManager = false;
                         break;
                     case "2 - Reception":
                         Admin = Visibility.Collapsed;

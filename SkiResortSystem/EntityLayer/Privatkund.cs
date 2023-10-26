@@ -5,7 +5,7 @@ namespace EntityLayer
     public class Privatkund
     {
         [Key]
-        public string PersonnummerID { get; set; }
+        public string PersonnummerId { get; set; }
         public string Förnamn { get; set; }
         public string Efternamn { get; set; }
         public Privatkund()
@@ -14,7 +14,7 @@ namespace EntityLayer
         }
         public Privatkund(string personnummerID, string förnamn, string efternamn)
         {
-            PersonnummerID = personnummerID;
+            PersonnummerId = personnummerID;
             Förnamn = förnamn;
             Efternamn = efternamn;
         }

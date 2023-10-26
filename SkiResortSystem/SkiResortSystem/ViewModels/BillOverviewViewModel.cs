@@ -74,7 +74,7 @@ namespace SkiResortSystem.ViewModels
                 Faktura.Fakturastatus = Status.Makulerad;
                 EconomyController ec = new EconomyController();
                 ec.UpdateFaktura(Faktura);
-                MessageBoxResult respons = MessageBox.Show($"Faktura {Faktura.FakturaID} är nu arkiverad i systemet!");
+                MessageBoxResult respons = MessageBox.Show($"Faktura {Faktura.FakturaId} är nu arkiverad i systemet!");
                 CloseCommand.Execute(view);
             });
 

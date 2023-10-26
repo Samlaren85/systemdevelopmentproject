@@ -5,19 +5,19 @@ namespace EntityLayer
 {
     public class Facilitet
     {
-        private static int _antalFaciliteter;
+        private string facilitetId;
         [Key]
-        private string facilitetID;
-        public string FacilitetID
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string FacilitetId
         {
             get
             {
-                if (LägenhetsID != null) return LägenhetsID.LägenhetID;
-                else if (CampingID != null) return CampingID.CampingID;
-                else return KonferensID.KonferensID;
+                if (LägenhetsID != null) return LägenhetsID.LägenhetId;
+                else if (CampingID != null) return CampingID.CampingId;
+                else return KonferensID.KonferensId;
             }
             set
-            { facilitetID = value; }
+            { facilitetId = value; }
         }
 
         [NotMapped]
@@ -37,8 +37,6 @@ namespace EntityLayer
         }
         public Facilitet( Konferenssal? konferansID, Lägenhet? lägenhetsID, Campingplats? campingID)
         {
-            _antalFaciliteter++;
-            FacilitetID = "F" + _antalFaciliteter.ToString("000000");
             KonferensID = konferansID;
             LägenhetsID = lägenhetsID;
             CampingID = campingID;

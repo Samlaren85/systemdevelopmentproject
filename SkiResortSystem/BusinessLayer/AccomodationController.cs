@@ -27,7 +27,7 @@ namespace BusinessLayer
         /// <returns></returns>
         public Bokning FindBoende(string sökTerm)
         {
-            return unitOfWork.BokningsRepository.FirstOrDefault(b => (b.BokningsID == sökTerm  
+            return unitOfWork.BokningsRepository.FirstOrDefault(b => (b.BokningsId == sökTerm  
                                                                || b.KundID.Privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)
                                                                || b.KundID.Företagskund.Företagsnamn.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)
                                                                || b.Ankomsttid.ToShortDateString().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)), x => x.KundID, x => x.KundID.Privatkund, x => x.KundID.Företagskund);
@@ -249,7 +249,7 @@ namespace BusinessLayer
         public List<Facilitet> FindLedigaFaciliteterFörBokning(string sökTerm, int antalPersoner, DateTime ankomst, DateTime avrese)
         {
             IList<Bokning> bokningar = unitOfWork.BokningsRepository.Find(b => b.Ankomsttid < avrese && b.Avresetid > ankomst, X => X.FacilitetID);
-            IList<Facilitet> Faciliteter = unitOfWork.FacilitetRepository.Find(b => b.FacilitetID.Contains(sökTerm, StringComparison.OrdinalIgnoreCase) && 
+            IList<Facilitet> Faciliteter = unitOfWork.FacilitetRepository.Find(b => b.FacilitetId.Contains(sökTerm, StringComparison.OrdinalIgnoreCase) && 
                                 ((b.LägenhetsID != null && antalPersoner <= b.LägenhetsID.Bäddar) ||
                                 (b.CampingID != null) ||
                                 (b.KonferensID != null && antalPersoner <= b.KonferensID.AntalPersoner)), x => x.LägenhetsID, x => x.CampingID, x => x.KonferensID);

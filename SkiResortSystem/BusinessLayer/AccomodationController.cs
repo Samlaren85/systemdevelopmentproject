@@ -26,8 +26,8 @@ namespace BusinessLayer
         /// <param name="sökTerm"></param>
         /// <returns></returns>
         public Bokning FindBoende(string sökTerm)
-        {
-            return unitOfWork.BokningsRepository.FirstOrDefault(b => (b.BokningsId == sökTerm  
+        {   
+            return unitOfWork.BokningsRepository.FirstOrDefault(b => (b.Bokningsnummer == sökTerm  
                                                                || b.KundID.Privatkund.Namn().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)
                                                                || b.KundID.Företagskund.Företagsnamn.Contains(sökTerm, StringComparison.OrdinalIgnoreCase)
                                                                || b.Ankomsttid.ToShortDateString().Contains(sökTerm, StringComparison.OrdinalIgnoreCase)), x => x.KundID, x => x.KundID.Privatkund, x => x.KundID.Företagskund);

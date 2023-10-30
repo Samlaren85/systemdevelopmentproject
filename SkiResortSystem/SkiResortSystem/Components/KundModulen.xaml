@@ -39,7 +39,7 @@
                         Command="{Binding DoubleClickCustomerCommand}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="PERSON-/ORG.NUMMER" Width="*" Binding="{Binding KundID}"/>
+                        <DataGridTextColumn Header="PERSON-/ORG.NUMMER" Width="*" Binding="{Binding KundId}"/>
                         <DataGridTextColumn Header="NAMN" Width="AUTO" Binding="{Binding}"/>
                         <DataGridTextColumn Header="TELEFONNUMER" Width="*" Binding="{Binding Telefonnummer}"/>
                         <DataGridTextColumn Header="E-POST" Width="*" Binding="{Binding Epost}"/>

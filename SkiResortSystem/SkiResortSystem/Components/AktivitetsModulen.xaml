@@ -31,6 +31,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="AKTIVITET" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Skidskola.Lärare}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="ANTAL LEDIGA PLATSER" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="ANTAL DELTAGARE" Width="*" Binding="{Binding Antal}"  IsReadOnly="False">
 
@@ -100,7 +101,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="NAMN" Width="230" Binding="{Binding Path=Bokningsref.KundID.Namn}"/>
                         <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding Path=Bokningsref.BokningsID}"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding Path=Bokningsref.Bokningsnummer}"/>
                         <DataGridTextColumn Header="AKTIVITET" Width="*" Binding="{Binding Path=Aktivitetsref.Typ }"/>
                         <DataGridTextColumn Header="STATUS" Width="*" Binding="{Binding Path=Aktivitetsref.Aktivitetsstatus }"/>
                     </DataGrid.Columns>
@@ -215,7 +216,7 @@
                         <DataGridTextColumn Header="NAMN" Width="230" Binding="{Binding Path=Bokning.KundID.Namn}"/>
                         <DataGridTextColumn Header="STARTDATUM" Width="2*" Binding="{Binding Hämtasut}"/>
                         <DataGridTextColumn Header="SLUTDATUM" Width="2*" Binding="{Binding Lämnasin}"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="Auto" Binding="{Binding Path=Bokning.BokningsID}"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="Auto" Binding="{Binding Path=Bokning.Bokningsnummer}"/>
                         <DataGridTextColumn Header="UTRUSTNING" Width="*" Binding="{Binding Path=Utrustning.UtrustningsBenämning}"/>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -238,7 +239,7 @@
                         <DataGridTextColumn Header="NAMN" Width="230" Binding="{Binding Path=Bokning.KundID.Namn}"/>
                         <DataGridTextColumn Header="STARTDATUM" Width="2*" Binding="{Binding Hämtasut}"/>
                         <DataGridTextColumn Header="SLUTDATUM" Width="2*" Binding="{Binding Lämnasin}"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="Auto" Binding="{Binding Path=Bokning.BokningsID}"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="Auto" Binding="{Binding Path=Bokning.Bokningsnummer}"/>
                         <DataGridTextColumn Header="HYLLA" Width="*" Binding="{Binding Hylla}">
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">

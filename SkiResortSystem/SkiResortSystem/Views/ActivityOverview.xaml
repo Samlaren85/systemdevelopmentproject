@@ -29,7 +29,7 @@
 
     <Canvas Background="#FFA6C3E4" Height="1000">
         <TextBlock Text="Bokningsnummer: " Canvas.Left="180" Canvas.Top="100" FontWeight="Bold" />
-        <TextBlock Text="{Binding Path=Bokningsref.BokningsID}" FontWeight="Bold" Canvas.Left="354" Canvas.Top="100"/>
+        <TextBlock Text="{Binding Path=Bokningsref.Bokningsnummer}" FontWeight="Bold" Canvas.Left="354" Canvas.Top="100"/>
 
 
         <TextBlock Text="Namn:" Canvas.Left="180" Canvas.Top="200"/>

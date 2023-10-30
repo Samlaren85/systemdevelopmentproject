@@ -317,7 +317,7 @@ namespace SkiResortSystem.ViewModels
                 Bokning.Avresetid = Avresa;
                 Bokning.AntalPersoner = AntalPersoner;
                 bc.UppdateraBokning(Bokning);
-                MessageBoxResult respons = MessageBox.Show($"Ändringar för bokning {Bokning.BokningsId} är nu sparad i systemet!");
+                MessageBoxResult respons = MessageBox.Show($"Ändringar för bokning {Bokning.Bokningsnummer} är nu sparad i systemet!");
                 CloseCommand.Execute(view);
             }
             else
@@ -326,7 +326,7 @@ namespace SkiResortSystem.ViewModels
                 Bokning.Bokningsstatus = Status.Kommande;
                 Bokning.Totalpris = Totalpris;
                 bc.SparaBokning(Bokning);
-                MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsId} är nu sparad i systemet!");
+                MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.Bokningsnummer} är nu sparad i systemet!");
                 PrintController.Run(Bokning);
                 //DETTA OCH konfigurera pdf i create
                 CloseCommand.Execute(view);
@@ -361,7 +361,7 @@ namespace SkiResortSystem.ViewModels
                     f.Fakturastatus = Status.Makulerad;
                 }
             }
-            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsId} är nu makulerad i systemet!");
+            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.Bokningsnummer} är nu makulerad i systemet!");
             CloseCommand.Execute(view);
 
         });
@@ -380,7 +380,7 @@ namespace SkiResortSystem.ViewModels
             BookingController bc = new BookingController();
             Bokning.Bokningsstatus = Status.Incheckad;
             bc.UppdateraBokning(Bokning);
-            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsId} är nu INCHECKAD i systemet!");
+            MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.Bokningsnummer} är nu INCHECKAD i systemet!");
             CloseCommand.Execute(view);
         });
 
@@ -396,7 +396,7 @@ namespace SkiResortSystem.ViewModels
             if (Bokning.UtnyttjadKredit > 0)
             {
                 {
-                    MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsId} är nu UTCHECKAD ur systemet!\n" +
+                    MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.Bokningsnummer} är nu UTCHECKAD ur systemet!\n" +
                                                                 $"Kunden har en kredit på {Bokning.UtnyttjadKredit} att betala.\n" +
                                                                 $"Betalar kunden på plats? (Annars skapas faktura till kunden)", "Slutbetalning", MessageBoxButton.YesNo);
                     if (respons == MessageBoxResult.No)
@@ -408,7 +408,7 @@ namespace SkiResortSystem.ViewModels
             }
             else
             {
-                MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.BokningsId} är nu UTCHECKAD ur systemet!\n" +
+                MessageBoxResult respons = MessageBox.Show($"Bokning {Bokning.Bokningsnummer} är nu UTCHECKAD ur systemet!\n" +
                                                             $"Kunden har ingenting kvar att betala.", "Utcheckad");
             }
             CloseCommand.Execute(view);
@@ -437,7 +437,7 @@ namespace SkiResortSystem.ViewModels
         /// <param name="bokning"></param>
         public BookingOverviewViewModel(Bokning bokning)
         {
-            Bokningsnummer = bokning.BokningsId;
+            Bokningsnummer = bokning.Bokningsnummer;
             Kund = bokning.KundID;
             Bokning = bokning;
             Ankomst = bokning.Ankomsttid;
@@ -596,7 +596,7 @@ namespace SkiResortSystem.ViewModels
                 Valdfacilitet
             };
             Bokning = SkapaBokning(Ankomst, Avresa, SessionController.LoggedIn, ValdKund, BokadFacilitet, ValdaAntalPersoner);
-            Bokningsnummer = Bokning.BokningsId;
+            Bokningsnummer = Bokning.Bokningsnummer;
             SkapabokningVisibility = Visibility.Visible;
 
         }

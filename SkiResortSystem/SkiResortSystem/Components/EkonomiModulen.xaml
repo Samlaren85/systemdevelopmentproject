@@ -31,8 +31,8 @@
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding DoubleClickBillingCommand}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="NAMN" Width="230"  Binding="{Binding Path=Bokningsref.KundID}"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="2*" Binding="{Binding Path=Bokningsref.BokningsID}"/>
+                        <DataGridTextColumn Header="NAMN" Width="230"  Binding="{Binding Path=Bokningsref.KundID.Namn}"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="2*" Binding="{Binding Path=Bokningsref.Bokningsnummer}"/>
                         <DataGridTextColumn Header="FAKTURANUMMER" Width="2*" Binding="{Binding FakturaID}"/>
                         <DataGridTextColumn Header="FÖRFALLODATUM" Width="2*" Binding="{Binding Förfallodatum}"/>
                         <DataGridTextColumn Header="BETALD" Width="*" Binding="{Binding Fakturastatus}"/>

@@ -45,10 +45,10 @@ namespace BusinessLayer.PrintController
             {
                 x = "Ja";
             }
-            string labelText = $"Bokningsbekräftelse\n\nBokningsnummer: {bokning.BokningsId}\nKund: {bokning.KundID.Namn}\nAnkomsttid: {bokning.Ankomsttid}\nAvresetid: {bokning.Avresetid}\nÅterbetalningsskydd: {x}";
+            string labelText = $"Bokningsbekräftelse\n\nBokningsnummer: {bokning.Bokningsnummer}\nKund: {bokning.KundID.Namn}\nAnkomsttid: {bokning.Ankomsttid}\nAvresetid: {bokning.Avresetid}\nÅterbetalningsskydd: {x}";
             Label label = new Label(labelText, 0, 0, 504, 700, Font.Helvetica, 18, TextAlign.Center);
             page.Elements.Add(label);
-            string uniqueFileName = $"Bokningsbekräftelse_{bokning.BokningsId}.pdf";
+            string uniqueFileName = $"Bokningsbekräftelse_{bokning.Bokningsnummer}.pdf";
             document.Draw(Util.GetPath($"Dokument/Bokningsbekräftelser/{uniqueFileName}"));
         }
         public static void Run(Faktura faktura, Faktura faktura2)

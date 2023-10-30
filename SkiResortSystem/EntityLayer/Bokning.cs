@@ -22,6 +22,7 @@ namespace EntityLayer
                 }
             }
         }
+        public string Bokningsnummer { get; set; }
         private Status betalningsstatus;
         public Status Betalningsstatus
         {
@@ -82,7 +83,7 @@ namespace EntityLayer
             string customerName = string.Empty;
             if (KundID.Företagskund != null) customerName = KundID.Företagskund.Företagsnamn;
             else if (KundID.Privatkund != null) customerName = KundID.Privatkund.Namn();
-            return $"{BokningsId} ({customerName})";
+            return $"{Bokningsnummer} ({customerName})";
         }
     }
 }

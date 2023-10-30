@@ -60,9 +60,8 @@ namespace EntityLayer
         /// <param name="password"></param>
         /// <param name="usertype"></param>
         /// <param name="rollID"></param>
-        public Användare(string användare, string password, int usertype, Roll rollID)
+        public Användare(string password, int usertype, Roll rollID)
         {
-            AnvändarNamn = användare;
             Password = password;
             UserType = usertype;
             RollID = rollID;

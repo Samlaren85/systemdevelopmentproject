@@ -412,13 +412,13 @@ namespace SkiResortSystem.ViewModels
             }
             if(Konferensradiobutton == true && (Avresetid < DateTime.Today || Ankomsttid < DateTime.Today))
             {
-                ErrorMessage2 = "Ankomst- och avresedatum måst vara senare än dagens datum";
+                ErrorMessage2 = "Ankomst- och avresedatum måste vara senare än dagens datum";
             }
             else if (Konferensradiobutton == false)
             {
                 if (Ankomsttid < DateTime.Today || Avresetid < DateTime.Today)
                 {
-                    ErrorMessage2 = "Ankomst- och avresedatum måst vara senare än dagens datum";
+                    ErrorMessage2 = "Ankomst- och avresedatum måste vara senare än dagens datum";
                 }
                 else if (((Ankomsttid.DayOfWeek != DayOfWeek.Friday && Ankomsttid.DayOfWeek != DayOfWeek.Sunday) ||
                          (Avresetid.DayOfWeek != DayOfWeek.Friday && Avresetid.DayOfWeek != DayOfWeek.Sunday)) && Lägenhetradiobutton)

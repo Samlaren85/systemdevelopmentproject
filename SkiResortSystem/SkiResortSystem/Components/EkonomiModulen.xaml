@@ -51,7 +51,7 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=KundID.Namn }"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding BokningsId }"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding Bokningsnummer }"/>
                     </DataGrid.Columns>
                 </DataGrid>
 

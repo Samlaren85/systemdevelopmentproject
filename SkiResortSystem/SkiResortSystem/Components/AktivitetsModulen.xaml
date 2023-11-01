@@ -31,7 +31,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="AKTIVITET" Width="*" Binding="{Binding Path=Aktivitetsref.Typ}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Varaktighet}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="VARAKTIGHET" Width="*" Binding="{Binding Path=Aktivitetsref.Skidskola.Lärare}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="LÄRARE" Width="*" Binding="{Binding Path=Aktivitetsref.Skidskola.Lärare}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="ANTAL LEDIGA PLATSER" Width="*" Binding="{Binding Path=Aktivitetsref.AntalPlatserKvar}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="ANTAL DELTAGARE" Width="*" Binding="{Binding Antal}"  IsReadOnly="False">
 

@@ -41,7 +41,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="PERSON-/ORG.NUMMER" Width="*" Binding="{Binding KundId}"/>
                         <DataGridTextColumn Header="NAMN" Width="AUTO" Binding="{Binding}"/>
-                        <DataGridTextColumn Header="TELEFONNUMER" Width="*" Binding="{Binding Telefonnummer}"/>
+                        <DataGridTextColumn Header="TELEFONNUMMER" Width="*" Binding="{Binding Telefonnummer}"/>
                         <DataGridTextColumn Header="E-POST" Width="*" Binding="{Binding Epost}"/>
                     </DataGrid.Columns>
 

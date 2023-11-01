@@ -28,14 +28,14 @@
             <DataGrid Margin="10,10,10,10" Width="auto" Height="auto" ItemsSource="{Binding _data}" 
                 CanUserAddRows="False" AutoGenerateColumns="false" Canvas.Left="45" Canvas.Top="45" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" Visibility="{Binding Facilitetsrapport}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Path=FacilitetID}" Width="*"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=FacilitetId}" Width="*"/>
                 <DataGridTextColumn Header="Benämning" Binding="{Binding Path=Typ}" Width="*"/>
             </DataGrid.Columns>
             </DataGrid>
             <DataGrid Margin="10,10,10,10" Width="auto" Height="auto" ItemsSource="{Binding _data}" 
                 CanUserAddRows="False" AutoGenerateColumns="false" Canvas.Left="45" Canvas.Top="45" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" Visibility="{Binding Aktivitetsrapport}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Path=AktivitetsID}" Width="*"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=AktivitetsId}" Width="*"/>
                 <DataGridTextColumn Header="Aktivitet" Binding="{Binding Path=Typ}" Width="*"/>
                 <DataGridTextColumn Header="Varaktighet" Binding="{Binding Path=Varaktighet}" Width="*"/>
                 <DataGridTextColumn Header="Antal Platser Kvar" Binding="{Binding Path=AntalPlatserKvar}" Width="*"/>
@@ -45,7 +45,7 @@
             <DataGrid Margin="10,10,10,10" Width="auto" Height="auto" ItemsSource="{Binding _data}" 
                 CanUserAddRows="False" AutoGenerateColumns="false" Canvas.Left="45" Canvas.Top="45" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" Visibility="{Binding Utrustningsrapport}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding Path=UtrustningsID}" Width="*"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=UtrustningsId}" Width="*"/>
                     <DataGridTextColumn Header="Benämning" Binding="{Binding Path=UtrustningsBenämning}" Width="*"/>
                     <DataGridTextColumn Header="Storlek" Binding="{Binding Path=Storlek}" Width="*"/>
                 </DataGrid.Columns>
@@ -53,7 +53,7 @@
             <DataGrid Margin="10,10,10,10" Width="auto" Height="auto" ItemsSource="{Binding _data}" 
                 CanUserAddRows="False" AutoGenerateColumns="false" Canvas.Left="45" Canvas.Top="45" HorizontalAlignment="Center" VerticalAlignment="Top" IsReadOnly="True" Visibility="{Binding Kundrapport}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Path=KundID}" Width="*"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=KundId}" Width="*"/>
                 <DataGridTextColumn Header="Namn" Binding="{Binding Path=Namn}" Width="*"/>
                 <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=Gatuadress}" Width="*"/>
                 <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=Postnummer}" Width="*"/>

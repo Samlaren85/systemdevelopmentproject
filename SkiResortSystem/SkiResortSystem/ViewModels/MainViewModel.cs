@@ -247,7 +247,7 @@ namespace SkiResortSystem.ViewModels
             {
                 switch (bh.Behörighetstyp)
                 {
-                    case "1 - Systemadministratör": // ta bort all acces förutom Admin innan inlämning OBS! även boolen till false
+                    case "1 - Systemadministratör": 
                         Admin = Visibility.Visible;
                         Economy = Visibility.Collapsed;
                         MarketingManager = Visibility.Collapsed;

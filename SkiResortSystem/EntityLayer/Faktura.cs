@@ -13,7 +13,7 @@ namespace EntityLayer
             get { return fakturastatus; }
             set
             {
-                if (value == Status.Obetald || value == Status.Makulerad)
+                if (value == Status.Obetald || value == Status.Betald || value == Status.Makulerad)
                 {
                     fakturastatus = value;
                 }

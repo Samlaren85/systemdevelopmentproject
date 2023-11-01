@@ -509,10 +509,13 @@ namespace SkiResortSystem.ViewModels
                 List<Utrustningsbokning> bokningar = new List<Utrustningsbokning>();
                 foreach (Utrustningsbokningsrad ur in Utrustningsbokningsrader)
                 {
-                    foreach (string stl in ur.Storlekar)
+                    if (ur.Storlekar != null)
                     {
-                        Utrustning utrustning = controller.FindUtrustning(ur.TypAvUtrustning, stl);
-                        bokningar.Add(controller.CreateUtrustningsbokning(utrustning, ur.FrånDatum, ur.TillDatum, SelectedEquipmentOrder));
+                        foreach (string stl in ur.Storlekar)
+                        {
+                            Utrustning utrustning = controller.FindUtrustning(ur.TypAvUtrustning, stl);
+                            bokningar.Add(controller.CreateUtrustningsbokning(utrustning, ur.FrånDatum, ur.TillDatum, SelectedEquipmentOrder));
+                        }
                     }
                 }
                 EquipmentOverviewViewModel equipmentOverviewViewModel = new EquipmentOverviewViewModel(bokningar, SelectedEquipmentOrder);

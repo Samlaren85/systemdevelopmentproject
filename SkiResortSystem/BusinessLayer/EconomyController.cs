@@ -113,9 +113,10 @@ namespace BusinessLayer
 
             unitOfWork.FakturaRepository.Add(faktura1);
             unitOfWork.FakturaRepository.Add(faktura2);
-            unitOfWork.Save();
             kundensBokning.Betalningsstatus = Status.Obetald;
 
+            unitOfWork.Save();
+            
             /// 
             /// Fakturorna skrivs ut samt läggs i en mapp på datorns hårddisk för evt. senare utskriftsmöjlighet.
             /// 

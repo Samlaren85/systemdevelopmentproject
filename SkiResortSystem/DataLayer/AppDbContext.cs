@@ -308,7 +308,7 @@ namespace DataLayer
                 Privatlektion priv = new Privatlektion(2, 375);
                 Privatlektioner.Add(priv);
 
-                DateTime startDate = new DateTime(2023, 11, 27);
+                DateTime startDate = new DateTime(2023, 10, 30);
                 DateTime endDate = new DateTime(2024, 4, 28);
 
 

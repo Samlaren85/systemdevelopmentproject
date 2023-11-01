@@ -428,7 +428,7 @@ namespace SkiResortSystem.ViewModels
                 else if (Ankomsttid.DayOfWeek == DayOfWeek.Sunday &&
                          Avresetid.DayOfWeek != DayOfWeek.Sunday && Campingradiobutton && bokningsLängd.Days != 1)
                 {
-                    ErrorMessage2 = "För veckobokning måste Ankomst- och avresedatum måste vara en söndag";
+                    ErrorMessage2 = "För veckobokning måste Ankomst- och avresedatum vara en söndag";
                 }
                 else if ((bokningsLängd.Days == 0 || bokningsLängd.Days > 7) && Campingradiobutton && AntalPersonerTillBoende != null)
                 {

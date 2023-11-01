@@ -81,7 +81,7 @@ namespace BusinessLayer
                     (b.KundID.Privatkund != null && b.KundID.Privatkund.Namn().Contains(searchString, StringComparison.OrdinalIgnoreCase)) ||
                     (b.KundID.Företagskund != null && b.KundID.Företagskund.Företagsnamn.Contains(searchString, StringComparison.OrdinalIgnoreCase))) &&
                     (b.Bokningsstatus != Status.Makulerad),
-                    x => x.KundID, x => x.KundID.Privatkund, x => x.KundID.Företagskund);
+                    x => x.KundID, x => x.KundID.Privatkund, x => x.KundID.Företagskund, f => f.Fakturaref);
         }
         public IList<Bokning> FindMasterBooking()
         {

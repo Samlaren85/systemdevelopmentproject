@@ -33,7 +33,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="NAMN" Width="230"  Binding="{Binding Path=Bokningsref.KundID.Namn}"/>
                         <DataGridTextColumn Header="BOKNINGSNUMMER" Width="2*" Binding="{Binding Path=Bokningsref.Bokningsnummer}"/>
-                        <DataGridTextColumn Header="FAKTURANUMMER" Width="2*" Binding="{Binding FakturaID}"/>
+                        <DataGridTextColumn Header="FAKTURANUMMER" Width="2*" Binding="{Binding FakturaId}"/>
                         <DataGridTextColumn Header="FÖRFALLODATUM" Width="2*" Binding="{Binding Förfallodatum}"/>
                         <DataGridTextColumn Header="BETALD" Width="*" Binding="{Binding Fakturastatus}"/>
                     </DataGrid.Columns>
@@ -51,7 +51,7 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="NAMN" Width="*" Binding="{Binding Path=KundID.Namn }"/>
-                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding BokningsID }"/>
+                        <DataGridTextColumn Header="BOKNINGSNUMMER" Width="*" Binding="{Binding BokningsId }"/>
                     </DataGrid.Columns>
                 </DataGrid>
 

@@ -28,7 +28,7 @@ namespace DataLayer
         public DbSet<FacilitetsPris> FacilitetsPriser { get; set; } = null!;
 
 
-        private static bool _test = false;
+        private static bool _test = true;
         private static bool _reset = false;
 
         private AppDbContext()
@@ -51,7 +51,7 @@ namespace DataLayer
             if (!optionBuilder.IsConfigured)
             {
                 if (_test) optionBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SkiResortSystem;Trusted_Connection=True;");
-                else optionBuilder.UseSqlServer("Server=sqlutb2.hb.se,56077;Database=suht2301;User Id=suht2301;Password=bax999;Encrypt=False;");
+                else optionBuilder.UseSqlServer("Server=sqlutb2.hb.se,56077;Database=***;User Id=***;Password=***;Encrypt=False;");
                 /*
                 if (_test) 
                 {

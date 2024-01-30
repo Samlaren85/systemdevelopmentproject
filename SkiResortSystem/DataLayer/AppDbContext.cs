@@ -319,7 +319,7 @@ namespace DataLayer
 
 
                     // Skapa nya skidskolor med den valda personen som instruktör för den dagen
-                    if (date.DayOfWeek != DayOfWeek.Saturday || date.DayOfWeek != DayOfWeek.Sunday)
+                    if (!date.DayOfWeek.Equals(DayOfWeek.Saturday) && !date.DayOfWeek.Equals(DayOfWeek.Sunday))
                     {
                         for (int privlek = 0; privlek < 4; privlek++)
                         {

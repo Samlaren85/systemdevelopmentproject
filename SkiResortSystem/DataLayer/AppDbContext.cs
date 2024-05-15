@@ -79,6 +79,8 @@ namespace DataLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasSequence<int>("AnställningsNummerSequence");
+            modelBuilder.HasSequence<int>("BokningIdSequence");
             modelBuilder.Entity<Aktivitet>()
                 .Property(e => e.AktivitetsId)
                 .HasDefaultValueSql("CONCAT('AKT', NEWID())");
